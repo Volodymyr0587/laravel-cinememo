@@ -39,14 +39,14 @@ class Edit extends Component
         $this->content_type_id = $contentItem->content_type_id;
         $this->title = $contentItem->title;
         $this->description = $contentItem->description;
-        $this->status = $contentItem->status;
+        $this->status = $contentItem->status->value;
         $this->existingImage = $contentItem->image;
     }
 
     public function removeImage()
     {
         if ($this->existingImage) {
-            Storage::delete($this->existingImage);
+            Storage::disk('public')->delete($this->existingImage);
             $this->contentItem->update(['image' => null]);
             $this->existingImage = '';
         }
@@ -66,7 +66,7 @@ class Edit extends Component
         if ($this->image) {
             // Delete old image if exists
             if ($this->existingImage) {
-                Storage::delete($this->existingImage);
+                Storage::disk('public')->delete($this->existingImage);
             }
             $imagePath = $this->image->store('content-images', 'public');
         }

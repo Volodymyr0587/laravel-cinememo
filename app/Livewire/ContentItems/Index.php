@@ -39,7 +39,7 @@ class Index extends Component
 
         // Delete the image file if it exists
         if ($contentItem->image) {
-            Storage::delete($contentItem->image);
+            Storage::disk('public')->delete($contentItem->image);
         }
 
         $contentItem->delete();
