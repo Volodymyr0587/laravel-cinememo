@@ -18,13 +18,13 @@
             </flux:navbar>
 
             <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="layout-grid" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
+                <flux:navbar.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
                     {{ __('Content Types') }}
                 </flux:navbar.item>
             </flux:navbar>
 
             <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="layout-grid" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
+                <flux:navbar.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
                     {{ __('Content Items') }}
                 </flux:navbar.item>
             </flux:navbar>
