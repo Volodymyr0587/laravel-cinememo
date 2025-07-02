@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Livewire\ContentItems;
+
+use App\Models\ContentItem;
+use App\Models\ContentType;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
+
+class Index extends Component
+{
+    use WithPagination;
+
+    public $search = '';
+    public $statusFilter = '';
+    public $contentTypeFilter = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingStatusFilter()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingContentTypeFilter()
+    {
+        $this->resetPage();
+    }
+
+    public function delete($id)
+    {
+        $contentItem = ContentItem::whereHas('contentType', function($query) {
+            $query->where('user_id', auth()->id());
+        })->findOrFail($id);
+
+        // Delete the image file if it exists
+        if ($contentItem->image) {
+            Storage::delete($contentItem->image);
+        }
+
+        $contentItem->delete();
+
+        session()->flash('message', 'Content item deleted successfully.');
+    }
+
+    public function render()
+    {
+        $query = ContentItem::whereHas('contentType', function($query) {
+            $query->where('user_id', auth()->id());
+        })->with('contentType');
+
+        if ($this->search) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        }
+
+        if ($this->statusFilter) {
+            $query->where('status', $this->statusFilter);
+        }
+
+        if ($this->contentTypeFilter) {
+            $query->where('content_type_id', $this->contentTypeFilter);
+        }
+
+        $contentItems = $query->paginate(12);
+
+        $contentTypes = ContentType::where('user_id', auth()->id())->get();
+
+        return view('livewire.content-items.index', compact('contentItems', 'contentTypes'));
+    }
+}
