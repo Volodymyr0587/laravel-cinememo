@@ -19,10 +19,15 @@ class Index extends Component
 
     public function delete($id)
     {
-        $contentType = ContentType::where('user_id', auth()->id())->findOrFail($id);
-        $contentType->delete();
+        try {
+            $contentType = ContentType::where('user_id', auth()->id())->findOrFail($id);
+            $contentType->delete();
 
-        session()->flash('message', 'Content type deleted successfully.');
+            session()->flash('message', 'Content type deleted successfully.');
+        } catch (\Exception $e) {
+             session()->flash('message', $e->getMessage());
+        }
+
     }
 
     public function render()

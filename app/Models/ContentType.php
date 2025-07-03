@@ -19,4 +19,13 @@ class ContentType extends Model
     {
         return $this->hasMany(ContentItem::class);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($contentType) {
+            if ($contentType->contentItems()->exists()) {
+                throw new \Exception('Cannot delete ContentType with related ContentItems.');
+            }
+        });
+    }
 }
