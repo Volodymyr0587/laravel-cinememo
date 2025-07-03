@@ -31,9 +31,7 @@ class Edit extends Component
     public function mount(ContentItem $contentItem)
     {
         // Ensure the content item belongs to the authenticated user
-        if ($contentItem->contentType->user_id !== auth()->id()) {
-            abort(403);
-        }
+        $this->authorize('view', $contentItem);
 
         $this->contentItem = $contentItem;
         $this->content_type_id = $contentItem->content_type_id;

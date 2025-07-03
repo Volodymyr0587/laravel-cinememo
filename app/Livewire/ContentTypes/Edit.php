@@ -18,7 +18,7 @@ class Edit extends Component
     {
         // Ensure the content type belongs to the authenticated user
         if ($contentType->user_id !== auth()->id()) {
-            abort(403);
+            abort(404);
         }
 
         $this->contentType = $contentType;

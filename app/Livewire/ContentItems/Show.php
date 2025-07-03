@@ -12,6 +12,8 @@ class Show extends Component
 
     public function mount(ContentItem $contentItem)
     {
+        $this->authorize('view', $contentItem);
+
         $this->contentItem = $contentItem;
     }
 
