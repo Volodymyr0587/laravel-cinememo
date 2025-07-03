@@ -40,7 +40,7 @@
 1. Clone the repository
 
 ```git clone https://github.com/Volodymyr0587/laravel-cinememo```
-```cd laravel-contact-management```
+```cd laravel-cinememo```
 
 2. Install dependencies
 
