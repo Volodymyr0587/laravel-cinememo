@@ -40,17 +40,21 @@
 1. Clone the repository
 
 ```git clone https://github.com/Volodymyr0587/laravel-cinememo```
+
 ```cd laravel-cinememo```
 
 2. Install dependencies
 
 ```composer install```
+
 ```npm install```
+
 ```npm run dev```
 
 3. Set up the environment
 
 ```cp .env.example .env```
+
 ```php artisan key:generate```
 
 4. Database setup
