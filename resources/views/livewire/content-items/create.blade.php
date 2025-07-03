@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                             <flux:button variant="primary" type="submit" >{{ __(' Create Content Item') }}</flux:button>
+                            <flux:button variant="primary" type="submit" >{{ __('Create Content Item') }}</flux:button>
                             <flux:link :href="route('content-items.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
                         </div>
                     </form>

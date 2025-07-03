@@ -48,18 +48,18 @@
                     <!-- Content Items Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($contentItems as $contentItem)
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
                                 @if($contentItem->image_url)
                                     <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
                                          class="w-full h-48 object-cover">
                                 @else
-                                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                        <span class="text-gray-500">No Image</span>
+                                    <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
+                                        <span class="text-gray-500 dark:text-gray-700">No Image</span>
                                     </div>
                                 @endif
 
                                 <div class="p-4">
-                                    <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $contentItem->title }}</h3>
+                                    <h3 class="font-semibold text-lg text-gray-800 dark:text-white mb-2">{{ $contentItem->title }}</h3>
 
                                     <p class="text-sm text-gray-600 mb-2">
                                         <span class="font-medium">Type:</span> {{ $contentItem->contentType->name }}
@@ -68,8 +68,8 @@
                                     <p class="text-sm text-gray-600 mb-3">
                                         <span class="font-medium">Status:</span>
                                         <span class="px-2 py-1 rounded text-xs
-                                            @if($contentItem->status === 'watched') bg-green-100 text-green-800
-                                            @elseif($contentItem->status === 'watching') bg-yellow-100 text-yellow-800
+                                            @if($contentItem->status->value === 'watched') bg-green-100 text-green-800
+                                            @elseif($contentItem->status->value === 'watching') bg-yellow-100 text-yellow-800
                                             @else bg-blue-100 text-blue-800 @endif">
                                             {{ ucfirst($contentItem->status->value) }}
                                         </span>
@@ -80,11 +80,12 @@
                                     @endif
 
                                     <div class="flex justify-between items-center">
-                                        <a href="{{ route('content-items.edit', $contentItem) }}"
-                                           class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Edit</a>
+                                        {{-- <a href="{{ route('content-items.edit', $contentItem) }}" wire:navigate
+                                           class="px-4 py-2 rounded-md bg-amber-300 text-indigo-600 hover:text-indigo-900 text-sm font-medium">Edit</a> --}}
+                                        <flux:button href="{{ route('content-items.edit', $contentItem) }}" wire:navigate>Edit</flux:button>
                                         <button wire:click="delete({{ $contentItem->id }})"
                                                 wire:confirm="Are you sure you want to delete this content item?"
-                                                class="text-red-600 hover:text-red-900 text-sm font-medium">Delete</button>
+                                                class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-900 text-sm font-medium hover:cursor-pointer">Delete</button>
                                     </div>
                                 </div>
                             </div>
