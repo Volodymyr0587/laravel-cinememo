@@ -50,7 +50,7 @@
                                 <a href="{{ route('content-items.show', $contentItem) }}"  wire:navigate>
                                     @if($contentItem->image_url)
                                         <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
-                                            class="w-full h-48 object-cover">
+                                            class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                     @else
                                         <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
                                             <span class="text-gray-500 dark:text-gray-700">No Image</span>
