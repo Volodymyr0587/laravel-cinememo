@@ -16,8 +16,12 @@
                     <x-flash-message />
 
                     <div class="mb-4">
-                        <input wire:model.live="search" type="text" placeholder="Search content types..."
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <flux:input
+                            wire:model.live="search"
+                            :label="__('Search')"
+                            type="text"
+                            :placeholder="__('Search content types...')"
+                        />
                     </div>
 
                     <div class="overflow-x-auto">

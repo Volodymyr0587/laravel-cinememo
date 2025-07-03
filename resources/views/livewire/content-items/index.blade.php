@@ -18,30 +18,28 @@
                     <!-- Filters -->
                     <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <input wire:model.live="search" type="text" placeholder="Search content items..."
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                                   bg-white text-black dark:bg-zinc-800 dark:text-white dark:border-gray-600">
+                            <flux:input
+                                wire:model.live="search"
+                                :label="__('Search')"
+                                type="text"
+                                :placeholder="__('Search content items...')"
+                            />
                         </div>
                         <div>
-                            <select wire:model.live="statusFilter"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                                    bg-white text-black dark:bg-zinc-800 dark:text-white dark:border-gray-600">
+                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
                                 <option value="">All Statuses</option>
                                 <option value="willwatch">Will Watch</option>
                                 <option value="watching">Watching</option>
                                 <option value="watched">Watched</option>
-                            </select>
-
+                            </flux:select>
                         </div>
                         <div>
-                            <select wire:model.live="contentTypeFilter"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-                                    bg-white text-black dark:bg-zinc-800 dark:text-white dark:border-gray-600">
+                            <flux:select wire:model.live="contentTypeFilter" :label="__('Content Type')">
                                 <option value="">All Content Types</option>
                                 @foreach($contentTypes as $contentType)
                                     <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
                                 @endforeach
-                            </select>
+                            </flux:select>
                         </div>
                     </div>
 
