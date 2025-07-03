@@ -61,22 +61,27 @@
                                 <div class="p-4">
                                     <h3 class="font-semibold text-lg text-gray-800 dark:text-white mb-2">{{ $contentItem->title }}</h3>
 
-                                    <p class="text-sm text-gray-600 mb-2">
-                                        <span class="font-medium">Type:</span> {{ $contentItem->contentType->name }}
-                                    </p>
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
+                                        <span class="font-medium">Type:</span>
+                                        <span>{{ $contentItem->contentType->name }}</span>
+                                    </div>
 
-                                    <p class="text-sm text-gray-600 mb-3">
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
                                         <span class="font-medium">Status:</span>
-                                        <span class="px-2 py-1 rounded text-xs
-                                            @if($contentItem->status->value === 'watched') bg-green-100 text-green-800
-                                            @elseif($contentItem->status->value === 'watching') bg-yellow-100 text-yellow-800
-                                            @else bg-blue-100 text-blue-800 @endif">
-                                            {{ ucfirst($contentItem->status->value) }}
+                                        <span @class([
+                                            'px-2 py-1 rounded text-xs',
+                                            'bg-green-100 text-green-800' => $contentItem->status === \App\Enums\ContentStatus::Watched,
+                                            'bg-yellow-100 text-yellow-800' => $contentItem->status === \App\Enums\ContentStatus::Watching,
+                                            'bg-blue-100 text-blue-800' => $contentItem->status === \App\Enums\ContentStatus::WillWatch,
+                                        ])>
+                                            {{ \App\Enums\ContentStatus::labels()[$contentItem->status->value] ?? ucfirst($contentItem->status->value) }}
                                         </span>
-                                    </p>
+                                    </div>
 
                                     @if($contentItem->description)
-                                        <p class="text-sm text-gray-600 mb-3">{{ Str::limit($contentItem->description, 100) }}</p>
+                                        <p class="text-sm text-gray-600 dark:text-white mb-3">
+                                            {{ Str::limit($contentItem->description, 100) }}
+                                        </p>
                                     @endif
 
                                     <div class="flex justify-between items-center">
