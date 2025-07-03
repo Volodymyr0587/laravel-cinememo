@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="mt-6">
-                        {{ $contentItems->links() }}
+                        {{ $contentItems->links('pagination.custom-tailwind') }}
                     </div>
                 </div>
             </div>

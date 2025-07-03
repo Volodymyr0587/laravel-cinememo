@@ -35,7 +35,7 @@ class Index extends Component
         $contentTypes = ContentType::where('user_id', auth()->id())
             ->where('name', 'like', '%' . $this->search . '%')
             ->withCount('contentItems')
-            ->paginate(10);
+            ->paginate(10)->withQueryString();
 
         return view('livewire.content-types.index', compact('contentTypes'));
     }

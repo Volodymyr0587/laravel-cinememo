@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="mt-4">
-                        {{ $contentTypes->links() }}
+                        {{ $contentTypes->links('pagination.custom-tailwind') }}
                     </div>
                 </div>
             </div>
