@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/content-items', ContentItems\Index::class)->name('content-items.index');
     Route::get('/content-items/create', ContentItems\Create::class)->name('content-items.create');
     Route::get('/content-items/{contentItem}/edit', ContentItems\Edit::class)->name('content-items.edit');
+    Route::get('/content-items/{contentItem}', ContentItems\Show::class)->name('content-items.show');
 });
 
 require __DIR__.'/auth.php';

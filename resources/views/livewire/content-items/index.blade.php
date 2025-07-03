@@ -47,17 +47,22 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($contentItems as $contentItem)
                             <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
-                                @if($contentItem->image_url)
-                                    <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
-                                         class="w-full h-48 object-cover">
-                                @else
-                                    <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                                        <span class="text-gray-500 dark:text-gray-700">No Image</span>
-                                    </div>
-                                @endif
+                                <a href="{{ route('content-items.show', $contentItem) }}"  wire:navigate>
+                                    @if($contentItem->image_url)
+                                        <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
+                                            class="w-full h-48 object-cover">
+                                    @else
+                                        <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
+                                            <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                                        </div>
+                                    @endif
+                                </a>
 
                                 <div class="p-4">
-                                    <h3 class="font-semibold text-lg text-gray-800 dark:text-white mb-2">{{ $contentItem->title }}</h3>
+                                    <a href="{{ route('content-items.show', $contentItem) }}"  wire:navigate
+                                        class="font-semibold text-lg text-gray-800 dark:text-white mb-2 hover:underline">
+                                        {{ $contentItem->title }}
+                                    </a>
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
                                         <span class="font-medium">Type:</span>
