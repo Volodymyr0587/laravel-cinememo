@@ -10,7 +10,7 @@ class Create extends Component
     public $name = '';
 
     protected $rules = [
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|min:2|max:100|unique:content_types,name',
     ];
 
     public function save()
