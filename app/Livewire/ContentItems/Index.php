@@ -65,7 +65,7 @@ class Index extends Component
             $query->where('content_type_id', $this->contentTypeFilter);
         }
 
-        $contentItems = $query->paginate(12);
+        $contentItems = $query->paginate(8);
 
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
 
