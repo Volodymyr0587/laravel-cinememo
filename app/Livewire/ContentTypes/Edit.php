@@ -2,17 +2,29 @@
 
 namespace App\Livewire\ContentTypes;
 
-use App\Models\ContentType;
 use Livewire\Component;
+use App\Models\ContentType;
+use Illuminate\Validation\Rule;
 
 class Edit extends Component
 {
     public ContentType $contentType;
     public $name = '';
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-    ];
+    protected function rules()
+    {
+        return [
+            'name' => [
+                'required',
+                'string',
+                'min:2',
+                'max:100',
+                Rule::unique('content_types')
+                    ->ignore($this->contentType->id)
+                    ->where(fn($query) => $query->where('user_id', auth()->id()))
+            ],
+        ];
+    }
 
     public function mount(ContentType $contentType)
     {

@@ -2,16 +2,28 @@
 
 namespace App\Livewire\ContentTypes;
 
-use App\Models\ContentType;
 use Livewire\Component;
+use App\Models\ContentType;
+use Illuminate\Validation\Rule;
 
 class Create extends Component
 {
     public $name = '';
 
-    protected $rules = [
-        'name' => 'required|string|min:2|max:100|unique:content_types,name',
-    ];
+    protected function rules()
+    {
+        return [
+            'name' => [
+                'required',
+                'string',
+                'min:2',
+                'max:100',
+                Rule::unique('content_types')->where(function ($query) {
+                    return $query->where('user_id', auth()->id());
+                }),
+            ],
+        ];
+    }
 
     public function save()
     {
