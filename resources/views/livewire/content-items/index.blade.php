@@ -4,7 +4,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Content Items') }}
         </h2>
-        <flux:link :href="route('content-items.create')" wire:navigate>{{ __('Add New Content Item') }}</flux:link>
+        <div class="flex items-center gap-x-8">
+            <flux:link :href="route('content-items.export')">{{ __('Export to XLSX') }}</flux:link>
+            <flux:link :href="route('content-items.create')" wire:navigate>{{ __('Add New Content Item') }}</flux:link>
+        </div>
     </div>
 
 
