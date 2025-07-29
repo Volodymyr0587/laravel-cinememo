@@ -6,6 +6,7 @@
         </h2>
         <div class="flex items-center gap-x-8">
             <flux:link :href="route('content-items.export')">{{ __('Export to XLSX') }}</flux:link>
+            <flux:link :href="route('content-items.export-pdf')" target="_blank">{{ __('Export to PDF') }}</flux:link>
             <flux:link :href="route('content-items.create')" wire:navigate>{{ __('Add New Content Item') }}</flux:link>
         </div>
     </div>
