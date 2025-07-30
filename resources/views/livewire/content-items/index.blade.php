@@ -7,7 +7,7 @@
         <div class="flex items-center gap-x-8">
             <flux:link :href="route('content-items.export')">{{ __('Export to XLSX') }}</flux:link>
             <flux:link :href="route('content-items.export-pdf')" target="_blank">{{ __('Export to PDF') }}</flux:link>
-            <flux:link :href="route('content-items.create')" wire:navigate>{{ __('Add New Content Item') }}</flux:link>
+            <x-button href="{{ route('content-items.create') }}" wire:navigate>{{ __('Add New Content Item') }}</x-button>
         </div>
     </div>
 
@@ -92,12 +92,11 @@
                                     @endif
 
                                     <div class="flex justify-between items-center">
-                                        {{-- <a href="{{ route('content-items.edit', $contentItem) }}" wire:navigate
-                                           class="px-4 py-2 rounded-md bg-amber-300 text-indigo-600 hover:text-indigo-900 text-sm font-medium">Edit</a> --}}
                                         <flux:button href="{{ route('content-items.edit', $contentItem) }}" wire:navigate>Edit</flux:button>
-                                        <button wire:click="delete({{ $contentItem->id }})"
+                                        <x-button wire:click="delete({{ $contentItem->id }})"
                                                 wire:confirm="Are you sure you want to delete this content item?"
-                                                class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-900 text-sm font-medium hover:cursor-pointer">Delete</button>
+                                                color="red" type="submit"
+                                                >Delete</x-button>
                                     </div>
                                 </div>
                             </div>
