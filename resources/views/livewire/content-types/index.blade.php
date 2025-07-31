@@ -4,7 +4,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Content Types') }}
         </h2>
-        <flux:link :href="route('content-types.create')" wire:navigate>{{ __('Add New Content Type') }}</flux:link>
+        <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('Add New Content Type') }}</x-button>
     </div>
 
 
