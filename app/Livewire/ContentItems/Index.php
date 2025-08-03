@@ -65,7 +65,8 @@ class Index extends Component
             $query->where('content_type_id', $this->contentTypeFilter);
         }
 
-        $contentItems = $query->paginate(8)->withQueryString();
+        $contentItems = $query->orderBy('updated_at', 'desc')
+                        ->paginate(8)->withQueryString();
 
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
 
