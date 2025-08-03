@@ -2,7 +2,7 @@
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
             <x-dashboard.card title="Total Content Items">
-                <div class="text-2xl font-bold">{{ $contentItemsCount }}</div>
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.film /> {{ $contentItemsCount }}</div>
                 @if ($lastUpdatedContentItem)
                     <div class="text-gray-500 dark:text-gray-400">
                          Last updated: {{ $lastUpdatedContentItem->updated_at->diffForHumans() }} ({{ $lastUpdatedContentItem->title }})
@@ -10,7 +10,7 @@
                 @endif
             </x-dashboard.card>
             <x-dashboard.card title="Total Content Types">
-                <div class="text-2xl font-bold">{{ $contentTypesCount }}</div>
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $contentTypesCount }}</div>
                 @if ($lastUpdatedContentType)
                     <div class="text-gray-500 dark:text-gray-400">
                         Last updated: {{ $lastUpdatedContentType->updated_at->diffForHumans() }} ({{ $lastUpdatedContentType->name }})
