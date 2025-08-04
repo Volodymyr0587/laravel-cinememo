@@ -1,20 +1,21 @@
 <?php
 
+use App\Livewire\Dashboard;
 use App\Livewire\ContentItems;
 use App\Livewire\ContentTypes;
 use App\Livewire\Settings\Profile;
-use function Spatie\LaravelPdf\Support\pdf;
 use App\Exports\ContentItemsExport;
 use App\Livewire\Settings\Password;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
+use function Spatie\LaravelPdf\Support\pdf;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
+Route::get('/dashboard', Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
