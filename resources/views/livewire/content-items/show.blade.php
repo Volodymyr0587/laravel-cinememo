@@ -54,6 +54,55 @@
                     </div>
                 @endif
 
+                @if ($contentItem->additionalImages->isNotEmpty())
+                    <div
+                        x-data="{ imageModal: false, imageSrc: '' }"
+                        class="mt-4"
+                    >
+                        <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">Additional Images</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            @foreach ($contentItem->additionalImages as $img)
+                                <div
+                                    class="relative overflow-hidden rounded shadow hover:shadow-lg transition duration-200 cursor-pointer"
+                                    @click="imageModal = true; imageSrc = '{{ Storage::url($img->path) }}'"
+                                >
+                                    <img
+                                        src="{{ Storage::url($img->path) }}"
+                                        alt="Additional Image"
+                                        class="w-full h-40 object-cover hover:scale-105 transition-transform duration-200 rounded"
+                                    >
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Modal -->
+                        <div
+                            x-show="imageModal"
+                            x-transition
+                            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
+                            @keydown.escape.window="imageModal = false"
+                        >
+                            <!-- Close Button (Pinned to screen corner) -->
+                            <button
+                                @click="imageModal = false"
+                                class="fixed top-4 right-4 z-50 text-white bg-red-600 hover:bg-red-700 rounded-full w-12 h-12 text-3xl flex items-center justify-center shadow-lg focus:outline-none"
+                                aria-label="Close"
+                            >
+                                &times;
+                            </button>
+
+                            <!-- Image container -->
+                            <div class="max-w-full max-h-full overflow-auto">
+                                <img
+                                    :src="imageSrc"
+                                    alt="Full Image"
+                                    class="max-w-full max-h-screen object-contain rounded-lg shadow-lg"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 {{-- Action Buttons --}}
                 <div class="flex justify-between items-center mt-6">
                     <flux:button href="{{ route('content-items.edit', $contentItem) }}" wire:navigate>

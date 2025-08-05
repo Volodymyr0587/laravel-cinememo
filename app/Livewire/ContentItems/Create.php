@@ -16,6 +16,7 @@ class Create extends Component
     public $description = '';
     public $image;
     public $status = 'willwatch';
+    public $additional_images = [];
 
     protected $rules = [
         'content_type_id' => 'required|exists:content_types,id',
@@ -23,6 +24,7 @@ class Create extends Component
         'description' => 'nullable|string',
         'image' => 'nullable|image|max:2048', // 2MB max
         'status' => 'required|in:watching,watched,willwatch',
+        'additional_images.*' => 'nullable|image|max:2048',
     ];
 
     public function save()
@@ -39,13 +41,18 @@ class Create extends Component
             $imagePath = $this->image->store('content-images', 'public');
         }
 
-        ContentItem::create([
+        $contentItem = ContentItem::create([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
             'image' => $imagePath,
             'status' => $this->status,
         ]);
+
+        foreach ($this->additional_images as $file) {
+            $path = $file->store('content-images', 'public');
+            $contentItem->additionalImages()->create(['path' => $path]);
+        }
 
         session()->flash('message', 'Content item created successfully.');
 

@@ -29,7 +29,6 @@
                                     <option value="watching">Watching</option>
                                     <option value="watched">Watched</option>
                                 </flux:select>
-                                {{-- @error('status') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror --}}
                             </div>
                         </div>
 
@@ -66,6 +65,28 @@
                                 Uploading...
                             </div>
                         </div>
+
+                        <div class="mt-4">
+                            <flux:input
+                                :label="__('Additional images')"
+                                wire:model="additional_images"
+                                type="file"
+                                multiple />
+                        </div>
+
+                         @if ($additional_images)
+                            <div class="mt-4">
+                                <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">Additional Image Previews:</p>
+                                <div class="flex flex-wrap gap-4">
+                                    @foreach ($additional_images as $file)
+                                        <div class="w-24 h-24">
+                                            <img src="{{ $file->temporaryUrl() }}" alt="Preview"
+                                                class="w-full h-full object-cover rounded border border-gray-300">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="mt-6 flex items-center justify-between">
                             <flux:button variant="primary" type="submit" >{{ __('Create Content Item') }}</flux:button>

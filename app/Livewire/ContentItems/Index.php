@@ -42,6 +42,11 @@ class Index extends Component
             Storage::disk('public')->delete($contentItem->image);
         }
 
+        // Delete all additional image files
+        foreach ($contentItem->additionalImages as $image) {
+            Storage::disk('public')->delete($image->path);
+        }
+
         $contentItem->delete();
 
         session()->flash('message', 'Content item deleted successfully.');

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\ContentStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContentItem extends Model
@@ -20,6 +21,11 @@ class ContentItem extends Model
     public function contentType(): BelongsTo
     {
         return $this->belongsTo(ContentType::class);
+    }
+
+    public function additionalImages(): HasMany
+    {
+        return $this->hasMany(Image::class);
     }
 
     public function getImageUrlAttribute(): ?string
