@@ -113,6 +113,12 @@
                     <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                       {{ __('Dashboard') }}
                     </flux:navlist.item>
+                    <flux:navlist.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
+                      {{ __('Content Types') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
+                      {{ __('Content Items') }}
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
