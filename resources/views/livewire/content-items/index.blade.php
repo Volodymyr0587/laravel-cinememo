@@ -4,10 +4,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Content Items') }}
         </h2>
-        <div class="flex items-center gap-x-8">
-            <flux:link :href="route('content-items.export')">{{ __('Export to XLSX') }}</flux:link>
-            <flux:link :href="route('content-items.export-pdf')" target="_blank">{{ __('Export to PDF') }}</flux:link>
-            <x-button href="{{ route('content-items.create') }}" wire:navigate>{{ __('Add New Content Item') }}</x-button>
+        <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
+            <flux:link :href="route('content-items.export')" class="order-2 sm:order-none">{{ __('Export to XLSX') }}</flux:link>
+            <flux:link :href="route('content-items.export-pdf')" class="order-3 sm:order-none" target="_blank">{{ __('Export to PDF') }}</flux:link>
+            <x-button href="{{ route('content-items.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Content Item') }}</x-button>
         </div>
     </div>
 
