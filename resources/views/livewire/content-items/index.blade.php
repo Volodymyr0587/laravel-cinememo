@@ -3,6 +3,14 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Content Items') }}
+            @if($statusFilter || $contentTypeFilter || $search)
+                <flux:button
+                    wire:click="clearFilters"
+                    class="ml-2 hover:cursor-pointer"
+                >
+                    {{ __('Clear filters') }}
+                </flux:button>
+            @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
             <flux:button
@@ -86,8 +94,8 @@
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
                                         <span class="font-medium">Status:</span>
-                                        <span @class([
-                                            'px-2 py-1 rounded text-xs',
+                                        <span wire:click="$set('statusFilter', '{{ $contentItem->status->value }}')" @class([
+                                            'px-2 py-1 rounded text-xs hover:cursor-pointer',
                                             'bg-green-100 text-green-800' => $contentItem->status === \App\Enums\ContentStatus::Watched,
                                             'bg-yellow-100 text-yellow-800' => $contentItem->status === \App\Enums\ContentStatus::Watching,
                                             'bg-blue-100 text-blue-800' => $contentItem->status === \App\Enums\ContentStatus::WillWatch,

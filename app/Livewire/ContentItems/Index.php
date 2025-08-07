@@ -31,6 +31,13 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function clearFilters(): void
+    {
+        $this->statusFilter = '';
+        $this->contentTypeFilter = '';
+        $this->search = '';
+    }
+
     public function delete($id)
     {
         $contentItem = ContentItem::whereHas('contentType', function($query) {
