@@ -67,11 +67,17 @@ Using SQLite for simplicity. Update your .env file accordingly:
 
 ```php artisan migrate:fresh```
 
-6. Create a symbolic link for storage
+6. [OPTIONAL] Run migrations with seeder
+
+```php artisan migrate:fresh --seed```
+
+This will create user (email: volodymyr@gmail.com, password: password123) and some data to explore
+
+7. Create a symbolic link for storage
 
 ```php artisan storage:link```
 
-7. Serve the application
+8. Serve the application
 
     ```php artisan serve```
 
