@@ -71,14 +71,24 @@
                         @forelse($contentItems as $contentItem)
                             <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
                                 <a href="{{ route('content-items.show', $contentItem) }}"  wire:navigate>
+                                    @php
+                                        $defaultImagePath = public_path('images/default-content.png');
+                                    @endphp
+
                                     @if($contentItem->image_url)
                                         <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
                                             class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                     @else
-                                        <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                                            <span class="text-gray-500 dark:text-gray-700">No Image</span>
-                                        </div>
+                                        @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
+                                            <img src="{{ asset('images/default-content.png') }}" alt="{{ $contentItem->title }}"
+                                                class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
+                                        @else
+                                            <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
+                                                <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                                            </div>
+                                        @endif
                                     @endif
+
                                 </a>
 
                                 <div class="p-4">
