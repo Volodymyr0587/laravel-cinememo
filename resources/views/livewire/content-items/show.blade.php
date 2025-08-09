@@ -16,17 +16,6 @@
                 </h2>
 
                 {{-- Image --}}
-                {{-- @if($contentItem->image_url)
-                    <div class="w-full max-h-96 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded mb-6 p-2">
-                        <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
-                            class="object-contain max-h-96 max-w-full">
-                    </div>
-                @else
-                    <div class="w-full h-64 bg-gray-200 dark:bg-zinc-600 flex items-center justify-center rounded mb-6">
-                        <span class="text-gray-500 dark:text-gray-300">No Image</span>
-                    </div>
-                @endif --}}
-
                 @php
                     $defaultImagePath = public_path('images/default-content.png');
                 @endphp
