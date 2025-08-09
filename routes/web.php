@@ -19,14 +19,16 @@ Route::get('/dashboard', Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+});
 
-    // Content Types Routes
+Route::middleware(['auth'])->group(function () {
+     // Content Types Routes
     Route::get('/content-types', ContentTypes\Index::class)->name('content-types.index');
     Route::get('/content-types/create', ContentTypes\Create::class)->name('content-types.create');
     Route::get('/content-types/{contentType}/edit', ContentTypes\Edit::class)->name('content-types.edit');
