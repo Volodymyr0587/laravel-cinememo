@@ -16,7 +16,7 @@
                 </h2>
 
                 {{-- Image --}}
-                @if($contentItem->image_url)
+                {{-- @if($contentItem->image_url)
                     <div class="w-full max-h-96 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded mb-6 p-2">
                         <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
                             class="object-contain max-h-96 max-w-full">
@@ -25,7 +25,30 @@
                     <div class="w-full h-64 bg-gray-200 dark:bg-zinc-600 flex items-center justify-center rounded mb-6">
                         <span class="text-gray-500 dark:text-gray-300">No Image</span>
                     </div>
+                @endif --}}
+
+                @php
+                    $defaultImagePath = public_path('images/default-content.png');
+                @endphp
+
+                @if($contentItem->image_url)
+                    <div class="w-full max-h-96 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded mb-6 p-2">
+                        <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
+                            class="object-contain max-h-96 max-w-full">
+                    </div>
+                @else
+                    @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
+                        <div class="w-full max-h-96 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded mb-6 p-2">
+                            <img src="{{ asset('images/default-content.png') }}" alt="{{ $contentItem->title }}"
+                                class="object-contain max-h-96 max-w-full">
+                        </div>
+                    @else
+                        <div class="w-full h-64 bg-gray-200 dark:bg-zinc-600 flex items-center justify-center rounded mb-6">
+                            <span class="text-gray-500 dark:text-gray-300">No Image</span>
+                        </div>
+                    @endif
                 @endif
+
 
                 {{-- Meta Info --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
