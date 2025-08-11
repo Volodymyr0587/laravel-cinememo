@@ -17,9 +17,17 @@
                     </div>
                 @endif
             </x-dashboard.card>
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+            <x-dashboard.card title="Number of Trashed Content Items">
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.trash />{{ $trashedContentItemsCount }}</div>
+                @if ($trashedContentItemsCount)
+                    <div class="text-gray-500 dark:text-gray-400">
+                        In trash {{ $trashedContentItemsCount }}  content items
+                    </div>
+                @endif
+            </x-dashboard.card>
+            {{-- <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                 <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
+            </div> --}}
         </div>
 
         <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4">

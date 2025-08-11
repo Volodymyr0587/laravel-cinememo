@@ -10,6 +10,7 @@ class Dashboard extends Component
     public $contentItems;
     public $contentItemsCount;
     public $lastUpdatedContentItem;
+    public $trashedContentItemsCount;
     public $contentTypesCount;
     public $lastUpdatedContentType;
 
@@ -28,6 +29,8 @@ class Dashboard extends Component
             ->orderBy('content_items.updated_at', 'desc')
             ->select('content_items.title', 'content_items.updated_at')
             ->first();
+
+        $this->trashedContentItemsCount = $user->contentItems()->onlyTrashed()->count();
 
         $this->contentTypesCount = $user->contentTypes()->count();
 
