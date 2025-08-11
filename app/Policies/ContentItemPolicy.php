@@ -58,7 +58,7 @@ class ContentItemPolicy
      */
     public function restore(User $user, ContentItem $contentItem): bool
     {
-        return false;
+        return $contentItem->contentType->user_id === $user->id;
     }
 
     /**
@@ -66,6 +66,6 @@ class ContentItemPolicy
      */
     public function forceDelete(User $user, ContentItem $contentItem): bool
     {
-        return false;
+        return $contentItem->contentType->user_id === $user->id;
     }
 }

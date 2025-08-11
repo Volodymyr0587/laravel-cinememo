@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('content-items.export');
 
     // Content Items Routes
+    Route::get('/content-items/trash', ContentItems\Trash::class)->name('content-items.trash');
     Route::get('/content-items', ContentItems\Index::class)->name('content-items.index');
     Route::get('/content-items/create', ContentItems\Create::class)->name('content-items.create');
     Route::get('/content-items/{contentItem}/edit', ContentItems\Edit::class)->name('content-items.edit');

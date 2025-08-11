@@ -29,6 +29,16 @@
                 </flux:navbar.item>
             </flux:navbar>
 
+            @php
+                $countTrashedContentItems = auth()->user()->contentItems()->onlyTrashed()->count();
+            @endphp
+
+            <flux:navbar class="-mb-px max-lg:hidden">
+                <flux:navbar.item icon="trash" :href="route('content-items.trash')" :current="request()->routeIs('content-items.trash')" wire:navigate>
+                    {{ __('Trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
+                </flux:navbar.item>
+            </flux:navbar>
+
             <flux:spacer />
 
             <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0!">
@@ -118,6 +128,9 @@
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
                       {{ __('Content Items') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="trash" :href="route('content-items.trash')" :current="request()->routeIs('content-items.trash')" wire:navigate>
+                      {{ __('Trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
                     </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>

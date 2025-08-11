@@ -6,11 +6,14 @@ use Illuminate\Support\Str;
 use App\Enums\ContentStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContentItem extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'content_type_id',
         'title',

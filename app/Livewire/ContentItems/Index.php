@@ -44,16 +44,6 @@ class Index extends Component
             $query->where('user_id', auth()->id());
         })->findOrFail($id);
 
-        // Delete the image file if it exists
-        if ($contentItem->image) {
-            Storage::disk('public')->delete($contentItem->image);
-        }
-
-        // Delete all additional image files
-        foreach ($contentItem->additionalImages as $image) {
-            Storage::disk('public')->delete($image->path);
-        }
-
         $contentItem->delete();
 
         session()->flash('message', 'Content item deleted successfully.');
