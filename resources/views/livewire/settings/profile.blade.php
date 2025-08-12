@@ -27,6 +27,29 @@
                 @endif
             </div>
 
+             <!-- Profile Image -->
+            <div class="mt-4">
+                <flux:input
+                    :label="__('Profile Image')"
+                    wire:model="profile_image"
+                    type="file"
+                    id="profile_image"
+                    accept="image/*" />
+
+                @if ($profile_image)
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-800 dark:text-white">Preview:</p>
+                        <img src="{{ $profile_image->temporaryUrl() }}" alt="Preview" class="mt-1 h-32 w-32 object-cover rounded">
+                    </div>
+                @elseif(Auth::user()->profile_image)
+                    <livewire:settings.delete-profile-image />
+                @endif
+
+                <div wire:loading wire:target="profile_image" class="text-sm text-gray-600 mt-2">
+                    Uploading...
+                </div>
+            </div>
+
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
                     <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>

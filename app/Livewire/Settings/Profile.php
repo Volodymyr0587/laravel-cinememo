@@ -3,16 +3,22 @@
 namespace App\Livewire\Settings;
 
 use App\Models\User;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class Profile extends Component
 {
+    use WithFileUploads;
+
     public string $name = '';
 
     public string $email = '';
+
+    public $profile_image;
 
     /**
      * Mount the component.
@@ -41,7 +47,19 @@ class Profile extends Component
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id),
             ],
+
+            'profile_image' => ['nullable', 'image', 'max:2048'],
         ]);
+
+        if ($this->profile_image) {
+            // Delete old profile image if exists
+            if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
+                // dd($user->profile_image);
+                Storage::disk('public')->delete($user->profile_image);
+            }
+
+            $validated['profile_image'] = $this->profile_image->store('profile_images', 'public');
+        }
 
         $user->fill($validated);
 

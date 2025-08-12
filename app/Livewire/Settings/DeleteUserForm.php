@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Settings;
 
+use Livewire\Component;
 use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteUserForm extends Component
 {
@@ -18,6 +19,8 @@ class DeleteUserForm extends Component
         $this->validate([
             'password' => ['required', 'string', 'current_password'],
         ]);
+
+        Storage::disk('public')->delete(Auth::user()->profile_image);
 
         tap(Auth::user(), $logout(...))->delete();
 
