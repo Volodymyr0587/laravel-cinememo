@@ -2,10 +2,12 @@
 
 namespace App\Livewire\ContentItems;
 
+use Livewire\Component;
 use App\Models\ContentItem;
 use App\Models\ContentType;
-use Livewire\Component;
+use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 
 class Create extends Component
 {
@@ -18,14 +20,17 @@ class Create extends Component
     public $status = 'willwatch';
     public $additional_images = [];
 
-    protected $rules = [
-        'content_type_id' => 'required|exists:content_types,id',
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'image' => 'nullable|image|max:2048', // 2MB max
-        'status' => 'required|in:watching,watched,willwatch',
-        'additional_images.*' => 'nullable|image|max:2048',
-    ];
+    protected function rules(): array
+    {
+        return [
+            'content_type_id' => 'required|exists:content_types,id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|max:2048', // 2MB max
+            'status' => ['required', Rule::in(ContentStatus::values())],
+            'additional_images.*' => 'nullable|image|max:2048',
+        ];
+    }
 
     public function save()
     {

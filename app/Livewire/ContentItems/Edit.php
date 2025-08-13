@@ -6,7 +6,9 @@ use App\Models\Image;
 use Livewire\Component;
 use App\Models\ContentItem;
 use App\Models\ContentType;
+use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
@@ -30,15 +32,18 @@ class Edit extends Component
     public $confirmingMainImageRemoval = false;
 
 
-    protected $rules = [
-        'content_type_id' => 'required|exists:content_types,id',
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'image' => 'nullable|image|max:2048',
-        'status' => 'required|in:watching,watched,willwatch',
-        'newAdditionalImages.*' => 'nullable|image|max:2048',
-        'imagesToRemove' => 'array',
-    ];
+    protected function rules(): array
+    {
+        return [
+            'content_type_id' => 'required|exists:content_types,id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|max:2048', // 2MB max
+            'status' => ['required', Rule::in(ContentStatus::values())],
+            'newAdditionalImages.*' => 'nullable|image|max:2048',
+            'imagesToRemove' => 'array',
+        ];
+    }
 
     public function mount(ContentItem $contentItem)
     {
