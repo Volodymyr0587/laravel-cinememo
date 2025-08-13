@@ -7,6 +7,7 @@ enum ContentStatus: string
     case Watching = 'watching';
     case Watched = 'watched';
     case WillWatch = 'willwatch';
+    case Waiting = 'waiting';
 
     public static function values(): array
     {
@@ -19,6 +20,7 @@ enum ContentStatus: string
             self::Watching->value => 'Watching',
             self::Watched->value => 'Watched',
             self::WillWatch->value => 'Will Watch',
+            self::Waiting->value => 'Waiting',
         ];
     }
 }
