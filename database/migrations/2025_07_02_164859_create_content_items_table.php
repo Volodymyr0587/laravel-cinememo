@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(ContentType::class)->constrained()->cascadeOnDelete();
             $table->string('title');
+            $table->string('slug');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ContentStatus::values())->default(ContentStatus::WillWatch->value);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

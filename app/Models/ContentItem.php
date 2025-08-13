@@ -19,7 +19,8 @@ class ContentItem extends Model
         'title',
         'description',
         'image',
-        'status'
+        'status',
+        'slug',
     ];
 
     public function contentType(): BelongsTo
