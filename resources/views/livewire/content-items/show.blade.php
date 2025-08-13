@@ -49,9 +49,10 @@
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Status') }}</p>
                         <span @class([
                             'inline-block px-2 py-1 rounded text-xs font-medium',
-                            'bg-green-100 text-green-800' => $contentItem->status === \App\Enums\ContentStatus::Watched,
-                            'bg-yellow-100 text-yellow-800' => $contentItem->status === \App\Enums\ContentStatus::Watching,
-                            'bg-blue-100 text-blue-800' => $contentItem->status === \App\Enums\ContentStatus::WillWatch,
+                            'bg-green-500 text-white'  => $contentItem->status === \App\Enums\ContentStatus::Watched,
+                            'bg-blue-500 text-white'   => $contentItem->status === \App\Enums\ContentStatus::Watching,
+                            'bg-purple-500 text-white' => $contentItem->status === \App\Enums\ContentStatus::WillWatch,
+                            'bg-amber-500 text-black'  => $contentItem->status === \App\Enums\ContentStatus::Waiting,
                         ])>
                             {{ \App\Enums\ContentStatus::labels()[$contentItem->status->value] ?? ucfirst($contentItem->status->value) }}
                         </span>
