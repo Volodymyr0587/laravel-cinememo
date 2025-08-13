@@ -111,6 +111,24 @@ class DatabaseSeeder extends Seeder
                         'images/Call-of-the-Night/Call-of-the-Night-3.png',
                     ]
                 ],
+                [
+                    'title' => 'Фрірен: після кінця пригоди 1 сезон',
+                    'description' => 'Король демонів переможений, і група героїв, що перемогла, повертається додому перед тим, як розпуститися. Четверо - маг Фрірен, герой Хіммель, жрець Хейтер і воїн Ейзен - згадують про свою десятирічну подорож, коли настає момент попрощатися один з одним. Але плин часу для ельфів відрізняється, тому Фрірен стає свідком того, як її супутники повільно йдуть один за одним. Перед смертю Хайтеру вдається нав\'язати Фрірену молоду людину-учня на ім\'я Ферн. Ведена пристрастю ельфа до збирання безлічі магічних заклинань, пара вирушає до, здавалося б, безцільної подорожі, знову відвідуючи місця, які відвідали герої минулого. Під час своїх подорожей Фрірен повільно стикається з жалем про втрачені можливості встановити тісніші зв\'язки зі своїми нині покійними товаришами.',
+                    'image' => 'images/Frieren/frieren-0.png',
+                    'status' => \App\Enums\ContentStatus::Watched->value,
+                    'additional_images' => [
+                        'images/Frieren/frieren.jpg',
+                        'images/Frieren/frieren-0.png',
+                        'images/Frieren/frieren-1.jpg',
+                        'images/Frieren/frieren-2.jpg',
+                        'images/Frieren/frieren-3.jpg',
+                        'images/Frieren/frieren-4.jpg',
+                        'images/Frieren/frieren-8.jpeg',
+                        'images/Frieren/frieren-9.png',
+                        'images/Frieren/frieren-11.jpeg',
+
+                    ]
+                ],
             ],
         ];
 
