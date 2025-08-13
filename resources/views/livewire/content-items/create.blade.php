@@ -25,9 +25,9 @@
                             <div>
 
                                 <flux:select wire:model="status" id="status" :label="__('Status')">
-                                    <option value="willwatch">Will Watch</option>
-                                    <option value="watching">Watching</option>
-                                    <option value="watched">Watched</option>
+                                    @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
+                                        <option value="{{ $value }}">{{ __($label) }}</option>
+                                    @endforeach
                                 </flux:select>
                             </div>
                         </div>
