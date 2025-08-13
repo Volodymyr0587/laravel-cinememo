@@ -20,7 +20,9 @@ class DeleteUserForm extends Component
             'password' => ['required', 'string', 'current_password'],
         ]);
 
-        Storage::disk('public')->delete(Auth::user()->profile_image);
+        if ($path = Auth::user()->profile_image) {
+            Storage::disk('public')->delete($path);
+        }
 
         tap(Auth::user(), $logout(...))->delete();
 
