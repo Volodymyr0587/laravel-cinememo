@@ -67,10 +67,19 @@
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="top" align="end">
-                <flux:profile
-                    class="cursor-pointer"
-                    :initials="auth()->user()->initials()"
-                />
+                @if (auth()->user()->profile_image)
+                    <flux:profile
+                        class="cursor-pointer"
+                        :name="auth()->user()->name"
+                        :avatar="Storage::url(auth()->user()->profile_image)"
+                     />
+                @else
+                    <flux:profile
+                        class="cursor-pointer"
+                        :name="auth()->user()->name"
+                        :initials="auth()->user()->initials()"
+                     />
+                @endif
 
                 <flux:menu>
                     <flux:menu.radio.group>
