@@ -51,9 +51,9 @@
                         <div>
                             <flux:select wire:model.live="statusFilter" :label="__('Status')">
                                 <option value="">All Statuses</option>
-                                <option value="willwatch">Will Watch</option>
-                                <option value="watching">Watching</option>
-                                <option value="watched">Watched</option>
+                                @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
+                                    <option value="{{ $value }}">{{ __($label) }}</option>
+                                @endforeach
                             </flux:select>
                         </div>
                         <div>
@@ -105,10 +105,11 @@
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
                                         <span class="font-medium">Status:</span>
                                         <span wire:click="$set('statusFilter', '{{ $contentItem->status->value }}')" @class([
-                                            'px-2 py-1 rounded text-xs hover:cursor-pointer',
-                                            'bg-green-100 text-green-800' => $contentItem->status === \App\Enums\ContentStatus::Watched,
-                                            'bg-yellow-100 text-yellow-800' => $contentItem->status === \App\Enums\ContentStatus::Watching,
-                                            'bg-blue-100 text-blue-800' => $contentItem->status === \App\Enums\ContentStatus::WillWatch,
+                                            'px-2 py-1 rounded text-xs font-bold hover:cursor-pointer',
+                                            'bg-green-500 text-white'  => $contentItem->status === \App\Enums\ContentStatus::Watched,   // насичений зелений
+                                            'bg-blue-500 text-white'   => $contentItem->status === \App\Enums\ContentStatus::Watching,  // яскраво-синій
+                                            'bg-purple-500 text-white' => $contentItem->status === \App\Enums\ContentStatus::WillWatch, // фіолетовий
+                                            'bg-amber-500 text-black'  => $contentItem->status === \App\Enums\ContentStatus::Waiting,   // теплий жовто-помаранчевий
                                         ])>
                                             {{ \App\Enums\ContentStatus::labels()[$contentItem->status->value] ?? ucfirst($contentItem->status->value) }}
                                         </span>
