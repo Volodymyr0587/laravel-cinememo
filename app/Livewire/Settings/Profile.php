@@ -18,7 +18,9 @@ class Profile extends Component
 
     public string $email = '';
 
-    public $profile_image;
+    public $profile_image; // uploaded file
+
+    public ?string $currentProfileImage = null; // stored image path
 
     /**
      * Mount the component.
@@ -27,6 +29,7 @@ class Profile extends Component
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->currentProfileImage = Auth::user()->profile_image;
     }
 
     /**
@@ -54,11 +57,12 @@ class Profile extends Component
         if ($this->profile_image) {
             // Delete old profile image if exists
             if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
-                // dd($user->profile_image);
                 Storage::disk('public')->delete($user->profile_image);
             }
 
             $validated['profile_image'] = $this->profile_image->store('profile_images', 'public');
+            $this->currentProfileImage = $validated['profile_image']; // update Livewire property
+            $this->reset('profile_image');
         }
 
         $user->fill($validated);
@@ -70,6 +74,24 @@ class Profile extends Component
         $user->save();
 
         $this->dispatch('profile-updated', name: $user->name);
+    }
+
+    public function deleteProfileImage(): void
+    {
+        $user = Auth::user();
+
+        if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
+            Storage::disk('public')->delete($user->profile_image);
+        }
+
+        // Remove DB reference
+        $user->update(['profile_image' => null]);
+
+        // Reset Livewire property if you are binding it in the view
+        $this->profile_image = null;
+        $this->currentProfileImage = null; // clear it so Blade re-renders
+
+        $this->dispatch('profile-image-deleted');
     }
 
     /**

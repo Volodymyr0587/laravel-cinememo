@@ -41,8 +41,20 @@
                         <p class="text-sm text-gray-800 dark:text-white">Preview:</p>
                         <img src="{{ $profile_image->temporaryUrl() }}" alt="Preview" class="mt-1 h-32 w-32 object-cover rounded">
                     </div>
-                @elseif(Auth::user()->profile_image)
-                    <livewire:settings.delete-profile-image />
+                @elseif ($currentProfileImage)
+                    <div class="mt-4 relative inline-block">
+                        <img src="{{ Storage::url($currentProfileImage) }}"
+                            alt="Profile Image"
+                            class="h-32 w-32 object-cover rounded border">
+
+                        <x-button
+                            wire:click="deleteProfileImage"
+                            wire:confirm="Are you sure you want to delete your profile image?"
+                            color="red"
+                            class="!absolute top-0 -right-20">
+                            <flux:icon.trash />
+                        </x-button>
+                    </div>
                 @endif
 
                 <div wire:loading wire:target="profile_image" class="text-sm text-gray-600 mt-2">
