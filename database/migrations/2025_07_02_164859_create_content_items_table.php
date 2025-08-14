@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ContentStatus::values())->default(ContentStatus::WillWatch->value);
+            $table->boolean('is_public')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

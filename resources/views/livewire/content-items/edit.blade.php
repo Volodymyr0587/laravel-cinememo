@@ -41,6 +41,16 @@
                         </div>
 
                         <div class="mt-4">
+                            <flux:field variant="inline">
+                                <flux:checkbox wire:model="is_public" />
+
+                                <flux:label>Make Public</flux:label>
+
+                                <flux:error name="is_public" />
+                            </flux:field>
+                        </div>
+
+                        <div class="mt-4">
                             {{-- Existing Image Preview --}}
                             @if($existingImage)
                             <div class="mt-2 mb-4">

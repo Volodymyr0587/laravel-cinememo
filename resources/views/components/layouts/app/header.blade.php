@@ -37,6 +37,12 @@
                 </flux:navbar.item>
             </flux:navbar>
 
+            <flux:navbar class="-mb-px max-lg:hidden">
+                <flux:navbar.item icon="film" :href="route('public-content.index')" :current="request()->routeIs('public-content.index')" wire:navigate>
+                    {{ __('Public Content') }}
+                </flux:navbar.item>
+            </flux:navbar>
+
             @php
                 $countTrashedContentItems = auth()->user()->contentItems()->onlyTrashed()->count();
             @endphp

@@ -5,7 +5,7 @@
 
                 {{-- Back Button --}}
                 <div class="mb-4">
-                    <flux:link :href="route('content-items.index')" wire:navigate>
+                    <flux:link :href="url()->previous()" wire:navigate>
                         ← {{ __('Back to list') }}
                     </flux:link>
                 </div>
@@ -155,6 +155,7 @@
 
 
                 {{-- Action Buttons --}}
+                @can('update', $contentItem)
                 <div class="flex justify-between items-center mt-6">
                     <flux:button href="{{ route('content-items.edit', $contentItem) }}" wire:navigate>
                         {{ __('Edit') }}
@@ -166,7 +167,7 @@
                         {{ __('Delete') }}
                     </button>
                 </div>
-
+                @endcan
             </div>
         </div>
     </div>

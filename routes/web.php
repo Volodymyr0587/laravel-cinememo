@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
 use function Spatie\LaravelPdf\Support\pdf;
+use App\Livewire\ContentItems\PublicContentItems;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/content-items/create', ContentItems\Create::class)->name('content-items.create');
     Route::get('/content-items/{contentItem}/edit', ContentItems\Edit::class)->name('content-items.edit');
     Route::get('/content-items/{contentItem}', ContentItems\Show::class)->name('content-items.show');
+
+    // Public Items Routes
+    Route::get('/public-content', PublicContentItems::class)
+        ->name('public-content.index');
 
     // Export Content Items to PDF
     Route::get('/export-pdf', function () {

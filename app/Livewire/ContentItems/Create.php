@@ -18,6 +18,7 @@ class Create extends Component
     public $description = '';
     public $image;
     public $status = 'willwatch';
+    public $is_public = false;
     public $additional_images = [];
 
     protected function rules(): array
@@ -28,6 +29,7 @@ class Create extends Component
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048', // 2MB max
             'status' => ['required', Rule::in(ContentStatus::values())],
+            'is_public' => ['boolean'],
             'additional_images.*' => 'nullable|image|max:2048',
         ];
     }
@@ -52,6 +54,7 @@ class Create extends Component
             'description' => $this->description,
             'image' => $imagePath,
             'status' => $this->status,
+            'is_public' => $this->is_public,
         ]);
 
         foreach ($this->additional_images as $file) {

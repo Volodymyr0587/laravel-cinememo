@@ -21,6 +21,7 @@ class Edit extends Component
     public $description = '';
     public $image;
     public $status = '';
+    public $is_public = '';
     public $existingImage = '';
 
     public $existingImages = [];
@@ -40,6 +41,7 @@ class Edit extends Component
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048', // 2MB max
             'status' => ['required', Rule::in(ContentStatus::values())],
+            'is_public' => ['boolean'],
             'newAdditionalImages.*' => 'nullable|image|max:2048',
             'imagesToRemove' => 'array',
         ];
@@ -48,13 +50,14 @@ class Edit extends Component
     public function mount(ContentItem $contentItem)
     {
         // Ensure the content item belongs to the authenticated user
-        $this->authorize('view', $contentItem);
+        $this->authorize('update', $contentItem);
 
         $this->contentItem = $contentItem;
         $this->content_type_id = $contentItem->content_type_id;
         $this->title = $contentItem->title;
         $this->description = $contentItem->description;
         $this->status = $contentItem->status->value;
+        $this->is_public = $contentItem->is_public;
         $this->existingImage = $contentItem->image;
 
         $this->existingImages = $contentItem->additionalImages->toArray();
@@ -154,6 +157,7 @@ class Edit extends Component
             'description' => $this->description,
             'image' => $imagePath,
             'status' => $this->status,
+            'is_public' => $this->is_public,
         ]);
 
         session()->flash('message', 'Content item updated successfully.');

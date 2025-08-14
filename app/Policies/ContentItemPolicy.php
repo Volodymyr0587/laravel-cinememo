@@ -21,12 +21,7 @@ class ContentItemPolicy
      */
     public function view(User $user, ContentItem $contentItem): bool
     {
-        if ($contentItem->contentType->user_id !== auth()->id()) {
-            abort(404);
-        }
-
-        return $contentItem->contentType->user_id === $user->id;
-
+        return $contentItem->is_public || $contentItem->contentType->user_id === $user->id;
     }
 
     /**
@@ -42,7 +37,7 @@ class ContentItemPolicy
      */
     public function update(User $user, ContentItem $contentItem): bool
     {
-        return false;
+         return $contentItem->contentType->user_id === $user->id;
     }
 
     /**
@@ -50,7 +45,7 @@ class ContentItemPolicy
      */
     public function delete(User $user, ContentItem $contentItem): bool
     {
-        return false;
+        return $contentItem->contentType->user_id === $user->id;
     }
 
     /**

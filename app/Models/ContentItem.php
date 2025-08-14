@@ -21,7 +21,13 @@ class ContentItem extends Model
         'image',
         'status',
         'slug',
+        'is_public',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function contentType(): BelongsTo
     {
@@ -67,5 +73,6 @@ class ContentItem extends Model
 
     protected $casts = [
         'status' => ContentStatus::class,
+        'is_public' => 'boolean',
     ];
 }
