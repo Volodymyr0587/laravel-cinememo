@@ -17,15 +17,23 @@
                 </flux:navbar.item>
             </flux:navbar>
 
+            @php
+                $countContentTypes = auth()->user()->contentTypes()->count();
+            @endphp
+
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
-                    {{ __('Content Types') }}
+                    {{ __('Content Types') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
 
+            @php
+                $countContentItems = auth()->user()->contentItems()->count();
+            @endphp
+
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
-                    {{ __('Content Items') }}
+                    {{ __('Content Items') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
 
