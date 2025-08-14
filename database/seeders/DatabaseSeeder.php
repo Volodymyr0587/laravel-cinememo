@@ -133,10 +133,17 @@ class DatabaseSeeder extends Seeder
         ];
 
         // 3. Database filling
+        $colors = [
+            'Movie' => '#ff9900',
+            'Serial' => '#1db954',
+            'Anime' => '#f23aa2',
+        ];
+
         foreach ($contentTypesAndContentItems as $typeName => $items) {
             $type = ContentType::create([
                 'user_id' => $user->id,
                 'name' => $typeName,
+                'color' => $colors[$typeName] ?? '#3b82f6',
             ]);
 
             foreach ($items as $itemData) {

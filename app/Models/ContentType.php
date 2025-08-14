@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContentType extends Model
 {
-    protected $fillable = ['user_id', 'name'];
+    protected $fillable = ['user_id', 'name', 'color'];
 
     public function user(): BelongsTo
     {

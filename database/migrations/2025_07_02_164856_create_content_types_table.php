@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('name')->unique();
+            $table->string('color', 7)->default('#3b82f6');
             $table->timestamps();
         });
     }

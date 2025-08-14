@@ -38,7 +38,9 @@
                                 @forelse($contentTypes as $contentType)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ $contentType->name }}
+                                            <span class="px-2 py-1 rounded text-xs font-bold" style="background-color: {{ $contentType->color }}">
+                                                {{ $contentType->name }}
+                                            </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $contentType->content_items_count }}

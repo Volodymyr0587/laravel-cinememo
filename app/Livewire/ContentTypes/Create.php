@@ -10,6 +10,8 @@ class Create extends Component
 {
     public $name = '';
 
+    public $color = '';
+
     protected function rules()
     {
         return [
@@ -22,6 +24,7 @@ class Create extends Component
                     return $query->where('user_id', auth()->id());
                 }),
             ],
+            'color' => ['required'],
         ];
     }
 
@@ -32,6 +35,7 @@ class Create extends Component
         ContentType::create([
             'user_id' => auth()->id(),
             'name' => $this->name,
+            'color' => $this->color,
         ]);
 
         session()->flash('message', 'Content type created successfully.');

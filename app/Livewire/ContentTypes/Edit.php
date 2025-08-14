@@ -10,6 +10,7 @@ class Edit extends Component
 {
     public ContentType $contentType;
     public $name = '';
+    public $color = '#3b82f6';
 
     protected function rules()
     {
@@ -23,6 +24,7 @@ class Edit extends Component
                     ->ignore($this->contentType->id)
                     ->where(fn($query) => $query->where('user_id', auth()->id()))
             ],
+            'color' => ['required'],
         ];
     }
 
@@ -35,6 +37,7 @@ class Edit extends Component
 
         $this->contentType = $contentType;
         $this->name = $contentType->name;
+        $this->color = $contentType->color ?? '#3b82f6';
     }
 
     public function save()
@@ -43,6 +46,7 @@ class Edit extends Component
 
         $this->contentType->update([
             'name' => $this->name,
+            'color' => $this->color,
         ]);
 
         session()->flash('message', 'Content type updated successfully.');

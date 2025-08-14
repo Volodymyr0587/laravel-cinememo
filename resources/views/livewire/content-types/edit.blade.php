@@ -21,6 +21,19 @@
                             />
                         </div>
 
+                        <div class="my-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                {{ __('Color') }}
+                            </label>
+                            <input
+                                type="color"
+                                wire:model="color"
+                                value="{{ $contentType->color }}"
+                                class="w-16 h-10 rounded border border-gray-300 dark:border-zinc-600 shadow-sm cursor-pointer
+                                    bg-white dark:bg-zinc-700"
+                            >
+                        </div>
+
                          <div class="flex items-center justify-between">
                             <flux:button variant="primary" type="submit" >{{ __('Update Content Type') }}</flux:button>
                             <flux:link :href="route('content-types.index')" wire:navigate>{{ __('Cancel') }}</flux:link>

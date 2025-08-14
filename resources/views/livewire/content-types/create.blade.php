@@ -19,6 +19,19 @@
                                 autocomplete="name"
                                 placeholder="movie"
                             />
+
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                    {{ __('Color') }}
+                                </label>
+                                <input
+                                    type="color"
+                                    wire:model="color"
+                                    class="w-16 h-10 rounded border border-gray-300 dark:border-zinc-600 shadow-sm cursor-pointer
+                                        bg-white dark:bg-zinc-700"
+                                >
+                            </div>
+
                         </div>
 
                         <div class="flex items-center justify-between">
