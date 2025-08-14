@@ -10,7 +10,12 @@ class Create extends Component
 {
     public $name = '';
 
-    public $color = '';
+    public $color;
+
+    public function mount()
+    {
+        $this->color = '#3b82f6';
+    }
 
     protected function rules()
     {
