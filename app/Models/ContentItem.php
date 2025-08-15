@@ -80,6 +80,10 @@ class ContentItem extends Model
                 $contentItem->slug = $slug;
             }
         });
+
+        static::forceDeleted(function ($contentItem) {
+            $contentItem->comments()->delete();
+        });
     }
 
     public function getRouteKeyName()
