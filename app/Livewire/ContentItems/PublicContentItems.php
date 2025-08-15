@@ -3,8 +3,9 @@
 namespace App\Livewire\ContentItems;
 
 use Livewire\Component;
-use App\Models\ContentItem;
 use Livewire\WithPagination;
+use App\Models\ContentItem;
+use App\Models\ContentType;
 
 class PublicContentItems extends Component
 {
@@ -13,18 +14,22 @@ class PublicContentItems extends Component
     public $search = '';
     public $contentTypeFilter = '';
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'contentTypeFilter' => ['except' => ''],
+    ];
+
     public function clearFilters(): void
     {
-        $this->contentTypeFilter = '';
         $this->search = '';
+        $this->contentTypeFilter = '';
+        $this->resetPage();
     }
 
     public function render()
     {
-        $query = ContentItem::with('user', 'contentType')
-            ->where('is_public', true)
-            // ->where('user_id', '!=', auth()->id())
-            ;
+        $query = ContentItem::with(['user', 'contentType'])
+            ->where('is_public', true);
 
         if ($this->search) {
             $query->where('title', 'like', '%' . $this->search . '%');
@@ -34,9 +39,16 @@ class PublicContentItems extends Component
             $query->where('content_type_id', $this->contentTypeFilter);
         }
 
-        $contentItems = $query->orderBy('updated_at', 'desc')
-                        ->paginate(8)->withQueryString();
+        // Додаємо likes_count лише один раз для сортування і відображення
+        $query->withCount('likes');
 
-        return view('livewire.content-items.public-content-items', compact('contentItems'));
+        $contentItems = $query->latest()->paginate(8)->withQueryString();
+
+        $contentTypes = ContentType::select('id','name','color')
+            ->whereHas('contentItems', fn($q) => $q->where('is_public', true))
+            ->orderBy('name')
+            ->get();
+
+        return view('livewire.content-items.public-content-items', compact('contentItems', 'contentTypes'));
     }
 }

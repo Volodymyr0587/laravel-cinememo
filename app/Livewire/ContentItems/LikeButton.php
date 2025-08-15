@@ -3,8 +3,8 @@
 namespace App\Livewire\ContentItems;
 
 use Livewire\Component;
-use App\Models\ContentItem;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ContentItem;
 
 class LikeButton extends Component
 {
@@ -12,21 +12,27 @@ class LikeButton extends Component
 
     public function toggleLike()
     {
+        // Перевірка політики
         $this->authorize('like', $this->contentItem);
 
-        if ($this->contentItem->isLikedBy(Auth::user())) {
-            $this->contentItem->likes()->where('user_id', Auth::id())->delete();
+        $user = Auth::user();
+
+        if ($this->contentItem->isLikedBy($user)) {
+            $this->contentItem->likes()->where('user_id', $user->id)->delete();
         } else {
-            $this->contentItem->likes()->create(['user_id' => Auth::id()]);
+            $this->contentItem->likes()->create(['user_id' => $user->id]);
         }
 
-        $this->contentItem->refresh();
+        // Оновлюємо likes_count без додаткових запитів
+        $this->contentItem->loadCount('likes');
     }
+
     public function render()
     {
-        return view('livewire.content-items.like-button', [
-            'likesCount' => $this->contentItem->likes()->count(),
-            'isLiked' => $this->contentItem->isLikedBy(Auth::user()),
-        ]);
+        $user = Auth::user();
+        $likesCount = $this->contentItem->likes_count ?? $this->contentItem->likes()->count();
+        $isLiked = $user ? $this->contentItem->isLikedBy($user) : false;
+
+        return view('livewire.content-items.like-button', compact('likesCount', 'isLiked'));
     }
 }

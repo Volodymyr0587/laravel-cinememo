@@ -23,8 +23,6 @@
             <div class="overflow-hidden dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
                 <div class="p-6">
 
-                    {{-- <x-flash-message /> --}}
-
                     <!-- Filters -->
                     <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
@@ -35,22 +33,17 @@
                                 :placeholder="__('Search content items...')"
                             />
                         </div>
-                        {{-- <div>
-                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
-                                <option value="">All Statuses</option>
-                                @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
-                                    <option value="{{ $value }}">{{ __($label) }}</option>
+                        <div>
+                            <flux:select
+                                wire:model.live="contentTypeFilter"
+                                :label="__('Content Type')"
+                            >
+                                <option value="">{{ __('All Types') }}</option>
+                                @foreach($contentTypes as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </flux:select>
-                        </div> --}}
-                        {{-- <div>
-                            <flux:select wire:model.live="contentTypeFilter" :label="__('Content Type')">
-                                <option value="">All Content Types</option>
-                                @foreach($contentTypes as $contentType)
-                                    <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div> --}}
+                        </div>
                     </div>
 
                     <!-- Content Items Grid -->
