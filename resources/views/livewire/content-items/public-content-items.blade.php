@@ -80,7 +80,7 @@
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
                                         <span class="font-medium">Type:</span>
                                         <span wire:click="$set('contentTypeFilter', '{{ $contentItem->contentType->id }}')"
-                                            class="px-2 py-1 rounded text-white font-bold"
+                                            class="px-2 py-1 rounded text-white font-bold hover:cursor-pointer"
                                             style="background-color: {{ $contentItem->contentType->color }}">
                                             {{ $contentItem->contentType->name }}
                                         </span>
