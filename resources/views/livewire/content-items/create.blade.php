@@ -50,7 +50,9 @@
                             <flux:field variant="inline">
                                 <flux:checkbox wire:model="is_public" />
 
-                                <flux:label>Make Public</flux:label>
+                                <flux:label>Make Public
+                                    <span class="ml-2 text-sm italic">(Other users will be able to view this content and leave comments)</span>
+                                </flux:label>
 
                                 <flux:error name="is_public" />
                             </flux:field>

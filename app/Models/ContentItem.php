@@ -45,6 +45,11 @@ class ContentItem extends Model
         return $this->likes()->where('user_id', $user->id)->exists();
     }
 
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function additionalImages(): HasMany
     {
         return $this->hasMany(Image::class);

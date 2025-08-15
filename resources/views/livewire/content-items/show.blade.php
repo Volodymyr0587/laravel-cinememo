@@ -60,6 +60,12 @@
                             {{ \App\Enums\ContentStatus::labels()[$contentItem->status->value] ?? ucfirst($contentItem->status->value) }}
                         </span>
                     </div>
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Author') }}</p>
+                        <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">
+                            {{ $contentItem->contentType->user->name }}
+                        </span>
+                    </div>
                 </div>
 
                 {{-- Description --}}
@@ -91,7 +97,7 @@
                         @keydown.escape.window="imageModal = false"
                         @keydown.arrow-right.window="next()"
                         @keydown.arrow-left.window="prev()"
-                        class="mt-4"
+                        class="my-4"
                     >
                         <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">Additional Images</p>
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -153,6 +159,9 @@
                 @endif
                 {{-- End of Additional images Slider Modal --}}
 
+                @if ($contentItem->is_public)
+                    <livewire:content-items.comments-section :contentItem="$contentItem" />
+                @endif
 
                 {{-- Action Buttons --}}
                 @can('update', $contentItem)
