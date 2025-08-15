@@ -121,11 +121,6 @@ class Edit extends Component
     {
         $this->validate();
 
-        // Verify the content type belongs to the authenticated user
-        $contentType = ContentType::where('id', $this->content_type_id)
-            ->where('user_id', auth()->id())
-            ->firstOrFail();
-
         $imagePath = $this->existingImage;
 
         if ($this->image) {

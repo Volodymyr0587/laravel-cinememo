@@ -38,15 +38,7 @@ class Create extends Component
     {
         $this->validate();
 
-        // Verify the content type belongs to the authenticated user
-        $contentType = ContentType::where('id', $this->content_type_id)
-            ->where('user_id', auth()->id())
-            ->firstOrFail();
-
-        $imagePath = null;
-        if ($this->image) {
-            $imagePath = $this->image->store('content-images', 'public');
-        }
+        $imagePath = $this->image ? $this->image->store('content-images', 'public') : null;
 
         $contentItem = ContentItem::create([
             'content_type_id' => $this->content_type_id,
