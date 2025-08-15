@@ -107,6 +107,10 @@
                                             {{ Str::limit($contentItem->description, 100) }}
                                         </p>
                                     @endif
+
+                                    @can('like', $contentItem)
+                                    <livewire:content-items.like-button :contentItem="$contentItem" />
+                                    @endcan
                                 </div>
                             </div>
                         @empty

@@ -63,4 +63,9 @@ class ContentItemPolicy
     {
         return $contentItem->contentType->user_id === $user->id;
     }
+
+    public function like(User $user, ContentItem $contentItem): bool
+    {
+        return $contentItem->is_public && $contentItem->contentType->user_id !== $user->id;
+    }
 }
