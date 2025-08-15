@@ -79,7 +79,7 @@
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
                                         <span class="font-medium">Type:</span>
-                                        <span
+                                        <span wire:click="$set('contentTypeFilter', '{{ $contentItem->contentType->id }}')"
                                             class="px-2 py-1 rounded text-white font-bold"
                                             style="background-color: {{ $contentItem->contentType->color }}">
                                             {{ $contentItem->contentType->name }}
@@ -102,7 +102,10 @@
                                     @endif
 
                                     @can('like', $contentItem)
-                                    <livewire:content-items.like-button :contentItem="$contentItem" />
+                                   <livewire:content-items.like-button
+                                        :contentItem="$contentItem"
+                                        :key="'like-button-' . $contentItem->id . '-' . $refreshKey"
+                                    />
                                     @endcan
                                 </div>
                             </div>

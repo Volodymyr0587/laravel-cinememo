@@ -5,10 +5,28 @@ namespace App\Livewire\ContentItems;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ContentItem;
+use Livewire\Attributes\On;
 
 class LikeButton extends Component
 {
     public ContentItem $contentItem;
+    public $likesCount;
+    public $isLiked = false;
+
+    public function mount()
+    {
+        $this->loadLikeData();
+    }
+
+    private function loadLikeData()
+    {
+        // Завжди перезавантажуємо свіжі дані з бази
+        $this->contentItem->loadCount('likes');
+        $this->likesCount = $this->contentItem->likes_count;
+
+        $user = Auth::user();
+        $this->isLiked = $user ? $this->contentItem->isLikedBy($user) : false;
+    }
 
     public function toggleLike()
     {
@@ -23,16 +41,32 @@ class LikeButton extends Component
             $this->contentItem->likes()->create(['user_id' => $user->id]);
         }
 
-        // Оновлюємо likes_count без додаткових запитів
-        $this->contentItem->loadCount('likes');
+        // Оновлюємо дані після зміни
+        $this->loadLikeData();
+
+        // Повідомляємо батьківський компонент про зміну
+        $this->dispatch('like-updated', contentItemId: $this->contentItem->id);
+    }
+
+    // Слухач для оновлення з батьківського компонента
+    #[On('refresh-likes')]
+    public function refreshLikes()
+    {
+        $this->loadLikeData();
+    }
+
+    // Слухач для оновлення конкретного елемента
+    #[On('refresh-like-{contentItem.id}')]
+    public function refreshSpecificLike()
+    {
+        $this->loadLikeData();
     }
 
     public function render()
     {
-        $user = Auth::user();
-        $likesCount = $this->contentItem->likes_count ?? $this->contentItem->likes()->count();
-        $isLiked = $user ? $this->contentItem->isLikedBy($user) : false;
-
-        return view('livewire.content-items.like-button', compact('likesCount', 'isLiked'));
+        return view('livewire.content-items.like-button', [
+            'likesCount' => $this->likesCount,
+            'isLiked' => $this->isLiked
+        ]);
     }
 }

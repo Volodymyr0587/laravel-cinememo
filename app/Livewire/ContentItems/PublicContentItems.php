@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\ContentItem;
 use App\Models\ContentType;
+use Livewire\Attributes\On;
 
 class PublicContentItems extends Component
 {
@@ -19,11 +20,41 @@ class PublicContentItems extends Component
         'contentTypeFilter' => ['except' => ''],
     ];
 
+    // Додаємо властивість для примусового оновлення
+    public $refreshKey = 0;
+
     public function clearFilters(): void
     {
         $this->search = '';
         $this->contentTypeFilter = '';
+        $this->resetPage(); // Важливо: скидаємо пагінацію
+        $this->refreshKey++; // Примусово оновлюємо компонент
+
+        // Повідомляємо всі дочірні компоненти про необхідність оновлення
+        $this->dispatch('refresh-likes');
+    }
+
+    // Додаємо методи для автоматичного скидання пагінації при зміні фільтрів
+    public function updatedSearch(): void
+    {
         $this->resetPage();
+        $this->refreshKey++;
+        $this->dispatch('refresh-likes');
+    }
+
+    public function updatedContentTypeFilter(): void
+    {
+        $this->resetPage();
+        $this->refreshKey++;
+        $this->dispatch('refresh-likes');
+    }
+
+    // Слухач для оновлення з дочірніх компонентів
+    #[On('like-updated')]
+    public function handleLikeUpdate($contentItemId)
+    {
+        // Можна додати додаткову логіку якщо потрібно
+        $this->refreshKey++;
     }
 
     public function render()
@@ -39,10 +70,12 @@ class PublicContentItems extends Component
             $query->where('content_type_id', $this->contentTypeFilter);
         }
 
-        // Додаємо likes_count лише один раз для сортування і відображення
-        $query->withCount('likes');
+        // Додаємо likes_count з уникненням конфліктів кешування
+        $query->withCount(['likes' => function ($query) {
+            $query->selectRaw('count(*)');
+        }]);
 
-        $contentItems = $query->latest()->paginate(8)->withQueryString();
+        $contentItems = $query->latest('created_at')->paginate(8);
 
         $contentTypes = ContentType::select('id','name','color')
             ->whereHas('contentItems', fn($q) => $q->where('is_public', true))
