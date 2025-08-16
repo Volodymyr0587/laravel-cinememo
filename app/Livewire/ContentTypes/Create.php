@@ -37,13 +37,12 @@ class Create extends Component
     {
         $this->validate();
 
-        ContentType::create([
-            'user_id' => auth()->id(),
+        $contentType = auth()->user()->contentTypes()->create([
             'name' => $this->name,
             'color' => $this->color,
         ]);
 
-        session()->flash('message', 'Content type created successfully.');
+        session()->flash('message', "Content type $contentType->name created successfully.");
 
         return redirect()->route('content-types.index');
     }
