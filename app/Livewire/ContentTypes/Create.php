@@ -3,7 +3,6 @@
 namespace App\Livewire\ContentTypes;
 
 use Livewire\Component;
-use App\Models\ContentType;
 use Illuminate\Validation\Rule;
 
 class Create extends Component
