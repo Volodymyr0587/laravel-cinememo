@@ -151,6 +151,7 @@ class DatabaseSeeder extends Seeder
                 $mainImagePath = $this->copyImageToStorage($itemData['image']);
 
                 $contentItem = ContentItem::create([
+                    'user_id' => $user->id,
                     'content_type_id' => $type->id,
                     'title' => $itemData['title'],
                     'description' => $itemData['description'],

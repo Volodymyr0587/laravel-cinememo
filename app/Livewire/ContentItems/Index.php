@@ -51,9 +51,11 @@ class Index extends Component
 
     public function render()
     {
-        $query = ContentItem::whereHas('contentType', function($query) {
-            $query->where('user_id', auth()->id());
-        })->with('contentType');
+        // $query = ContentItem::whereHas('contentType', function($query) {
+        //     $query->where('user_id', auth()->id());
+        // })->with('contentType');
+
+        $query = auth()->user()->contentItems()->with('contentType');
 
         if ($this->search) {
             $query->where('title', 'like', '%' . $this->search . '%');

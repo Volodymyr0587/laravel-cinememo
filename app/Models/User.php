@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+
 
 class User extends Authenticatable
 {
@@ -67,8 +67,8 @@ class User extends Authenticatable
         return $this->hasMany(ContentType::class);
     }
 
-    public function contentItems(): HasManyThrough
+    public function contentItems(): HasMany
     {
-        return $this->hasManyThrough(ContentItem::class, ContentType::class);
+        return $this->hasMany(ContentItem::class);
     }
 }

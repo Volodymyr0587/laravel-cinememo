@@ -40,7 +40,7 @@ class Create extends Component
 
         $imagePath = $this->image ? $this->image->store('content-images', 'public') : null;
 
-        $contentItem = ContentItem::create([
+        $contentItem = auth()->user()->contentItems()->create([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,

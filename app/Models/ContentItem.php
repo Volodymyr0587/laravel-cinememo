@@ -16,6 +16,7 @@ class ContentItem extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'content_type_id',
         'title',
         'description',

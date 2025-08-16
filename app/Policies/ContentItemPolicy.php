@@ -21,7 +21,7 @@ class ContentItemPolicy
      */
     public function view(User $user, ContentItem $contentItem): bool
     {
-        return $contentItem->is_public || $contentItem->contentType->user_id === $user->id;
+        return $contentItem->is_public || $contentItem->user_id === $user->id;
     }
 
     /**
@@ -37,7 +37,7 @@ class ContentItemPolicy
      */
     public function update(User $user, ContentItem $contentItem): bool
     {
-         return $contentItem->contentType->user_id === $user->id;
+         return $contentItem->user_id === $user->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class ContentItemPolicy
      */
     public function delete(User $user, ContentItem $contentItem): bool
     {
-        return $contentItem->contentType->user_id === $user->id;
+        return $contentItem->user_id === $user->id;
     }
 
     /**
@@ -53,7 +53,7 @@ class ContentItemPolicy
      */
     public function restore(User $user, ContentItem $contentItem): bool
     {
-        return $contentItem->contentType->user_id === $user->id;
+        return $contentItem->user_id === $user->id;
     }
 
     /**
@@ -61,11 +61,11 @@ class ContentItemPolicy
      */
     public function forceDelete(User $user, ContentItem $contentItem): bool
     {
-        return $contentItem->contentType->user_id === $user->id;
+        return $contentItem->user_id === $user->id;
     }
 
     public function like(User $user, ContentItem $contentItem): bool
     {
-        return $contentItem->is_public && $contentItem->contentType->user_id !== $user->id;
+        return $contentItem->is_public && $contentItem->user_id !== $user->id;
     }
 }
