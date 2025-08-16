@@ -84,13 +84,13 @@
     <section class="max-w-6xl mx-auto py-16 px-6">
         <h2 class="text-3xl font-bold text-center mb-10">{{ __("Examples of the interface") }}</h2>
         <div class="grid md:grid-cols-3 gap-6">
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700">
+            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
                 <img src="{{ asset('images/app-screenshots/screenshot-1.png') }}" alt="Screenshot 1" class="w-full h-auto">
             </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700">
+            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
                 <img src="{{ asset('images/app-screenshots/screenshot-2.png') }}" alt="Screenshot 2" class="w-full h-auto">
             </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700">
+            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
                 <img src="{{ asset('images/app-screenshots/screenshot-3.png') }}" alt="Screenshot 3" class="w-full h-auto">
             </div>
         </div>
