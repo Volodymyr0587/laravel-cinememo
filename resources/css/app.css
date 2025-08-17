@@ -33,6 +33,12 @@
         --color-accent: var(--color-white);
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
+
+         /* Change neon color for dark theme */
+        --neon-primary-color: #ffffff;
+        --neon-primary-r: 255;
+        --neon-primary-g: 255;
+        --neon-primary-b: 255;
     }
 }
 
@@ -60,6 +66,81 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
+@layer utilities {
+  @keyframes neon-pulse-red {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(239, 68, 68, 0.8),
+                   0 0 20px rgba(239, 68, 68, 0.6),
+                   0 0 30px rgba(239, 68, 68, 0.4);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(239, 68, 68, 1),
+                   0 0 40px rgba(239, 68, 68, 0.8),
+                   0 0 60px rgba(239, 68, 68, 0.6);
+    }
+  }
+
+  @keyframes neon-pulse-blue {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
+                   0 0 20px rgba(59, 130, 246, 0.6),
+                   0 0 30px rgba(59, 130, 246, 0.4);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(59, 130, 246, 1),
+                   0 0 40px rgba(59, 130, 246, 0.8),
+                   0 0 60px rgba(59, 130, 246, 0.6);
+    }
+  }
+
+  @keyframes neon-pulse-gold {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                   0 0 20px rgba(255, 215, 0, 0.6),
+                   0 0 30px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(255, 215, 0, 1),
+                   0 0 40px rgba(255, 215, 0, 0.8),
+                   0 0 60px rgba(255, 215, 0, 0.6);
+    }
+  }
+
+  @keyframes neon-pulse-white {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                   0 0 20px rgba(255, 255, 255, 0.6),
+                   0 0 30px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                   0 0 40px rgba(255, 255, 255, 0.8),
+                   0 0 60px rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .text-neon-red {
+    color: #ef4444; /* Tailwind red-600 */
+    animation: neon-pulse-red 2s infinite;
+  }
+
+  .text-neon-blue {
+    color: #3b82f6; /* Tailwind blue-500 */
+    animation: neon-pulse-blue 2s infinite;
+  }
+
+  .text-neon-gold {
+    color: #fcd34d; /* Tailwind amber-300 */
+    animation: neon-pulse-gold 2s infinite;
+  }
+
+  .text-neon-white {
+    color: #ffffff;
+    animation: neon-pulse-white 2s infinite;
+  }
+}
+
 
 /* \[:where(&)\]:size-4 {
     @apply size-4;

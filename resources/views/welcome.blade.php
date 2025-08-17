@@ -46,11 +46,14 @@
 
     <!-- Hero -->
     <section class="text-center py-20 px-6">
-        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-            {{ __("Organize your content") }}, <br class="hidden md:block"> {{ __("save your ideas, stay productive") }}
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-neon-red">
+            🎥 {{ config('app.name', 'CineMemo') }}
         </h1>
+        <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+            {{ __("Organize your content") }}, <br class="hidden md:block"> {{ __("save your ideas, stay productive") }}
+        </h2>
         <p class="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-8">
-            {{ config('app.name', 'MyApp') }} — {{ __("is an application for saving notes, movies, articles and everything that is important. In one place. Anytime.") }}
+            <span class="font-bold">{{ config('app.name', 'MyApp') }}</span> — {{ __("is an application for saving notes, movies, articles and everything that is important. In one place. Anytime.") }}
         </p>
         <a href="{{ route('register') }}"
            class="px-6 py-3 rounded-xl bg-blue-600 text-white text-lg font-semibold shadow-lg hover:bg-blue-700 transition">
@@ -93,6 +96,96 @@
             <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
                 <img src="{{ asset('images/app-screenshots/screenshot-3.png') }}" alt="Screenshot 3" class="w-full h-auto">
             </div>
+            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
+                <img src="{{ asset('images/app-screenshots/screenshot-4.png') }}" alt="Screenshot 4" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
+                <img src="{{ asset('images/app-screenshots/screenshot-5.png') }}" alt="Screenshot 5" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
+                <img src="{{ asset('images/app-screenshots/screenshot-6.png') }}" alt="Screenshot 6" class="w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50 dark:bg-neutral-950">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                {{ __("User reviews") }}
+            </h2>
+            <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
+                {{ __("Here's what our users say about the app") }}:
+            </p>
+
+            <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Testimonial 1 -->
+                <div class="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-md">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        “{{ __("Thanks to this app, I don't forget anything anymore. It's very convenient to share with friends.") }}”
+                    </p>
+                    <div class="mt-4 flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/60?img=1" alt="User" class="h-12 w-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="font-semibold text-gray-900 dark:text-white">Andriy K.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ __("Freelancer") }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-md">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        “{{ __("I like that you can comment and like. It adds an element of socialization. I love this ❤️") }}”
+                    </p>
+                    <div class="mt-4 flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/60?img=2" alt="User" class="h-12 w-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="font-semibold text-gray-900 dark:text-white">Oksana P.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ __("Student") }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-md">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        “{{ __("The design is simple and convenient. Registration is quick, and the features are really useful in everyday life.") }}”
+                    </p>
+                    <div class="mt-4 flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/60?img=3" alt="User" class="h-12 w-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="font-semibold text-gray-900 dark:text-white">Igor L.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ __("Manager") }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback -->
+    <section class="max-w-6xl mx-auto py-16 px-6">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">{{ __("Do you have any questions? Write to us!") }}</h2>
+        <div class="max-w-2xl mx-auto bg-white dark:bg-neutral-900 p-8 rounded-lg shadow">
+            <form action="mailto:support@example.com" method="POST" enctype="text/plain" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Name") }}</label>
+                    <flux:input type="text" id="name" name="name" />
+                </div>
+                <div>
+                    <label for="email" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Email") }}</label>
+                    <flux:input type="email" id="email" name="email" required />
+                </div>
+                <div>
+                    <label for="message" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Message") }}</label>
+                    <flux:textarea id="message" name="message" rows="4" required />
+                </div>
+                <button type="submit"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 transition">
+                    {{ __("Send") }}
+                </button>
+            </form>
         </div>
     </section>
 
