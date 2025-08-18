@@ -168,24 +168,7 @@
     <section class="max-w-6xl mx-auto py-16 px-6">
         <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">{{ __("Do you have any questions? Write to us!") }}</h2>
         <div class="max-w-2xl mx-auto bg-white dark:bg-neutral-900 p-8 rounded-lg shadow">
-            <form action="mailto:support@example.com" method="POST" enctype="text/plain" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Name") }}</label>
-                    <flux:input type="text" id="name" name="name" />
-                </div>
-                <div>
-                    <label for="email" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Email") }}</label>
-                    <flux:input type="email" id="email" name="email" required />
-                </div>
-                <div>
-                    <label for="message" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Message") }}</label>
-                    <flux:textarea id="message" name="message" rows="4" required />
-                </div>
-                <button type="submit"
-                        class="w-full bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 transition">
-                    {{ __("Send") }}
-                </button>
-            </form>
+            <livewire:contact-form />
         </div>
     </section>
 
