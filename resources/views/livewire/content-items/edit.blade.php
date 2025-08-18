@@ -35,6 +35,24 @@
                                 placeholder="The Lord of the Rings: The Fellowship of the Ring" />
                         </div>
 
+                        <div class="mt-4 w-full">
+                            <label for="genres" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
+                                {{ __("Genres") }}
+                            </label>
+                            <div class="relative">
+                                <select
+                                    wire:model="genres"
+                                    id="genres"
+                                    multiple
+                                    class="w-full h-40 px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-zinc-600 scrollbar-track-gray-100 dark:scrollbar-track-zinc-700"
+                                >
+                                    @foreach($allGenres as $genre)
+                                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="mt-4">
                             <flux:textarea wire:model="description" :label="__('Description')" id="description"
                                 rows="4"></flux:textarea>

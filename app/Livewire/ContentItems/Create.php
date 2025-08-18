@@ -2,6 +2,7 @@
 
 namespace App\Livewire\ContentItems;
 
+use App\Models\Genre;
 use Livewire\Component;
 use App\Models\ContentItem;
 use App\Models\ContentType;
@@ -20,6 +21,7 @@ class Create extends Component
     public $status = 'willwatch';
     public $is_public = false;
     public $additional_images = [];
+    public $genres = [];
 
     protected function rules(): array
     {
@@ -31,6 +33,8 @@ class Create extends Component
             'status' => ['required', Rule::in(ContentStatus::values())],
             'is_public' => ['boolean'],
             'additional_images.*' => 'nullable|image|max:2048',
+            'genres' => 'array',
+            'genres.*' => 'exists:genres,id',
         ];
     }
 
@@ -54,6 +58,11 @@ class Create extends Component
             $contentItem->additionalImages()->create(['path' => $path]);
         }
 
+        // Зберігаємо жанри
+        if (!empty($this->genres)) {
+            $contentItem->genres()->sync($this->genres);
+        }
+
         session()->flash('message', 'Content item created successfully.');
 
         return redirect()->route('content-items.index');
@@ -62,7 +71,8 @@ class Create extends Component
     public function render()
     {
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
+        $allGenres = Genre::orderBy('name')->get();
 
-        return view('livewire.content-items.create', compact('contentTypes'));
+        return view('livewire.content-items.create', compact('contentTypes', 'allGenres'));
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ContentItem extends Model
 {
@@ -34,6 +35,11 @@ class ContentItem extends Model
     public function contentType(): BelongsTo
     {
         return $this->belongsTo(ContentType::class);
+    }
+
+    public function genres(): BelongsToMany
+    {
+        return $this->belongsToMany(Genre::class, 'content_item_genre');
     }
 
     public function likes(): MorphMany

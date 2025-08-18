@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(GenreSeeder::class);
         // 1. Creating a user
         $user = User::create([
             'name' => 'Volodymyr',
@@ -167,6 +168,10 @@ class DatabaseSeeder extends Seeder
                     ]);
                 }
             }
+
+            // Прив'язуємо випадкові жанри
+            $genreIds = \App\Models\Genre::inRandomOrder()->take(rand(1, 3))->pluck('id');
+            $contentItem->genres()->attach($genreIds);
         }
     }
 
