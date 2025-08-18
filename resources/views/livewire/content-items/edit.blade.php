@@ -35,37 +35,41 @@
                                 placeholder="The Lord of the Rings: The Fellowship of the Ring" />
                         </div>
 
-                        <div class="mt-4 w-full">
-                            <label for="genres" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
-                                {{ __("Genres") }}
-                            </label>
-                            <div class="relative">
-                                <select
-                                    wire:model="genres"
-                                    id="genres"
-                                    multiple
-                                    class="w-full h-40 px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-zinc-600 scrollbar-track-gray-100 dark:scrollbar-track-zinc-700"
-                                >
-                                    @foreach($allGenres as $genre)
-                                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="mt-4">
                             <flux:textarea wire:model="description" :label="__('Description')" id="description"
                                 rows="4"></flux:textarea>
                         </div>
 
                         <div class="mt-4">
-                            <flux:field variant="inline">
-                                <flux:checkbox wire:model="is_public" />
+                            <label for="genres" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
+                                {{ __("Genres") }}
+                            </label>
 
-                                <flux:label>Make Public</flux:label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                                @foreach($allGenres as $genre)
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox"
+                                            wire:model="genres"
+                                            value="{{ $genre->id }}"
+                                             class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
+                                        <span class="text-gray-700 dark:text-white text-sm">{{ $genre->name }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <hr class="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+                        </div>
 
-                                <flux:error name="is_public" />
-                            </flux:field>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">{{ __("Visibility") }}</p>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox"
+                                    wire:model="is_public"
+                                    class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
+                                <div class="grid grid-cols-1">
+                                    <span class="text-gray-700 dark:text-white text-sm">{{ __("Make Public") }}</span>
+                                    <span class="text-xs italic">(Other users will be able to view this content and leave comments)</span>
+                                </div>
+                            </label>
                         </div>
 
                         <div class="mt-4">
