@@ -2,9 +2,10 @@
 
 namespace App\Livewire\ContentItems;
 
+use App\Models\Genre;
+use Livewire\Component;
 use App\Models\ContentItem;
 use App\Models\ContentType;
-use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
 
@@ -79,6 +80,11 @@ class Index extends Component
 
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
 
-        return view('livewire.content-items.index', compact('contentItems', 'contentTypes'));
+        // 👇 Fetch all genres for current user
+        // $genres = Genre::where('user_id', auth()->id())->get();
+        $genres = Genre::all();
+
+
+        return view('livewire.content-items.index', compact('contentItems', 'contentTypes', 'genres'));
     }
 }

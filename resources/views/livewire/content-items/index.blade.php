@@ -39,7 +39,7 @@
                     <x-flash-message />
 
                     <!-- Filters -->
-                    <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                             <flux:input
                                 wire:model.live="search"
@@ -47,6 +47,14 @@
                                 type="text"
                                 :placeholder="__('Search content items...')"
                             />
+                        </div>
+                        <div>
+                            <flux:select wire:model.live="genreFilter" :label="__('Genre')">
+                                <option value="">All Genres</option>
+                                @foreach($genres as $genre)
+                                    <option value="{{ $genre->id }}">{{ __($genre->name) }}</option>
+                                @endforeach
+                            </flux:select>
                         </div>
                         <div>
                             <flux:select wire:model.live="statusFilter" :label="__('Status')">
@@ -111,9 +119,9 @@
                                         </span>
                                     </div>
 
-                                    <div class="grid grid-cols-2 gap-2 mb-2 text-sm">
+                                    <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
                                         <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">Genres:</span>
-                                        @foreach ($contentItem->genres as $genre)
+                                        @forelse ($contentItem->genres as $genre)
                                             <span
                                                 class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
                                                     hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
@@ -122,7 +130,11 @@
                                                 >
                                                 {{ $genre->name }}
                                             </span>
-                                        @endforeach
+                                        @empty
+                                            <span class="font-semibold italic text-xs dark:text-white">
+                                                {{ __("No genre") }}
+                                            </span>
+                                        @endforelse
                                     </div>
 
 
