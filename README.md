@@ -16,6 +16,37 @@
 
 ---
 
+## 📬 Contact Form
+
+The application includes a Livewire-powered contact form on the welcome page.  
+Users can send messages directly, and the app will dispatch an email to the configured support address.
+
+### Features
+- Livewire 3 component (`ContactForm`) with real-time validation
+- Sends email via Laravel Mail system
+- Flash message feedback with Alpine.js animations
+- Rate limiting to prevent spam submissions
+
+### Configuration
+
+Set up your mail driver in `.env`:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_user
+MAIL_PASSWORD=your_mailtrap_pass
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="YourApp"
+```
+
+For local development, you can use:
+
+```MAIL_MAILER=log```
+This will log outgoing emails to `storage/logs/laravel.log` instead of sending them.
+
 ## 📦 Tech Stack
 
 - Laravel 12
