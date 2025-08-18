@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Content Items') }}
-            @if($statusFilter || $contentTypeFilter || $search)
+            @if($statusFilter || $contentTypeFilter || $genreFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
                     class="ml-2 hover:cursor-pointer"
@@ -110,6 +110,21 @@
                                             {{ $contentItem->contentType->name }}
                                         </span>
                                     </div>
+
+                                    <div class="grid grid-cols-2 gap-2 mb-2 text-sm">
+                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">Genres:</span>
+                                        @foreach ($contentItem->genres as $genre)
+                                            <span
+                                                class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
+                                                    hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
+                                                    text-center cursor-pointer select-none shadow-sm"
+                                                    wire:click="$set('genreFilter', {{ $genre->id }})"
+                                                >
+                                                {{ $genre->name }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
                                         <span class="font-medium">Status:</span>

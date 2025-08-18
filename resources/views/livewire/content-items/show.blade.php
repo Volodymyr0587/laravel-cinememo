@@ -61,6 +61,20 @@
                         </span>
                     </div>
                     <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Genres') }}</p>
+                        <div class="flex flex-wrap gap-2 mt-0.5">
+                            @foreach ($contentItem->genres as $genre)
+                                <span
+                                    class="px-2 py-1 rounded font-medium text-xs text-white bg-blue-500 dark:bg-blue-600
+                                        hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
+                                        text-center cursor-pointer select-none shadow-sm"
+                                    >
+                                    {{ $genre->name }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div>
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Author') }}</p>
                         <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">
                             {{ $contentItem->contentType->user->name }}

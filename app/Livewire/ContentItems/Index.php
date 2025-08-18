@@ -15,6 +15,8 @@ class Index extends Component
     public $search = '';
     public $statusFilter = '';
     public $contentTypeFilter = '';
+    public $genreFilter = '';
+
 
     public function updatingSearch()
     {
@@ -36,6 +38,7 @@ class Index extends Component
         $this->statusFilter = '';
         $this->contentTypeFilter = '';
         $this->search = '';
+        $this->genreFilter = '';
     }
 
     public function delete($id)
@@ -51,11 +54,7 @@ class Index extends Component
 
     public function render()
     {
-        // $query = ContentItem::whereHas('contentType', function($query) {
-        //     $query->where('user_id', auth()->id());
-        // })->with('contentType');
-
-        $query = auth()->user()->contentItems()->with('contentType');
+        $query = auth()->user()->contentItems()->with(['contentType', 'genres']);
 
         if ($this->search) {
             $query->where('title', 'like', '%' . $this->search . '%');
@@ -67,6 +66,12 @@ class Index extends Component
 
         if ($this->contentTypeFilter) {
             $query->where('content_type_id', $this->contentTypeFilter);
+        }
+
+        if ($this->genreFilter) {
+            $query->whereHas('genres', function ($q) {
+                $q->where('genres.id', $this->genreFilter);
+            });
         }
 
         $contentItems = $query->orderBy('updated_at', 'desc')
