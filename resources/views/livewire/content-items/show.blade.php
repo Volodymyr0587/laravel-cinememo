@@ -66,8 +66,7 @@
                             @foreach ($contentItem->genres as $genre)
                                 <span
                                     class="px-2 py-1 rounded font-medium text-xs text-white bg-blue-500 dark:bg-blue-600
-                                        hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
-                                        text-center cursor-pointer select-none shadow-sm"
+                                        transition-colors duration-200 text-center shadow-sm"
                                     >
                                     {{ $genre->name }}
                                 </span>
