@@ -14,10 +14,8 @@ class ContentItemsExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        // Get all items with relations
-        return ContentItem::with('contentType')->whereHas('contentType', function ($q) {
-            $q->where('user_id', auth()->id());
-        })->get();
+        // Get all auth user content items with relations
+        return auth()->user()->contentItems()->with('contentType')->get();
     }
 
     public function headings(): array
