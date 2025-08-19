@@ -36,7 +36,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Export Content Items to XLSX
     Route::get('/content-items/export', function () {
-        return Excel::download(new ContentItemsExport, 'content-items.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        $fileName = 'content-items-' . now()->format('Y-m-d_H-i-s') . '.xlsx';
+        return Excel::download(new ContentItemsExport, $fileName, \Maatwebsite\Excel\Excel::XLSX);
     })->name('content-items.export');
 
     // Content Items Routes
@@ -53,9 +54,10 @@ Route::middleware(['auth'])->group(function () {
     // Export Content Items to PDF
     Route::get('/export-pdf', function () {
         $contentItems = auth()->user()->contentItems()->with('contentType')->get();
+        $fileName = 'content-items-' . now()->format('Y-m-d_H-i-s') . '.pdf';
         return pdf()->view('pdf.content-items', ['contentItems' => $contentItems])
         ->format('A4')
-        ->name('content-items.pdf');
+        ->name($fileName);
     })->name('content-items.export-pdf');
 });
 
