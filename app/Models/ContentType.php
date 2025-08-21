@@ -24,7 +24,7 @@ class ContentType extends Model
     {
         static::deleting(function ($contentType) {
             if ($contentType->contentItems()->exists()) {
-                throw new \Exception('Cannot delete ContentType with related ContentItems.');
+                throw new \Exception("Cannot delete category $contentType->name with related Content.");
             }
         });
     }

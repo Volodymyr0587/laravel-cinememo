@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-            {{ __('Create Content Type') }}
+            {{ __('Create Category') }}
         </h2>
     </div>
 
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Create Content Type') }}</flux:button>
+                            <flux:button variant="primary" type="submit" >{{ __('Create Category') }}</flux:button>
                             <flux:link :href="route('content-types.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
                         </div>
                     </form>

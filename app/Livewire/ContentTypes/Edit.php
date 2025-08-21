@@ -49,7 +49,7 @@ class Edit extends Component
             'color' => $this->color,
         ]);
 
-        session()->flash('message', 'Content type updated successfully.');
+        session()->flash('message', "Category $this->name updated successfully.");
 
         return redirect()->route('content-types.index');
     }

@@ -13,8 +13,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <flux:select wire:model="content_type_id" id="content_type_id"
-                                    :label="__('Content Type')">
-                                    <option value="">Select a content type</option>
+                                    :label="__('Category')">
+                                    <option value="">Select a category</option>
                                     @foreach($contentTypes as $contentType)
                                     <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
                                     @endforeach

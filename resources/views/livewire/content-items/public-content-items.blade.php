@@ -36,9 +36,9 @@
                         <div>
                             <flux:select
                                 wire:model.live="contentTypeFilter"
-                                :label="__('Content Type')"
+                                :label="__('Category')"
                             >
-                                <option value="">{{ __('All Types') }}</option>
+                                <option value="">{{ __('All Categories') }}</option>
                                 @foreach($contentTypes as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
@@ -78,7 +78,7 @@
                                     </a>
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
-                                        <span class="font-medium">Type:</span>
+                                        <span class="font-medium">Category:</span>
                                         <span wire:click="$set('contentTypeFilter', '{{ $contentItem->contentType->id }}')"
                                             class="px-2 py-1 rounded text-white font-bold hover:cursor-pointer"
                                             style="background-color: {{ $contentItem->contentType->color }}">

@@ -42,7 +42,7 @@
                 {{-- Meta Info --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Content Type') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Category') }}</p>
                         <span class="inline-block px-2 py-1 rounded text-xs font-medium"
                             style="background-color: {{ $contentItem->contentType->color }}">
                             {{ $contentItem->contentType->name }}

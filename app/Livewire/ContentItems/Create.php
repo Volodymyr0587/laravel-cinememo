@@ -4,16 +4,17 @@ namespace App\Livewire\ContentItems;
 
 use App\Models\Genre;
 use Livewire\Component;
-use App\Models\ContentItem;
 use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 
 class Create extends Component
 {
     use WithFileUploads;
 
+    #[Validate('required', message: 'Please select a category. If there are no categories, first create one in the Categories section.')]
     public $content_type_id = '';
     public $title = '';
     public $description = '';

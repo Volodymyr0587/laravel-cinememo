@@ -12,9 +12,8 @@
                     <form wire:submit="save" enctype="multipart/form-data">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                {{-- <label for="content_type_id" class="block text-sm font-medium text-gray-700">Content Type</label> --}}
-                                <flux:select wire:model="content_type_id" id="content_type_id" :label="__('Content Type')">
-                                    <option value="">Select a content type</option>
+                                <flux:select wire:model="content_type_id" id="content_type_id" :label="__('Category')">
+                                    <option value="">Select a category</option>
                                     @foreach($contentTypes as $contentType)
                                         <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
                                     @endforeach
