@@ -24,17 +24,17 @@
         <nav class="flex space-x-4">
             @if (Route::has('login'))
                 @auth
-                    <a href="{{ url('/dashboard') }}"
+                    <a href="{{ url('/dashboard') }}" wire:navigate
                        class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __("Dashboard") }}
                     </a>
                 @else
-                    <a href="{{ route('login') }}"
+                    <a href="{{ route('login') }}" wire:navigate
                        class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __("Log in") }}
                     </a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
+                        <a href="{{ route('register') }}" wire:navigate
                            class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 shadow-lg">
                             {{ __("Sign up") }}
                         </a>
