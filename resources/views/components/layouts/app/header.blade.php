@@ -107,7 +107,11 @@
                                     <span
                                         class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
                                     >
-                                        {{ auth()->user()->initials() }}
+                                         @if (auth()->user()->profile_image)
+                                            <img src="{{ Storage::url(auth()->user()->profile_image) }}" alt="">
+                                         @else
+                                            {{ auth()->user()->initials() }}
+                                         @endif
                                     </span>
                                 </span>
 
