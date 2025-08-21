@@ -189,7 +189,7 @@
 
                     <button type="submit" wire:click="delete({{ $contentItem->id }})"
                             wire:confirm="Are you sure you want to delete this content item?"
-                            class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-800 text-sm font-medium">
+                            class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-800 text-sm font-medium hover:cursor-pointer">
                         {{ __('Delete') }}
                     </button>
                 </div>
