@@ -83,6 +83,11 @@
                 </flux:tooltip>
             </flux:navbar> --}}
 
+            <!-- Lang Switcher-->
+            <x-language-switcher />
+
+
+
             <!-- Desktop User Menu -->
             <flux:dropdown position="top" align="end">
                 @if (auth()->user()->profile_image)

@@ -2,26 +2,26 @@
     <x-flash-message />
     <form wire:submit.prevent="send" class="space-y-6">
         <div>
-            <label for="name" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Name") }}</label>
+            <label for="name" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("welcome.feedback.form.name") }}</label>
             <flux:input type="text" id="name" wire:model.defer="name" required />
             @error('name') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="email" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Email") }}</label>
+            <label for="email" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("welcome.feedback.form.email") }}</label>
             <flux:input type="email" id="email" wire:model.defer="email" required />
             @error('email') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            <label for="message" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("Message") }}</label>
+            <label for="message" class="block text-sm mb-2 font-medium text-gray-700 dark:text-gray-200">{{ __("welcome.feedback.form.message") }}</label>
             <flux:textarea id="message" wire:model.defer="message" rows="4" required />
             @error('message') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <button type="submit"
-            class="w-full bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 transition">
-            {{ __("Send") }}
+            class="w-full bg-blue-600 text-white text-lg font-semibold py-3 rounded-lg shadow hover:bg-blue-700 transition">
+            {{ __("welcome.buttons.send") }}
         </button>
 
         @if (session('success'))

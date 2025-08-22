@@ -61,4 +61,11 @@ Route::middleware(['auth'])->group(function () {
     })->name('content-items.export-pdf');
 });
 
+Route::get('/locale/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'uk'])) {
+        session(['locale' => $lang]);
+    }
+    return redirect()->back();
+})->name('locale.switch');
+
 require __DIR__.'/auth.php';
