@@ -66,19 +66,19 @@
 
     <!-- Features -->
     <section class="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-3 gap-10">
-        <div class="p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 shadow-sm">
+        <div class="p-6 rounded-2xl bg-gray-100 dark:bg-neutral-900 shadow-sm">
             <h3 class="text-xl font-semibold mb-3">📚 {{ __("welcome.features.feat1-head") }}</h3>
             <p class="text-gray-600 dark:text-gray-300">
                 {{ __("welcome.features.feat1-paragraph") }}.
             </p>
         </div>
-        <div class="p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 shadow-sm">
+        <div class="p-6 rounded-2xl bg-gray-100 dark:bg-neutral-900 shadow-sm">
             <h3 class="text-xl font-semibold mb-3">💬 {{ __("welcome.features.feat2-head") }}</h3>
             <p class="text-gray-600 dark:text-gray-300">
                 {{ __("welcome.features.feat2-paragraph") }}.
             </p>
         </div>
-        <div class="p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 shadow-sm">
+        <div class="p-6 rounded-2xl bg-gray-100 dark:bg-neutral-900 shadow-sm">
             <h3 class="text-xl font-semibold mb-3">📱 {{ __("welcome.features.feat3-head") }}</h3>
             <p class="text-gray-600 dark:text-gray-300">
                 {{ __("welcome.features.feat3-paragraph") }}.
