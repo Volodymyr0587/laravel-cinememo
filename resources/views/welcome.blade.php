@@ -21,7 +21,7 @@
              <x-app-logo />
             {{-- {{ config('app.name', 'MyApp') }} --}}
         </a>
-        <nav class="flex space-x-4">
+        <nav class="flex items-center gap-4">
             <!-- Lang Switcher-->
             <x-language-switcher />
 
