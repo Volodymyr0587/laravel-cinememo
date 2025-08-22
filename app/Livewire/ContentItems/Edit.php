@@ -20,6 +20,7 @@ class Edit extends Component
     public $content_type_id = '';
     public $title = '';
     public $description = '';
+    public $release_date = '';
     public $image;
     public $status = '';
     public $is_public = '';
@@ -41,6 +42,7 @@ class Edit extends Component
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'release_date' => ['nullable', 'string', new \App\Rules\ValidReleaseDate()],
             'image' => 'nullable|image|max:2048', // 2MB max
             'status' => ['required', Rule::in(ContentStatus::values())],
             'is_public' => ['boolean'],
@@ -60,6 +62,7 @@ class Edit extends Component
         $this->content_type_id = $contentItem->content_type_id;
         $this->title = $contentItem->title;
         $this->description = $contentItem->description;
+        $this->release_date = $contentItem->release_date;
         $this->status = $contentItem->status->value;
         $this->is_public = $contentItem->is_public;
         $this->existingImage = $contentItem->image;
@@ -156,6 +159,7 @@ class Edit extends Component
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
+            'release_date' => $this->release_date,
             'image' => $imagePath,
             'status' => $this->status,
             'is_public' => $this->is_public,

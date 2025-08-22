@@ -109,6 +109,16 @@
                                         {{ $contentItem->title }}
                                     </a>
 
+                                    @if ($contentItem->release_date)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">Release date:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ Carbon\Carbon::parse($contentItem->release_date)->format('Y-M-d') }}
+                                        </span>
+                                    </div>
+                                    @endif
+
+
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
                                         <span class="font-medium">Category:</span>
                                         <span

@@ -42,6 +42,16 @@
                         </div>
 
                         <div class="mt-4">
+                            <flux:input
+                                wire:model="release_date"
+                                :label="__('Release date (optional)')"
+                                type="text"
+                                autocomplete="release_date"
+                                placeholder="Enter the full date (YYYY-MM-DD), or just the year and month (YYYY-MM), or just the year (YYYY)."
+                            />
+                        </div>
+
+                        <div class="mt-4">
                             <flux:textarea wire:model="description" :label="__('Description')" id="description" rows="4"></flux:textarea>
                         </div>
 

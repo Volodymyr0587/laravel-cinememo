@@ -177,9 +177,7 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'release_date' => 'Дата виходу має бути у форматі РРРР, РРРР-ММ або РРРР-ММ-ДД.',
     ],
 
     /*

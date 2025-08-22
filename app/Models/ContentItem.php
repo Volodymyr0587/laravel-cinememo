@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use App\Enums\ContentStatus;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +22,7 @@ class ContentItem extends Model
         'content_type_id',
         'title',
         'description',
+        'release_date',
         'image',
         'status',
         'slug',
@@ -65,6 +67,26 @@ class ContentItem extends Model
     public function getImageUrlAttribute(): ?string
     {
         return $this->image ? Storage::url($this->image) : null;
+    }
+
+    /**
+     * Повертає дату релізу як об'єкт Carbon, якщо формат повний.
+     * Якщо формат неповний, повертає null або сам рядок.
+     */
+     public function getReleaseDateAsCarbon(): ?Carbon
+    {
+        if (!$this->release_date) {
+            return null;
+        }
+
+        // Спробуємо розпарсити дату. Carbon::createFromFormat строгий до формату.
+        // Якщо передати лише рік 'Y', він створить дату на початок року.
+        // Це може бути корисно для сортування.
+        try {
+            return Carbon::parse($this->release_date);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     protected static function boot()

@@ -177,9 +177,7 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'release_date' => 'The release date must be in the format YYYY, YYYY-MM, or YYYY-MM-DD.',
     ],
 
     /*

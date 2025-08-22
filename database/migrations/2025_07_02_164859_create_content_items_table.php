@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
+            $table->string('release_date')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ContentStatus::values())->default(ContentStatus::WillWatch->value);
             $table->boolean('is_public')->default(false);
