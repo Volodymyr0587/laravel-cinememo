@@ -13,7 +13,7 @@
 
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('Dashboard') }}
+                    {{ __('layouts-app-header.dashboard') }}
                 </flux:navbar.item>
             </flux:navbar>
 
@@ -23,7 +23,7 @@
 
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
-                    {{ __('Categories') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                    {{ __('layouts-app-header.categories') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
 
@@ -33,7 +33,7 @@
 
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
-                    {{ __('Content Items') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
+                    {{ __('layouts-app-header.my-collection') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
 
@@ -43,7 +43,7 @@
 
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="film" :href="route('public-content.index')" :current="request()->routeIs('public-content.index')" wire:navigate>
-                    {{ __('Public Content') }} <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
+                    {{ __('layouts-app-header.public-content') }} <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
 
@@ -53,7 +53,7 @@
 
             <flux:navbar class="-mb-px max-lg:hidden">
                 <flux:navbar.item icon="trash" :href="route('content-items.trash')" :current="request()->routeIs('content-items.trash')" wire:navigate>
-                    {{ __('Trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
+                    {{ __('layouts-app-header.trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
 
@@ -105,7 +105,7 @@
                     <flux:menu.separator />
 
                     <flux:menu.radio.group>
-                        <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
+                        <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('layouts-app-header.settings') }}</flux:menu.item>
                     </flux:menu.radio.group>
 
                     <flux:menu.separator />
@@ -113,7 +113,7 @@
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
+                            {{ __('layouts-app-header.log-out') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>
@@ -131,19 +131,19 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')">
                     <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                      {{ __('Dashboard') }}
+                      {{ __('layouts-app-header.dashboard') }}
                     </flux:navlist.item>
                     <flux:navlist.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
-                      {{ __('Categories') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                      {{ __('layouts-app-header.categories') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
-                      {{ __('Content Items') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
+                      {{ __('layouts-app-header.my-collection') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('public-content.index')" :current="request()->routeIs('public-content.index')" wire:navigate>
-                      {{ __('Public Content') }} <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
+                      {{ __('layouts-app-header.public-content') }} <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
                     </flux:navlist.item>
                     <flux:navlist.item icon="trash" :href="route('content-items.trash')" :current="request()->routeIs('content-items.trash')" wire:navigate>
-                      {{ __('Trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
+                      {{ __('layouts-app-header.trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
                     </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
