@@ -55,8 +55,8 @@
                                         $defaultImagePath = public_path('images/default-content.png');
                                     @endphp
 
-                                    @if($contentItem->image_url)
-                                        <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
+                                    @if($contentItem->main_image_url)
+                                        <img src="{{ $contentItem->main_image_url }}" alt="{{ $contentItem->title }}"
                                             class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                     @else
                                         @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))

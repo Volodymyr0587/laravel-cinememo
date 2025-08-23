@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasImages;
 use Illuminate\Support\Str;
 use App\Enums\ContentStatus;
 use Illuminate\Support\Carbon;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ContentItem extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasImages;
 
     protected $fillable = [
         'user_id',
@@ -59,35 +60,32 @@ class ContentItem extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function additionalImages(): HasMany
-    {
-        return $this->hasMany(Image::class);
-    }
-
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? Storage::url($this->image) : null;
+        if ($this->mainImage) {
+            return Storage::url($this->mainImage->path);
+        }
     }
 
-    /**
-     * Повертає дату релізу як об'єкт Carbon, якщо формат повний.
-     * Якщо формат неповний, повертає null або сам рядок.
-     */
-     public function getReleaseDateAsCarbon(): ?Carbon
+     public function getFormattedReleaseDateAttribute(): string
     {
-        if (!$this->release_date) {
-            return null;
+        $date = $this->release_date;
+
+        if (preg_match('/^\d{4}$/', $date)) {
+            return $date;
         }
 
-        // Спробуємо розпарсити дату. Carbon::createFromFormat строгий до формату.
-        // Якщо передати лише рік 'Y', він створить дату на початок року.
-        // Це може бути корисно для сортування.
-        try {
-            return Carbon::parse($this->release_date);
-        } catch (\Exception $e) {
-            return null;
+        if (preg_match('/^\d{4}-\d{2}$/', $date)) {
+            return \Carbon\Carbon::createFromFormat('Y-m', $date)->format('Y-M');
         }
+
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format('Y-M-d');
+        }
+
+        return $date;
     }
+
 
     protected static function boot()
     {

@@ -3,14 +3,40 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Image extends Model
 {
-    protected $fillable = ['content_item_id', 'path'];
+    protected $fillable = [
+        'imageable_id',
+        'imageable_type',
+        'path',
+        'type'
+    ];
 
-    public function contentItem(): BelongsTo
+    /**
+     * Image can belongs to different models
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function imageable(): MorphTo
     {
-        return $this->belongsTo(ContentItem::class);
+        return $this->morphTo();
+    }
+
+    /**
+     * Scope for get main image
+     */
+    public function scopeMain($query)
+    {
+        return $query->where('type', 'main');
+    }
+
+    /**
+     * Scope for get additional images
+     */
+    public function scopeAdditional($query)
+    {
+        return $query->where('type', 'additional');
     }
 }

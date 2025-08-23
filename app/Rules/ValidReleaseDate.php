@@ -26,13 +26,26 @@ class ValidReleaseDate implements ValidationRule
         $month = $parts[1] ?? null;
         $day   = $parts[2] ?? null;
 
+        if ($year < 1800 || $year > 2100) {
+            $fail('The :attribute year must be between 1800 and 2100.');
+            return;
+        }
+
         if ($month && ($month < 1 || $month > 12)) {
             $fail(__('validation.custom.release_date'));
             return;
         }
 
-        if ($day && !checkdate((int)$month, (int)$day, $year)) {
-            $fail(__('validation.custom.release_date'));
+        if ($day !== null) {
+            if ($month === null) {
+                $fail('The :attribute cannot have a day without a month.');
+                return;
+            }
+
+            if (!checkdate($month, $day, $year)) {
+                $fail('The :attribute is not a valid date.');
+                return;
+            }
         }
     }
 }

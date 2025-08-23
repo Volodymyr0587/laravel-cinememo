@@ -34,7 +34,7 @@
     @forelse ($contentItems as $item)
         <a href="{{ route('content-items.show', $item) }}" wire:navigate
            class="group relative block aspect-[3/4] overflow-hidden rounded-lg shadow hover:shadow-lg transition-shadow duration-200 border border-neutral-200 dark:border-neutral-700">
-            <img src="{{ $item->image ?  asset('storage/' . $item->image) : asset('images/default-content.png') }}"
+            <img src="{{ $item->main_image_url ? $item->main_image_url : asset('images/default-content.png') }}"
                  alt="{{ $item->title }}"
                  class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105" />
 

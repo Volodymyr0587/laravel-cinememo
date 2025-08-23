@@ -83,8 +83,8 @@
                                         $defaultImagePath = public_path('images/default-content.png');
                                     @endphp
 
-                                    @if($contentItem->image_url)
-                                        <img src="{{ $contentItem->image_url }}" alt="{{ $contentItem->title }}"
+                                    @if($contentItem->main_image_url)
+                                        <img src="{{ $contentItem->main_image_url }}" alt="{{ $contentItem->title }}"
                                             class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                     @else
                                         @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
@@ -113,7 +113,7 @@
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
                                         <span class="font-medium">Release date:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                                            {{ Carbon\Carbon::parse($contentItem->release_date)->format('Y-M-d') }}
+                                            {{ $contentItem->formatted_release_date }}
                                         </span>
                                     </div>
                                     @endif

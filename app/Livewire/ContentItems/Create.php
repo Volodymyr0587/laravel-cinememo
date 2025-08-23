@@ -8,7 +8,6 @@ use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
 
 class Create extends Component
 {
@@ -19,7 +18,7 @@ class Create extends Component
     public $title = '';
     public $description = '';
     public $release_date = '';
-    public $image;
+    public $main_image; // Змінюємо назву для ясності
     public $status = 'willwatch';
     public $is_public = false;
     public $additional_images = [];
@@ -32,7 +31,7 @@ class Create extends Component
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'release_date' => ['nullable', 'string', new \App\Rules\ValidReleaseDate()],
-            'image' => 'nullable|image|max:2048', // 2MB max
+            'main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
             'is_public' => ['boolean'],
             'additional_images.*' => 'nullable|image|max:2048',
@@ -45,21 +44,27 @@ class Create extends Component
     {
         $this->validate();
 
-        $imagePath = $this->image ? $this->image->store('content-images', 'public') : null;
-
+        // Створюємо ContentItem
         $contentItem = auth()->user()->contentItems()->create([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
             'release_date' => $this->release_date,
-            'image' => $imagePath,
             'status' => $this->status,
             'is_public' => $this->is_public,
+            // Тимчасово залишаємо image поле порожнім для нової системи
         ]);
 
+        // Додаємо головне зображення через нову поліморфну систему
+        if ($this->main_image) {
+            $mainImagePath = $this->main_image->store('content-images', 'public');
+            $contentItem->addMainImage($mainImagePath);
+        }
+
+        // Додаємо додаткові зображення через нову поліморфну систему
         foreach ($this->additional_images as $file) {
             $path = $file->store('content-images', 'public');
-            $contentItem->additionalImages()->create(['path' => $path]);
+            $contentItem->addAdditionalImage($path);
         }
 
         // Зберігаємо жанри

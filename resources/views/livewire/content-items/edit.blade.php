@@ -84,11 +84,11 @@
 
                         <div class="mt-4">
                             {{-- Existing Image Preview --}}
-                            @if($existingImage)
+                            @if($contentItem->main_image_url)
                             <div class="mt-2 mb-4">
                                 <p class="text-sm text-gray-600 dark:text-white font-bold mb-2">Current image</p>
                                 <div class="flex items-center space-x-4">
-                                    <img src="{{ Storage::url($existingImage) }}" alt="Current image"
+                                    <img src="{{ $contentItem->main_image_url }}" alt="Current image"
                                         class="h-24 w-24 object-cover rounded">
                                     <button type="button" wire:click="confirmMainImageRemoval"
                                         class="bg-red-500 hover:bg-red-700 hover:cursor-pointer text-white font-bold py-1 px-3 rounded text-sm">
@@ -99,24 +99,24 @@
                             @endif
 
                             {{-- File Upload Input --}}
-                            <flux:input :label="__('Image')" wire:model="image" type="file" id="image"
+                            <flux:input :label="__('Image')" wire:model="new_main_image" type="file" id="new_main_image"
                                 accept="image/*" />
 
                             {{-- Validation Error --}}
-                            @error('image')
+                            @error('new_main_image')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
 
                             {{-- New Image Preview --}}
-                            @if ($image)
+                            @if ($new_main_image)
                             <div class="mt-2">
                                 <p class="text-sm text-gray-800 dark:text-white">Preview:</p>
-                                <img src="{{ $image->temporaryUrl() }}" alt="Preview"
+                                <img src="{{ $new_main_image->temporaryUrl() }}" alt="Preview"
                                     class="mt-1 h-32 w-32 object-cover rounded">
                             </div>
                             @endif
 
-                            @if ($existingImages)
+                            @if ($contentItem->additionalImages->isNotEmpty())
                                 <div class="mt-4">
                                     <p class="text-sm text-gray-600 dark:text-white font-bold mb-2">Additional images</p>
                                     <div class="flex flex-wrap gap-4">
@@ -191,7 +191,7 @@
                     class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded hover:bg-gray-300">
                 Cancel
             </button>
-            <button wire:click="removeImage"
+            <button wire:click="removeMainImage"
                     type="button"
                     class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
                 Delete

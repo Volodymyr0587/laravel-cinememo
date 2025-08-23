@@ -90,15 +90,15 @@
                         <div class="mt-4">
                             <flux:input
                                 :label="__('Image')"
-                                wire:model="image"
+                                wire:model="main_image"
                                 type="file"
-                                id="image"
+                                id="main_image"
                                 accept="image/*" />
 
-                            @if ($image)
+                            @if ($main_image)
                                 <div class="mt-2">
                                     <p class="text-sm text-gray-800 dark:text-white">Preview:</p>
-                                    <img src="{{ $image->temporaryUrl() }}" alt="Preview" class="mt-1 h-32 w-32 object-cover rounded">
+                                    <img src="{{ $main_image->temporaryUrl() }}" alt="Preview" class="mt-1 h-32 w-32 object-cover rounded">
                                 </div>
                             @endif
 
