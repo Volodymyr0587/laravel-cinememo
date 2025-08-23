@@ -16,7 +16,7 @@ class ValidReleaseDate implements ValidationRule
     {
         // Only allow YYYY, YYYY-MM, YYYY-MM-DD
         if (!preg_match('/^\d{4}(-\d{2}){0,2}$/', $value)) {
-            $fail(__('validation.custom.release_date'));
+            $fail(__('validation.custom.release_date.format'));
             return;
         }
 
@@ -27,23 +27,23 @@ class ValidReleaseDate implements ValidationRule
         $day   = $parts[2] ?? null;
 
         if ($year < 1800 || $year > 2100) {
-            $fail('The :attribute year must be between 1800 and 2100.');
+            $fail(__('validation.custom.release_date.year_range'));
             return;
         }
 
         if ($month && ($month < 1 || $month > 12)) {
-            $fail(__('validation.custom.release_date'));
+            $fail(__('validation.custom.release_date.invalid_month'));
             return;
         }
 
         if ($day !== null) {
             if ($month === null) {
-                $fail('The :attribute cannot have a day without a month.');
+                $fail(__('validation.custom.release_date.day_without_month'));
                 return;
             }
 
             if (!checkdate($month, $day, $year)) {
-                $fail('The :attribute is not a valid date.');
+                $fail(__('validation.custom.release_date.invalid_date'));
                 return;
             }
         }
