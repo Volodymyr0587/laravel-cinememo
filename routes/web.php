@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Actors;
 use App\Livewire\Dashboard;
 use App\Livewire\ContentItems;
 use App\Livewire\ContentTypes;
@@ -59,6 +60,12 @@ Route::middleware(['auth'])->group(function () {
         ->format('A4')
         ->name($fileName);
     })->name('content-items.export-pdf');
+
+    // Content Items Routes
+    Route::get('/actors', Actors\Index::class)->name('actors.index');
+    Route::get('/actors/create', Actors\Create::class)->name('actors.create');
+    // Route::get('/actors/{contentItem}/edit', Actors\Edit::class)->name('actors.edit');
+    // Route::get('/actors/{contentItem}', Actors\Show::class)->name('content-items.show');
 });
 
 Route::get('/locale/{lang}', function ($lang) {

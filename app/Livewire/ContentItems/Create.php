@@ -23,6 +23,8 @@ class Create extends Component
     public $is_public = false;
     public $additional_images = [];
     public $genres = [];
+    public $actors = [];
+
 
     protected function rules(): array
     {

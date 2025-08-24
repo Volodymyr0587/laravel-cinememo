@@ -38,6 +38,16 @@
             </flux:navbar>
 
             @php
+                $countActors = auth()->user()->actors()->count();
+            @endphp
+
+            <flux:navbar class="-mb-px max-lg:hidden">
+                <flux:navbar.item icon="film" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
+                    {{ __('layouts-app-header.actors') }} <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                </flux:navbar.item>
+            </flux:navbar>
+
+            @php
                 $countPublicContentItems = App\Models\ContentItem::where('is_public', true)->count();
             @endphp
 

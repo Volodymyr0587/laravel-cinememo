@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Actor extends Model
 {
-    use SoftDeletes, HasImages;
+    use HasImages;
 
     protected $fillable = [
         'user_id',
@@ -31,6 +31,44 @@ class Actor extends Model
     public function contentItems(): BelongsToMany
     {
         return $this->belongsToMany(ContentItem::class, 'actor_content_item');
+    }
+
+    public function getFormattedBirthDateAttribute(): string
+    {
+        $date = $this->birth_date;
+
+        if (preg_match('/^\d{4}$/', $date)) {
+            return $date;
+        }
+
+        if (preg_match('/^\d{4}-\d{2}$/', $date)) {
+            return \Carbon\Carbon::createFromFormat('Y-m', $date)->format('Y-M');
+        }
+
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format('Y-M-d');
+        }
+
+        return $date;
+    }
+
+    public function getFormattedDeathDateAttribute(): string
+    {
+        $date = $this->death_date;
+
+        if (preg_match('/^\d{4}$/', $date)) {
+            return $date;
+        }
+
+        if (preg_match('/^\d{4}-\d{2}$/', $date)) {
+            return \Carbon\Carbon::createFromFormat('Y-m', $date)->format('Y-M');
+        }
+
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format('Y-M-d');
+        }
+
+        return $date;
     }
 
     protected static function boot()
