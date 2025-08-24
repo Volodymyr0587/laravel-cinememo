@@ -32,15 +32,7 @@ class Trash extends Component
 
         $this->authorize('restore', $contentItem);
 
-        // Delete the image file if it exists
-        if ($contentItem->image) {
-            Storage::disk('public')->delete($contentItem->image);
-        }
-
-        // Delete all additional image files
-        foreach ($contentItem->additionalImages as $image) {
-            Storage::disk('public')->delete($image->path);
-        }
+        $contentItem->removeAllImages();
 
         $contentItem->forceDelete();
 
