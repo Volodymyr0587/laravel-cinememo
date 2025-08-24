@@ -85,7 +85,7 @@ trait HasImages
         $mainImage = $this->mainImage;
         if ($mainImage) {
             Storage::disk('public')->delete($mainImage->path);
-            return $mainImage->delete();
+            return $mainImage->forceDelete();
         }
         return false;
     }
@@ -97,7 +97,7 @@ trait HasImages
     {
         $image = $this->additionalImages()->findOrFail($imageId);
         Storage::disk('public')->delete($image->path);
-        return $image->delete();
+        return $image->forceDelete();
     }
 
     /**
@@ -107,7 +107,7 @@ trait HasImages
     {
         foreach ($this->images as $image) {
             Storage::disk('public')->delete($image->path);
-            $image->delete();
+            $image->forceDelete();
         }
     }
 }
