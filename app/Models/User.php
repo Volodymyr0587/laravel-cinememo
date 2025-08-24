@@ -71,4 +71,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(ContentItem::class);
     }
+
+
+    /**
+     * Get all of the actors for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function actors(): HasMany
+    {
+        return $this->hasMany(Actor::class);
+    }
 }

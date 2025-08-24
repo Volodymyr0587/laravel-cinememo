@@ -45,6 +45,12 @@ class ContentItem extends Model
         return $this->belongsToMany(Genre::class, 'content_item_genre');
     }
 
+    public function actors(): BelongsToMany
+    {
+        return $this->belongsToMany(Actor::class, 'actor_content_item');
+    }
+
+
     public function likes(): MorphMany
     {
         return $this->morphMany(Like::class, 'likeable');
