@@ -24,6 +24,10 @@ class DeleteUserForm extends Component
             Storage::disk('public')->delete($path);
         }
 
+        Auth::user()->contentItems()->each(function ($item) {
+            $item->removeAllImages();
+        });
+
         tap(Auth::user(), $logout(...))->delete();
 
         $this->redirect('/', navigate: true);
