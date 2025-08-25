@@ -2,7 +2,7 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Content Items') }}
+            {{ __('Actors') }}
             @if($contentItemFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
@@ -45,7 +45,7 @@
                                 wire:model.live="search"
                                 :label="__('Search')"
                                 type="text"
-                                :placeholder="__('Search content items...')"
+                                :placeholder="__('Search actor...')"
                             />
                         </div>
                         {{-- <div>
@@ -80,7 +80,7 @@
                             <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
                                 <a href="{{ route('content-items.show', $actor) }}"  wire:navigate>
                                     @php
-                                        $defaultImagePath = public_path('images/default-content.png');
+                                        $defaultImagePath = public_path('images/default-actor.png');
                                     @endphp
 
                                     @if($actor->main_image_url)
@@ -88,7 +88,7 @@
                                             class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                     @else
                                         @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
-                                            <img src="{{ asset('images/default-content.png') }}" alt="{{ $actor->name }}"
+                                            <img src="{{ asset('images/default-actor.png') }}" alt="{{ $actor->name }}"
                                                 class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                         @else
                                             <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
