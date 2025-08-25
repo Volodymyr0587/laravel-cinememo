@@ -30,6 +30,8 @@ class Create extends Component
             'birth_place' => ['nullable', 'string', 'max:255'],
             'main_image' => 'nullable|image|max:2048',
             'additional_images.*' => 'nullable|image|max:2048',
+            'content_items' => 'array',
+            'content_items.*' => 'exists:content_items,id',
         ];
     }
 
@@ -58,7 +60,7 @@ class Create extends Component
             $actor->addAdditionalImage($path);
         }
 
-        // Зберігаємо жанри
+        // Зберігаємо content items
         if (!empty($this->content_items)) {
             $actor->contentItems()->sync($this->content_items);
         }

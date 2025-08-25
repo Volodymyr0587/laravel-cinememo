@@ -106,7 +106,7 @@
                                 @foreach($contentItems as $contentItem)
                                     <label class="flex items-center space-x-2 cursor-pointer">
                                         <input type="checkbox"
-                                            wire:model="content_type_id"
+                                            wire:model="content_items"
                                             value="{{ $contentItem->id }}"
                                              class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
                                         <span class="text-gray-700 dark:text-white text-sm">{{ $contentItem->title }}</span>

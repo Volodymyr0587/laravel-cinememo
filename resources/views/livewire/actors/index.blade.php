@@ -113,6 +113,15 @@
                                     </div>
                                     @endif
 
+                                    @if ($actor->birth_place)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">Birth place:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ $actor->birth_place }}
+                                        </span>
+                                    </div>
+                                    @endif
+
                                     @if ($actor->death_date)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
                                         <span class="font-medium">Death date:</span>
@@ -132,7 +141,7 @@
                                                     text-center cursor-pointer select-none shadow-sm"
                                                     wire:click="$set('contentItemFilter', {{ $contentItem->id }})"
                                                 >
-                                                {{ $contentItem->name }}
+                                                {{ $contentItem->title }}
                                             </span>
                                         @empty
                                             <span class="font-semibold italic text-xs dark:text-white">
