@@ -74,7 +74,7 @@
                         </div>
                     </div>
 
-                    <!-- Content Items Grid -->
+                    <!-- Actors Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($actors as $actor)
                             <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
@@ -132,7 +132,7 @@
                                     @endif
 
 
-                                    <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
+                                    <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
                                         <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">Works of the actor:</span>
                                         @forelse ($actor->contentItems as $contentItem)
                                             <span
@@ -173,7 +173,7 @@
                                     <div class="flex justify-between items-center">
                                         <flux:button href="{{ route('content-items.edit', $actor) }}" wire:navigate>Edit</flux:button>
                                         <x-button wire:click="delete({{ $actor->id }})"
-                                                wire:confirm="Are you sure you want to delete this actor?"
+                                                wire:confirm="Are you sure you want to delete this actor? This action is irreversible."
                                                 color="red" type="submit"
                                                 >Delete</x-button>
                                     </div>
