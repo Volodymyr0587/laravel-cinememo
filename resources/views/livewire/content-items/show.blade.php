@@ -87,9 +87,24 @@
                         </div>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Author') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Actors') }}</p>
+                        @if ($contentItem->actors->isNotEmpty())
+                            @foreach ($contentItem->actors as $actor)
+                                <a href="{{ route('actors.show', $actor) }}"
+                                class="inline-block text-sm font-medium text-cyan-400 hover:underline">
+                                    {{ $actor->name }} @if (!$loop->last), @endif
+                                </a>
+                            @endforeach
+                        @else
+                            <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">
+                                {{ __("No actors attached yet") }}
+                            </span>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Added by') }}</p>
                         <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">
-                            {{ $contentItem->contentType->user->name }}
+                            {{ $contentItem->user->name }}
                         </span>
                     </div>
                 </div>
