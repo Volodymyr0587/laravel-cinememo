@@ -5,7 +5,7 @@
 
                 {{-- Back Button --}}
                 <div class="mb-4">
-                    <flux:link :href="url()->previous()" wire:navigate>
+                    <flux:link href="{{ route('actors.index') }}" wire:navigate>
                         ← {{ __('Back to all actors') }}
                     </flux:link>
                 </div>
