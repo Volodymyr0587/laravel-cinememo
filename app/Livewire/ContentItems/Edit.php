@@ -10,12 +10,15 @@ use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 
 class Edit extends Component
 {
     use WithFileUploads;
 
     public ContentItem $contentItem;
+
+    #[Validate('required', message: 'Please select a category. If there are no categories, first create one in the Categories section.')]
     public $content_type_id = '';
     public $title = '';
     public $description = '';

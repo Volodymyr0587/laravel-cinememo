@@ -8,6 +8,7 @@ use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 
 class Create extends Component
 {
