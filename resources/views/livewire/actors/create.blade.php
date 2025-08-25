@@ -99,7 +99,7 @@
 
                         <div class="mt-4">
                             <label for="content_type_id" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
-                                {{ __("Select a content") }}
+                                {{ __("Select actor-related content") }}
                             </label>
 
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3">
