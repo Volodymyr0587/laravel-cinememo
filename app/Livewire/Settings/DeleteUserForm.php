@@ -28,6 +28,10 @@ class DeleteUserForm extends Component
             $item->removeAllImages();
         });
 
+        Auth::user()->actors()->each(function ($actor) {
+            $actor->removeAllImages();
+        });
+
         tap(Auth::user(), $logout(...))->delete();
 
         $this->redirect('/', navigate: true);
