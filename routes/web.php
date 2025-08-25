@@ -61,11 +61,11 @@ Route::middleware(['auth'])->group(function () {
         ->name($fileName);
     })->name('content-items.export-pdf');
 
-    // Content Items Routes
+    // Actors Routes
     Route::get('/actors', Actors\Index::class)->name('actors.index');
     Route::get('/actors/create', Actors\Create::class)->name('actors.create');
-    // Route::get('/actors/{contentItem}/edit', Actors\Edit::class)->name('actors.edit');
-    // Route::get('/actors/{contentItem}', Actors\Show::class)->name('content-items.show');
+    Route::get('/actors/{actor}/edit', Actors\Edit::class)->name('actors.edit');
+    Route::get('/actors/{actor}', Actors\Show::class)->name('actors.show');
 });
 
 Route::get('/locale/{lang}', function ($lang) {

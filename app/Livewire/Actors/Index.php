@@ -24,6 +24,7 @@ class Index extends Component
     {
         try {
             $actor = Actor::where('user_id', auth()->id())->findOrFail($id);
+            $actor->removeAllImages();
             $actor->delete();
 
             session()->flash('message', "Actor $actor->name deleted successfully.");
