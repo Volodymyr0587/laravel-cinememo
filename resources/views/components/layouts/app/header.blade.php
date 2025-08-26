@@ -42,7 +42,7 @@
             @endphp
 
             <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="film" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
+                <flux:navbar.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
                     {{ __('layouts-app-header.actors') }} <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
@@ -148,6 +148,9 @@
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
                       {{ __('layouts-app-header.my-collection') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
+                      {{ __('layouts-app-header.actors') }} <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('public-content.index')" :current="request()->routeIs('public-content.index')" wire:navigate>
                       {{ __('layouts-app-header.public-content') }} <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
