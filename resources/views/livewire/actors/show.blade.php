@@ -72,7 +72,7 @@
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Works of the actor:') }}</p>
                         <div class="flex flex-wrap gap-2 mt-0.5">
                             @forelse ($actor->contentItems as $contentItem)
-                                <a href="{{ route('content-items.show', $contentItem) }}"
+                                <a href="{{ route('content-items.show', $contentItem) }}" wire:navigate
                                     class="px-2 py-1 rounded font-medium text-xs text-white bg-blue-500 dark:bg-blue-600
                                         transition-colors duration-200 text-center shadow-sm hover:cursor-pointer"
                                     >
@@ -137,6 +137,7 @@
                     <!-- Modal -->
                     <div
                         x-show="imageModal"
+                        style="display: none"
                         x-transition
                         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
                     >

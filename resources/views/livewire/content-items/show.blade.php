@@ -90,7 +90,7 @@
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Actors') }}</p>
                         @if ($contentItem->actors->isNotEmpty())
                             @foreach ($contentItem->actors as $actor)
-                                <a href="{{ route('actors.show', $actor) }}"
+                                <a href="{{ route('actors.show', $actor) }}" wire:navigate
                                 class="inline-block text-sm font-medium text-cyan-400 hover:underline">
                                     {{ $actor->name }} @if (!$loop->last), @endif
                                 </a>
@@ -159,6 +159,7 @@
                     <!-- Modal -->
                     <div
                         x-show="imageModal"
+                        style="display: none"
                         x-transition
                         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
                     >
