@@ -16,13 +16,14 @@
     <div x-show="open"
          @click.away="open = false"
          x-transition
+         style="display: none"
          class="absolute right-0 mt-2 w-40 bg-white dark:bg-zinc-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-        <a href="{{ route('locale.switch', 'en') }}"
+        <a href="{{ route('locale.switch', 'en') }}" wire:navigate
            class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-zinc-700
                   {{ app()->getLocale() === 'en' ? 'bg-cyan-500 text-white shadow-[0_0_10px_rgba(34,211,238,0.8)]' : '' }}">
             <x-flag-language-en class="w-5 h-5" /> English
         </a>
-        <a href="{{ route('locale.switch', 'uk') }}"
+        <a href="{{ route('locale.switch', 'uk') }}" wire:navigate
            class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-zinc-700
                   {{ app()->getLocale() === 'uk' ? 'bg-cyan-500 text-white shadow-[0_0_10px_rgba(34,211,238,0.8)]' : '' }}">
             <x-flag-language-uk class="w-5 h-5" /> Українська
