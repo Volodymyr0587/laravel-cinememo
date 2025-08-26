@@ -13,13 +13,33 @@
 
                         <div class="mt-4">
                             <flux:input
-                                wire:model="name"
+                                {{-- wire:model="name" --}}
+                                wire:model.live.debounce.300ms="name"
                                 :label="__('Name') . ' *'"
                                 type="text"
                                 autocomplete="name"
                                 placeholder="Leonardo DiCaprio"
                             />
                         </div>
+
+                        <!-- Show existing actors with similar names -->
+                        @if(!empty($existing_actors) && count($existing_actors) > 0)
+                            <div class="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+                                <p class="text-sm text-yellow-800 font-medium mb-2">
+                                    ⚠️ You already have similar actors:
+                                </p>
+                                <ul class="space-y-1">
+                                    @foreach($existing_actors as $existing)
+                                        <li class="text-sm text-yellow-700">
+                                            • {{ $existing['display_name'] }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <p class="text-xs text-yellow-600 mt-2">
+                                    You can still create this actor if it's a different person.
+                                </p>
+                            </div>
+                        @endif
 
                         <div class="mt-4">
                             <flux:input

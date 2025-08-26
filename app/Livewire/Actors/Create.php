@@ -18,6 +18,8 @@ class Create extends Component
     public $main_image;
     public $additional_images = [];
     public $content_items = [];
+    // Property to show existing actors with same name
+    public $existing_actors = [];
 
 
     protected function rules(): array
@@ -33,6 +35,28 @@ class Create extends Component
             'content_items' => 'array',
             'content_items.*' => 'exists:content_items,id',
         ];
+    }
+
+    // Check for existing actors with same name when name changes
+    public function updatedName()
+    {
+        if (!empty($this->name)) {
+            $this->existing_actors = auth()->user()->actors()
+                ->where('name', 'LIKE', '%' . $this->name . '%')
+                ->with('user')
+                ->get()
+                ->map(function ($actor) {
+                    return [
+                        'id' => $actor->id,
+                        'name' => $actor->name,
+                        'birth_date' => $actor->birth_date,
+                        'birth_place' => $actor->birth_place,
+                        'display_name' => $actor->display_name,
+                    ];
+                });
+        } else {
+            $this->existing_actors = [];
+        }
     }
 
     public function save()

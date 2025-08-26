@@ -93,6 +93,29 @@ class Actor extends Model
         });
     }
 
+     // Helper method to get display name with distinguishing info
+    public function getDisplayNameAttribute(): string
+    {
+        $displayName = $this->name;
+
+        // Add birth year if available to distinguish actors with same name
+        if ($this->birth_date) {
+            $displayName .= ' (' . $this->birth_date . ')';
+        }
+
+        // If still not unique within user's actors, add birth place
+        $sameNameActors = static::where('user_id', $this->user_id)
+                               ->where('name', $this->name)
+                               ->where('id', '!=', $this->id)
+                               ->count();
+
+        if ($sameNameActors > 0 && $this->birth_place) {
+            $displayName .= ' - ' . $this->birth_place;
+        }
+
+        return $displayName;
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
