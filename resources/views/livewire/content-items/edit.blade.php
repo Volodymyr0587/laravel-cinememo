@@ -56,7 +56,7 @@
                             </label>
 
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                               @foreach($allUserActors as $actor)
+                               @forelse($allUserActors as $actor)
                                     <label x-data="{ hover: false }" class="relative flex items-center space-x-2 cursor-pointer">
                                         <input type="checkbox"
                                             id="actor_{{ $actor->id }}"
@@ -83,7 +83,11 @@
                                             </div>
                                         </span>
                                     </label>
-                                @endforeach
+                                @empty
+                                    <span class="font-semibold italic text-xs dark:text-white">
+                                        {{ __("There are no actors in your collection yet.") }}
+                                    </span>
+                                @endforelse
                             </div>
                             <hr class="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
                         </div>
