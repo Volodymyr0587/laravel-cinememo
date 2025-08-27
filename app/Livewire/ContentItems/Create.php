@@ -26,6 +26,12 @@ class Create extends Component
     public $genres = [];
     public $actors = [];
 
+    public function mount()
+    {
+        $this->genres = [];
+        $this->actors = [];
+    }
+
 
     protected function rules(): array
     {
@@ -40,6 +46,8 @@ class Create extends Component
             'additional_images.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
+            'actors' => 'array',
+            'actors.*' => 'exists:actors,id',
         ];
     }
 
@@ -75,6 +83,11 @@ class Create extends Component
             $contentItem->genres()->sync($this->genres);
         }
 
+        // Зберігаємо акторів
+        if (!empty($this->actors)) {
+            $contentItem->actors()->sync($this->actors);
+        }
+
         session()->flash('message', 'Content item created successfully.');
 
         return redirect()->route('content-items.index');
@@ -83,8 +96,9 @@ class Create extends Component
     public function render()
     {
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
-        $allGenres = Genre::orderBy('name')->get();
+        $allGenres = Genre::orderBy('name')->get(['id', 'name']);;
+        $allUserActors = auth()->user()->actors()->with('mainImage')->orderBy('name')->get();
 
-        return view('livewire.content-items.create', compact('contentTypes', 'allGenres'));
+        return view('livewire.content-items.create', compact('contentTypes', 'allGenres', 'allUserActors'));
     }
 }

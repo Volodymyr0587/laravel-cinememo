@@ -32,6 +32,7 @@ class Edit extends Component
     public $imageIdToRemove = null;
     public $confirmingMainImageRemoval = false;
     public $genres = [];
+    public $actors = [];
 
     protected function rules(): array
     {
@@ -46,6 +47,8 @@ class Edit extends Component
             'newAdditionalImages.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
+            'actors' => 'array',
+            'actors.*' => 'exists:actors,id',
         ];
     }
 
@@ -61,6 +64,7 @@ class Edit extends Component
         $this->status = $contentItem->status->value;
         $this->is_public = $contentItem->is_public;
         $this->genres = $contentItem->genres()->pluck('genres.id')->toArray();
+        $this->actors = $contentItem->actors()->pluck('actors.id')->toArray();
     }
 
     public function removeMainImage()
@@ -125,6 +129,7 @@ class Edit extends Component
 
         // Оновлюємо жанри
         $this->contentItem->genres()->sync($this->genres);
+        $this->contentItem->actors()->sync($this->actors);
 
         session()->flash('message', 'Content item updated successfully.');
 
@@ -134,8 +139,9 @@ class Edit extends Component
     public function render()
     {
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
-        $allGenres = Genre::orderBy('name')->get();
+        $allGenres = Genre::orderBy('name')->get(['id', 'name']);;
+        $allUserActors = auth()->user()->actors()->with('mainImage')->orderBy('name')->get();
 
-        return view('livewire.content-items.edit', compact('contentTypes', 'allGenres'));
+        return view('livewire.content-items.edit', compact('contentTypes', 'allGenres', 'allUserActors'));
     }
 }
