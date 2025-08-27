@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-            {{ __('Edit Actor or Actress') }}
+            {{ __('Edit Actor or Actress') }} - {{ $actor->name }}
         </h2>
     </div>
 
