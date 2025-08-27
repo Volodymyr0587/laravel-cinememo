@@ -23,7 +23,6 @@ return new class extends Migration
             $table->date('birth_date')->nullable();
             $table->date('death_date')->nullable();
             $table->string('birth_place')->nullable();
-            $table->unique(['user_id', 'name']);
             $table->timestamps();
         });
 
