@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin;
 use App\Livewire\Actors;
 use App\Livewire\Dashboard;
 use App\Livewire\ContentItems;
@@ -66,6 +67,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/actors/create', Actors\Create::class)->name('actors.create');
     Route::get('/actors/{actor}/edit', Actors\Edit::class)->name('actors.edit');
     Route::get('/actors/{actor}', Actors\Show::class)->name('actors.show');
+
+
+    // Admin Route
+    Route::get('/users', Admin\Users\Index::class)->name('admin.users.index');
 });
 
 Route::get('/locale/{lang}', function ($lang) {
