@@ -88,18 +88,34 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Actors') }}</p>
-                        @if ($contentItem->actors->isNotEmpty())
-                            @foreach ($contentItem->actors as $actor)
-                                <a href="{{ route('actors.show', $actor) }}" wire:navigate
-                                class="inline-block text-sm font-medium text-cyan-400 hover:underline">
-                                    {{ $actor->name }} @if (!$loop->last), @endif
-                                </a>
-                            @endforeach
-                        @else
-                            <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">
-                                {{ __("No actors attached yet") }}
+                        @forelse ($contentItem->actors as $actor)
+                            <a x-data="{ hover: false }" href="{{ route('actors.show', $actor) }}" wire:navigate
+                                class="inline-block text-sm font-medium text-cyan-400 hover:underline"
+                                >
+                                <span @mouseenter="hover = true" @mouseleave="hover = false"
+                                    class="relative">
+                                    {{ $actor->name }}
+                                    <div x-show="hover"
+                                        x-transition
+                                        class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border">
+                                        @if($actor->main_image_url)
+                                        <img src="{{ $actor->main_image_url }}"
+                                            alt="{{ $actor->name }}"
+                                            class="w-full h-full object-cover">
+                                        @else
+                                        <img src="{{ asset('images/default-actor.png') }}"
+                                            alt="{{ $actor->name }}"
+                                            class="w-full h-full object-cover"
+                                        >
+                                        @endif
+                                    </div>
+                                </span>
+                            </a>@if(!$loop->last) | @endif
+                        @empty
+                            <span class="font-semibold italic text-xs dark:text-white">
+                                {{ __("No actors") }}
                             </span>
-                        @endif
+                        @endforelse
                     </div>
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Added by') }}</p>

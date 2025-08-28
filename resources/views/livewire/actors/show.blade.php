@@ -67,17 +67,33 @@
 
 
                 {{-- Meta Info --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="gap-4 mb-6">
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("Known for") }}:</p>
                         <div class="flex flex-wrap gap-2 mt-0.5">
                             @forelse ($actor->contentItems as $contentItem)
-                                <a href="{{ route('content-items.show', $contentItem) }}" wire:navigate
-                                    class="px-2 py-1 rounded font-medium text-xs text-white bg-blue-500 dark:bg-blue-600
-                                        transition-colors duration-200 text-center shadow-sm hover:cursor-pointer"
+                                <a x-data="{ hover: false }" href="{{ route('content-items.show', $contentItem) }}" wire:navigate
+                                    class="inline-block text-sm font-medium text-cyan-400 hover:underline"
                                     >
-                                    {{ $contentItem->title }}
-                                </a>
+                                    <span @mouseenter="hover = true" @mouseleave="hover = false"
+                                        class="relative">
+                                        {{ $contentItem->title }}
+                                        <div x-show="hover"
+                                            x-transition
+                                            class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border">
+                                            @if($contentItem->main_image_url)
+                                            <img src="{{ $contentItem->main_image_url }}"
+                                                alt="{{ $contentItem->title }}"
+                                                class="w-full h-full object-cover">
+                                            @else
+                                            <img src="{{ asset('images/default-content.png') }}"
+                                                alt="{{ $contentItem->title }}"
+                                                class="w-full h-full object-cover"
+                                            >
+                                            @endif
+                                        </div>
+                                    </span>
+                                </a>@if(!$loop->last) | @endif
                             @empty
                                 <span class="font-semibold italic text-xs dark:text-white">
                                     {{ __("No works") }}
