@@ -74,7 +74,7 @@
                                             {{ $actor->name }}
                                             <div x-show="hover"
                                                 x-transition
-                                                class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border">
+                                                class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border hidden sm:block">
                                                 @if($actor->main_image_url)
                                                 <img src="{{ $actor->main_image_url }}"
                                                     alt="{{ $actor->name }}"

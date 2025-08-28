@@ -144,15 +144,37 @@
                             </label>
 
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3">
-                                @foreach($contentItems as $contentItem)
-                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                @forelse($contentItems as $contentItem)
+                                    <label x-data="{ hover: false }" class="relative flex items-center space-x-2 cursor-pointer">
                                         <input type="checkbox"
+                                            id="content_item_{{ $contentItem->id }}"
                                             wire:model="content_items"
                                             value="{{ $contentItem->id }}"
-                                             class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
-                                        <span class="text-gray-700 dark:text-white text-sm">{{ $contentItem->title }}</span>
+                                            class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
+
+                                        <span @mouseenter="hover = true" @mouseleave="hover = false"
+                                            class="text-gray-700 dark:text-white text-sm relative">
+                                            {{ $contentItem->title }}
+                                            <div x-show="hover"
+                                                x-transition
+                                                class="absolute z-50 top-full left-0 mt-2 w-32 h-44 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border hidden sm:block">
+                                                @if($contentItem->main_image_url)
+                                                    <img src="{{ $contentItem->main_image_url }}"
+                                                        alt="{{ $contentItem->title }}"
+                                                        class="w-full h-full object-cover">
+                                                @else
+                                                    <img src="{{ asset('images/default-content.png') }}"
+                                                        alt="{{ $contentItem->title }}"
+                                                        class="w-full h-full object-cover">
+                                                @endif
+                                            </div>
+                                        </span>
                                     </label>
-                                @endforeach
+                                @empty
+                                    <span class="font-semibold italic text-xs dark:text-white">
+                                        {{ __("There are no content items in your collection yet.") }}
+                                    </span>
+                                @endforelse
                             </div>
                             <div class="my-12">
                                 <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
