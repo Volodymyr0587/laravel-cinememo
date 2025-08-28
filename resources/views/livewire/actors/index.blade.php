@@ -133,7 +133,7 @@
 
 
                                     <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
-                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">Works of the actor:</span>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("Known for") }}:</span>
                                         @forelse ($actor->contentItems as $contentItem)
                                             <span
                                                 class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600

@@ -69,7 +69,7 @@
                 {{-- Meta Info --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Works of the actor:') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("Known for") }}:</p>
                         <div class="flex flex-wrap gap-2 mt-0.5">
                             @forelse ($actor->contentItems as $contentItem)
                                 <a href="{{ route('content-items.show', $contentItem) }}" wire:navigate
