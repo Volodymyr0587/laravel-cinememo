@@ -68,4 +68,23 @@ class ContentItemPolicy
     {
         return $contentItem->is_public && $contentItem->user_id !== $user->id;
     }
+
+    /**
+     * Determine whether the user can view actors of the content item.
+     */
+    public function viewActors(User $user, ContentItem $contentItem): bool
+    {
+        // Allow if item is not public
+        if (!$contentItem->is_public) {
+            return true;
+        }
+
+        // Allow if item is public but owned by the user
+        if ($contentItem->is_public && $contentItem->user_id === $user->id) {
+            return true;
+        }
+
+        // Otherwise, deny
+        return false;
+    }
 }
