@@ -17,6 +17,47 @@
                 </flux:navbar.item>
             </flux:navbar>
 
+            {{-- <flux:dropdown class="-mb-px max-lg:hidden">
+                <flux:button icon="film" icon:trailing="chevron-down">{{ __('layouts-app-header.my-collection') }}</flux:button>
+
+                <flux:menu>
+                    @php
+                        $countContentTypes = auth()->user()->contentTypes()->count();
+                    @endphp
+                    <flux:navbar.item icon="list-bullet" :href="route('content-types.index')" wire:navigate>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.categories') }} </span>
+                            <flux:badge   flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                        </div>
+                    </flux:navbar.item>
+
+                    <flux:menu.separator />
+
+                    @php
+                        $countActors = auth()->user()->actors()->count();
+                    @endphp
+                    <flux:navbar.item icon="users" :href="route('actors.index')" wire:navigate>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.actors') }}</span>
+                            <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                        </div>
+                    </flux:navbar.item>
+
+                    <flux:menu.separator />
+
+                    @php
+                        $countContentItems = auth()->user()->contentItems()->count();
+                    @endphp
+                   <flux:navbar.item icon="film" :href="route('content-items.index')" wire:navigate>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.my-collection') }}</span>
+                            <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
+                        </div>
+                    </flux:navbar.item>
+
+                </flux:menu>
+            </flux:dropdown> --}}
+
             @php
                 $countContentTypes = auth()->user()->contentTypes()->count();
             @endphp
