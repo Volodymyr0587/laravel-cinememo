@@ -5,6 +5,7 @@ return [
     "categories" => "Categories",
     "my-collection" => "My Collection",
     "actors" => "Actors",
+    "content" => "Content",
     "public-content" => "Public Content",
     "trash" => "Trash",
     "settings" => "Settings",

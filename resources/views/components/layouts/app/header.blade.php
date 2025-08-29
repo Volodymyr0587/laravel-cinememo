@@ -17,76 +17,55 @@
                 </flux:navbar.item>
             </flux:navbar>
 
-            {{-- <flux:dropdown class="-mb-px max-lg:hidden">
-                <flux:button icon="film" icon:trailing="chevron-down">{{ __('layouts-app-header.my-collection') }}</flux:button>
-
+            <flux:dropdown position="top" align="start" class="max-lg:hidden">
+                <flux:button variant="ghost" size="sm" icon="circle-stack" icon:trailing="chevron-down" class="hover:cursor-pointer">{{ __('layouts-app-header.my-collection') }}</flux:button>
                 <flux:menu>
-                    @php
-                        $countContentTypes = auth()->user()->contentTypes()->count();
-                    @endphp
-                    <flux:navbar.item icon="list-bullet" :href="route('content-types.index')" wire:navigate>
-                        <div class="flex items-center justify-between">
-                            <span>{{ __('layouts-app-header.categories') }} </span>
-                            <flux:badge   flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                    <flux:menu.radio.group>
+                        <div class="p-0 text-sm font-normal">
+                            @php
+                                $countActors = auth()->user()->actors()->count();
+                            @endphp
+                            <flux:navbar.item icon="users" :href="route('actors.index')"
+                                class="{{ request()->routeIs('actors.index') ? 'text-neon-gold' : '' }}" wire:navigate>
+                                <div class="flex items-center justify-between">
+                                    <span>{{ __('layouts-app-header.actors') }}</span>
+                                    <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                                </div>
+                            </flux:navbar.item>
                         </div>
-                    </flux:navbar.item>
 
-                    <flux:menu.separator />
+                        <flux:menu.separator />
 
-                    @php
-                        $countActors = auth()->user()->actors()->count();
-                    @endphp
-                    <flux:navbar.item icon="users" :href="route('actors.index')" wire:navigate>
-                        <div class="flex items-center justify-between">
-                            <span>{{ __('layouts-app-header.actors') }}</span>
-                            <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                        <div class="p-0 text-sm font-normal">
+                            @php
+                                $countContentTypes = auth()->user()->contentTypes()->count();
+                            @endphp
+                            <flux:navbar.item icon="list-bullet" :href="route('content-types.index')"
+                                class="{{ request()->routeIs('content-types.index') ? 'text-neon-gold' : '' }}" wire:navigate>
+                                <div class="flex items-center justify-between">
+                                    <span>{{ __('layouts-app-header.categories') }} </span>
+                                    <flux:badge   flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                                </div>
+                            </flux:navbar.item>
+
                         </div>
-                    </flux:navbar.item>
 
-                    <flux:menu.separator />
+                        <flux:menu.separator />
 
-                    @php
-                        $countContentItems = auth()->user()->contentItems()->count();
-                    @endphp
-                   <flux:navbar.item icon="film" :href="route('content-items.index')" wire:navigate>
-                        <div class="flex items-center justify-between">
-                            <span>{{ __('layouts-app-header.my-collection') }}</span>
-                            <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
-                        </div>
-                    </flux:navbar.item>
+                        @php
+                            $countContentItems = auth()->user()->contentItems()->count();
+                        @endphp
+                        <flux:navbar.item icon="film" :href="route('content-items.index')"
+                            class="{{ request()->routeIs('content-items.index') ? 'text-neon-gold' : '' }}" wire:navigate>
+                            <div class="flex items-center justify-between">
+                                <span>{{ __('layouts-app-header.content') }}</span>
+                                <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
+                            </div>
+                        </flux:navbar.item>
 
+                    </flux:menu.radio.group>
                 </flux:menu>
-            </flux:dropdown> --}}
-
-            @php
-                $countContentTypes = auth()->user()->contentTypes()->count();
-            @endphp
-
-            <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
-                    {{ __('layouts-app-header.categories') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
-                </flux:navbar.item>
-            </flux:navbar>
-
-            @php
-                $countContentItems = auth()->user()->contentItems()->count();
-            @endphp
-
-            <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
-                    {{ __('layouts-app-header.my-collection') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
-                </flux:navbar.item>
-            </flux:navbar>
-
-            @php
-                $countActors = auth()->user()->actors()->count();
-            @endphp
-
-            <flux:navbar class="-mb-px max-lg:hidden">
-                <flux:navbar.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
-                    {{ __('layouts-app-header.actors') }} <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
-                </flux:navbar.item>
-            </flux:navbar>
+            </flux:dropdown>
 
             @php
                 $countPublicContentItems = App\Models\ContentItem::where('is_public', true)->count();
@@ -98,6 +77,7 @@
                 </flux:navbar.item>
             </flux:navbar>
 
+            <flux:spacer />
             @php
                 $countTrashedContentItems = auth()->user()->contentItems()->onlyTrashed()->count();
             @endphp
@@ -107,8 +87,6 @@
                     {{ __('layouts-app-header.trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
                 </flux:navbar.item>
             </flux:navbar>
-
-            <flux:spacer />
 
             <!-- Lang Switcher-->
             <x-language-switcher class="mr-2" />
@@ -184,20 +162,35 @@
                     <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                       {{ __('layouts-app-header.dashboard') }}
                     </flux:navlist.item>
+                    <flux:navlist.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.actors') }}</span>
+                            <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                        </div>
+                    </flux:navlist.item>
                     <flux:navlist.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
-                      {{ __('layouts-app-header.categories') }} <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.categories') }}</span>
+                            <flux:badge color="orange" size="sm" class="ml-1">{{ $countContentTypes }}</flux:badge>
+                        </div>
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('content-items.index')" :current="request()->routeIs('content-items.index')" wire:navigate>
-                      {{ __('layouts-app-header.my-collection') }} <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
-                    </flux:navlist.item>
-                    <flux:navlist.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
-                      {{ __('layouts-app-header.actors') }} <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.my-collection') }}</span>
+                            <flux:badge color="blue" size="sm" class="ml-1">{{ $countContentItems }}</flux:badge>
+                        </div>
                     </flux:navlist.item>
                     <flux:navlist.item icon="film" :href="route('public-content.index')" :current="request()->routeIs('public-content.index')" wire:navigate>
-                      {{ __('layouts-app-header.public-content') }} <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.public-content') }}</span>
+                            <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
+                        </div>
                     </flux:navlist.item>
                     <flux:navlist.item icon="trash" :href="route('content-items.trash')" :current="request()->routeIs('content-items.trash')" wire:navigate>
-                      {{ __('layouts-app-header.trash') }} <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.trash') }}</span>
+                            <flux:badge color="rose" size="sm" class="ml-1">{{ $countTrashedContentItems }}</flux:badge>
+                        </div>
                     </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
