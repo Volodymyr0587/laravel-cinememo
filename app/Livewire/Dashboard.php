@@ -19,6 +19,11 @@ class Dashboard extends Component
                     ->take(8)
                     ->get(),
                 'contentItemsCount' => $user->contentItems()->count(),
+                'actorsCount' => $user->actors()->count(),
+                'lastUpdatedActor' => $user->actors()
+                    ->orderBy('actors.updated_at', 'desc')
+                    ->select('actors.name', 'actors.updated_at')
+                    ->first(),
                 'lastUpdatedContentItem' => $user->contentItems()
                     ->orderBy('content_items.updated_at', 'desc')
                     ->select('content_items.title', 'content_items.updated_at')

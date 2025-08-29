@@ -1,7 +1,7 @@
 <div>
      <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <x-dashboard.card title="Total Content Items">
+        <div class="grid auto-rows-min gap-4 md:grid-cols-4">
+            <x-dashboard.card title="{{ __('Total in the collection') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.film /> {{ $stats->contentItemsCount }}</div>
                 @if ($stats->lastUpdatedContentItem)
                     <div class="text-gray-500 dark:text-gray-400">
@@ -9,7 +9,7 @@
                     </div>
                 @endif
             </x-dashboard.card>
-            <x-dashboard.card title="Total Content Types">
+            <x-dashboard.card title="{{ __('Total categories') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $stats->contentTypesCount }}</div>
                 @if ($stats->lastUpdatedContentType)
                     <div class="text-gray-500 dark:text-gray-400">
@@ -17,7 +17,15 @@
                     </div>
                 @endif
             </x-dashboard.card>
-            <x-dashboard.card title="Number of Trashed Content Items">
+            <x-dashboard.card title="{{ __('Total actors') }}">
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $stats->actorsCount }}</div>
+                @if ($stats->actorsCount)
+                    <div class="text-gray-500 dark:text-gray-400">
+                        Last updated: {{ $stats->lastUpdatedActor->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedActor->name }})
+                    </div>
+                @endif
+            </x-dashboard.card>
+            <x-dashboard.card title="{{ __('Total in trash') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.trash />{{ $stats->trashedContentItemsCount }}</div>
                 @if ($stats->trashedContentItemsCount)
                     <div class="text-gray-500 dark:text-gray-400">
@@ -43,7 +51,7 @@
             </div>
         </a>
     @empty
-        <p class="text-center text-neutral-500 dark:text-neutral-400 col-span-full">No content items yet</p>
+        <p class="text-center text-neutral-500 dark:text-neutral-400 col-span-full">{{ __("There is currently nothing in your collection") }}.</p>
     @endforelse
 </div>
 </div>
