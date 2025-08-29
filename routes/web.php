@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\Admin;
 use App\Livewire\Actors;
 use App\Livewire\Dashboard;
 use App\Livewire\ContentItems;
@@ -31,7 +30,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-     // Content Types Routes
+    // Content Types Routes
     Route::get('/content-types', ContentTypes\Index::class)->name('content-types.index');
     Route::get('/content-types/create', ContentTypes\Create::class)->name('content-types.create');
     Route::get('/content-types/{contentType}/edit', ContentTypes\Edit::class)->name('content-types.edit');
@@ -58,8 +57,8 @@ Route::middleware(['auth'])->group(function () {
         $contentItems = auth()->user()->contentItems()->with('contentType')->get();
         $fileName = 'content-items-' . now()->format('Y-m-d_H-i-s') . '.pdf';
         return pdf()->view('pdf.content-items', ['contentItems' => $contentItems])
-        ->format('A4')
-        ->name($fileName);
+            ->format('A4')
+            ->name($fileName);
     })->name('content-items.export-pdf');
 
     // Actors Routes
@@ -69,8 +68,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/actors/{actor}', Actors\Show::class)->name('actors.show');
 
 
-    // Admin Route
-    Route::get('/users', Admin\Users\Index::class)->name('admin.users.index');
 });
 
 Route::get('/locale/{lang}', function ($lang) {
@@ -80,4 +77,4 @@ Route::get('/locale/{lang}', function ($lang) {
     return redirect()->back();
 })->name('locale.switch');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
