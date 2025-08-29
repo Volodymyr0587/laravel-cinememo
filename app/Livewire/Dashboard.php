@@ -29,6 +29,10 @@ class Dashboard extends Component
                     ->select('content_items.title', 'content_items.updated_at')
                     ->first(),
                 'trashedContentItemsCount' => $user->contentItems()->onlyTrashed()->count(),
+                'lastTrashedContentItem' => $user->contentItems()->onlyTrashed()
+                    ->orderBy('content_items.deleted_at', 'desc')
+                    ->select('content_items.title', 'content_items.deleted_at')
+                    ->first(),
                 'contentTypesCount' => $user->contentTypes()->count(),
                 'lastUpdatedContentType' => $user->contentTypes()
                     ->latest('updated_at')

@@ -5,7 +5,7 @@
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.film /> {{ $stats->contentItemsCount }}</div>
                 @if ($stats->lastUpdatedContentItem)
                     <div class="text-gray-500 dark:text-gray-400">
-                         Last updated: {{ $stats->lastUpdatedContentItem->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedContentItem->title }})
+                         {{ __("Last updated") }}: {{ $stats->lastUpdatedContentItem->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedContentItem->title }})
                     </div>
                 @endif
             </x-dashboard.card>
@@ -13,7 +13,7 @@
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $stats->contentTypesCount }}</div>
                 @if ($stats->lastUpdatedContentType)
                     <div class="text-gray-500 dark:text-gray-400">
-                        Last updated: {{ $stats->lastUpdatedContentType->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedContentType->name }})
+                        {{ __("Last updated") }}: {{ $stats->lastUpdatedContentType->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedContentType->name }})
                     </div>
                 @endif
             </x-dashboard.card>
@@ -21,15 +21,15 @@
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $stats->actorsCount }}</div>
                 @if ($stats->actorsCount)
                     <div class="text-gray-500 dark:text-gray-400">
-                        Last updated: {{ $stats->lastUpdatedActor->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedActor->name }})
+                        {{ __("Last updated") }}: {{ $stats->lastUpdatedActor->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedActor->name }})
                     </div>
                 @endif
             </x-dashboard.card>
             <x-dashboard.card title="{{ __('Total in trash') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.trash />{{ $stats->trashedContentItemsCount }}</div>
-                @if ($stats->trashedContentItemsCount)
+                @if ($stats->lastTrashedContentItem)
                     <div class="text-gray-500 dark:text-gray-400">
-                        In trash {{ $stats->trashedContentItemsCount }}  content items
+                        {{ __("Last trashed") }}: {{ $stats->lastTrashedContentItem->deleted_at->diffForHumans() }} ({{ $stats->lastTrashedContentItem->title }})
                     </div>
                 @endif
             </x-dashboard.card>
