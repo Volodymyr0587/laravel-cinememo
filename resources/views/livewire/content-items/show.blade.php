@@ -5,8 +5,8 @@
 
                 {{-- Back Button --}}
                 <div class="mb-4">
-                    <flux:link :href="url()->previous()" wire:navigate>
-                        ← {{ __('Back to list') }}
+                    <flux:link href="{{ route('content-items.index') }}" wire:navigate>
+                        ← {{ __('Back to collection') }}
                     </flux:link>
                 </div>
 
