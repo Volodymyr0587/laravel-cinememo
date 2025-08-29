@@ -2,26 +2,26 @@
      <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
             <x-dashboard.card title="Total Content Items">
-                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.film /> {{ $contentItemsCount }}</div>
-                @if ($lastUpdatedContentItem)
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.film /> {{ $stats->contentItemsCount }}</div>
+                @if ($stats->lastUpdatedContentItem)
                     <div class="text-gray-500 dark:text-gray-400">
-                         Last updated: {{ $lastUpdatedContentItem->updated_at->diffForHumans() }} ({{ $lastUpdatedContentItem->title }})
+                         Last updated: {{ $stats->lastUpdatedContentItem->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedContentItem->title }})
                     </div>
                 @endif
             </x-dashboard.card>
             <x-dashboard.card title="Total Content Types">
-                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $contentTypesCount }}</div>
-                @if ($lastUpdatedContentType)
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.list-bullet />{{ $stats->contentTypesCount }}</div>
+                @if ($stats->lastUpdatedContentType)
                     <div class="text-gray-500 dark:text-gray-400">
-                        Last updated: {{ $lastUpdatedContentType->updated_at->diffForHumans() }} ({{ $lastUpdatedContentType->name }})
+                        Last updated: {{ $stats->lastUpdatedContentType->updated_at->diffForHumans() }} ({{ $stats->lastUpdatedContentType->name }})
                     </div>
                 @endif
             </x-dashboard.card>
             <x-dashboard.card title="Number of Trashed Content Items">
-                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.trash />{{ $trashedContentItemsCount }}</div>
-                @if ($trashedContentItemsCount)
+                <div class="flex items-center gap-x-2 text-2xl font-bold"><flux:icon.trash />{{ $stats->trashedContentItemsCount }}</div>
+                @if ($stats->trashedContentItemsCount)
                     <div class="text-gray-500 dark:text-gray-400">
-                        In trash {{ $trashedContentItemsCount }}  content items
+                        In trash {{ $stats->trashedContentItemsCount }}  content items
                     </div>
                 @endif
             </x-dashboard.card>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-    @forelse ($contentItems as $item)
+    @forelse ($stats->contentItems as $item)
         <a href="{{ route('content-items.show', $item) }}" wire:navigate
            class="group relative block aspect-[3/4] overflow-hidden rounded-lg shadow hover:shadow-lg transition-shadow duration-200 border border-neutral-200 dark:border-neutral-700">
             <img src="{{ $item->main_image_url ? $item->main_image_url : asset('images/default-content.png') }}"
