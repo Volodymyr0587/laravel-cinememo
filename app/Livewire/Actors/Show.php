@@ -16,19 +16,18 @@ class Show extends Component
         $this->actor = $actor;
     }
 
-    public function delete(Actor $actor)
+    public function delete()
     {
-        $this->authorize('delete', $actor);
+        $this->authorize('delete', $this->actor);
 
-        $actor->removeAllImages();
+        $this->actor->removeAllImages();
+        $this->actor->delete();
 
-        $actor->delete();
-
-        session()->flash('message', "Actor $actor->name deleted successfully.");
+        session()->flash('message', "Actor {$this->actor->name} deleted successfully.");
 
         $this->redirectRoute('actors.index');
-
     }
+
     public function render()
     {
         return view('livewire.actors.show');

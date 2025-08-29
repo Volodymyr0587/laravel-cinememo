@@ -27,9 +27,15 @@
                 @if ($actor->birth_place)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">Birth place:</span>
-                    <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ $actor->birth_place }}" target="_blank"
+                        class="px-2 py-1 rounded text-xs font-bold
+                            bg-gray-900 text-white
+                            dark:bg-white dark:text-gray-900
+                            hover:bg-gray-700 dark:hover:bg-gray-200
+                            hover:shadow-lg hover:scale-105
+                            transition duration-300 ease-out transform">
                         {{ $actor->birth_place }}
-                    </span>
+                    </a>
                 </div>
                 @endif
 
@@ -202,7 +208,7 @@
                         {{ __('Edit') }}
                     </flux:button>
 
-                    <button type="submit" wire:click="delete({{ $actor }})"
+                    <button type="submit" wire:click="delete"
                             wire:confirm="Are you sure you want to delete this actor? This action is irreversible."
                             class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-800 text-sm font-medium hover:cursor-pointer">
                         {{ __('Delete') }}
