@@ -50,7 +50,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($contentItems as $contentItem)
                             <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
-                                <a href="{{ route('content-items.show', $contentItem) }}"  wire:navigate>
+                                <a href="{{ route('content-items.show', [$contentItem, 'from' => request()->route()->getName()]) }}"  wire:navigate>
                                     @php
                                         $defaultImagePath = public_path('images/default-content.png');
                                     @endphp
@@ -72,7 +72,7 @@
                                 </a>
 
                                 <div class="p-4">
-                                    <a href="{{ route('content-items.show', $contentItem) }}"  wire:navigate
+                                    <a href="{{ route('content-items.show', [$contentItem, 'from' => request()->route()->getName()]) }}"  wire:navigate
                                         class="font-semibold text-lg text-gray-800 dark:text-white mb-2 hover:underline">
                                         {{ $contentItem->title }}
                                     </a>

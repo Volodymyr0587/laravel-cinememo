@@ -5,9 +5,19 @@
 
                 {{-- Back Button --}}
                 <div class="mb-4">
-                    <flux:link href="{{ route('content-items.index') }}" wire:navigate>
-                        ← {{ __('Back to collection') }}
-                    </flux:link>
+                    @php
+                        $from = request()->query('from');
+                    @endphp
+
+                    @if ($from === 'public-content.index')
+                        <flux:link href="{{ route('public-content.index') }}" wire:navigate>
+                            ← {{ __('Back to public content') }}
+                        </flux:link>
+                    @else
+                        <flux:link href="{{ route('content-items.index') }}" wire:navigate>
+                            ← {{ __('Back to collection') }}
+                        </flux:link>
+                    @endif
                 </div>
 
                 {{-- Title --}}
