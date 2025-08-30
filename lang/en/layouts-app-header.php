@@ -10,4 +10,5 @@ return [
     "trash" => "Trash",
     "settings" => "Settings",
     "log-out" => "Log Out",
+    "user-management" => "User management"
 ];

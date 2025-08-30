@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Users;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
@@ -17,6 +18,37 @@ class Index extends Component
     {
         $this->search = '';
         $this->roleFilter = '';
+    }
+
+    public function delete(int $userId)
+    {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $user = User::findOrFail($userId);
+
+        // remove roles first (Spatie)
+        $user->syncRoles([]);
+
+        // delete related content items
+        if ($path = $user->profile_image) {
+            Storage::disk('public')->delete($path);
+        }
+
+        $user->contentItems()->each(function ($item) {
+            $item->removeAllImages();
+        });
+
+        $user->actors()->each(function ($actor) {
+            $actor->removeAllImages();
+        });
+
+        // finally delete user
+        $user->delete();
+
+        session()->flash('message', 'User and all related data deleted successfully.');
+        return redirect()->route('admin.users.index');
     }
 
     public function render()

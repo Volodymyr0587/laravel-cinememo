@@ -133,6 +133,14 @@
 
                     <flux:menu.separator />
 
+                    @role('admin')
+                        <flux:menu.radio.group>
+                            <flux:menu.item :href="route('admin.users.index')" icon="users" wire:navigate>{{ __('layouts-app-header.user-management') }}</flux:menu.item>
+                        </flux:menu.radio.group>
+
+                        <flux:menu.separator />
+                    @endrole
+
                     <flux:menu.radio.group>
                         <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('layouts-app-header.settings') }}</flux:menu.item>
                     </flux:menu.radio.group>

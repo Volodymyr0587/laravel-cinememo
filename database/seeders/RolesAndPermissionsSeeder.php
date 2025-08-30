@@ -33,10 +33,10 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'assign_permissions_to_roles']);
 
         // Create Roles and assign existing permissions
-        $adminRole = Role::create(['name' => 'Admin']);
+        $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo(Permission::all()); // Admin gets all permissions
 
-        $writerRole = Role::create(['name' => 'Writer']);
+        $writerRole = Role::create(['name' => 'writer']);
         $writerRole->givePermissionTo([
             'create_articles', 'edit_articles', 'delete_articles'
         ]);
@@ -47,6 +47,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password123'),
         ]);
-        $user->assignRole('Admin');
+        $user->assignRole('admin');
     }
 }

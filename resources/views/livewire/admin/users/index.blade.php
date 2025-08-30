@@ -12,9 +12,9 @@
                 </flux:button>
             @endif
         </h2>
-        <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
+        {{-- <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
             <x-button href="{{ route('actors.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New User') }}</x-button>
-        </div>
+        </div> --}}
     </div>
 
 
@@ -81,35 +81,42 @@
                                         <td class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-white">{{ $user->name }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->email }}</td>
                                         <td class="px-4 py-2 text-sm">
-                                            <span class="px-2 py-1 rounded text-xs font-bold bg-blue-500 text-white">
-                                                {{-- {{ $user->roles->pluck('name')->implode(', ') ?: '—' }} --}}
-                                                roles name placeholder
-                                            </span>
+                                            @forelse ($user->getRoleNames() as $roleName)
+                                                <span class="px-2 py-1 mr-1 rounded text-xs font-bold bg-blue-500 text-white">
+                                                    {{ $roleName }}
+                                                </span>
+                                            @empty
+                                                No roles
+                                            @endforelse
+
                                         </td>
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->created_at }}</td>
                                         <td class="px-4 py-2 text-right space-x-2">
+                                            @can('view_users')
                                             <flux:button
                                                 size="sm"
                                                 variant="primary"
                                                 color="lime"
-                                                {{-- href="{{ route('users.edit', $user) }}" --}}
+                                                {{-- href="{{ route('admin.users.show', $user) }}" --}}
                                                 wire:navigate
                                                 class="hover:cursor-pointer"
                                             >
                                                 {{ __("Details") }}
                                             </flux:button>
-                                            {{-- <flux:button href="{{ route('users.edit', $user) }}" wire:navigate size="sm">Edit</flux:button> --}}
+                                            @endcan
+                                            @can('edit_users')
                                             <flux:button
                                                 size="sm"
                                                 variant="primary"
                                                 color="indigo"
-                                                {{-- href="{{ route('users.edit', $user) }}" --}}
+                                                href="{{ route('admin.users.edit', $user) }}"
                                                 wire:navigate
                                                 class="hover:cursor-pointer"
                                             >
                                                 Edit
                                             </flux:button>
-
+                                            @endcan
+                                            @can('delete_users')
                                             <flux:button
                                                 size="sm"
                                                 variant="danger"
@@ -119,6 +126,7 @@
                                             >
                                                 Delete
                                             </flux:button>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
