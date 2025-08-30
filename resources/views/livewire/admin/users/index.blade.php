@@ -12,9 +12,9 @@
                 </flux:button>
             @endif
         </h2>
-        {{-- <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            <x-button href="{{ route('actors.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New User') }}</x-button>
-        </div> --}}
+        <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
+            <x-button href="{{ route('admin.users.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New User') }}</x-button>
+        </div>
     </div>
 
 
@@ -133,8 +133,7 @@
                                     <tr>
                                         <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-300">
                                             No users found.
-                                            {{-- <flux:link :href="route('users.create')" wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link> --}}
-                                            {{-- <flux:link  wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link> --}}
+                                            <flux:link :href="route('admin.users.create')" wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link>
                                         </td>
                                     </tr>
                                 @endforelse

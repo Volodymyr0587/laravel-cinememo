@@ -8,6 +8,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->group(
             function () {
                 Route::get('users', Admin\Users\Index::class)->name('users.index'); // Route name: 'admin.users.index'
+                Route::get('users/create', Admin\Users\Create::class)->name('users.create');
                 Route::get('users/{user}/edit', Admin\Users\Edit::class)->name('users.edit');
                 Route::get('users/{user}', Admin\Users\Show::class)->name('users.show');
             }
