@@ -3,22 +3,21 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
-use App\Notifications\UserDeletedNotification;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\UserDeletedNotification;
 
-class Index extends Component
+class Show extends Component
 {
-    use WithPagination;
+    public User $user;
 
-    public $search = '';
-    public $roleFilter = '';
-
-    public function clearFilters(): void
+    public function mount(User $user)
     {
-        $this->search = '';
-        $this->roleFilter = '';
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $this->user = $user;
     }
 
     public function delete(int $userId)
@@ -57,22 +56,6 @@ class Index extends Component
 
     public function render()
     {
-        $query = User::latest(); // add with('roles') after install spatie/laravel-permission
-
-        if ($this->search) {
-            $query
-                ->where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('email', 'like', '%' . $this->search . '%');
-        }
-
-        if ($this->roleFilter) {
-            $query->whereHas('roles', function ($q) {
-                $q->where('name', $this->roleFilter);
-            });
-        }
-
-        $allUsers = $query->paginate(10)->withQueryString();
-
-        return view('livewire.admin.users.index', compact('allUsers'));
+        return view('livewire.admin.users.show');
     }
 }

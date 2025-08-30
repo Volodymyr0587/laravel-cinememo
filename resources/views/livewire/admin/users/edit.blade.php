@@ -60,5 +60,27 @@
                 </div>
             </div>
         </div>
+
+        <!-- Danger Zone -->
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
+            <div class="overflow-hidden border border-red-500 dark:border-red-400 bg-white dark:bg-zinc-800 shadow-lg sm:rounded-lg">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-red-600 dark:text-red-400">
+                        {{ __('Danger Zone') }}
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                        {{ __('Once you delete this user, all of their data will be permanently removed. This action cannot be undone.') }}
+                    </p>
+                    <div class="mt-4">
+                        <form wire:submit.prevent="deleteUser">
+                            <flux:button variant="danger" type="submit" class="hover:cursor-pointer">
+                                {{ __('Delete User') }}
+                            </flux:button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Danger Zone -->
     </div>
 </div>

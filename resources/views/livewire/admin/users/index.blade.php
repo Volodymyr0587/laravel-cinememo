@@ -82,7 +82,7 @@
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->email }}</td>
                                         <td class="px-4 py-2 text-sm">
                                             @forelse ($user->getRoleNames() as $roleName)
-                                                <span class="px-2 py-1 mr-1 rounded text-xs font-bold bg-blue-500 text-white">
+                                                <span wire:click="$set('roleFilter', '{{ $roleName }}')" class="px-2 py-1 mr-1 rounded text-xs font-bold bg-blue-500 text-white hover:cursor-pointer">
                                                     {{ $roleName }}
                                                 </span>
                                             @empty
@@ -97,7 +97,7 @@
                                                 size="sm"
                                                 variant="primary"
                                                 color="lime"
-                                                {{-- href="{{ route('admin.users.show', $user) }}" --}}
+                                                href="{{ route('admin.users.show', $user) }}"
                                                 wire:navigate
                                                 class="hover:cursor-pointer"
                                             >
@@ -131,10 +131,10 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="px-4 py-6 text-center text-gray-500 dark:text-gray-300">
+                                        <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-300">
                                             No users found.
                                             {{-- <flux:link :href="route('users.create')" wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link> --}}
-                                            <flux:link  wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link>
+                                            {{-- <flux:link  wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link> --}}
                                         </td>
                                     </tr>
                                 @endforelse
