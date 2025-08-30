@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
+use App\Notifications\UserDeletedNotification;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,9 @@ class Index extends Component
         }
 
         $user = User::findOrFail($userId);
+
+        // notify user before deleting
+        $user->notify(new UserDeletedNotification('Violation of rules or user request.'));
 
         // remove roles first (Spatie)
         $user->syncRoles([]);
