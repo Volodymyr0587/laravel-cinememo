@@ -11,6 +11,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
                 Route::get('users/create', Admin\Users\Create::class)->name('users.create');
                 Route::get('users/{user}/edit', Admin\Users\Edit::class)->name('users.edit');
                 Route::get('users/{user}', Admin\Users\Show::class)->name('users.show');
+
+                Route::get('roles', Admin\Roles\Index::class)->name('roles.index');
+                Route::get('roles/create', Admin\Roles\Create::class)->name('roles.create');
+                Route::get('roles/{role}/edit', Admin\Roles\Edit::class)->name('roles.edit');
             }
         );
 });

@@ -11,4 +11,5 @@ return [
     "settings" => "Налаштування",
     "log-out" => "Вийти",
     "user-management" => "Керування користувачами",
+    "roles-management" => "Керування ролями",
 ];
