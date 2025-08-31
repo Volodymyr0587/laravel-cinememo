@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
 use App\Notifications\UserDeletedNotification;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
@@ -23,33 +24,38 @@ class Index extends Component
 
     public function delete(int $userId)
     {
-        if (!auth()->user()->hasRole('admin')) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $user = User::findOrFail($userId);
 
-        // notify user before deleting
-        $user->notify(new UserDeletedNotification('Violation of rules or user request.'));
+        $this->authorize('delete', $user);
 
-        // remove roles first (Spatie)
-        $user->syncRoles([]);
+        DB::transaction(function () use ($user) {
+            // notify user before deleting
+            $user->notify(new UserDeletedNotification('Violation of rules or user request.'));
 
-        // delete related content items
-        if ($path = $user->profile_image) {
-            Storage::disk('public')->delete($path);
-        }
+            // remove roles and permissions first (Spatie)
+            $user->syncRoles([]);
+            $user->syncPermissions([]);
 
-        $user->contentItems()->each(function ($item) {
-            $item->removeAllImages();
+            // delete related content items
+            if ($path = $user->profile_image) {
+                Storage::disk('public')->delete($path);
+            }
+
+            $user->contentItems()->each(function ($item) {
+                $item->removeAllImages();
+            });
+
+            $user->actors()->each(function ($actor) {
+                $actor->removeAllImages();
+            });
+
+            // TODO: delete other relationships if exist
+            // e.g. $user->appointments()->delete();
+
+            // finally delete user
+            $user->delete();
         });
 
-        $user->actors()->each(function ($actor) {
-            $actor->removeAllImages();
-        });
-
-        // finally delete user
-        $user->delete();
 
         session()->flash('message', 'User and all related data deleted successfully.');
         return redirect()->route('admin.users.index');
