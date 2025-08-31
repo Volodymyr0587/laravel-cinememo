@@ -4,9 +4,8 @@ namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Storage;
+use App\Services\UserDeletionService;
 
 
 class Edit extends Component
@@ -40,39 +39,18 @@ class Edit extends Component
         return redirect()->route('admin.users.index');
     }
 
-    public function delete()
+    public function delete(int $userId, UserDeletionService $userDeletionService)
     {
-        $this->authorize('delete', $this->user);
+        $user = User::findOrFail($userId);
 
-        DB::transaction(function () {
-            // Remove all assigned roles (Spatie)
-            $this->user->syncRoles([]);
-            $this->user->syncPermissions([]);
+        $this->authorize('delete', $user);
 
-            // Delete profile image if exists
-            if ($path = $this->user->profile_image) {
-                Storage::disk('public')->delete($path);
-            }
+        $userDeletionService->deleteUser($userId);
 
-            // Delete related content items & their images
-            $this->user->contentItems()->each(function ($item) {
-                $item->removeAllImages();
-            });
-
-            // Delete related actors & their images
-            $this->user->actors()->each(function ($actor) {
-                $actor->removeAllImages();
-            });
-
-            // Finally delete user
-            $this->user->delete();
-        });
-
-        session()->flash('message', 'User and all related data deleted successfully.');
+        session()->flash('message', "User {$user->name} and all related data deleted successfully.");
 
         return redirect()->route('admin.users.index');
     }
-
 
     public function render()
     {

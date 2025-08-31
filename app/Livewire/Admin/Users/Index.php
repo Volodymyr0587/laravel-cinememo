@@ -3,11 +3,9 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
-use App\Notifications\UserDeletedNotification;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Storage;
+use App\Services\UserDeletionService;
 
 class Index extends Component
 {
@@ -22,42 +20,16 @@ class Index extends Component
         $this->roleFilter = '';
     }
 
-    public function delete(int $userId)
+    public function delete(int $userId, UserDeletionService $userDeletionService)
     {
         $user = User::findOrFail($userId);
 
         $this->authorize('delete', $user);
 
-        DB::transaction(function () use ($user) {
-            // notify user before deleting
-            $user->notify(new UserDeletedNotification('Violation of rules or user request.'));
+        $userDeletionService->deleteUser($userId);
 
-            // remove roles and permissions first (Spatie)
-            $user->syncRoles([]);
-            $user->syncPermissions([]);
+        session()->flash('message', "User {$user->name} and all related data deleted successfully.");
 
-            // delete related content items
-            if ($path = $user->profile_image) {
-                Storage::disk('public')->delete($path);
-            }
-
-            $user->contentItems()->each(function ($item) {
-                $item->removeAllImages();
-            });
-
-            $user->actors()->each(function ($actor) {
-                $actor->removeAllImages();
-            });
-
-            // TODO: delete other relationships if exist
-            // e.g. $user->appointments()->delete();
-
-            // finally delete user
-            $user->delete();
-        });
-
-
-        session()->flash('message', 'User and all related data deleted successfully.');
         return redirect()->route('admin.users.index');
     }
 
