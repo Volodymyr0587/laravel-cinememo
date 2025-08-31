@@ -72,11 +72,17 @@
                         {{ __('Once you delete this user, all of their data will be permanently removed. This action cannot be undone.') }}
                     </p>
                     <div class="mt-4">
-                        <form wire:submit.prevent="deleteUser">
-                            <flux:button variant="danger" type="submit" class="hover:cursor-pointer">
-                                {{ __('Delete User') }}
-                            </flux:button>
-                        </form>
+                        @can('delete_users')
+                        <flux:button
+                            size="sm"
+                            variant="danger"
+                            wire:click="delete({{ $user->id }})"
+                            wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
+                            class="hover:cursor-pointer"
+                        >
+                            Delete
+                        </flux:button>
+                        @endcan
                     </div>
                 </div>
             </div>
