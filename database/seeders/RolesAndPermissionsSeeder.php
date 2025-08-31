@@ -33,6 +33,9 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'assign_permissions_to_roles']);
 
         // Create Roles and assign existing permissions
+        $superAdminRole = Role::create(['name' => 'super_admin']);
+        $superAdminRole->givePermissionTo(Permission::all());
+
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo(Permission::all()); // Admin gets all permissions
 
@@ -40,6 +43,14 @@ class RolesAndPermissionsSeeder extends Seeder
         $writerRole->givePermissionTo([
             'create_articles', 'edit_articles', 'delete_articles'
         ]);
+
+        // Create Super Admin user (protected from deletion)
+        $superAdmin = \App\Models\User::factory()->create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('password123'),
+        ]);
+        $superAdmin->assignRole('super_admin');
 
         // Create Admin user and assign Admin role to a it
         $user = \App\Models\User::factory()->create([

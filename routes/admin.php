@@ -2,7 +2,7 @@
 
 use App\Livewire\Admin;
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
      Route::prefix('admin') // Adds '/admin' to the URL of all routes in this group
         ->name('admin.') // Prefixes route names with 'admin.'
         ->group(

@@ -117,15 +117,25 @@
                                             </flux:button>
                                             @endcan
                                             @can('delete_users')
-                                            <flux:button
-                                                size="sm"
-                                                variant="danger"
-                                                wire:click="delete({{ $user->id }})"
-                                                wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
-                                                class="hover:cursor-pointer"
-                                            >
-                                                Delete
-                                            </flux:button>
+                                                @if(auth()->id() !== $user->id)
+                                                    <flux:button
+                                                        size="sm"
+                                                        variant="danger"
+                                                        wire:click="delete({{ $user->id }})"
+                                                        wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
+                                                        class="hover:cursor-pointer"
+                                                    >
+                                                        Delete
+                                                    </flux:button>
+                                                @else
+                                                    <flux:button
+                                                        size="sm"
+                                                        variant="subtle"
+
+                                                    >
+                                                        Delete
+                                                    </flux:button>
+                                                @endif
                                             @endcan
                                         </td>
                                     </tr>

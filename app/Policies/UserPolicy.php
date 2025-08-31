@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_users') && $user->hasRole('admin');
+        return $user->can('view_users') && $user->hasRole(['admin', 'super_admin']);
     }
 
     /**
@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->can('view_users') && $user->hasRole('admin');
+        return $user->can('view_users') && $user->hasRole(['admin', 'super_admin']);
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_users') && $user->hasRole('admin');
+        return $user->can('create_users') && $user->hasRole(['admin', 'super_admin']);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->can('edit_users') && $user->hasRole('admin');
+        return $user->can('edit_users') && $user->hasRole(['admin', 'super_admin']);
     }
 
     /**
@@ -44,7 +44,30 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->can('delete_users') && $user->hasRole('admin') && $user->id !== $model->id;
+        // Prevent self-deletion
+        if ($user->id === $model->id) {
+            return false;
+        }
+
+        // Prevent deletion of super admins
+        if ($model->hasRole('super_admin')) {
+            return false;
+        }
+
+        // Only super admins can delete other admins
+        if ($model->hasRole('admin') && !$user->hasRole('super_admin')) {
+            return false;
+        }
+
+        // Ensure at least one admin remains
+        if ($model->hasRole('admin')) {
+            $adminCount = User::role(['admin', 'super_admin'])->count();
+            if ($adminCount <= 1) {
+                return false;
+            }
+        }
+
+        return $user->can('delete_users') && ($user->hasRole('admin') || $user->hasRole('super_admin'));
     }
 
     /**
