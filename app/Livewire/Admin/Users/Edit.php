@@ -16,6 +16,8 @@ class Edit extends Component
 
     public function mount(User $user)
     {
+        $this->authorize('view', $user);
+
         $this->user = $user;
         $this->roles = $user->roles->pluck('name')->toArray();
         $this->allRoles = Role::all();
@@ -23,9 +25,7 @@ class Edit extends Component
 
     public function save()
     {
-        if (!auth()->user()->hasRole('admin')) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorize('update', $this->user);
 
         $this->validate([
             'roles' => 'array',
@@ -34,7 +34,7 @@ class Edit extends Component
 
         $this->user->syncRoles($this->roles);
 
-        session()->flash('message'. 'User updated successfully');
+        session()->flash('message', 'User updated successfully');
 
         return redirect()->route('admin.users.index');
     }

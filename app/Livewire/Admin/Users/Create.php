@@ -25,9 +25,7 @@ class Create extends Component
 
     public function save()
     {
-        if (!auth()->user()->hasRole('admin')) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorize('create', User::class);
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
