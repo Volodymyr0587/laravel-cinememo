@@ -5,6 +5,7 @@ namespace App\Livewire\Settings;
 use Livewire\Component;
 use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserDeletionService;
 use Illuminate\Support\Facades\Storage;
 
 class DeleteUserForm extends Component
@@ -14,25 +15,20 @@ class DeleteUserForm extends Component
     /**
      * Delete the currently authenticated user.
      */
-    public function deleteUser(Logout $logout): void
+    public function deleteUser(Logout $logout, UserDeletionService $userDeletionService): void
     {
         $this->validate([
             'password' => ['required', 'string', 'current_password'],
         ]);
 
-        if ($path = Auth::user()->profile_image) {
-            Storage::disk('public')->delete($path);
-        }
+        // store user ID before logout because Auth::user() will be gone after
+        $userId = Auth::id();
 
-        Auth::user()->contentItems()->each(function ($item) {
-            $item->removeAllImages();
-        });
+        // logout first so session is cleared before actual deletion
+        $logout();
 
-        Auth::user()->actors()->each(function ($actor) {
-            $actor->removeAllImages();
-        });
-
-        tap(Auth::user(), $logout(...))->delete();
+        // use centralized service
+        $userDeletionService->deleteUser($userId, 'User requested account deletion.');
 
         $this->redirect('/', navigate: true);
     }
