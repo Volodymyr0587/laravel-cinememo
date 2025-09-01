@@ -30,7 +30,7 @@ class Edit extends Component
 
     public function update()
     {
-        if (!auth()->user()->hasRole('admin')) {
+        if (!auth()->user()->hasRole(['super_admin', 'admin'])) {
             abort(403, 'Unauthorized action.');
         }
 

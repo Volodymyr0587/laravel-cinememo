@@ -18,7 +18,7 @@ class Create extends Component
 
     public function save()
     {
-        if (!auth()->user()->hasRole('admin')) {
+        if (!auth()->user()->hasRole(['super_admin', 'admin'])) {
             abort(403, 'Unauthorized action.');
         }
 
