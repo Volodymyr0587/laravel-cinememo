@@ -36,6 +36,11 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
+        // Prevent deletion of super admins
+        if ($model->hasRole('super_admin')) {
+            return false;
+        }
+
         return $user->can('edit_users') && $user->hasRole(['admin', 'super_admin']);
     }
 

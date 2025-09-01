@@ -41,8 +41,14 @@
                                             wire:model="roles"
                                             value="{{ $role->name }}"
                                             class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600"
+                                            @if($role->name === 'super_admin') disabled @endif
                                         >
-                                        <span class="text-gray-700 dark:text-white text-sm">{{ ucfirst($role->name) }}</span>
+                                        <span class="text-gray-700 dark:text-white text-sm">
+                                            {{ ucfirst($role->name) }}
+                                        </span>
+                                        @if($role->name === 'super_admin')
+                                            <span class="ml-1 text-xs text-gray-500">(fixed)</span>
+                                        @endif
                                     </label>
                                 @endforeach
                             </div>
@@ -62,6 +68,7 @@
         </div>
 
         <!-- Danger Zone -->
+        @can('delete', $user)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
             <div class="overflow-hidden border border-red-500 dark:border-red-400 bg-white dark:bg-zinc-800 shadow-lg sm:rounded-lg">
                 <div class="p-6">
@@ -87,6 +94,7 @@
                 </div>
             </div>
         </div>
+        @endcan
         <!-- End Danger Zone -->
     </div>
 </div>

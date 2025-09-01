@@ -66,8 +66,14 @@
                                             wire:model="roles"
                                             value="{{ $role->name }}"
                                             class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600"
+                                            @if($role->name === 'super_admin' && !auth()->user()->hasRole('super_admin')) disabled @endif
                                         >
-                                        <span class="text-gray-700 dark:text-white text-sm">{{ ucfirst($role->name) }}</span>
+                                        <span class="text-gray-700 dark:text-white text-sm">
+                                            {{ ucfirst($role->name) }}
+                                            @if($role->name === 'super_admin' && !auth()->user()->hasRole('super_admin'))
+                                                <span class="ml-1 text-xs text-gray-500">(only super admin)</span>
+                                            @endif
+                                        </span>
                                     </label>
                                 @endforeach
                             </div>

@@ -92,6 +92,7 @@
                                         </td>
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->created_at }}</td>
                                         <td class="px-4 py-2 text-right space-x-2">
+
                                             @can('view_users')
                                             <flux:button
                                                 size="sm"
@@ -104,38 +105,37 @@
                                                 {{ __("Details") }}
                                             </flux:button>
                                             @endcan
-                                            @can('edit_users')
-                                            <flux:button
-                                                size="sm"
-                                                variant="primary"
-                                                color="indigo"
-                                                href="{{ route('admin.users.edit', $user) }}"
-                                                wire:navigate
-                                                class="hover:cursor-pointer"
-                                            >
-                                                Edit
-                                            </flux:button>
-                                            @endcan
-                                            @can('delete_users')
-                                                @if(auth()->id() !== $user->id)
-                                                    <flux:button
-                                                        size="sm"
-                                                        variant="danger"
-                                                        wire:click="delete({{ $user->id }})"
-                                                        wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
-                                                        class="hover:cursor-pointer"
-                                                    >
-                                                        Delete
-                                                    </flux:button>
-                                                @else
-                                                    <flux:button
-                                                        size="sm"
-                                                        variant="subtle"
 
-                                                    >
-                                                        Delete
-                                                    </flux:button>
-                                                @endif
+                                            @can('update', $user)
+                                                <flux:button
+                                                    size="sm"
+                                                    variant="primary"
+                                                    color="indigo"
+                                                    href="{{ route('admin.users.edit', $user) }}"
+                                                    class="hover:cursor-pointer"
+                                                >
+                                                    Edit
+                                                </flux:button>
+                                            @else
+                                                <flux:button size="sm" variant="subtle" disabled>
+                                                    Edit
+                                                </flux:button>
+                                            @endcan
+
+                                            @can('delete', $user)
+                                                <flux:button
+                                                    size="sm"
+                                                    variant="danger"
+                                                    wire:click="delete({{ $user->id }})"
+                                                    wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
+                                                    class="hover:cursor-pointer"
+                                                >
+                                                    Delete
+                                                </flux:button>
+                                            @else
+                                                <flux:button size="sm" variant="subtle" disabled>
+                                                    Delete
+                                                </flux:button>
                                             @endcan
                                         </td>
                                     </tr>
