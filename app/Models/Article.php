@@ -54,6 +54,11 @@ class Article extends Model
         }
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     protected static function boot()
     {
         parent::boot();
