@@ -58,7 +58,7 @@
                 </div>
 
                 {{-- Actions --}}
-                @can('edit_users')
+                @can('update', $user)
                 <div class="flex justify-end">
                     <flux:button href="{{ route('admin.users.edit', $user) }}" wire:navigate>
                         {{ __('Edit User') }}
