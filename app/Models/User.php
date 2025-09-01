@@ -83,4 +83,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Actor::class);
     }
+
+    /**
+     * Get all of the Articles for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class);
+    }
 }
