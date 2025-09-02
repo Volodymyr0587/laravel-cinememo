@@ -78,7 +78,7 @@
             </flux:navbar>
 
             @php
-                $countArticles = App\Models\Article::where('is_publish', true)->count();
+                $countArticles = App\Models\Article::where('is_published', true)->count();
             @endphp
 
             <flux:navbar class="-mb-px max-lg:hidden">

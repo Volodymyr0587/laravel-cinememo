@@ -23,15 +23,17 @@ class Index extends Component
     public function delete($id)
     {
         try {
-            $article = Article::where('user_id', auth()->id())->findOrFail($id);
+            $article = Article::findOrFail($id);
+
+            $this->authorize('delete', $article);
+
             $article->removeAllImages();
             $article->delete();
 
-            session()->flash('message', "Article $article->name deleted successfully.");
+            session()->flash('message', "Article '{$article->title}' deleted successfully.");
         } catch (\Exception $e) {
-             session()->flash('message', $e->getMessage());
+            session()->flash('message', $e->getMessage());
         }
-
     }
 
 

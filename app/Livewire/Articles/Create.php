@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Articles;
 
+use App\Models\Article;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -33,7 +34,7 @@ class Create extends Component
 
     public function save()
     {
-        $this->authorize('create', User::class);
+        $this->authorize('create', Article::class);
 
         $this->validate();
 

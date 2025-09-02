@@ -37,6 +37,10 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article): bool
     {
+        if ($user->hasAnyRole(['admin', 'super_admin'])) {
+            return true;
+        }
+
         return $article->user->is($user) && $user->hasRole(['writer']);
     }
 

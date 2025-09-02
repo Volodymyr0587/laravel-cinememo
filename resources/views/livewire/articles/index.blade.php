@@ -26,7 +26,9 @@
             >
                {{ __('Export to PDF') }}
             </flux:button> --}}
+            @hasanyrole(['super_admin', 'writer'])
             <x-button href="{{ route('writer.articles.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Article') }}</x-button>
+            @endhasanyrole
         </div>
     </div>
 
@@ -104,14 +106,14 @@
                                         {{ $article->title }}
                                     </a>
 
-                                    @if ($article->birth_date)
+
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">Birth date:</span>
+                                        <span class="font-medium">{{ __("Written by") }}:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                                            {{ $article->formatted_birth_date }}
+                                            {{ $article->user->name }}
                                         </span>
                                     </div>
-                                    @endif
+
 
                                     @if ($article->birth_place)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
@@ -177,11 +179,17 @@
                                     @endif --}}
 
                                     <div class="flex justify-between items-center">
-                                        <flux:button href="{{ route('writer.articles.edit', $article) }}" wire:navigate>Edit</flux:button>
-                                        <x-button wire:click="delete({{ $article->id }})"
+                                        @can('update', $article)
+                                            <flux:button href="{{ route('writer.articles.edit', $article) }}" wire:navigate>Edit</flux:button>
+                                        @endcan
+
+                                        @can('delete', $article)
+                                             <x-button wire:click="delete({{ $article->id }})"
                                                 wire:confirm="Are you sure you want to delete this article? This action is irreversible."
                                                 color="red" type="submit"
                                                 >Delete</x-button>
+                                        @endcan
+
                                     </div>
                                 </div>
                             </div>
