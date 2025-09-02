@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Articles;
 use App\Livewire\Actors;
 use App\Livewire\Dashboard;
 use App\Livewire\ContentItems;
@@ -67,6 +68,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/actors/{actor}/edit', Actors\Edit::class)->name('actors.edit');
     Route::get('/actors/{actor}', Actors\Show::class)->name('actors.show');
 
+    // Articles Routes
+    Route::get('/articles', Articles\Index::class)->name('articles.index');
+    Route::get('articles/{article}', Articles\Show::class)->name('articles.show');
 
 });
 

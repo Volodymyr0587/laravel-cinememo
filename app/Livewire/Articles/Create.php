@@ -2,12 +2,75 @@
 
 namespace App\Livewire\Articles;
 
+use App\Models\User;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
+    public $title = '';
+    public $body = '';
+    public $is_published = false;
+    public $main_image;
+    public $additional_images = [];
+    public $tags = [];
+
+
+    protected function rules(): array
+    {
+        return [
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'is_published' => 'boolean',
+            'main_image' => 'nullable|image|max:2048',
+            'additional_images.*' => 'nullable|image|max:2048',
+            // 'tags' => 'array',
+            // 'tags.*' => 'exists:tags,id',
+        ];
+    }
+
+    public function save()
+    {
+        $this->authorize('create', User::class);
+
+        $this->validate();
+
+        // Створюємо Actor
+        $article = auth()->user()->articles()->create([
+            'title' => $this->title,
+            'body' => $this->body,
+        ]);
+
+        // Додаємо головне зображення через нову поліморфну систему
+        if ($this->main_image) {
+            $mainImagePath = $this->main_image->store('articles', 'public');
+            $article->addMainImage($mainImagePath);
+        }
+
+        // Додаємо додаткові зображення через нову поліморфну систему
+        foreach ($this->additional_images as $file) {
+            $path = $file->store('articles', 'public');
+            $article->addAdditionalImage($path);
+        }
+
+        // Зберігаємо tags
+        // if (!empty($this->tags)) {
+        //     $article->contentItems()->sync($this->tags);
+        // }
+
+        session()->flash('message', "Article $article->name has been added to your list of actors.");
+
+        return redirect()->route('articles.index');
+    }
+
     public function render()
     {
+        // $tags = Tag::where('user_id', auth()->id())
+        //     ->orderBy('name')
+        //     ->get();
+
         return view('livewire.articles.create');
     }
 }

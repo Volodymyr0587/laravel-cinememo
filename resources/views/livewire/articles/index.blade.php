@@ -177,7 +177,7 @@
                                     @endif --}}
 
                                     <div class="flex justify-between items-center">
-                                        <flux:button href="{{ route('articles.edit', $article) }}" wire:navigate>Edit</flux:button>
+                                        <flux:button href="{{ route('writer.articles.edit', $article) }}" wire:navigate>Edit</flux:button>
                                         <x-button wire:click="delete({{ $article->id }})"
                                                 wire:confirm="Are you sure you want to delete this article? This action is irreversible."
                                                 color="red" type="submit"
