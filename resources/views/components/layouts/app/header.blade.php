@@ -77,6 +77,16 @@
                 </flux:navbar.item>
             </flux:navbar>
 
+            @php
+                $countArticles = App\Models\Article::where('is_publish', true)->count();
+            @endphp
+
+            <flux:navbar class="-mb-px max-lg:hidden">
+                <flux:navbar.item icon="newspaper" :href="route('articles.index')" :current="request()->routeIs('articles.index')" wire:navigate>
+                    {{ __('layouts-app-header.articles') }} <flux:badge color="lime" size="sm" class="ml-1">{{ $countArticles }}</flux:badge>
+                </flux:navbar.item>
+            </flux:navbar>
+
             <flux:spacer />
             @php
                 $countTrashedContentItems = auth()->user()->contentItems()->onlyTrashed()->count();
@@ -199,6 +209,12 @@
                         <div class="flex items-center justify-between">
                             <span>{{ __('layouts-app-header.public-content') }}</span>
                             <flux:badge color="green" size="sm" class="ml-1">{{ $countPublicContentItems }}</flux:badge>
+                        </div>
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="newspaper" :href="route('articles.index')" :current="request()->routeIs('articles.index')" wire:navigate>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.articles') }}</span>
+                            <flux:badge color="lime" size="sm" class="ml-1">{{ $countArticles }}</flux:badge>
                         </div>
                     </flux:navlist.item>
                     <flux:navlist.item icon="trash" :href="route('content-items.trash')" :current="request()->routeIs('content-items.trash')" wire:navigate>

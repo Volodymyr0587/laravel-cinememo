@@ -7,6 +7,7 @@ return [
     "actors" => "Actors",
     "content" => "Content",
     "public-content" => "Public Content",
+    "articles" => "Blog",
     "trash" => "Trash",
     "settings" => "Settings",
     "log-out" => "Log Out",
