@@ -21,7 +21,13 @@ class ArticlePolicy
      */
     public function view(User $user, Article $article): bool
     {
-         return true; // anyone can view articles
+        if ($article->is_published) {
+            return true;
+        }
+
+        if ($user) {
+            return $article->user->is($user) || $user->hasRole(['admin','super_admin', 'writer']);
+        }
     }
 
     /**
