@@ -13,7 +13,9 @@ class Edit extends Component
     public Article $article;
 
     public $title;
-    public $body;
+    public $introduction;
+    public $main;
+    public $conclusion;
     public $is_published;
     public $main_image;
     public $additional_images = [];
@@ -33,7 +35,9 @@ class Edit extends Component
         $this->authorize('update', $article);
 
         $this->title = $article->title;
-        $this->body = $article->body;
+        $this->introduction = $article->introduction;
+        $this->main = $article->main;
+        $this->conclusion = $article->conclusion;
         $this->is_published = $article->is_published;
         // If you have tags relation
         // $this->tags = $article->tags()->pluck('id')->toArray();
@@ -43,7 +47,9 @@ class Edit extends Component
     {
         return [
             'title' => 'required|string|max:255',
-            'body' => 'required|string',
+            'introduction' => 'required|string',
+            'main' => 'required|string',
+            'conclusion' => 'nullable|string',
             'is_published' => 'boolean',
             'main_image' => 'nullable|image|max:2048',
             'additional_images.*' => 'nullable|image|max:2048',
@@ -58,17 +64,13 @@ class Edit extends Component
 
         $this->validate();
 
-        // Check if article becomes published for the first time
-        if ($this->is_published && ! $this->article->published_at) {
-            $this->article->published_at = now();
-        }
-
         // Оновлюємо дані статті
         $this->article->update([
             'title' => $this->title,
-            'body' => $this->body,
+            'introduction' => $this->introduction,
+            'main' => $this->main,
+            'conclusion' => $this->conclusion,
             'is_published' => $this->is_published,
-            'published_at' => $this->article->published_at,
         ]);
 
         // Якщо нове головне зображення

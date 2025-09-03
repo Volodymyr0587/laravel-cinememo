@@ -18,7 +18,9 @@ class Article extends Model
         'user_id',
         'title',
         'slug',
-        'body',
+        'introduction',
+        'main',
+        'conclusion',
         'is_published',
     ];
 
@@ -77,6 +79,14 @@ class Article extends Model
                 }
 
                 $article->slug = $slug;
+            }
+
+            if ($article->is_published && ! $article->published_at) {
+                $article->published_at = now();
+            }
+
+            if (! $article->is_published) {
+                $article->published_at = null;
             }
         });
 

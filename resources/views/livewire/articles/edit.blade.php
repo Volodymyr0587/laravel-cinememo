@@ -22,7 +22,15 @@
                         </div>
 
                         <div class="mt-4">
-                            <flux:textarea wire:model="body" :label="__('Body')" id="body" rows="10"></flux:textarea>
+                            <flux:textarea wire:model="introduction" :label="__('Introduction')" id="introduction" rows="10"></flux:textarea>
+                        </div>
+
+                        <div class="mt-4">
+                            <flux:textarea wire:model="main" :label="__('Main')" id="main" rows="10"></flux:textarea>
+                        </div>
+
+                        <div class="mt-4">
+                            <flux:textarea wire:model="conclusion" :label="__('Conclusion') . ' *'" id="conclusion" rows="10"></flux:textarea>
                         </div>
 
                         @hasanyrole(['super_admin', 'admin'])

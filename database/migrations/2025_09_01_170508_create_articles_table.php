@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->string('slug');
-            $table->text('body');
+            $table->text('introduction');
+            $table->text('main');
+            $table->text('conclusion')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();

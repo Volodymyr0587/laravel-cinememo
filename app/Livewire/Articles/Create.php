@@ -11,7 +11,9 @@ class Create extends Component
     use WithFileUploads;
 
     public $title = '';
-    public $body = '';
+    public $introduction = '';
+    public $main = '';
+    public $conclusion = '';
     public $is_published = false;
     public $main_image;
     public $additional_images = [];
@@ -22,7 +24,9 @@ class Create extends Component
     {
         return [
             'title' => 'required|string|max:255',
-            'body' => 'required|string',
+            'introduction' => 'required|string',
+            'main' => 'required|string',
+            'conclusion' => 'nullable|string',
             'is_published' => 'boolean',
             'main_image' => 'nullable|image|max:2048',
             'additional_images.*' => 'nullable|image|max:2048',
@@ -40,9 +44,10 @@ class Create extends Component
         // Створюємо Article
         $article = auth()->user()->articles()->create([
             'title' => $this->title,
-            'body' => $this->body,
+            'introduction' => $this->introduction,
+            'main' => $this->main,
+            'conclusion' => $this->conclusion,
             'is_published' => $this->is_published,
-            'published_at' => $this->is_published ? now() : null,
         ]);
 
         // Додаємо головне зображення через нову поліморфну систему
