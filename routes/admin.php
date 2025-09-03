@@ -17,7 +17,7 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
                 Route::get('roles/create', Admin\Roles\Create::class)->name('roles.create');
                 Route::get('roles/{role}/edit', Admin\Roles\Edit::class)->name('roles.edit');
 
-                Route::get('articles', Articles\Deleted::class)->name('articles.deleted');
+                Route::get('articles/deleted', Articles\Deleted::class)->name('articles.deleted');
             }
         );
 });
