@@ -37,7 +37,7 @@ class Published extends Component
         $articles = $query->orderBy('updated_at', 'desc')
                         ->paginate(8)->withQueryString();
 
-        $authors = User::role('writer')->get();
+        $authors = User::role(['writer', 'admin', 'super_admin'])->get();
 
         // $contentItems = auth()->user()->contentItems()->get();
         return view('livewire.articles.published', compact('articles', 'authors'));

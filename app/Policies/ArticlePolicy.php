@@ -29,7 +29,7 @@ class ArticlePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['writer']);
+        return $user->hasRole(['super_admin', 'writer']);
     }
 
     /**

@@ -27,15 +27,20 @@
                             <flux:textarea wire:model="body" :label="__('Body')" id="body" rows="10"></flux:textarea>
                         </div>
 
-                        <div class="mt-4">
-                        <flux:field variant="inline">
-                            <flux:checkbox wire:model="is_published" />
-
-                            <flux:label>Publish article</flux:label>
-
-                            <flux:error name="is_published" />
-                        </flux:field>
-                        </div>
+                        @hasanyrole(['super_admin', 'admin'])
+                            <div class="mt-4">
+                                <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">{{ __("Publish article") }}</p>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox"
+                                        wire:model="is_published"
+                                        class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
+                                    <div class="grid grid-cols-1">
+                                        <span class="text-gray-700 dark:text-white text-sm">{{ __("Make Public") }}</span>
+                                        <span class="text-xs italic">(Other users will be able to view this content and leave comments)</span>
+                                    </div>
+                                </label>
+                            </div>
+                        @endhasanyrole
 
                         <div class="mt-4">
                             <flux:input

@@ -3,7 +3,6 @@
 namespace App\Livewire\Articles;
 
 use App\Models\Article;
-use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -38,10 +37,11 @@ class Create extends Component
 
         $this->validate();
 
-        // Створюємо Actor
+        // Створюємо Article
         $article = auth()->user()->articles()->create([
             'title' => $this->title,
             'body' => $this->body,
+            'is_published' => $this->is_published,
         ]);
 
         // Додаємо головне зображення через нову поліморфну систему
@@ -63,7 +63,7 @@ class Create extends Component
 
         session()->flash('message', "Article $article->name has been added to your list of actors.");
 
-        return redirect()->route('articles.index');
+        return redirect()->route('writer.articles.index');
     }
 
     public function render()

@@ -160,7 +160,7 @@
 
                     @hasrole('writer|admin|super_admin')
                         <flux:menu.radio.group>
-                            <flux:menu.item :href="route('writer.articles.index')" icon="user" wire:navigate>{{ __('layouts-app-header.articles-management') }}</flux:menu.item>
+                            <flux:menu.item :href="route('writer.articles.index')" icon="newspaper" wire:navigate>{{ __('layouts-app-header.articles-management') }}</flux:menu.item>
                         </flux:menu.radio.group>
 
                         <flux:menu.separator />

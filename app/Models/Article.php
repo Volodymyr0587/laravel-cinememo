@@ -84,4 +84,8 @@ class Article extends Model
             $article->comments()->delete();
         });
     }
+
+    protected $casts = [
+        'is_published' => 'boolean',
+    ];
 }

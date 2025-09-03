@@ -3,14 +3,14 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Articles') }} - {{ __("Manage your articles as an author") }}
-            {{-- @if($contentItemFilter || $search)
+            @if($authorFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
                     class="ml-2 hover:cursor-pointer"
                 >
                     {{ __('Clear filters') }}
                 </flux:button>
-            @endif --}}
+            @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
             {{-- <flux:button
@@ -26,6 +26,17 @@
             >
                {{ __('Export to PDF') }}
             </flux:button> --}}
+
+            @hasanyrole(['super_admin', 'admin'])
+            <flux:button
+                :href="route('admin.articles.deleted')" class="order-3 sm:order-none"
+                icon:trailing="trash"
+                wire:navigate
+            >
+               {{ __('View Deleted Articles') }}
+            </flux:button>
+            @endhasanyrole
+
             @hasanyrole(['super_admin', 'writer'])
             <x-button href="{{ route('writer.articles.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Article') }}</x-button>
             @endhasanyrole
@@ -114,6 +125,32 @@
                                         </span>
                                     </div>
 
+                                    <div class="flex items-center justify-between text-sm mt-2 mb-3">
+                                        <span class="font-medium text-gray-600 dark:text-white">{{ __("Visibility") }}:</span>
+                                        <span
+                                        @class([
+                                            'px-2 py-1 rounded text-xs font-bold hover:cursor-pointer',
+                                            'bg-green-500 text-white'  => $article->is_published == true,
+                                            'bg-gray-500 text-white'   => $article->is_published == false,
+                                        ])>
+                                            {{ $article->is_published ? 'published' : 'under review' }}
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("Created at") }}:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ $article->created_at }}
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("Updated at") }}:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ $article->updated_at }}
+                                        </span>
+                                    </div>
+
 
                                     @if ($article->birth_place)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
@@ -185,7 +222,7 @@
 
                                         @can('delete', $article)
                                              <x-button wire:click="delete({{ $article->id }})"
-                                                wire:confirm="Are you sure you want to delete this article? This action is irreversible."
+                                                wire:confirm="Are you sure you want to delete this article?"
                                                 color="red" type="submit"
                                                 >Delete</x-button>
                                         @endcan
