@@ -13,4 +13,5 @@ return [
     "log-out" => "Вийти",
     "user-management" => "Керування користувачами",
     "roles-management" => "Керування ролями",
+    "articles-management" => "Керування статтями",
 ];

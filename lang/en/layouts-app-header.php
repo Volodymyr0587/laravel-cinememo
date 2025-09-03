@@ -12,5 +12,6 @@ return [
     "settings" => "Settings",
     "log-out" => "Log Out",
     "user-management" => "User management",
-    "roles-management" => "Roles management"
+    "roles-management" => "Roles management",
+    "articles-management" => "Articles management",
 ];

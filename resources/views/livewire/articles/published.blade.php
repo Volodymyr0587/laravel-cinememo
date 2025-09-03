@@ -2,7 +2,7 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Articles') }} - {{ __("Manage your articles as an author") }}
+            {{ __('Articles') }}
             {{-- @if($contentItemFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
@@ -63,6 +63,14 @@
                                 <option value="">All Statuses</option>
                                 @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
                                     <option value="{{ $value }}">{{ __($label) }}</option>
+                                @endforeach
+                            </flux:select>
+                        </div> --}}
+                        {{-- <div>
+                            <flux:select wire:model.live="contentItemFilter" :label="__('Content')">
+                                <option value="">All Content</option>
+                                @foreach($contentItems as $contentItem)
+                                    <option value="{{ $contentItem->id }}">{{ $contentItem->title }}</option>
                                 @endforeach
                             </flux:select>
                         </div> --}}
@@ -178,7 +186,7 @@
                                         </p>
                                     @endif --}}
 
-                                    <div class="flex justify-between items-center">
+                                    {{-- <div class="flex justify-between items-center">
                                         @can('update', $article)
                                             <flux:button href="{{ route('writer.articles.edit', $article) }}" wire:navigate>Edit</flux:button>
                                         @endcan
@@ -190,7 +198,7 @@
                                                 >Delete</x-button>
                                         @endcan
 
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         @empty

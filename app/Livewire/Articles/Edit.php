@@ -84,7 +84,7 @@ class Edit extends Component
 
         session()->flash('message', "Article {$this->article->title} updated successfully.");
 
-        return redirect()->route('articles.index');
+        return redirect()->route('writer.articles.index');
     }
 
 

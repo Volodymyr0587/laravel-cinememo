@@ -7,7 +7,7 @@ use App\Models\Article;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Published extends Component
 {
     use WithPagination;
 
@@ -20,27 +20,9 @@ class Index extends Component
         $this->authorFilter = '';
     }
 
-
-    public function delete($id)
-    {
-        try {
-            $article = Article::findOrFail($id);
-
-            $this->authorize('delete', $article);
-
-            $article->removeAllImages();
-            $article->delete();
-
-            session()->flash('message', "Article '{$article->title}' deleted successfully.");
-        } catch (\Exception $e) {
-            session()->flash('message', $e->getMessage());
-        }
-    }
-
-
     public function render()
     {
-        $query = Article::with(['user']);
+        $query = Article::with(['user'])->where('is_published', true);
 
         if ($this->search) {
             $query->where('title', 'like', '%' . $this->search . '%');
@@ -55,10 +37,9 @@ class Index extends Component
         $articles = $query->orderBy('updated_at', 'desc')
                         ->paginate(8)->withQueryString();
 
-        // Get users with writer role
         $authors = User::role('writer')->get();
 
-        return view('livewire.articles.index', compact('articles', 'authors'));
+        // $contentItems = auth()->user()->contentItems()->get();
+        return view('livewire.articles.published', compact('articles', 'authors'));
     }
-
 }

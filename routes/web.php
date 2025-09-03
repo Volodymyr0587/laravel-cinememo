@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/actors/{actor}', Actors\Show::class)->name('actors.show');
 
     // Articles Routes
-    Route::get('/articles', Articles\Index::class)->name('articles.index');
+    Route::get('/articles', Articles\Published::class)->name('articles.index');
     Route::get('articles/{article}', Articles\Show::class)->name('articles.show');
 
 });

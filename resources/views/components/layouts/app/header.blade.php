@@ -158,6 +158,14 @@
 
                     @endhasanyrole
 
+                    @hasrole('writer|admin|super_admin')
+                        <flux:menu.radio.group>
+                            <flux:menu.item :href="route('writer.articles.index')" icon="user" wire:navigate>{{ __('layouts-app-header.articles-management') }}</flux:menu.item>
+                        </flux:menu.radio.group>
+
+                        <flux:menu.separator />
+                    @endhasrole
+
                     <flux:menu.radio.group>
                         <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('layouts-app-header.settings') }}</flux:menu.item>
                     </flux:menu.radio.group>
