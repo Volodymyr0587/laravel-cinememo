@@ -42,6 +42,7 @@ class Create extends Component
             'title' => $this->title,
             'body' => $this->body,
             'is_published' => $this->is_published,
+            'published_at' => $this->is_published ? now() : null,
         ]);
 
         // Додаємо головне зображення через нову поліморфну систему

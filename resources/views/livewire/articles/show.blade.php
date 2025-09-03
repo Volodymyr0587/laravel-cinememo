@@ -25,79 +25,10 @@
                 <div class="grow">
                     <div class="flex justify-between items-center gap-x-2">
                         <div>
-                            <!-- Tooltip -->
-                            <div class="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
-                                <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">
-                                        Leyla Ludic
-                                    </span>
-
-                                    <!-- Dropdown Card -->
-                                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-neutral-950 dark:divide-neutral-700"
-                                        role="tooltip">
-                                        <!-- Body -->
-                                        <div class="p-4 sm:p-5">
-                                            <div class="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                                                <div class="shrink-0">
-                                                    <img class="size-8 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                                                        alt="Avatar">
-                                                </div>
-
-                                                <div class="grow">
-                                                    <p
-                                                        class="text-lg font-semibold text-gray-200 dark:text-neutral-200">
-                                                        Leyla Ludic
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <p class="text-sm text-gray-400 dark:text-neutral-400">
-                                                Leyla is a Customer Success Specialist at Preline and spends her time
-                                                speaking to in-house recruiters all over the world.
-                                            </p>
-                                        </div>
-                                        <!-- End Body -->
-
-                                        <!-- Footer -->
-                                        <div class="flex justify-between items-center px-4 py-3 sm:px-5">
-                                            <ul class="text-xs space-x-3">
-                                                <li class="inline-block">
-                                                    <span
-                                                        class="font-semibold text-gray-200 dark:text-neutral-200">56</span>
-                                                    <span class="text-gray-400 dark:text-neutral-400">articles</span>
-                                                </li>
-                                                <li class="inline-block">
-                                                    <span
-                                                        class="font-semibold text-gray-200 dark:text-neutral-200">1k+</span>
-                                                    <span class="text-gray-400 dark:text-neutral-400">followers</span>
-                                                </li>
-                                            </ul>
-
-                                            <div>
-                                                <button type="button"
-                                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                                    </svg>
-                                                    Follow
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <!-- End Footer -->
-                                    </div>
-                                    <!-- End Dropdown Card -->
-                                </div>
-                            </div>
-                            <!-- End Tooltip -->
-
                             <ul class="text-xs text-gray-500 dark:text-neutral-500">
                                 <li
                                     class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                                    Jan 18
+                                    {{ $article->published_at ? $article->published_at->format('Y-M-d H:m:i') : 'under review' }}
                                 </li>
                                 <li
                                     class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
@@ -128,7 +59,7 @@
         <!-- Content -->
         <div class="space-y-5 md:space-y-8">
             <div class="space-y-3">
-                <h2 class="text-2xl font-bold md:text-3xl dark:text-white">Announcing a free plan for small teams</h2>
+                <h2 class="text-2xl font-bold md:text-3xl dark:text-white">{{ $article->title }}</h2>
 
                 <p class="text-lg text-gray-800 dark:text-neutral-200">At preline, our mission has always been focused
                     on bringing openness and transparency to the design process. We've always believed that by providing
@@ -140,11 +71,25 @@
                 culture and to continue building a product that supports this vision.</p>
 
             <figure>
-                <img class="w-full object-cover rounded-xl"
-                    src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
-                    alt="Blog Image">
+                @php
+                    $defaultImagePath = public_path('images/default-article.png');
+                @endphp
+
+                @if($article->main_image_url)
+                    <img src="{{ $article->main_image_url }}" alt="{{ $article->title }}"
+                        class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
+                @else
+                    @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
+                        <img src="{{ asset('images/default-article.png') }}" alt="{{ $article->title }}"
+                            class="w-full object-cover rounded-xl transition duration-300 ease-in-out hover:scale-110">
+                    @else
+                        <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
+                            <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                        </div>
+                    @endif
+                @endif
                 <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-                    A woman sitting at a table.
+                    {{ $article->title }}
                 </figcaption>
             </figure>
 

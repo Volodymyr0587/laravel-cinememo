@@ -58,21 +58,27 @@ class Edit extends Component
 
         $this->validate();
 
+        // Check if article becomes published for the first time
+        if ($this->is_published && ! $this->article->published_at) {
+            $this->article->published_at = now();
+        }
+
         // Оновлюємо дані статті
         $this->article->update([
             'title' => $this->title,
             'body' => $this->body,
             'is_published' => $this->is_published,
+            'published_at' => $this->article->published_at,
         ]);
 
         // Якщо нове головне зображення
-        if ($this->main_image) {
-            $mainImagePath = $this->main_image->store('articles', 'public');
+        if ($this->new_main_image) {
+            $mainImagePath = $this->new_main_image->store('articles', 'public');
             $this->article->addMainImage($mainImagePath); // другий параметр можна зробити щоб заміняти
         }
 
         // Додаємо додаткові зображення
-        foreach ($this->additional_images as $file) {
+        foreach ($this->newAdditionalImages as $file) {
             $path = $file->store('articles', 'public');
             $this->article->addAdditionalImage($path);
         }
@@ -95,9 +101,9 @@ class Edit extends Component
 
     public function removeMainImage()
     {
-        $this->actor->removeMainImage();
+        $this->article->removeMainImage();
         $this->confirmingMainImageRemoval = false;
-        $this->actor->refresh();
+        $this->article->refresh();
 
         session()->flash('message', 'Main image removed successfully.');
     }
@@ -110,10 +116,10 @@ class Edit extends Component
 
     public function deleteAdditionalImageConfirmed()
     {
-        $this->actor->removeAdditionalImage($this->imageIdToRemove);
+        $this->article->removeAdditionalImage($this->imageIdToRemove);
 
         $this->reset(['confirmingImageRemoval', 'imageIdToRemove']);
-        $this->actor->refresh();
+        $this->article->refresh();
 
         session()->flash('message', 'Additional image removed successfully.');
     }
