@@ -16,10 +16,15 @@
         <!-- Avatar Media -->
         <div class="flex justify-between items-center mb-6">
             <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                <div class="shrink-0">
-                    <img class="size-12 rounded-full"
-                        src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                        alt="Avatar">
+                <div>
+                    @if ($article->user->profile_image)
+                        <flux:avatar
+                            name="{{ $article->user->name }}"
+                            src="{{ Storage::url($article->user->profile_image) }}"
+                        />
+                    @else
+                        <flux:avatar name="{{ $article->user->name }}" />
+                    @endif
                 </div>
 
                 <div class="grow">
