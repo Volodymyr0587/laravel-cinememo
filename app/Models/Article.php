@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -60,6 +61,18 @@ class Article extends Model
     {
         return 'slug';
     }
+
+
+    public function getReadingTimeAttribute(): int
+    {
+        $text = strip_tags("{$this->introduction} {$this->main} {$this->conclusion}");
+        preg_match_all('/\p{L}+/u', $text, $matches);
+
+        $wordCount = count($matches[0]);
+
+        return max(1, ceil($wordCount / 200));
+    }
+
 
     protected static function boot()
     {
