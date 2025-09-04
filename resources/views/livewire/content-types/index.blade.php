@@ -3,6 +3,15 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Categories') }}
+            @if($search)
+                <flux:button
+                    wire:click.prevent="clearFilters"
+                    wire:key="index-content-types-clear-filters-btn"
+                    class="ml-2 hover:cursor-pointer"
+                >
+                    {{ __('Clear filters') }}
+                </flux:button>
+            @endif
         </h2>
         <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('Add New Category') }}</x-button>
     </div>
@@ -36,7 +45,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 @forelse($contentTypes as $contentType)
-                                    <tr>
+                                    <tr wire:key="content-type-{{ $contentType->id }}">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                             <span class="px-2 py-1 rounded text-xs font-bold" style="background-color: {{ $contentType->color }}">
                                                 {{ $contentType->name }}

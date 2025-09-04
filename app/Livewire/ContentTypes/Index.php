@@ -12,8 +12,18 @@ class Index extends Component
 
     public $search = '';
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+
     public function updatingSearch()
     {
+        $this->resetPage();
+    }
+
+    public function clearFilters(): void
+    {
+        $this->search = '';
         $this->resetPage();
     }
 
