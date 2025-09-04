@@ -56,7 +56,7 @@ class Index extends Component
                         ->paginate(8)->withQueryString();
 
         // Get users with writer role
-        $authors = User::role('writer')->get();
+        $authors = User::role(['writer', 'admin', 'super_admin'])->get();
 
         return view('livewire.articles.index', compact('articles', 'authors'));
     }
