@@ -101,12 +101,11 @@
                                         </p>
                                     @endif
 
-                                    @can('like', $contentItem)
                                     <livewire:content-items.like-button
                                         :likeable="$contentItem"
                                         :key="'like-button-content-' . $contentItem->id"
                                     />
-                                    @endcan
+
                                 </div>
                             </div>
                         @empty

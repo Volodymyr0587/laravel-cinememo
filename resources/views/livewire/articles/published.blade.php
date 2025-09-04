@@ -146,7 +146,10 @@
                                         </span>
                                     </div>
 
-
+                                    <livewire:content-items.like-button
+                                        :likeable="$article"
+                                        :key="'like-button-content-' . $article->id"
+                                    />
 
                                     {{-- <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
                                         <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("Known for") }}:</span>

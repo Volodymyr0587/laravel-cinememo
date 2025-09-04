@@ -1,15 +1,19 @@
 <div>
-    <flux:button
+    <button
         wire:click="toggleLike"
-        class="flex items-center gap-1 hover:cursor-pointer transition-colors duration-200"
+        {{ $canLike ? '' : 'disabled' }}
+        class="flex items-center gap-1 transition-colors duration-200 text-sm
+               {{ $canLike ? 'hover:cursor-pointer' : 'opacity-50 cursor-not-allowed' }}"
     >
         <div class="flex items-center gap-x-2">
             <flux:icon.heart
                 variant="{{ $isLiked ? 'solid' : 'outline' }}"
-                class="w-5 h-5 {{ $isLiked ? 'text-red-500 font-bold' : 'text-gray-500 hover:text-red-400' }}"
+                class="w-5 h-5 {{ $isLiked ? 'text-red-500 font-bold' : 'text-gray-500' }}"
             />
 
             <span>{{ $likesCount }}</span>
         </div>
-    </flux:button>
+    </button>
 </div>
+
+

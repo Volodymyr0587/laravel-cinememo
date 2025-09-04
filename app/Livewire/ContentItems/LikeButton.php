@@ -12,10 +12,14 @@ class LikeButton extends Component
     public Model $likeable; // generic
     public $likesCount;
     public $isLiked = false;
+    public $canLike = false;
 
     public function mount()
     {
         $this->loadLikeData();
+
+        $user = Auth::user();
+        $this->canLike = $user ? $user->can('like', $this->likeable) : false;
     }
 
     private function loadLikeData()
