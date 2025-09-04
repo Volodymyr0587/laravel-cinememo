@@ -46,6 +46,16 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Roles') }}
+
+            @if($search)
+                <flux:button
+                    wire:click.prevent="clearFilters"
+                    wire:key="index-roles-clear-filters-btn"
+                    class="ml-2 hover:cursor-pointer"
+                >
+                    {{ __('Clear filters') }}
+                </flux:button>
+            @endif
         </h2>
         <x-button href="{{ route('admin.roles.create') }}" wire:navigate>{{ __('Add New Role') }}</x-button>
     </div>
@@ -78,7 +88,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 @forelse($roles as $role)
-                                    <tr>
+                                    <tr wire:key="role-{{ $role->id }}">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                             <span class="px-2 py-1 rounded text-xs font-bold" style="background-color: {{ $role->color }}">
                                                 {{ $role->name }}

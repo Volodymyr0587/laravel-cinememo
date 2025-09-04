@@ -14,6 +14,23 @@ class Index extends Component
     public $confirmingDelete = false;
     public ?Role $roleToDelete = null;
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+
+    // reset pagination when changing filters
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function clearFilters(): void
+    {
+        $this->search = '';
+        $this->resetPage();
+    }
+
+
     public function confirmDelete($roleId)
     {
         $this->roleToDelete = Role::find($roleId); // find role by ID
@@ -44,7 +61,7 @@ class Index extends Component
             $query->where('name', 'like', "%{$this->search}%");
         }
 
-        $roles = $query->latest()->paginate(10);
+        $roles = $query->latest()->paginate(10)->withQueryString();
 
         return view('livewire.admin.roles.index', compact('roles'));
     }
