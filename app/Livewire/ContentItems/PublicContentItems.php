@@ -6,55 +6,24 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\ContentItem;
 use App\Models\ContentType;
-use Livewire\Attributes\On;
 
 class PublicContentItems extends Component
 {
     use WithPagination;
 
     public $search = '';
-    public $contentTypeFilter = '';
+    public $publicContentTypeFilter = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'contentTypeFilter' => ['except' => ''],
+        'publicContentTypeFilter' => ['except' => ''],
     ];
-
-    // Додаємо властивість для примусового оновлення
-    public $refreshKey = 0;
 
     public function clearFilters(): void
     {
         $this->search = '';
-        $this->contentTypeFilter = '';
-        $this->resetPage(); // Важливо: скидаємо пагінацію
-        $this->refreshKey++; // Примусово оновлюємо компонент
-
-        // Повідомляємо всі дочірні компоненти про необхідність оновлення
-        $this->dispatch('refresh-likes');
-    }
-
-    // Додаємо методи для автоматичного скидання пагінації при зміні фільтрів
-    public function updatedSearch(): void
-    {
+        $this->publicContentTypeFilter = '';
         $this->resetPage();
-        $this->refreshKey++;
-        $this->dispatch('refresh-likes');
-    }
-
-    public function updatedContentTypeFilter(): void
-    {
-        $this->resetPage();
-        $this->refreshKey++;
-        $this->dispatch('refresh-likes');
-    }
-
-    // Слухач для оновлення з дочірніх компонентів
-    #[On('like-updated')]
-    public function handleLikeUpdate($likeableId = null)
-    {
-        // Можна додати додаткову логіку якщо потрібно
-        $this->refreshKey++;
     }
 
     public function render()
@@ -66,8 +35,8 @@ class PublicContentItems extends Component
             $query->where('title', 'like', '%' . $this->search . '%');
         }
 
-        if ($this->contentTypeFilter) {
-            $query->where('content_type_id', $this->contentTypeFilter);
+        if ($this->publicContentTypeFilter) {
+            $query->where('content_type_id', $this->publicContentTypeFilter);
         }
 
         // Додаємо likes_count з уникненням конфліктів кешування
@@ -75,7 +44,8 @@ class PublicContentItems extends Component
             $query->selectRaw('count(*)');
         }]);
 
-        $contentItems = $query->latest('created_at')->paginate(8);
+        $contentItems = $query->latest('created_at')->paginate(8)
+            ->withQueryString();
 
         $contentTypes = ContentType::select('id','name','color')
             ->whereHas('contentItems', fn($q) => $q->where('is_public', true))

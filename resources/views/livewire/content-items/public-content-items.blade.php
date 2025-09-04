@@ -3,9 +3,10 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Public Content Items') }}
-            @if($contentTypeFilter || $search)
+            @if($publicContentTypeFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
+                    wire:key="public-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
                     {{ __('Clear filters') }}
@@ -35,7 +36,7 @@
                         </div>
                         <div>
                             <flux:select
-                                wire:model.live="contentTypeFilter"
+                                wire:model.live="publicContentTypeFilter"
                                 :label="__('Category')"
                             >
                                 <option value="">{{ __('All Categories') }}</option>
@@ -49,7 +50,7 @@
                     <!-- Content Items Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($contentItems as $contentItem)
-                            <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
+                            <div wire:key="public-content-item-{{ $contentItem->id }}" class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
                                 <a href="{{ route('content-items.show', [$contentItem, 'from' => request()->route()->getName()]) }}"  wire:navigate>
                                     @php
                                         $defaultImagePath = public_path('images/default-content.png');
@@ -79,7 +80,7 @@
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
                                         <span class="font-medium">Category:</span>
-                                        <span wire:click="$set('contentTypeFilter', '{{ $contentItem->contentType->id }}')"
+                                        <span wire:click="$set('publicContentTypeFilter', '{{ $contentItem->contentType->id }}')"
                                             class="px-2 py-1 rounded text-white font-bold hover:cursor-pointer"
                                             style="background-color: {{ $contentItem->contentType->color }}">
                                             {{ $contentItem->contentType->name }}

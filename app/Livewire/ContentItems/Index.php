@@ -18,6 +18,12 @@ class Index extends Component
     public $contentTypeFilter = '';
     public $genreFilter = '';
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'statusFilter' => ['except' => ''],
+        'contentTypeFilter' => ['except' => ''],
+        'genreFilter' => ['except' => ''],
+    ];
 
     public function updatingSearch()
     {
@@ -40,6 +46,7 @@ class Index extends Component
         $this->contentTypeFilter = '';
         $this->search = '';
         $this->genreFilter = '';
+        $this->resetPage();
     }
 
     public function delete($id)
