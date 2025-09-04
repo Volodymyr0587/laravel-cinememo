@@ -5,7 +5,7 @@
             {{ __('Content Items') }}
             @if($statusFilter || $contentTypeFilter || $genreFilter || $search)
                 <flux:button
-                    wire:click="clearFilters"
+                    wire:click.prevent="clearFilters"
                     wire:key="index-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >

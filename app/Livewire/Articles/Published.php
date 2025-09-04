@@ -12,12 +12,29 @@ class Published extends Component
     use WithPagination;
 
     public $search = '';
-    public $authorFilter = '';
+    public $publishedAuthorFilter = '';
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'publishedAuthorFilter' => ['except' => ''],
+    ];
+
+    // reset pagination when changing filters
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPublishedAuthorFilter(): void
+    {
+        $this->resetPage();
+    }
 
     public function clearFilters(): void
     {
         $this->search = '';
-        $this->authorFilter = '';
+        $this->publishedAuthorFilter = '';
+        $this->resetPage();
     }
 
     public function render()
@@ -28,9 +45,9 @@ class Published extends Component
             $query->where('title', 'like', '%' . $this->search . '%');
         }
 
-        if ($this->authorFilter) {
+        if ($this->publishedAuthorFilter) {
             $query->whereHas('user', function ($q) {
-                $q->where('id', $this->authorFilter);
+                $q->where('id', $this->publishedAuthorFilter);
             });
         }
 

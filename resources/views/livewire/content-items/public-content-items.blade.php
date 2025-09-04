@@ -5,7 +5,7 @@
             {{ __('Public Content Items') }}
             @if($publicContentTypeFilter || $search)
                 <flux:button
-                    wire:click="clearFilters"
+                    wire:click.prevent="clearFilters"
                     wire:key="public-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >

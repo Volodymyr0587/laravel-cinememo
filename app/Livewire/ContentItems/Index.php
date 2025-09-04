@@ -25,6 +25,7 @@ class Index extends Component
         'genreFilter' => ['except' => ''],
     ];
 
+    // reset pagination when changing filters
     public function updatingSearch()
     {
         $this->resetPage();

@@ -5,8 +5,9 @@
             {{ __('Articles') }} - {{ __("Manage your articles as an author") }}
             @if($authorFilter || $search)
                 <flux:button
-                    wire:click="clearFilters"
+                    wire:click.prevent="clearFilters"
                     class="ml-2 hover:cursor-pointer"
+                    wire:key="articles-clear-filters-btn"
                 >
                     {{ __('Clear filters') }}
                 </flux:button>
@@ -90,7 +91,7 @@
                     <!-- Articles Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($articles as $article)
-                            <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
+                            <div wire:key="article-{{ $article->id }}" class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
                                 <a href="{{ route('articles.show', $article) }}"  wire:navigate>
                                     @php
                                         $defaultImagePath = public_path('images/default-article.png');

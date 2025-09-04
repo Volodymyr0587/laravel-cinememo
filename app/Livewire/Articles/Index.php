@@ -14,10 +14,27 @@ class Index extends Component
     public $search = '';
     public $authorFilter = '';
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'authorFilter' => ['except' => ''],
+    ];
+
+    // reset pagination when changing filters
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatingAuthorFilter(): void
+    {
+        $this->resetPage();
+    }
+
     public function clearFilters(): void
     {
         $this->search = '';
         $this->authorFilter = '';
+        $this->resetPage();
     }
 
 

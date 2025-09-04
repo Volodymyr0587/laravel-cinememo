@@ -3,9 +3,10 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Articles') }}
-            @if($authorFilter || $search)
+            @if($publishedAuthorFilter || $search)
                 <flux:button
-                    wire:click="clearFilters"
+                    wire:click.prevent="clearFilters"
+                    wire:key="published-articles-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
                     {{ __('Clear filters') }}
@@ -75,7 +76,7 @@
                             </flux:select>
                         </div> --}}
                         <div>
-                            <flux:select wire:model.live="authorFilter" :label="__('Authors')">
+                            <flux:select wire:model.live="publishedAuthorFilter" :label="__('Authors')">
                                 <option value="">All authors</option>
                                 @foreach($authors as $author)
                                     <option value="{{ $author->id }}">{{ $author->name }}</option>
@@ -87,7 +88,7 @@
                     <!-- Articles Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($articles as $article)
-                            <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
+                            <div wire:key="published-article-{{ $article->id }}" class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
                                 <a href="{{ route('articles.show', $article) }}"  wire:navigate>
                                     @php
                                         $defaultImagePath = public_path('images/default-article.png');

@@ -19,6 +19,17 @@ class PublicContentItems extends Component
         'publicContentTypeFilter' => ['except' => ''],
     ];
 
+    // reset pagination when changing filters
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPublicContentTypeFilter()
+    {
+        $this->resetPage();
+    }
+
     public function clearFilters(): void
     {
         $this->search = '';
