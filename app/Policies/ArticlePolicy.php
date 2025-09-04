@@ -73,4 +73,9 @@ class ArticlePolicy
     {
         return $user->hasAnyRole(['admin', 'super_admin']);
     }
+
+    public function like(User $user, Article $article): bool
+    {
+        return $article->is_published && $article->user_id !== $user->id;
+    }
 }

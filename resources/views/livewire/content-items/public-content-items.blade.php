@@ -102,9 +102,9 @@
                                     @endif
 
                                     @can('like', $contentItem)
-                                   <livewire:content-items.like-button
-                                        :contentItem="$contentItem"
-                                        :key="'like-button-' . $contentItem->id . '-' . $refreshKey"
+                                    <livewire:content-items.like-button
+                                        :likeable="$contentItem"
+                                        :key="'like-button-content-' . $contentItem->id"
                                     />
                                     @endcan
                                 </div>

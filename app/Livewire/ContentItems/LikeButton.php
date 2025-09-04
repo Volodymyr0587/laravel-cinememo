@@ -3,13 +3,13 @@
 namespace App\Livewire\ContentItems;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use App\Models\ContentItem;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 
 class LikeButton extends Component
 {
-    public ContentItem $contentItem;
+    public Model $likeable; // generic
     public $likesCount;
     public $isLiked = false;
 
@@ -21,31 +21,31 @@ class LikeButton extends Component
     private function loadLikeData()
     {
         // Завжди перезавантажуємо свіжі дані з бази
-        $this->contentItem->loadCount('likes');
-        $this->likesCount = $this->contentItem->likes_count;
+        $this->likeable->loadCount('likes');
+        $this->likesCount = $this->likeable->likes_count;
 
         $user = Auth::user();
-        $this->isLiked = $user ? $this->contentItem->isLikedBy($user) : false;
+        $this->isLiked = $user ? $this->likeable->isLikedBy($user) : false;
     }
 
     public function toggleLike()
     {
         // Перевірка політики
-        $this->authorize('like', $this->contentItem);
+        $this->authorize('like', $this->likeable);
 
         $user = Auth::user();
 
-        if ($this->contentItem->isLikedBy($user)) {
-            $this->contentItem->likes()->where('user_id', $user->id)->delete();
+        if ($this->likeable->isLikedBy($user)) {
+            $this->likeable->likes()->where('user_id', $user->id)->delete();
         } else {
-            $this->contentItem->likes()->create(['user_id' => $user->id]);
+            $this->likeable->likes()->create(['user_id' => $user->id]);
         }
 
         // Оновлюємо дані після зміни
         $this->loadLikeData();
 
         // Повідомляємо батьківський компонент про зміну
-        $this->dispatch('like-updated', contentItemId: $this->contentItem->id);
+        $this->dispatch('like-updated', $this->likeable->id);
     }
 
     // Слухач для оновлення з батьківського компонента
@@ -56,7 +56,7 @@ class LikeButton extends Component
     }
 
     // Слухач для оновлення конкретного елемента
-    #[On('refresh-like-{contentItem.id}')]
+    #[On('refresh-like-{likeable.id}')]
     public function refreshSpecificLike()
     {
         $this->loadLikeData();

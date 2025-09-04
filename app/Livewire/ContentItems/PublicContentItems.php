@@ -51,7 +51,7 @@ class PublicContentItems extends Component
 
     // Слухач для оновлення з дочірніх компонентів
     #[On('like-updated')]
-    public function handleLikeUpdate($contentItemId)
+    public function handleLikeUpdate($likeableId = null)
     {
         // Можна додати додаткову логіку якщо потрібно
         $this->refreshKey++;
