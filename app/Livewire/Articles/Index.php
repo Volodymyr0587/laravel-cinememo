@@ -55,7 +55,7 @@ class Index extends Component
         $articles = $query->orderBy('updated_at', 'desc')
                         ->paginate(8)->withQueryString();
 
-        // Get users with writer role
+        // Get users with permission to write articles
         $authors = User::role(['writer', 'admin', 'super_admin'])->get();
 
         return view('livewire.articles.index', compact('articles', 'authors'));
