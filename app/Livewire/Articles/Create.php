@@ -17,7 +17,7 @@ class Create extends Component
     public $is_published = false;
     public $main_image;
     public $additional_images = [];
-    public $tags = [];
+    public $tags = '';
 
 
     protected function rules(): array
@@ -30,8 +30,7 @@ class Create extends Component
             'is_published' => 'boolean',
             'main_image' => 'nullable|image|max:2048',
             'additional_images.*' => 'nullable|image|max:2048',
-            // 'tags' => 'array',
-            // 'tags.*' => 'exists:tags,id',
+            'tags'  => 'nullable|string',
         ];
     }
 
@@ -63,9 +62,7 @@ class Create extends Component
         }
 
         // Зберігаємо tags
-        // if (!empty($this->tags)) {
-        //     $article->contentItems()->sync($this->tags);
-        // }
+        $article->syncTags($this->tags);
 
         session()->flash('message', "Article $article->name has been added to your list of actors.");
 
@@ -74,10 +71,6 @@ class Create extends Component
 
     public function render()
     {
-        // $tags = Tag::where('user_id', auth()->id())
-        //     ->orderBy('name')
-        //     ->get();
-
         return view('livewire.articles.create');
     }
 }

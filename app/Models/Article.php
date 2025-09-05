@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use App\Traits\HasImages;
+use App\Traits\Taggable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Article extends Model
 {
-    use SoftDeletes, HasImages;
+    use SoftDeletes, HasImages, Taggable;
 
     protected $fillable = [
         'user_id',
@@ -48,13 +47,6 @@ class Article extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
-    }
-
-    public function getImageUrlAttribute(): ?string
-    {
-        if ($this->mainImage) {
-            return Storage::url($this->mainImage->path);
-        }
     }
 
     public function getRouteKeyName()

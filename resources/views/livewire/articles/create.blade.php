@@ -35,6 +35,16 @@
                             <flux:textarea wire:model="conclusion" :label="__('Conclusion') . ' *'" id="conclusion" rows="10"></flux:textarea>
                         </div>
 
+                        <div class="mt-4">
+                            <flux:input
+                                id="tags"
+                                wire:model.defer="tags"
+                                :label="__('Tags (comma separated)')"
+                                type="text"
+                                placeholder="e.g. drama, comedy, thriller, tv news, awards, casting, etc."
+                            />
+                        </div>
+
                         @hasanyrole(['super_admin', 'admin'])
                             <div class="mt-4">
                                 <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">{{ __("Publish article") }}</p>

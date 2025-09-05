@@ -19,7 +19,7 @@ class Edit extends Component
     public $is_published;
     public $main_image;
     public $additional_images = [];
-    public $tags = [];
+    public $tags;
 
     public $new_main_image; // нове головне фото
     public $newAdditionalImages = [];
@@ -31,6 +31,8 @@ class Edit extends Component
     public function mount(Article $article)
     {
         $this->article = $article;
+
+        $this->tags = $article->tags->pluck('name')->implode(', ');
 
         $this->authorize('update', $article);
 
@@ -53,8 +55,7 @@ class Edit extends Component
             'is_published' => 'boolean',
             'main_image' => 'nullable|image|max:2048',
             'additional_images.*' => 'nullable|image|max:2048',
-            // 'tags' => 'array',
-            // 'tags.*' => 'exists:tags,id',
+            'tags'  => 'nullable|string',
         ];
     }
 
@@ -86,9 +87,7 @@ class Edit extends Component
         }
 
         // Синхронізуємо теги
-        // if (!empty($this->tags)) {
-        //     $this->article->contentItems()->sync($this->tags);
-        // }
+        $this->article->syncTags($this->tags);
 
         session()->flash('message', "Article {$this->article->title} updated successfully.");
 
