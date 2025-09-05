@@ -45,7 +45,6 @@ class Index extends Component
 
             $this->authorize('delete', $article);
 
-            $article->removeAllImages();
             $article->delete();
 
             session()->flash('message', "Article '{$article->title}' deleted successfully.");

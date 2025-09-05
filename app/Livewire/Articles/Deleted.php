@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Articles;
 
-use App\Models\User;
 use App\Models\Article;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -28,13 +27,13 @@ class Deleted extends Component
 
     public function forceDelete($id)
     {
-        $contentItem = Article::onlyTrashed()->findOrFail($id);
+        $article = Article::onlyTrashed()->findOrFail($id);
 
-        $this->authorize('restore', $contentItem);
+        $this->authorize('restore', $article);
 
-        $contentItem->removeAllImages();
+        $article->removeAllImages();
 
-        $contentItem->forceDelete();
+        $article->forceDelete();
 
         session()->flash('message', 'Article permanently deleted.');
 
