@@ -1,7 +1,18 @@
 <div>
     <div class="mb-4">
         <flux:textarea wire:model.defer="body" :label="__('Let\'s discuss')" id="body" rows="4"></flux:textarea>
-        <div class="flex justify-end mt-2">
+        <div class="flex items-center justify-between mt-2">
+
+                <span
+                    class="flex items-center gap-x-2 text-sm text-gray-500 focus:outline-hidden dark:text-neutral-400">
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
+                    </svg>
+                    {{ $count }}
+                </span>
+
         <flux:button class="mt-2 hover:cursor-pointer" wire:click="postComment" variant="primary" type="submit">
             {{__('Add Comment') }}
         </flux:button>

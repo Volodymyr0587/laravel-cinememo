@@ -3,52 +3,77 @@
 namespace App\Livewire\ContentItems;
 
 use App\Models\Comment;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use App\Models\ContentItem;
 use Illuminate\Support\Facades\Auth;
 
 class CommentsSection extends Component
 {
-    public ContentItem $contentItem;
+    public Model $commentable;
     public string $body = '';
+    public int $count = 0;
 
     protected $rules = [
         'body' => 'required|string|min:3|max:500'
     ];
 
+    public function mount(Model $commentable)
+    {
+        $this->commentable = $commentable;
+        $this->count = $commentable->comments()->count();
+    }
+
+    #[\Livewire\Attributes\On('comment-updated')]
+    public function refreshCount($commentableId)
+    {
+        if ($this->commentable->id === (int) $commentableId) {
+            $this->count = $this->commentable->comments()->count();
+        }
+    }
+
     public function postComment()
     {
         $this->validate();
 
-        if (! $this->contentItem->is_public) {
+        // only public content items are commentable
+        if ($this->commentable instanceof \App\Models\ContentItem && ! $this->commentable->is_public) {
             return;
         }
 
-        $this->contentItem->comments()->create([
+        // only published articles are commentable
+        if ($this->commentable instanceof \App\Models\Article && ! $this->commentable->is_published) {
+            return;
+        }
+
+        $this->commentable->comments()->create([
             'user_id' => Auth::id(),
             'body' => $this->body
         ]);
 
         $this->reset('body');
-        $this->contentItem->refresh();
+        $this->commentable->refresh();
+
+         // ✅ tell parent to refresh count
+        $this->dispatch('comment-updated', $this->commentable->id);
     }
 
-    public function mount(ContentItem $contentItem)
-    {
-        $this->contentItem = $contentItem;
-    }
+
 
     public function deleteComment(Comment $comment)
     {
         $this->authorize('delete', $comment);
         $comment->delete();
 
-        $this->contentItem->refresh();
+        $this->commentable->refresh();
+
+         // ✅ tell parent to refresh count
+        $this->dispatch('comment-updated', $this->commentable->id);
     }
+
     public function render()
     {
         return view('livewire.content-items.comments-section', [
-            'comments' => $this->contentItem->comments()->with('user')->latest()->get()
+            'comments' => $this->commentable->comments()->with('user')->latest()->get()
         ]);
     }
 }
