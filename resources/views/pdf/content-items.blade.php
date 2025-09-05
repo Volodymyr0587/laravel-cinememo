@@ -58,6 +58,21 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
+        .no-image-container {
+            width: 100%;
+            height: 16rem; /* h-64 */
+            background-color: #e5e7eb; /* gray-200 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.25rem; /* rounded */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+
+        .no-image-text {
+            color: #6b7280; /* gray-500 */
+        }
     </style>
 </head>
 <body>
@@ -68,8 +83,12 @@
             <h2>{{ $item->title }}</h2>
             <p><span class="label">Status:</span> {{ ucfirst($item->status->value) }}</p>
             <p><span class="label">Type:</span> {{ $item->contentType->name ?? '-' }}</p>
-            @if ($item->image_url)
-                <img src="{{ public_path($item->image_url) }}" alt="Image for {{ $item->title }}" class="image">
+            @if ($item->main_image_url)
+                <img src="{{ public_path($item->main_image_url) }}" alt="Image for {{ $item->title }}" class="image">
+            @else
+                <div class="no-image-container">
+                    <span class="no-image-text">No Image</span>
+                </div>
             @endif
         </div>
     @endforeach
