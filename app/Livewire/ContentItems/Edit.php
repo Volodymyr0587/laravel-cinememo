@@ -22,6 +22,9 @@ class Edit extends Component
     public $content_type_id = '';
     public $title = '';
     public $description = '';
+    public ?int $hours = null;
+    public ?int $minutes = null;
+    public ?int $seconds = null;
     public $release_date = '';
     public $new_main_image; // Нове головне зображення
     public $status = '';
@@ -40,6 +43,9 @@ class Edit extends Component
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'hours' => 'nullable|integer|min:0',
+            'minutes' => 'nullable|integer|min:0|max:59',
+            'seconds' => 'nullable|integer|min:0|max:59',
             'release_date' => ['nullable', 'string', new ValidPartialDate()],
             'new_main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
@@ -60,6 +66,9 @@ class Edit extends Component
         $this->content_type_id = $contentItem->content_type_id;
         $this->title = $contentItem->title;
         $this->description = $contentItem->description;
+        $this->hours = $contentItem->hours;
+        $this->minutes = $contentItem->minutes;
+        $this->seconds = $contentItem->seconds;
         $this->release_date = $contentItem->release_date;
         $this->status = $contentItem->status->value;
         $this->is_public = $contentItem->is_public;
@@ -105,6 +114,10 @@ class Edit extends Component
     {
         $this->validate();
 
+        $durationInSeconds = ($this->hours ?? 0) * 3600
+                   + ($this->minutes ?? 0) * 60
+                   + ($this->seconds ?? 0);
+
         // Додаємо нове головне зображення, якщо завантажено
         if ($this->new_main_image) {
             $mainImagePath = $this->new_main_image->store('content-images', 'public');
@@ -122,6 +135,7 @@ class Edit extends Component
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
+            'duration_in_seconds' => $durationInSeconds ?: null,
             'release_date' => $this->release_date,
             'status' => $this->status,
             'is_public' => $this->is_public,

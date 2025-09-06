@@ -50,6 +50,21 @@
                                 rows="4"></flux:textarea>
                         </div>
 
+                        <flux:label class="mt-4">Duration</flux:label>
+                        <div class="flex flex-col lg:flex-row gap-4">
+                            <div class="flex-1 max-w-3xs">
+                                <flux:input wire:model="hours" :label="__('Hours')" type="number" min="0" />
+                            </div>
+
+                            <div class="flex-1 max-w-3xs">
+                                <flux:input wire:model="minutes" :label="__('Minutes')" type="number" min="0" max="59" />
+                            </div>
+
+                            <div class="flex-1 max-w-3xs">
+                                <flux:input wire:model="seconds" :label="__('Seconds')" type="number" min="0" max="59" />
+                            </div>
+                        </div>
+
                         <div class="mt-4">
                             <label for="actors" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
                                 {{ __("Actors") }}

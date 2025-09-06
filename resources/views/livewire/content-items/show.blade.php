@@ -154,6 +154,15 @@
                     </div>
                 @endif
 
+                @if($contentItem->formatted_duration)
+                <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                    <span class="font-medium">Duration:</span>
+                    <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                        {{ $contentItem->formatted_duration['human'] }}
+                    </span>
+                </div>
+                @endif
+
                 {{-- Additional images Slider Modal --}}
                @if ($contentItem->additionalImages->isNotEmpty())
                 <div

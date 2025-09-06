@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -23,6 +23,7 @@ class ContentItem extends Model
         'content_type_id',
         'title',
         'description',
+        'duration_in_seconds',
         'release_date',
         'image',
         'status',
@@ -95,6 +96,66 @@ class ContentItem extends Model
 
         return $date;
     }
+
+    /**
+     * Accessor to get duration in a convenient format (H:i:s).
+     * If 'duration_in_seconds' is null, returns '00:00:00'.
+     */
+    protected function formattedDuration(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value, $attributes) {
+                $seconds = $attributes['duration_in_seconds'] ?? null;
+
+                if ($seconds === null) {
+                    return null;
+                }
+
+                // Standard HH:MM:SS
+                $hhmmss = gmdate($seconds >= 3600 ? "H:i:s" : "i:s", $seconds);
+
+                // Human-readable format
+                $hours = intdiv($seconds, 3600);
+                $minutes = intdiv($seconds % 3600, 60);
+                $secs = $seconds % 60;
+
+                $parts = [];
+                if ($hours > 0) {
+                    $parts[] = "{$hours}h";
+                }
+                if ($minutes > 0) {
+                    $parts[] = "{$minutes}m";
+                }
+                if ($secs > 0) {
+                    $parts[] = "{$secs}s";
+                }
+
+                $human = implode(' ', $parts) ?: '0s';
+
+                return [
+                    'hhmmss' => $hhmmss,
+                    'human'  => $human,
+                ];
+            }
+        );
+    }
+
+
+    public function getHoursAttribute(): ?int
+    {
+        return $this->duration_in_seconds ? intdiv($this->duration_in_seconds, 3600) : null;
+    }
+
+    public function getMinutesAttribute(): ?int
+    {
+        return $this->duration_in_seconds ? intdiv(($this->duration_in_seconds % 3600), 60) : null;
+    }
+
+    public function getSecondsAttribute(): ?int
+    {
+        return $this->duration_in_seconds ? $this->duration_in_seconds % 60 : null;
+    }
+
 
 
     protected static function boot()

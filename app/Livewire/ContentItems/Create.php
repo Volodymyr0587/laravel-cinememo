@@ -19,6 +19,9 @@ class Create extends Component
     public $content_type_id = '';
     public $title = '';
     public $description = '';
+    public ?int $hours = null;
+    public ?int $minutes = null;
+    public ?int $seconds = null;
     public $release_date = '';
     public $main_image; // Змінюємо назву для ясності
     public $status = 'willwatch';
@@ -40,6 +43,9 @@ class Create extends Component
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'hours' => 'nullable|integer|min:0',
+            'minutes' => 'nullable|integer|min:0|max:59',
+            'seconds' => 'nullable|integer|min:0|max:59',
             'release_date' => ['nullable', 'string', new ValidPartialDate()],
             'main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
@@ -56,11 +62,16 @@ class Create extends Component
     {
         $this->validate();
 
+        $durationInSeconds = ($this->hours ?? 0) * 3600
+                   + ($this->minutes ?? 0) * 60
+                   + ($this->seconds ?? 0);
+
         // Створюємо ContentItem
         $contentItem = auth()->user()->contentItems()->create([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
+            'duration_in_seconds' => $durationInSeconds ?: null,
             'release_date' => $this->release_date,
             'status' => $this->status,
             'is_public' => $this->is_public,
