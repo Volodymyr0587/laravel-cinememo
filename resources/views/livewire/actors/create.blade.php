@@ -72,6 +72,16 @@
                         </div>
 
                         <div class="mt-4">
+                            <flux:input
+                                wire:model="death_place"
+                                :label="__('Death place')"
+                                type="text"
+                                autocomplete="death_place"
+                                placeholder="Los Angeles, California, United States"
+                            />
+                        </div>
+
+                        <div class="mt-4">
                             <flux:textarea wire:model="biography" :label="__('Biography')" id="biography" rows="6"></flux:textarea>
                         </div>
 

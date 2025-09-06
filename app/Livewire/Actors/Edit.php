@@ -18,6 +18,7 @@ class Edit extends Component
     public $birth_date = '';
     public $death_date = '';
     public $birth_place = '';
+    public $death_place = '';
 
     public $new_main_image; // нове головне фото
     public $newAdditionalImages = [];
@@ -36,6 +37,7 @@ class Edit extends Component
             'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
             'death_date' => ['nullable', 'date', 'after:birth_date'],
             'birth_place' => ['nullable', 'string', 'max:255'],
+            'death_place' => ['nullable', 'string', 'max:255'],
             'new_main_image' => 'nullable|image|max:2048',
             'newAdditionalImages.*' => 'nullable|image|max:2048',
             'content_items' => 'array',
@@ -53,6 +55,7 @@ class Edit extends Component
         $this->birth_date = $actor->birth_date;
         $this->death_date = $actor->death_date;
         $this->birth_place = $actor->birth_place;
+        $this->death_place = $actor->death_place;
         $this->content_items = $actor->contentItems()->pluck('content_items.id')->toArray();
     }
 
@@ -79,6 +82,7 @@ class Edit extends Component
             'birth_date' => $this->birth_date,
             'death_date' => $this->death_date,
             'birth_place' => $this->birth_place,
+            'death_place' => $this->death_place,
         ]);
 
         // оновлюємо пов’язані контент-айтеми

@@ -137,6 +137,21 @@
                                     </div>
                                     @endif
 
+                                    @if ($actor->death_place)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("actors/main.death_place") }}:</span>
+                                        <a href="https://www.google.com/maps/search/?api=1&query={{ $actor->death_place }}" target="_blank"
+                                            class="px-2 py-1 rounded text-xs font-bold
+                                                bg-gray-900 text-white
+                                                dark:bg-white dark:text-gray-900
+                                                hover:bg-gray-700 dark:hover:bg-gray-200
+                                                hover:shadow-lg hover:scale-105
+                                                transition duration-300 ease-out transform">
+                                            {{ $actor->death_place }}
+                                        </a>
+                                    </div>
+                                    @endif
+
 
                                     <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
                                         <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("actors/main.known_for") }}:</span>

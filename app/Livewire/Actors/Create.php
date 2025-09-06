@@ -15,6 +15,7 @@ class Create extends Component
     public $birth_date = '';
     public $death_date = '';
     public $birth_place = '';
+    public $death_place = '';
     public $main_image;
     public $additional_images = [];
     public $content_items = [];
@@ -30,6 +31,7 @@ class Create extends Component
             'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
             'death_date' => ['nullable', 'date', 'after:birth_date'],
             'birth_place' => ['nullable', 'string', 'max:255'],
+            'death_place' => ['nullable', 'string', 'max:255'],
             'main_image' => 'nullable|image|max:2048',
             'additional_images.*' => 'nullable|image|max:2048',
             'content_items' => 'array',
@@ -70,6 +72,7 @@ class Create extends Component
             'birth_date' => $this->birth_date,
             'death_date' => $this->death_date,
             'birth_place' => $this->birth_place,
+            'death_place' => $this->death_place,
         ]);
 
         // Додаємо головне зображення через нову поліморфну систему

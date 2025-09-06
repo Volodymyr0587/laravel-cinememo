@@ -48,6 +48,21 @@
                 </div>
                 @endif
 
+                @if ($actor->death_place)
+                <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                    <span class="font-medium">Death place:</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ $actor->death_place }}" target="_blank"
+                        class="px-2 py-1 rounded text-xs font-bold
+                            bg-gray-900 text-white
+                            dark:bg-white dark:text-gray-900
+                            hover:bg-gray-700 dark:hover:bg-gray-200
+                            hover:shadow-lg hover:scale-105
+                            transition duration-300 ease-out transform">
+                        {{ $actor->death_place }}
+                    </a>
+                </div>
+                @endif
+
                 {{-- Image --}}
                 @php
                     $defaultImagePath = public_path('images/default-actor.png');

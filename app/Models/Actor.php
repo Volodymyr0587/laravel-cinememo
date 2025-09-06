@@ -20,7 +20,8 @@ class Actor extends Model
         'biography',
         'birth_date',
         'death_date',
-        'birth_place'
+        'birth_place',
+        'death_place',
     ];
 
     public function user(): BelongsTo
