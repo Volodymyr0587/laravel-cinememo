@@ -51,7 +51,7 @@
                 </div>
             </a>
         @empty
-            <p class="text-center text-neutral-500 dark:text-neutral-400 col-span-full">{{ __("There is currently nothing in your collection") }}.</p>
+            <p class="text-center text-neutral-500 dark:text-neutral-400 col-span-full">{{ __("dashboard.nothing_in_collection") }}.</p>
         @endforelse
     </div>
     <!-- Footer -->

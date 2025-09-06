@@ -7,4 +7,5 @@ return [
     "total_in_trash" => "Total in trash",
     "last_updated" => "Last updated",
     "last_trashed" => "Last trashed",
+    "nothing_in_collection" => "There is currently nothing in your collection",
 ];

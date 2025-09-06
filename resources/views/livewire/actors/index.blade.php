@@ -2,13 +2,13 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Actors') }}
+            {{ __('actors/main.actors') }}
             @if($contentItemFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('actors/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -26,7 +26,7 @@
             >
                {{ __('Export to PDF') }}
             </flux:button> --}}
-            <x-button href="{{ route('actors.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Actor') }}</x-button>
+            <x-button href="{{ route('actors.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('actors/main.add_new_actor') }}</x-button>
         </div>
     </div>
 
@@ -43,9 +43,9 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('actors/main.search')"
                                 type="text"
-                                :placeholder="__('Search actor...')"
+                                :placeholder="__('actors/main.search_actor')"
                             />
                         </div>
                         {{-- <div>
@@ -65,8 +65,8 @@
                             </flux:select>
                         </div> --}}
                         <div>
-                            <flux:select wire:model.live="contentItemFilter" :label="__('Content')">
-                                <option value="">All Content</option>
+                            <flux:select wire:model.live="contentItemFilter" :label="__('actors/main.content')">
+                                <option value="">{{ __("actors/main.all_content") }}</option>
                                 @foreach($contentItems as $contentItem)
                                     <option value="{{ $contentItem->id }}">{{ $contentItem->title }}</option>
                                 @endforeach
@@ -92,7 +92,7 @@
                                                 class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                         @else
                                             <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                                                <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                                                <span class="text-gray-500 dark:text-gray-700">{{ __("actors/main.no_mage") }}</span>
                                             </div>
                                         @endif
                                     @endif
@@ -106,7 +106,7 @@
 
                                     @if ($actor->birth_date)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">Birth date:</span>
+                                        <span class="font-medium">{{ __("actors/main.birth_date") }}:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                                             {{ $actor->formatted_birth_date }}
                                         </span>
@@ -115,7 +115,7 @@
 
                                     @if ($actor->birth_place)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">Birth place:</span>
+                                        <span class="font-medium">{{ __("actors/main.birth_place") }}:</span>
                                         <a href="https://www.google.com/maps/search/?api=1&query={{ $actor->birth_place }}" target="_blank"
                                             class="px-2 py-1 rounded text-xs font-bold
                                                 bg-gray-900 text-white
@@ -130,7 +130,7 @@
 
                                     @if ($actor->death_date)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">Death date:</span>
+                                        <span class="font-medium">{{ __("actors/main.death_date") }}:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                                             {{ $actor->formatted_death_date }}
                                         </span>
@@ -139,7 +139,7 @@
 
 
                                     <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
-                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("Known for") }}:</span>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("actors/main.known_for") }}:</span>
                                         @forelse ($actor->contentItems as $contentItem)
                                             <span
                                                 class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
@@ -151,7 +151,7 @@
                                             </span>
                                         @empty
                                             <span class="font-semibold italic text-xs dark:text-white">
-                                                {{ __("No works") }}
+                                                {{ __("actors/main.no_works") }}
                                             </span>
                                         @endforelse
                                     </div>
@@ -177,18 +177,18 @@
                                     @endif
 
                                     <div class="flex justify-between items-center">
-                                        <flux:button href="{{ route('actors.edit', $actor) }}" wire:navigate>Edit</flux:button>
+                                        <flux:button href="{{ route('actors.edit', $actor) }}" wire:navigate>{{ __("actors/main.edit") }}</flux:button>
                                         <x-button wire:click="delete({{ $actor->id }})"
-                                                wire:confirm="Are you sure you want to delete this actor? This action is irreversible."
+                                                wire:confirm="{{ __('actors/main.delete_confirm_message') }}"
                                                 color="red" type="submit"
-                                                >Delete</x-button>
+                                                >{{ __("actors/main.delete") }}</x-button>
                                     </div>
                                 </div>
                             </div>
                         @empty
                             <div class="col-span-full text-center py-8">
-                                <p class="text-gray-500 text-lg">No actors found.</p>
-                                <flux:link :href="route('actors.create')" wire:navigate>{{ __('Add First Actor') }}</flux:link>
+                                <p class="text-gray-500 text-lg">{{ __("actors/main.no_actors_found") }}.</p>
+                                <flux:link :href="route('actors.create')" wire:navigate>{{ __("actors/main.add_first_actor") }}</flux:link>
                             </div>
                         @endforelse
                     </div>
