@@ -74,7 +74,12 @@ class Published extends Component
             ->has('articles')
             ->get();
 
-        $tags = Tag::orderBy('name')->get();
+        $tags = Tag::whereHas('articles', function ($q) {
+            $q->where('is_published', true);
+        })
+        ->orderBy('name')
+        ->get();
+
 
         // $contentItems = auth()->user()->contentItems()->get();
         return view('livewire.articles.published', compact('articles', 'authors', 'tags'));
