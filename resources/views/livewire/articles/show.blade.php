@@ -69,7 +69,11 @@
 
                 <div>
                     @forelse ($article->tags as $tag)
-                        <span class="m-1 inline-flex items-center gap-1.5 py-1 px-2 rounded-md text-xs text-gray-800 bg-gray-200 dark:text-neutral-200 dark:bg-neutral-700"
+                        @php
+                            $colors = collect(['#1E09FF', '#9A09FF', '#7D27F5', '#BD2119', '#11118F', '#CC1BB0', '#6B59C7', '#49042F', '#042E49', '#2F4904']);
+                            $color = $colors->random();
+                        @endphp
+                        <span class="m-1 inline-flex items-center gap-1.5 py-1 px-2 rounded-md text-xs font-bold text-white" style="background-color: {{ $color }}"
                             href="#">
                             {{ ucfirst($tag->name) }}
                         </span>
