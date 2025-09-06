@@ -82,11 +82,15 @@ class ContentItem extends Model
         }
 
         if (preg_match('/^\d{4}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m', $date)->format('Y-M');
+            return \Carbon\Carbon::createFromFormat('Y-m', $date)
+                ->locale(app()->getLocale()) // <- set locale
+                ->isoFormat('YYYY MMMM'); // localized month
         }
 
         if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format('Y-M-d');
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)
+                ->locale(app()->getLocale()) // <- set locale
+                ->isoFormat('LL'); // localized date
         }
 
         return $date;

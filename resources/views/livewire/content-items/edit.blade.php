@@ -38,10 +38,10 @@
                         <div class="mt-4">
                             <flux:input
                                 wire:model="release_date"
-                                :label="__('Release date (optional)')"
+                                :label="__('Release date') . ' **'"
                                 type="text"
                                 autocomplete="release_date"
-                                placeholder="Enter the full date (YYYY-MM-DD), or just the year and month (YYYY-MM), or just the year (YYYY)."
+                                placeholder="YYYY, YYYY-MM, or YYYY-MM-DD"
                             />
                         </div>
 
@@ -204,6 +204,12 @@
                             <div wire:loading wire:target="image" class="text-sm text-gray-600 mt-2">
                                 {{ __('Uploading...') }}
                             </div>
+                        </div>
+
+                        <div class="my-12">
+                            <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+                            <p class="mt-2 font-bold text-xs italic">* - {{ __("Required fields") }}</p>
+                            <p class="mt-2 font-bold text-xs italic">** - {{ ("Enter the full date (YYYY-MM-DD), or just the year and month (YYYY-MM), or just the year (YYYY)") }}</p>
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">

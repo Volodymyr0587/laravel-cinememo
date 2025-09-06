@@ -177,12 +177,13 @@ return [
     */
 
     'custom' => [
-        'release_date' => [
-            'format' => 'The release date must be in the format YYYY, YYYY-MM, or YYYY-MM-DD.',
-            'year_range' => 'The release date year must be between 1800 and 2100.',
-            'invalid_month' => 'The release date must have a valid month (01–12).',
-            'day_without_month' => 'The release date cannot have a day without a month.',
-            'invalid_date' => 'The release date is not a valid date.',
+        'partial_date' => [
+            'format' => 'The :attribute must be in format YYYY, YYYY-MM, or YYYY-MM-DD.',
+            'year_range' => 'The :attribute year must be between :min and :max.',
+            'invalid_month' => 'The month in :attribute must be between 01 and 12.',
+            'day_without_month' => 'You cannot specify a day without a month in :attribute.',
+            'invalid_date' => 'The :attribute is not a valid date.',
+            'after_birth' => 'The death date must be after the birth date.',
         ],
     ],
 

@@ -3,12 +3,12 @@
 namespace App\Livewire\ContentItems;
 
 use App\Models\Genre;
-use App\Models\Image;
 use Livewire\Component;
 use App\Models\ContentItem;
 use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
+use App\Rules\ValidPartialDate;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 
@@ -40,7 +40,7 @@ class Edit extends Component
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'release_date' => ['nullable', 'string', new \App\Rules\ValidReleaseDate()],
+            'release_date' => ['nullable', 'string', new ValidPartialDate()],
             'new_main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
             'is_public' => ['boolean'],

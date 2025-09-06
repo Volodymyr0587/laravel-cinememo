@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Actors;
 
-use App\Models\ContentItem;
 use Livewire\Component;
+use App\Models\ContentItem;
 use Livewire\WithFileUploads;
+use App\Rules\ValidPartialDate;
 
 class Create extends Component
 {
@@ -28,8 +29,8 @@ class Create extends Component
         return [
             'name' => 'required|string|max:255',
             'biography' => 'nullable|string',
-            'birth_date' => ['nullable', 'date', 'before_or_equal:today'],
-            'death_date' => ['nullable', 'date', 'after:birth_date'],
+            'birth_date' => ['nullable', new ValidPartialDate(1800, now()->year)],
+            'death_date' => ['nullable', new ValidPartialDate(1800, now()->year)],
             'birth_place' => ['nullable', 'string', 'max:255'],
             'death_place' => ['nullable', 'string', 'max:255'],
             'main_image' => 'nullable|image|max:2048',
@@ -74,6 +75,14 @@ class Create extends Component
             'birth_place' => $this->birth_place,
             'death_place' => $this->death_place,
         ]);
+
+        // Extra check: death_date must be after birth_date
+        if ($this->birth_date && $this->death_date) {
+            if (strcmp($this->death_date, $this->birth_date) <= 0) {
+                $this->addError('death_date', __('validation.custom.partial_date.after_birth'));
+                return;
+            }
+        }
 
         // Додаємо головне зображення через нову поліморфну систему
         if ($this->main_image) {

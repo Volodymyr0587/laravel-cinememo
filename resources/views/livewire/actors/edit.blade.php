@@ -25,9 +25,9 @@
                             <flux:input
                                 wire:model="birth_date"
                                 :label="__('Birth date')"
-                                type="date"
+                                type="text"
                                 autocomplete="birth_date"
-                                placeholder="Select a birth date"
+                                placeholder="YYYY, YYYY-MM, or YYYY-MM-DD"
                             />
                         </div>
 
@@ -45,9 +45,9 @@
                             <flux:input
                                 wire:model="death_date"
                                 :label="__('Death date')"
-                                type="date"
+                                type="text"
                                 autocomplete="death_date"
-                                placeholder="Select a death date"
+                                placeholder="YYYY, YYYY-MM, or YYYY-MM-DD"
                             />
                         </div>
 
@@ -189,6 +189,7 @@
                             <div class="my-12">
                                 <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
                                 <p class="mt-2 font-bold text-xs italic">* - {{ __("Required fields") }}</p>
+                                <p class="mt-2 font-bold text-xs italic">** - {{ ("Enter the full date (YYYY-MM-DD), or just the year and month (YYYY-MM), or just the year (YYYY)") }}</p>
                             </div>
 
                         </div>
