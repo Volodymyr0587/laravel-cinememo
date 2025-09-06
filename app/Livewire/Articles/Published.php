@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Articles;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Article;
 use Livewire\Component;
@@ -13,10 +14,13 @@ class Published extends Component
 
     public $search = '';
     public $publishedAuthorFilter = '';
+    public $publishedTagFilter = '';
+
 
     protected $queryString = [
         'search' => ['except' => ''],
         'publishedAuthorFilter' => ['except' => ''],
+        'publishedTagFilter' => ['except' => ''],
     ];
 
     // reset pagination when changing filters
@@ -30,10 +34,16 @@ class Published extends Component
         $this->resetPage();
     }
 
+    public function updatingPublishedTagFilter(): void
+    {
+        $this->resetPage();
+    }
+
     public function clearFilters(): void
     {
         $this->search = '';
         $this->publishedAuthorFilter = '';
+        $this->publishedTagFilter = '';
         $this->resetPage();
     }
 
@@ -51,6 +61,12 @@ class Published extends Component
             });
         }
 
+        if ($this->publishedTagFilter) {
+            $query->whereHas('tags', function ($q) {
+                $q->where('tags.id', $this->publishedTagFilter);
+            });
+        }
+
         $articles = $query->orderBy('updated_at', 'desc')
                         ->paginate(8)->withQueryString();
 
@@ -58,7 +74,9 @@ class Published extends Component
             ->has('articles')
             ->get();
 
+        $tags = Tag::orderBy('name')->get();
+
         // $contentItems = auth()->user()->contentItems()->get();
-        return view('livewire.articles.published', compact('articles', 'authors'));
+        return view('livewire.articles.published', compact('articles', 'authors', 'tags'));
     }
 }

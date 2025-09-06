@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('Articles') }}
-            @if($publishedAuthorFilter || $search)
+            @if($publishedAuthorFilter || $search || $publishedTagFilter)
                 <flux:button
                     wire:click.prevent="clearFilters"
                     wire:key="published-articles-clear-filters-btn"
@@ -42,7 +42,7 @@
                     <x-flash-message />
 
                     <!-- Filters -->
-                    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <flux:input
                                 wire:model.live="search"
@@ -80,6 +80,14 @@
                                 <option value="">All authors</option>
                                 @foreach($authors as $author)
                                     <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                @endforeach
+                            </flux:select>
+                        </div>
+                        <div>
+                            <flux:select wire:model.live="publishedTagFilter" :label="__('Tags')">
+                                <option value="">All tags</option>
+                               @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ ucfirst($tag->name) }}</option>
                                 @endforeach
                             </flux:select>
                         </div>
