@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\ContentItems;
+namespace App\Livewire\Likes;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -68,7 +68,7 @@ class LikeButton extends Component
 
     public function render()
     {
-        return view('livewire.content-items.like-button', [
+        return view('livewire.likes.like-button', [
             'likesCount' => $this->likesCount,
             'isLiked' => $this->isLiked
         ]);

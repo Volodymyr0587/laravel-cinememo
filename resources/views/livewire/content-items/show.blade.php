@@ -239,7 +239,7 @@
                 {{-- End of Additional images Slider Modal --}}
 
                 @if ($contentItem->is_public)
-                    <livewire:content-items.comments-section :commentable="$contentItem" />
+                    <livewire:comments.comments-section :commentable="$contentItem" />
                 @endif
 
                 {{-- Action Buttons --}}

@@ -155,7 +155,7 @@
                                         </span>
                                     </div>
 
-                                    <livewire:content-items.like-button
+                                    <livewire:likes.like-button
                                         :likeable="$article"
                                         :key="'like-button-content-' . $article->id"
                                     />

@@ -102,7 +102,7 @@
                                         </p>
                                     @endif
 
-                                    <livewire:content-items.like-button
+                                    <livewire:likes.like-button
                                         :likeable="$contentItem"
                                         :key="'like-button-content-' . $contentItem->id"
                                     />

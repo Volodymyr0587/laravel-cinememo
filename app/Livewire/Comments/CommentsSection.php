@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\ContentItems;
+namespace App\Livewire\Comments;
 
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
@@ -72,7 +72,7 @@ class CommentsSection extends Component
 
     public function render()
     {
-        return view('livewire.content-items.comments-section', [
+        return view('livewire.comments.comments-section', [
             'comments' => $this->commentable->comments()->with('user')->latest()->get()
         ]);
     }

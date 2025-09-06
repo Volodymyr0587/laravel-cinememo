@@ -214,7 +214,7 @@
         <div class="flex items-center gap-x-1.5">
             <!-- Like Button -->
             <div class="hs-tooltip inline-block">
-                <livewire:content-items.like-button
+                <livewire:likes.like-button
                     :likeable="$article"
                     :key="'like-button-content-' . $article->id"
                 />
@@ -226,7 +226,7 @@
 <!-- End Sticky Share Group -->
 
             @if ($article->is_published)
-                <livewire:content-items.comments-section :commentable="$article" />
+                <livewire:comments.comments-section :commentable="$article" />
             @endif
 
             </div>
