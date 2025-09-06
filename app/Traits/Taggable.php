@@ -39,6 +39,10 @@ trait Taggable
         $tagIds = Tag::whereIn('name', $tagNames)->pluck('id');
         $this->tags()->sync($tagIds);
 
+        // cleanup unused tags
+        $usedTagIds = \DB::table('taggables')->pluck('tag_id')->toArray();
+        Tag::whereNotIn('id', $usedTagIds)->delete();
+
         return [$existingTags, $newTags->toArray()];
 
     }
