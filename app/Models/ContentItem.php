@@ -73,7 +73,7 @@ class ContentItem extends Model
         }
     }
 
-     public function getFormattedReleaseDateAttribute(): string
+    public function getFormattedReleaseDateAttribute(): string
     {
         $date = $this->release_date;
 
