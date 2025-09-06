@@ -239,6 +239,20 @@
                 {{-- End of Additional images Slider Modal --}}
 
                 @if ($contentItem->is_public)
+                    <div class="sticky bottom-6 inset-x-0 text-center">
+                        <div class="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
+                            <div class="flex items-center gap-x-1.5">
+                                <!-- Like Button -->
+                                <div class="hs-tooltip inline-block">
+                                    <livewire:likes.like-button
+                                        :likeable="$contentItem"
+                                        :key="'like-button-content-' . $contentItem->id"
+                                    />
+                                </div>
+                                <!-- End Like Button -->
+                            </div>
+                        </div>
+                    </div>
                     <livewire:comments.comments-section :commentable="$contentItem" />
                 @endif
 
