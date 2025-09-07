@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
+            $table->string('video_url')->nullable();
+            $table->string('video_id', 20)->nullable();
             $table->integer('duration_in_seconds')->nullable();
             $table->string('release_date')->nullable();
             $table->string('image')->nullable();

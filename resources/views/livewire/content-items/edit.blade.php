@@ -50,6 +50,11 @@
                                 rows="4"></flux:textarea>
                         </div>
 
+                        <div class="mt-4">
+                            <flux:input wire:model="video_url" :label="__('YouTube video url')" id="video_url"
+                                placeholder="https://youtu.be/xxxx or https://www.youtube.com/watch?v=xxxx"/>
+                        </div>
+
                         <flux:label class="mt-4">Duration</flux:label>
                         <div class="flex flex-col lg:flex-row gap-4">
                             <div class="flex-1 max-w-3xs">

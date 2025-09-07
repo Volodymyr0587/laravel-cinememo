@@ -23,6 +23,8 @@ class ContentItem extends Model
         'content_type_id',
         'title',
         'description',
+        'video_url',
+        'video_id',
         'duration_in_seconds',
         'release_date',
         'image',
@@ -73,6 +75,14 @@ class ContentItem extends Model
             return Storage::url($this->mainImage->path);
         }
     }
+
+    public function getYoutubeEmbedUrlAttribute(): ?string
+    {
+        return $this->video_id
+            ? "https://www.youtube.com/embed/{$this->video_id}"
+            : null;
+    }
+
 
     public function getFormattedReleaseDateAttribute(): string
     {

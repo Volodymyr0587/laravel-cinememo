@@ -4,6 +4,7 @@ namespace App\Livewire\ContentItems;
 
 use App\Models\Genre;
 use Livewire\Component;
+use App\Rules\YoutubeUrl;
 use App\Models\ContentItem;
 use App\Models\ContentType;
 use App\Enums\ContentStatus;
@@ -22,6 +23,7 @@ class Edit extends Component
     public $content_type_id = '';
     public $title = '';
     public $description = '';
+    public ?string $video_url = null;
     public ?int $hours = null;
     public ?int $minutes = null;
     public ?int $seconds = null;
@@ -43,6 +45,7 @@ class Edit extends Component
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'video_url' => ['nullable', 'string', new YoutubeUrl],
             'hours' => 'nullable|integer|min:0',
             'minutes' => 'nullable|integer|min:0|max:59',
             'seconds' => 'nullable|integer|min:0|max:59',
@@ -66,6 +69,7 @@ class Edit extends Component
         $this->content_type_id = $contentItem->content_type_id;
         $this->title = $contentItem->title;
         $this->description = $contentItem->description;
+        $this->video_url = $contentItem->video_url;
         $this->hours = $contentItem->hours;
         $this->minutes = $contentItem->minutes;
         $this->seconds = $contentItem->seconds;
@@ -114,6 +118,10 @@ class Edit extends Component
     {
         $this->validate();
 
+        $videoId = $this->video_url
+            ? YoutubeUrl::extractId($this->video_url)
+            : null;
+
         $durationInSeconds = ($this->hours ?? 0) * 3600
                    + ($this->minutes ?? 0) * 60
                    + ($this->seconds ?? 0);
@@ -135,6 +143,8 @@ class Edit extends Component
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
+            'video_url' => $this->video_url,
+            'video_id'  => $videoId,
             'duration_in_seconds' => $durationInSeconds ?: null,
             'release_date' => $this->release_date,
             'status' => $this->status,

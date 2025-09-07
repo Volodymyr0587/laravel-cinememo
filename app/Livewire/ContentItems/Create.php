@@ -4,6 +4,7 @@ namespace App\Livewire\ContentItems;
 
 use App\Models\Genre;
 use Livewire\Component;
+use App\Rules\YoutubeUrl;
 use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
@@ -19,6 +20,7 @@ class Create extends Component
     public $content_type_id = '';
     public $title = '';
     public $description = '';
+    public ?string $video_url = null;
     public ?int $hours = null;
     public ?int $minutes = null;
     public ?int $seconds = null;
@@ -43,6 +45,7 @@ class Create extends Component
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'video_url' => ['nullable', 'string', new YoutubeUrl],
             'hours' => 'nullable|integer|min:0',
             'minutes' => 'nullable|integer|min:0|max:59',
             'seconds' => 'nullable|integer|min:0|max:59',
@@ -62,6 +65,8 @@ class Create extends Component
     {
         $this->validate();
 
+        $videoId = YoutubeUrl::extractId($this->video_url);
+
         $durationInSeconds = ($this->hours ?? 0) * 3600
                    + ($this->minutes ?? 0) * 60
                    + ($this->seconds ?? 0);
@@ -71,6 +76,8 @@ class Create extends Component
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
             'description' => $this->description,
+            'video_url' => $this->video_url,
+            'video_id'  => $videoId,
             'duration_in_seconds' => $durationInSeconds ?: null,
             'release_date' => $this->release_date,
             'status' => $this->status,

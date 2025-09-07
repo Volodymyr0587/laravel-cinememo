@@ -163,6 +163,24 @@
                 </div>
                 @endif
 
+               {{-- Video --}}
+               @if($contentItem->youtube_embed_url)
+                    <div class="mt-4">
+                        <iframe
+                            class="w-full aspect-video"
+                            src="{{ $contentItem->youtube_embed_url }}"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                        If the video doesn’t load, <a href="{{ $contentItem->video_url }}" target="_blank" class="text-blue-600 underline">watch it on YouTube</a>.
+                    </p>
+                @endif
+
+
                 {{-- Additional images Slider Modal --}}
                @if ($contentItem->additionalImages->isNotEmpty())
                 <div
