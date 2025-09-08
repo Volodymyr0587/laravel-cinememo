@@ -97,7 +97,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="grid grid-cols-3 gap-x-1 gap-y-1">
                                                 @forelse ($role->permissions->pluck('name') as $permissionName)
-                                                    <span class="px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900">
+                                                    <span class="px-2 py-1 rounded text-xs font-bold bg-gray-200 text-gray-900 dark:bg-white dark:text-gray-900">
                                                         {{ $permissionName }}
                                                     </span>
                                                 @empty
