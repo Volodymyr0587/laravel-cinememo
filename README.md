@@ -16,21 +16,6 @@
 
 ---
 
-![Articles page](public/images/app-screenshots/screnshot-for-readme-05.png)
-![Show article page](public/images/app-screenshots/screnshot-for-readme-06.png)
-![Image slider](public/images/app-screenshots/screnshot-for-readme-07.png)
-![Comment section](public/images/app-screenshots/screnshot-for-readme-08.png)
-![video section](public/images/app-screenshots/screnshot-for-readme-09.png)
-![Show content page](public/images/app-screenshots/screnshot-for-readme-10.png)
-![Create content page](public/images/app-screenshots/screnshot-for-readme-11.png)
-![Genres](public/images/app-screenshots/screnshot-for-readme-12.png)
-![Validation messages](public/images/app-screenshots/screnshot-for-readme-14.png)
-![Category page](public/images/app-screenshots/screnshot-for-readme-15.png)
-![Lang switcher](public/images/app-screenshots/screnshot-for-readme-16.png)
-
-
-
-
 ## 📬 Contact Form
 
 The application includes a Livewire-powered contact form on the welcome page.  
@@ -130,3 +115,18 @@ This will create user (email: volodymyr@gmail.com, password: password123) and so
 ## Usage
 
 Register a new user and start managing your favorite content.
+
+## Examples of application appearance
+
+![Articles page](public/images/app-screenshots/screnshot-for-readme-05.png)
+![Show article page](public/images/app-screenshots/screnshot-for-readme-06.png)
+![Image slider](public/images/app-screenshots/screnshot-for-readme-07.png)
+![Comment section](public/images/app-screenshots/screnshot-for-readme-08.png)
+![video section](public/images/app-screenshots/screnshot-for-readme-09.png)
+![Show content page](public/images/app-screenshots/screnshot-for-readme-10.png)
+![Create content page](public/images/app-screenshots/screnshot-for-readme-11.png)
+![Genres](public/images/app-screenshots/screnshot-for-readme-12.png)
+![Validation messages](public/images/app-screenshots/screnshot-for-readme-14.png)
+![Category page](public/images/app-screenshots/screnshot-for-readme-15.png)
+![Lang switcher](public/images/app-screenshots/screnshot-for-readme-16.png)
+
