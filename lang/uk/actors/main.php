@@ -16,6 +16,7 @@ return [
     "birth_place" => "Місце народження",
     "death_date" => "Дата смерті",
     "death_place" => "Місце смерті",
+    "age" => "Вік",
     "known_for" => "Відомий за",
     "no_works" => "Немає робіт",
 

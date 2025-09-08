@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('biography')->nullable();
-            $table->string('birth_date', 10)->nullable();
-            $table->string('death_date', 10)->nullable();
+            $table->date('birth_date')->nullable();
+            $table->date('death_date')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('death_place')->nullable();
             $table->timestamps();

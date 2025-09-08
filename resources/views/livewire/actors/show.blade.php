@@ -19,7 +19,7 @@
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">Birth date:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                        {{ $actor->formatted_birth_date }}
+                        {{ $actor->birth_date->format('M-d-Y') }}
                     </span>
                 </div>
                 @endif
@@ -43,10 +43,17 @@
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">Death date:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                        {{ $actor->formatted_death_date }}
+                        {{ $actor->death_date->format('M-d-Y') }}
                     </span>
                 </div>
                 @endif
+
+                <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                    <span class="font-medium">Age:</span>
+                    <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                         {{ $actor->formatted_age }}
+                    </span>
+                </div>
 
                 @if ($actor->death_place)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">

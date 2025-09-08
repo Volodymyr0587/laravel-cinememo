@@ -6,7 +6,7 @@ use App\Models\Actor;
 use Livewire\Component;
 use App\Models\ContentItem;
 use Livewire\WithFileUploads;
-use App\Rules\ValidPartialDate;
+
 
 class Edit extends Component
 {
@@ -16,8 +16,8 @@ class Edit extends Component
 
     public $name = '';
     public $biography = '';
-    public $birth_date = '';
-    public $death_date = '';
+    public $birth_date;
+    public $death_date;
     public $birth_place = '';
     public $death_place = '';
 
@@ -35,8 +35,8 @@ class Edit extends Component
         return [
             'name' => 'required|string|max:255',
             'biography' => 'nullable|string',
-            'birth_date' => ['nullable', new ValidPartialDate(1800, now()->year)],
-            'death_date' => ['nullable', new ValidPartialDate(1800, now()->year)],
+            'birth_date' => ['nullable', 'date', 'before:today'],
+            'death_date' => ['nullable', 'date', 'after:birth_date'],
             'birth_place' => ['nullable', 'string', 'max:255'],
             'death_place' => ['nullable', 'string', 'max:255'],
             'new_main_image' => 'nullable|image|max:2048',
@@ -53,8 +53,8 @@ class Edit extends Component
         $this->actor = $actor;
         $this->name = $actor->name;
         $this->biography = $actor->biography;
-        $this->birth_date = $actor->birth_date;
-        $this->death_date = $actor->death_date;
+        $this->birth_date = $actor->birth_date?->format('Y-m-d');
+        $this->death_date = $actor->death_date?->format('Y-m-d');
         $this->birth_place = $actor->birth_place;
         $this->death_place = $actor->death_place;
         $this->content_items = $actor->contentItems()->pluck('content_items.id')->toArray();
@@ -65,12 +65,12 @@ class Edit extends Component
         $this->validate();
 
         // Extra check: death_date must be after birth_date
-        if ($this->birth_date && $this->death_date) {
-            if (strcmp($this->death_date, $this->birth_date) <= 0) {
-                $this->addError('death_date', __('validation.custom.partial_date.after_birth'));
-                return;
-            }
-        }
+        // if ($this->birth_date && $this->death_date) {
+        //     if (strcmp($this->death_date, $this->birth_date) <= 0) {
+        //         $this->addError('death_date', __('validation.custom.partial_date.after_birth'));
+        //         return;
+        //     }
+        // }
 
         // додаємо нове головне фото
         if ($this->new_main_image) {

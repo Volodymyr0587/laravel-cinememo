@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasImages;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -33,53 +34,6 @@ class Actor extends Model
         return $this->belongsToMany(ContentItem::class, 'actor_content_item');
     }
 
-    public function getFormattedBirthDateAttribute(): string
-    {
-        $date = $this->birth_date;
-
-        if (preg_match('/^\d{4}$/', $date)) {
-            return $date; // just the year, no localization needed
-        }
-
-        if (preg_match('/^\d{4}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m', $date)
-                ->locale(app()->getLocale()) // <- set locale
-                ->isoFormat('YYYY MMMM'); // localized month
-        }
-
-        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)
-                ->locale(app()->getLocale()) // <- set locale
-                ->isoFormat('LL'); // localized date
-        }
-
-        return $date;
-    }
-
-
-    public function getFormattedDeathDateAttribute(): string
-    {
-        $date = $this->death_date;
-
-        if (preg_match('/^\d{4}$/', $date)) {
-            return $date; // just the year, no localization needed
-        }
-
-        if (preg_match('/^\d{4}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m', $date)
-                ->locale(app()->getLocale()) // <- set locale
-                ->isoFormat('YYYY MMMM'); // localized month
-        }
-
-        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)
-                ->locale(app()->getLocale()) // <- set locale
-                ->isoFormat('LL'); // localized date
-        }
-
-        return $date;
-    }
-
     protected static function boot()
     {
         parent::boot();
@@ -102,6 +56,39 @@ class Actor extends Model
         });
     }
 
+    /**
+     * Age in years (from birth_date to death_date or today).
+     */
+    protected function age(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->birth_date) {
+                    return null;
+                }
+
+                $endDate = $this->death_date ?? now();
+
+                return floor($this->birth_date->diffInYears($endDate));
+            },
+        );
+    }
+
+    /**
+     * Example: "1967– (57 years)" or "1967–2020 (53 years)".
+     */
+    protected function formattedAge(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->birth_date
+                ? ($this->death_date
+                    ? $this->birth_date->year . '–' . $this->death_date->year . ' (' . $this->age . ' ' . __('years') . ')'
+                    : $this->birth_date->year . '– ... (' . $this->age . ' ' . __('years') . ')'
+                )
+                : null,
+        );
+    }
+
      // Helper method to get display name with distinguishing info
     public function getDisplayNameAttribute(): string
     {
@@ -109,7 +96,7 @@ class Actor extends Model
 
         // Add birth year if available to distinguish actors with same name
         if ($this->birth_date) {
-            $displayName .= ' (' . $this->birth_date . ')';
+            $displayName .= ' (' . $this->birth_date->format('M-d-Y') . ')';
         }
 
         // If still not unique within user's actors, add birth place
@@ -128,5 +115,13 @@ class Actor extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'birth_date' => 'date',
+            'death_date' => 'date',
+        ];
     }
 }

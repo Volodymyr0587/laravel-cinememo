@@ -16,6 +16,7 @@ return [
     "birth_place" => "Birth place",
     "death_date" => "Death date",
     "death_place" => "Death place",
+    "age" => "Age",
     "known_for" => "Known for",
     "no_works" => "No works",
 
