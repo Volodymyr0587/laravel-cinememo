@@ -8,4 +8,6 @@ return [
     "last_updated" => "Last updated",
     "last_trashed" => "Last trashed",
     "nothing_in_collection" => "There is currently nothing in your collection",
+    "recommendations" => "Because you liked these genres, you might enjoy",
+    "nothing_in_recommendations" => "There is currently nothing in your recommendations",
 ];
