@@ -16,21 +16,17 @@
 
 ---
 
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-02.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-03.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-04.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-05.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-06.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-07.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-08.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-09.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-10.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-11.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-12.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-13.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-14.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-15.png)
-![Welcome page](public/images/app-screenshots/screnshot-for-readme-16.png)
+![Articles page](public/images/app-screenshots/screnshot-for-readme-05.png)
+![Show article page](public/images/app-screenshots/screnshot-for-readme-06.png)
+![Image slider](public/images/app-screenshots/screnshot-for-readme-07.png)
+![Comment section](public/images/app-screenshots/screnshot-for-readme-08.png)
+![video section](public/images/app-screenshots/screnshot-for-readme-09.png)
+![Show content page](public/images/app-screenshots/screnshot-for-readme-10.png)
+![Create content page](public/images/app-screenshots/screnshot-for-readme-11.png)
+![Genres](public/images/app-screenshots/screnshot-for-readme-12.png)
+![Validation messages](public/images/app-screenshots/screnshot-for-readme-14.png)
+![Category page](public/images/app-screenshots/screnshot-for-readme-15.png)
+![Lang switcher](public/images/app-screenshots/screnshot-for-readme-16.png)
 
 
 
