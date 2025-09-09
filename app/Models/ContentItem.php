@@ -6,14 +6,17 @@ use App\Traits\HasImages;
 use Illuminate\Support\Str;
 use App\Enums\ContentStatus;
 use Illuminate\Support\Carbon;
+use App\Observers\ContentItemObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[ObservedBy([ContentItemObserver::class])]
 class ContentItem extends Model
 {
     use SoftDeletes, HasImages;
