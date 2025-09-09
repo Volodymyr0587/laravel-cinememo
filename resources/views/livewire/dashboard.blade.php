@@ -79,7 +79,7 @@
             {{ __("dashboard.recommendations") }}:
             @if($topGenres->isNotEmpty())
                 <p class="mb-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    Based on your top genres:
+                    {{ __("dashboard.recommendation_subtitle") }}:
                     <span class="font-medium">
                         {{ $topGenres->pluck('name')->join(', ') }}
                     </span>
