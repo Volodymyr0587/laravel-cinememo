@@ -18,6 +18,11 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
                 Route::get('roles/{role}/edit', Admin\Roles\Edit::class)->name('roles.edit');
 
                 Route::get('articles/deleted', Articles\Deleted::class)->name('articles.deleted');
+
+                Route::get('genres', Admin\Genres\Index::class)->name('genres.index'); // Route name: 'admin.genres.index'
+                Route::get('genres/create', Admin\Genres\Create::class)->name('genres.create');
+                Route::get('genres/{genre}/edit', Admin\Genres\Edit::class)->name('genres.edit');
+                Route::get('genres/{genre}', Admin\Genres\Show::class)->name('genres.show');
             }
         );
 });

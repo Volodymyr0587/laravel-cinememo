@@ -14,4 +14,5 @@ return [
     "user-management" => "Керування користувачами",
     "roles-management" => "Керування ролями",
     "articles-management" => "Керування статтями",
+    "genres-management" => "Керування жанрами",
 ];

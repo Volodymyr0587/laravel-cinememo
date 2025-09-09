@@ -156,6 +156,12 @@
 
                         <flux:menu.separator />
 
+                        <flux:menu.radio.group>
+                            <flux:menu.item :href="route('admin.genres.index')" icon="paint-brush" wire:navigate>{{ __('layouts-app-header.genres-management') }}</flux:menu.item>
+                        </flux:menu.radio.group>
+
+                        <flux:menu.separator />
+
                     @endhasanyrole
 
                     @hasrole('writer|admin|super_admin')

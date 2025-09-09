@@ -46,7 +46,7 @@ class GenreSeeder extends Seeder
             'Steampunk', 'Dieselpunk', 'Supernatural Romance',
             'Horror Comedy', 'Sci-Fi Western', 'Fantasy Adventure',
             'Action Comedy', 'Romantic Thriller', 'Sci-Fi Horror',
-            'Dark Fantasy', 'Post-Apocalyptic Horror',
+            'Post-Apocalyptic Horror',
             'Mystery Thriller', 'Psychological Drama',
         ];
 

@@ -14,4 +14,5 @@ return [
     "user-management" => "User management",
     "roles-management" => "Roles management",
     "articles-management" => "Articles management",
+    "genres-management" => "Genres management",
 ];
