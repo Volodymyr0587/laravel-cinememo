@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class Dashboard extends Component
 {
     public $recommendations;
+    public $topGenres;
 
-    public function mount(RecommendationService $recommendations)
+    public function mount()
     {
-        $this->recommendations = $recommendations->getRecommendationsForUser(Auth::user());
+        $result = app(RecommendationService::class)->getRecommendationsForUser(auth()->user());
+
+        $this->recommendations = $result['recommendations'];
+        $this->topGenres = $result['genres'];
     }
 
     #[Computed]

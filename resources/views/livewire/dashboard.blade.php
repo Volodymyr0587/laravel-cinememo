@@ -77,6 +77,14 @@
 
         <h2 class="text-2xl font-semibold mt-3 mb-3 text-neutral-800 dark:text-neutral-100">
             {{ __("dashboard.recommendations") }}:
+            @if($topGenres->isNotEmpty())
+                <p class="mb-2 text-sm text-neutral-600 dark:text-neutral-400">
+                    Based on your top genres:
+                    <span class="font-medium">
+                        {{ $topGenres->pluck('name')->join(', ') }}
+                    </span>
+                </p>
+            @endif
         </h2>
 
         <div
