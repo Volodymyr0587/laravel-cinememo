@@ -19,8 +19,12 @@ class YoutubeUrl implements ValidationRule
         }
     }
 
-    public static function extractId(string $url): ?string
+    public static function extractId(?string $url): ?string
     {
+        if (!$url) {
+           return null;
+        }
+
         if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/', $url, $matches)) {
             return $matches[1];
         }

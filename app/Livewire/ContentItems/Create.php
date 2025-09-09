@@ -65,7 +65,9 @@ class Create extends Component
     {
         $this->validate();
 
-        $videoId = YoutubeUrl::extractId($this->video_url);
+        $videoId = $this->video_url
+            ? YoutubeUrl::extractId($this->video_url)
+            : null;
 
         $durationInSeconds = ($this->hours ?? 0) * 3600
                    + ($this->minutes ?? 0) * 60
