@@ -9,7 +9,6 @@ use App\Models\ContentItem;
 use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
-use App\Rules\ValidPartialDate;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 
@@ -49,7 +48,7 @@ class Edit extends Component
             'hours' => 'nullable|integer|min:0',
             'minutes' => 'nullable|integer|min:0|max:59',
             'seconds' => 'nullable|integer|min:0|max:59',
-            'release_date' => ['nullable', 'string', new ValidPartialDate()],
+            'release_date' => ['nullable', 'date'],
             'new_main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
             'is_public' => ['boolean'],
@@ -73,7 +72,7 @@ class Edit extends Component
         $this->hours = $contentItem->hours;
         $this->minutes = $contentItem->minutes;
         $this->seconds = $contentItem->seconds;
-        $this->release_date = $contentItem->release_date;
+        $this->release_date = $contentItem->release_date?->format('Y-m-d');
         $this->status = $contentItem->status->value;
         $this->is_public = $contentItem->is_public;
         $this->genres = $contentItem->genres()->pluck('genres.id')->toArray();
@@ -146,7 +145,7 @@ class Edit extends Component
             'video_url' => $this->video_url,
             'video_id'  => $videoId,
             'duration_in_seconds' => $durationInSeconds ?: null,
-            'release_date' => $this->release_date,
+            'release_date' => $this->release_date ? \Carbon\Carbon::parse($this->release_date) : null,
             'status' => $this->status,
             'is_public' => $this->is_public,
         ]);

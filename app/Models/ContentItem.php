@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Traits\HasImages;
+use App\Helpers\DateHelper;
 use Illuminate\Support\Str;
 use App\Enums\ContentStatus;
-use Illuminate\Support\Carbon;
 use App\Observers\ContentItemObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -89,25 +89,7 @@ class ContentItem extends Model
 
     public function getFormattedReleaseDateAttribute(): string
     {
-        $date = $this->release_date;
-
-        if (preg_match('/^\d{4}$/', $date)) {
-            return $date;
-        }
-
-        if (preg_match('/^\d{4}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m', $date)
-                ->locale(app()->getLocale()) // <- set locale
-                ->isoFormat('YYYY MMMM'); // localized month
-        }
-
-        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-            return \Carbon\Carbon::createFromFormat('Y-m-d', $date)
-                ->locale(app()->getLocale()) // <- set locale
-                ->isoFormat('LL'); // localized date
-        }
-
-        return $date;
+        return DateHelper::formatReleaseDate((string) $this->release_date);
     }
 
     /**
@@ -203,6 +185,7 @@ class ContentItem extends Model
     }
 
     protected $casts = [
+        'release_date' => 'date',
         'status' => ContentStatus::class,
         'is_public' => 'boolean',
     ];

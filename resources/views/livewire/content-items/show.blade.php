@@ -29,7 +29,7 @@
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">Release date:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                        {{ $contentItem->formatted_release_date }}
+                        {{ $contentItem->release_date->format('Y-M-d') }}
                     </span>
                 </div>
                 @endif

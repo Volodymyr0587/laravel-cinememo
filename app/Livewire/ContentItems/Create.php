@@ -8,7 +8,6 @@ use App\Rules\YoutubeUrl;
 use App\Models\ContentType;
 use App\Enums\ContentStatus;
 use Livewire\WithFileUploads;
-use App\Rules\ValidPartialDate;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 
@@ -49,7 +48,7 @@ class Create extends Component
             'hours' => 'nullable|integer|min:0',
             'minutes' => 'nullable|integer|min:0|max:59',
             'seconds' => 'nullable|integer|min:0|max:59',
-            'release_date' => ['nullable', 'string', new ValidPartialDate()],
+            'release_date' => ['nullable', 'date'],
             'main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
             'is_public' => ['boolean'],
@@ -81,7 +80,7 @@ class Create extends Component
             'video_url' => $this->video_url,
             'video_id'  => $videoId,
             'duration_in_seconds' => $durationInSeconds ?: null,
-            'release_date' => $this->release_date,
+            'release_date' => $this->release_date ? \Carbon\Carbon::parse($this->release_date) : null,
             'status' => $this->status,
             'is_public' => $this->is_public,
             // Тимчасово залишаємо image поле порожнім для нової системи

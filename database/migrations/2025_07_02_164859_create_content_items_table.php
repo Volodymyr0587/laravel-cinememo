@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('video_url')->nullable();
             $table->string('video_id', 20)->nullable();
             $table->integer('duration_in_seconds')->nullable();
-            $table->string('release_date')->nullable();
+            $table->date('release_date')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ContentStatus::values())->default(ContentStatus::WillWatch->value);
             $table->boolean('is_public')->default(false);
