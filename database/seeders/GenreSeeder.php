@@ -38,7 +38,7 @@ class GenreSeeder extends Seeder
             'Jukebox Musical', 'Rock Opera', 'Bollywood',
             'Nature Doc', 'Biography Doc', 'True Crime Doc', 'Mockumentary', 'Political Drama',
             'Crime Drama', 'Social Drama', 'Anthology', 'Body Horror', 'Occult Horror',
-            'Folk Horror', 'Cosmic Horror (Lovecraftian)',
+            'Folk Horror', 'Cosmic Horror',
             'Legal Thriller', 'Erotic Thriller', 'Surveillance Thriller', 'Eco-Thriller',
             'Alternate History', 'Military Sci-Fi', 'Hard Sci-Fi', 'Mythology / Folklore',
             'Gaslamp Fantasy', 'Arthouse', 'Road Movie', 'Travelogue', 'Experimental Animation',
