@@ -42,7 +42,7 @@ class GenreSeeder extends Seeder
             'Legal Thriller', 'Erotic Thriller', 'Surveillance Thriller', 'Eco-Thriller',
             'Alternate History', 'Military Sci-Fi', 'Hard Sci-Fi', 'Mythology / Folklore',
             'Gaslamp Fantasy', 'Arthouse', 'Road Movie', 'Travelogue', 'Experimental Animation',
-            'Comedy Horror Romance (popular in anime & K-drama)', 'Fantasy Romance',
+            'Comedy Horror Romance', 'Fantasy Romance',
             'Sci-Fi Comedy', 'Mystery Comedy', 'Action Horror', 'Fantasy Mystery',
 
             // Music-Related
