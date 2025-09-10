@@ -17,7 +17,8 @@ class GenreSeeder extends Seeder
             // Main
             'Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Mystery',
             'Romance', 'Sci-Fi', 'Thriller', 'Crime', 'Historical', 'War',
-            'Western', 'Musical', 'Documentary', 'Animation',
+            'Western', 'Musical', 'Documentary', 'Animation', 'Family',
+            'Kids', 'Coming-of-Age', 'Experimental', 'Silent Film', 'Short Film',
 
             // Subgenres
             'Martial Arts', 'Superhero', 'Spy', 'Disaster', 'Survival',
@@ -35,12 +36,23 @@ class GenreSeeder extends Seeder
             'Anti-War', 'Resistance', 'Spy War',
             'Classic Western', 'Neo-Western', 'Spaghetti Western', 'Samurai Western',
             'Jukebox Musical', 'Rock Opera', 'Bollywood',
-            'Nature Doc', 'Biography Doc', 'True Crime Doc', 'Mockumentary',
+            'Nature Doc', 'Biography Doc', 'True Crime Doc', 'Mockumentary', 'Political Drama',
+            'Crime Drama', 'Social Drama', 'Anthology', 'Body Horror', 'Occult Horror',
+            'Folk Horror', 'Cosmic Horror (Lovecraftian)',
+            'Legal Thriller', 'Erotic Thriller', 'Surveillance Thriller', 'Eco-Thriller',
+            'Alternate History', 'Military Sci-Fi', 'Hard Sci-Fi', 'Mythology / Folklore',
+            'Gaslamp Fantasy', 'Arthouse', 'Road Movie', 'Travelogue', 'Experimental Animation',
+            'Comedy Horror Romance (popular in anime & K-drama)', 'Fantasy Romance',
+            'Sci-Fi Comedy', 'Mystery Comedy', 'Action Horror', 'Fantasy Mystery',
+
+            // Music-Related
+            'Concert Film', 'Music Video Compilation',
 
             // Anime/Manga
             'Shonen', 'Shojo', 'Seinen', 'Josei', 'Isekai',
             'Slice of Life', 'Mecha', 'Magical Girl', 'Harem', 'Reverse Harem',
-            'Sports', 'Idol/Music',
+            'Sports', 'Idol/Music', 'Shojo-ai', 'Shonen-ai',
+            'Ecchi', 'Doujinshi', 'Anthropomorphic / Kemono', 'Game Adaptation',
 
             // Hybrid
             'Steampunk', 'Dieselpunk', 'Supernatural Romance',
