@@ -28,7 +28,8 @@ class ContentSeeder extends Seeder
                         'images/The-Shawshank-Redemption/The-Shawshank-Redemption-2.jpg',
                         'images/The-Shawshank-Redemption/The-Shawshank-Redemption-3.jpg',
                         'images/The-Shawshank-Redemption/The-Shawshank-Redemption-4.jpg'
-                    ]
+                    ],
+                    'release_date' => '1999-10-14',
                 ],
                 [
                     'title' => 'Inception',
@@ -39,7 +40,8 @@ class ContentSeeder extends Seeder
                         'images/Inception/Inception-2.jpg',
                         'images/Inception/Inception-3.jpeg',
                         'images/Inception/Inception-4.jpeg',
-                    ]
+                    ],
+                    'release_date' => '2010-07-16',
                 ],
             ],
             'Serial' => [
@@ -52,7 +54,8 @@ class ContentSeeder extends Seeder
                         'images/Breaking-Bad/breaking-bad-1.jpeg',
                         'images/Breaking-Bad/breaking-bad-2.jpg',
                         'images/Breaking-Bad/breaking-bad-3.jpg',
-                    ]
+                    ],
+                     'release_date' => 'January 20, 2008',
                 ],
                 [
                     'title' => 'Stranger Things',
@@ -63,7 +66,8 @@ class ContentSeeder extends Seeder
                         'images/Stranger-Things/stranger-things-1.jpg',
                         'images/Stranger-Things/stranger-things-2.jpeg',
                         'images/Stranger-Things/stranger-things-3.png',
-                    ]
+                    ],
+                    'release_date' => 'July 15, 2016',
                 ],
             ],
             'Anime' => [
@@ -139,6 +143,7 @@ class ContentSeeder extends Seeder
                     'title' => $itemData['title'],
                     'description' => $itemData['description'],
                     'status' => $itemData['status'],
+                    'release_date' => $itemData['release_date'] ?? null
                 ]);
 
                 // Додаємо головне зображення через поліморфну систему
