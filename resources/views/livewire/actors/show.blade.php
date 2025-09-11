@@ -48,12 +48,14 @@
                 </div>
                 @endif
 
+                @if ($actor->formatted_age)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">Age:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                          {{ $actor->formatted_age }}
                     </span>
                 </div>
+                @endif
 
                 @if ($actor->death_place)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
