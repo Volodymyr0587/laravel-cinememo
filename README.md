@@ -118,6 +118,7 @@ Register a new user and start managing your favorite content.
 
 ## Examples of application appearance
 
+![Dashboard page](public/images/app-screenshots/screnshot-for-readme-00.png)
 ![Articles page](public/images/app-screenshots/screnshot-for-readme-05.png)
 ![Show article page](public/images/app-screenshots/screnshot-for-readme-06.png)
 ![Image slider](public/images/app-screenshots/screnshot-for-readme-07.png)
