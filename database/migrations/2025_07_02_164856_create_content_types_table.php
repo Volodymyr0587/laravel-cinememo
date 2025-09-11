@@ -15,8 +15,10 @@ return new class extends Migration
         Schema::create('content_types', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('color', 7)->default('#3b82f6');
+            // Unique per user
+            $table->unique(['user_id', 'name']);
             $table->timestamps();
         });
     }
