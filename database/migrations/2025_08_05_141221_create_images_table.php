@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\ContentItem;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(ContentItem::class)->constrained()->cascadeOnDelete();
             $table->string('path');
+             // Add polymorphic columns
+            $table->morphs('imageable'); // Це створить imageable_id та imageable_type
+            // Add enum for image type (main or additional)
+            $table->enum('type', ['main', 'additional'])->default('additional');
+            // Add index for best productivity
+            $table->index(['imageable_type', 'imageable_id', 'type']);
             $table->timestamps();
         });
     }
