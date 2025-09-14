@@ -64,7 +64,7 @@ class Create extends Component
         // Зберігаємо tags
         $article->syncTags($this->tags);
 
-        session()->flash('message', "Article $article->name has been added to your list of actors.");
+        session()->flash('message', "Article $article->name has been created.");
 
         return redirect()->route('writer.articles.index');
     }
