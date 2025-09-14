@@ -2,18 +2,18 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Categories') }}
+            {{ __('content_types/main.categories') }}
             @if($search)
                 <flux:button
                     wire:click.prevent="clearFilters"
                     wire:key="index-content-types-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('content_types/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
-        <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('Add New Category') }}</x-button>
+        <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('content_types/main.add_new_category') }}</x-button>
     </div>
 
 
@@ -27,9 +27,9 @@
                     <div class="mb-4">
                         <flux:input
                             wire:model.live="search"
-                            :label="__('Search')"
+                            :label="__('content_types/main.search')"
                             type="text"
-                            :placeholder="__('Search category...')"
+                            :placeholder="__('content_types/main.search_category')"
                         />
                     </div>
 
@@ -37,10 +37,10 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Items Count</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_types/main.name') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_types/main.items_count') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_types/main.created') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_types/main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -55,20 +55,23 @@
                                             {{ $contentType->content_items_count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $contentType->created_at->format('M d, Y') }}
+                                            {{ $contentType->created_at->translatedFormat('d F Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('content-types.edit', $contentType) }}"
-                                               class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
+                                            <a href="{{ route('content-types.edit', $contentType) }}" wire:navigate
+                                               class="text-indigo-600 hover:text-indigo-900 mr-4">{{ __('content_types/main.edit') }}</a>
                                             <button wire:click="delete({{ $contentType->id }})"
-                                                    wire:confirm="Are you sure you want to delete {{ $contentType->name }} category?"
-                                                    class="text-red-600 hover:text-red-900 hover:cursor-pointer">Delete</button>
+                                                    wire:confirm="{{ __("content_types/main.delete_confirm_message") }}"
+                                                    class="text-red-600 hover:text-red-900 hover:cursor-pointer">{{ __('content_types/main.delete') }}</button>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                                            {{ __("No categories found") }}.
+                                            <div class="col-span-full text-center py-8">
+                                                <p>{{ __('content_types/main.no_categories_found') }}.</p>
+                                                <flux:link :href="route('content-types.create')" wire:navigate>{{ __("content_types/main.add_first_category") }}</flux:link>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforelse
