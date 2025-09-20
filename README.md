@@ -11,8 +11,23 @@
 - 🏷️ Add genres, statuses (e.g., Watching, Watched), and tags
 - 📁 Upload related images or posters
 - 📊 Filter and search through your library
+- 🌟 Recommendation system based on your most favorite genres
+- 💬 Comment system with likes
+- 🔒 Public and private content visibility
+- 📄 Articles 
 - 🌗 Light & dark mode ready (optional)
 - 🔐 User authentication and personal data separation
+
+---
+
+## 🛡️ Roles & Permissions
+
+The application includes a role-based management system:
+
+- **Super Admin**: Full system access, manage all users, roles, and content  
+- **Admin**: Manage categories, content items, articles, and moderate user activity  
+- **Writer**: Create and manage their own content and articles  
+- **User**: Create personal notes, manage their media library, comment, and interact with others  
 
 ---
 
