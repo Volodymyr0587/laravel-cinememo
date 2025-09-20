@@ -14,7 +14,13 @@ class Index extends Component
 
     public function clearFilters(): void
     {
-        $this->search = '';
+        $this->reset(['search']);
+        $this->resetPage();
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
     }
 
     public function delete(int $genreId)

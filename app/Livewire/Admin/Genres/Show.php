@@ -16,6 +16,19 @@ class Show extends Component
         $this->genre = $genre;
     }
 
+    public function delete(int $genreId)
+    {
+        $genre = Genre::findOrFail($genreId);
+
+        $this->authorize('delete', $genre);
+
+        $genre->delete();
+
+        session()->flash('message', "Genre '{$genre->name}' deleted successfully.");
+
+        return redirect()->route('admin.genres.index');
+    }
+
     public function render()
     {
         return view('livewire.admin.genres.show');

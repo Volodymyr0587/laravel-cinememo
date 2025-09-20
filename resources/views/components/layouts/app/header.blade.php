@@ -162,6 +162,12 @@
 
                         <flux:menu.separator />
 
+                        <flux:menu.radio.group>
+                            <flux:menu.item :href="route('admin.professions.index')" icon="identification" wire:navigate>{{ __('layouts-app-header.professions-management') }}</flux:menu.item>
+                        </flux:menu.radio.group>
+
+                        <flux:menu.separator />
+
                     @endhasanyrole
 
                     @hasrole('writer|admin|super_admin')

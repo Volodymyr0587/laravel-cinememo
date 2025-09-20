@@ -14,6 +14,7 @@ class ProfessionSeeder extends Seeder
     public function run(): void
     {
         $professions = [
+            'Actor',
             // Development and Pre-Production
             'Executive Producer',
             'Producer',

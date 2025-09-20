@@ -23,6 +23,11 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
                 Route::get('genres/create', Admin\Genres\Create::class)->name('genres.create');
                 Route::get('genres/{genre}/edit', Admin\Genres\Edit::class)->name('genres.edit');
                 Route::get('genres/{genre}', Admin\Genres\Show::class)->name('genres.show');
+
+                Route::get('professions', Admin\Professions\Index::class)->name('professions.index'); // Route name: 'admin.professions.index'
+                Route::get('professions/create', Admin\Professions\Create::class)->name('professions.create');
+                Route::get('professions/{profession}/edit', Admin\Professions\Edit::class)->name('professions.edit');
+                Route::get('professions/{profession}', Admin\Professions\Show::class)->name('professions.show');
             }
         );
 });

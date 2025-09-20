@@ -15,4 +15,5 @@ return [
     "roles-management" => "Керування ролями",
     "articles-management" => "Керування статтями",
     "genres-management" => "Керування жанрами",
+    "professions-management" => "Керування професіями",
 ];
