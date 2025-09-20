@@ -53,11 +53,19 @@ class RolesAndPermissionsSeeder extends Seeder
         $superAdmin->assignRole('super_admin');
 
         // Create Admin user and assign Admin role to a it
-        $user = \App\Models\User::factory()->create([
+        $admin = \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password123'),
         ]);
-        $user->assignRole('admin');
+        $admin->assignRole('admin');
+
+        // Create Writer user and assign Writer role to a it
+        $writer = \App\Models\User::factory()->create([
+            'name' => 'Writer',
+            'email' => 'writer@gmail.com',
+            'password' => bcrypt('password123'),
+        ]);
+        $writer->assignRole('writer');
     }
 }

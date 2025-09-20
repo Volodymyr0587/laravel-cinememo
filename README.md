@@ -109,21 +109,23 @@ Using SQLite for simplicity. Update your .env file accordingly:
 
 ```DB_CONNECTION=sqlite```
 
-5. Run migrations
-
-```php artisan migrate:fresh```
-
-6. [OPTIONAL] Run migrations with seeder
+5. Run migrations with seeders
 
 ```php artisan migrate:fresh --seed```
 
-This will create user (email: volodymyr@gmail.com, password: password123) and some data to explore
+This will create 
+- `Super admin` user (email: superadmin@gmail.com, password: `password123`)
+- `Admin` user (email: admin@gmail.com, password: `password123`)
+- `Writer` user (email: writer@gmail.com, password: `password123`)
+- `Regular user` (email: volodymyr@gmail.com, password: `password123`) 
 
-7. Create a symbolic link for storage
+and some data to explore for Regular user.
+
+6. Create a symbolic link for storage
 
 ```php artisan storage:link```
 
-8. Serve the application
+7. Serve the application
 
     ```php artisan serve```
 
