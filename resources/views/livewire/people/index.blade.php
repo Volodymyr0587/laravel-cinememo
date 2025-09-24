@@ -1,0 +1,242 @@
+<div>
+
+    <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
+            {{ __('people/main.people') }}
+            @if($contentItemFilter || $search)
+                <flux:button
+                    wire:click="clearFilters"
+                    class="ml-2 hover:cursor-pointer"
+                >
+                    {{ __('people/main.clear_filters') }}
+                </flux:button>
+            @endif
+        </h2>
+        <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
+            {{-- <flux:button
+                :href="route('content-items.export')" class="order-2 sm:order-none"
+                icon:trailing="arrow-down-tray"
+            >
+                {{ __('Export to XLSX') }}
+            </flux:button>
+            <flux:button
+                :href="route('content-items.export-pdf')" class="order-3 sm:order-none"
+                icon:trailing="arrow-down-tray"
+                target="_blank"
+            >
+               {{ __('Export to PDF') }}
+            </flux:button> --}}
+            <x-button href="{{ route('people.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('people/main.add_new_person') }}</x-button>
+        </div>
+    </div>
+
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="overflow-hidden dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+                <div class="p-6">
+
+                    <x-flash-message />
+
+                    <!-- Filters -->
+                    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <flux:input
+                                wire:model.live="search"
+                                :label="__('people/main.search')"
+                                type="text"
+                                :placeholder="__('people/main.search_person')"
+                            />
+                        </div>
+                        {{-- <div>
+                            <flux:select wire:model.live="genreFilter" :label="__('Genre')">
+                                <option value="">All Genres</option>
+                                @foreach($genres as $genre)
+                                    <option value="{{ $genre->id }}">{{ __($genre->name) }}</option>
+                                @endforeach
+                            </flux:select>
+                        </div>
+                        <div>
+                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
+                                <option value="">All Statuses</option>
+                                @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
+                                    <option value="{{ $value }}">{{ __($label) }}</option>
+                                @endforeach
+                            </flux:select>
+                        </div> --}}
+                        <div>
+                            <flux:select wire:model.live="contentItemFilter" :label="__('people/main.content')">
+                                <option value="">{{ __("people/main.all_content") }}</option>
+                                @foreach($contentItems as $contentItem)
+                                    <option value="{{ $contentItem->id }}">{{ $contentItem->title }}</option>
+                                @endforeach
+                            </flux:select>
+                        </div>
+                    </div>
+
+                    <!-- People Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        @forelse($people as $person)
+                            <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
+                                <a href="{{ route('people.show', $person) }}"  wire:navigate>
+                                    @php
+                                        $defaultImagePath = public_path('images/default-person.png');
+                                    @endphp
+
+                                    @if($person->main_image_url)
+                                        <img src="{{ $person->main_image_url }}" alt="{{ $person->name }}"
+                                            class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
+                                    @else
+                                        @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
+                                            <img src="{{ asset('images/default-person.png') }}" alt="{{ $person->name }}"
+                                                class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
+                                        @else
+                                            <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
+                                                <span class="text-gray-500 dark:text-gray-700">{{ __("people/main.no_mage") }}</span>
+                                            </div>
+                                        @endif
+                                    @endif
+                                </a>
+
+                                <div class="p-4">
+                                    <a href="{{ route('people.show', $person) }}"  wire:navigate
+                                        class="font-semibold text-lg text-gray-800 dark:text-white mb-2 hover:underline">
+                                        {{ $person->name }}
+                                    </a>
+
+                                    @if ($person->birth_date)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("people/main.birth_date") }}:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ $person->birth_date->format('M-d-Y') }}
+                                        </span>
+                                    </div>
+                                    @endif
+
+                                    @if ($person->birth_place)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("people/main.birth_place") }}:</span>
+                                        <a href="https://www.google.com/maps/search/?api=1&query={{ $person->birth_place }}" target="_blank"
+                                            class="px-2 py-1 rounded text-xs font-bold
+                                                bg-gray-900 text-white
+                                                dark:bg-white dark:text-gray-900
+                                                hover:bg-gray-700 dark:hover:bg-gray-200
+                                                hover:shadow-lg hover:scale-105
+                                                transition duration-300 ease-out transform">
+                                            {{ $person->birth_place }}
+                                        </a>
+                                    </div>
+                                    @endif
+
+                                    @if ($person->death_date)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("people/main.death_date") }}:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ $person->death_date->format('M-d-Y') }}
+                                        </span>
+                                    </div>
+                                    @endif
+
+                                    @if ($person->formatted_age)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("people/main.age") }}:</span>
+                                        <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                            {{ $person->formatted_age }}
+                                        </span>
+                                    </div>
+                                    @endif
+
+                                    @if ($person->death_place)
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                                        <span class="font-medium">{{ __("people/main.death_place") }}:</span>
+                                        <a href="https://www.google.com/maps/search/?api=1&query={{ $person->death_place }}" target="_blank"
+                                            class="px-2 py-1 rounded text-xs font-bold
+                                                bg-gray-900 text-white
+                                                dark:bg-white dark:text-gray-900
+                                                hover:bg-gray-700 dark:hover:bg-gray-200
+                                                hover:shadow-lg hover:scale-105
+                                                transition duration-300 ease-out transform">
+                                            {{ $person->death_place }}
+                                        </a>
+                                    </div>
+                                    @endif
+
+
+                                    <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
+                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("people/main.known_for") }}:</span>
+                                        @php
+                                            $grouped = $person->contentItems->groupBy('id');
+                                        @endphp
+
+                                        @forelse ($grouped as $contentItemId => $items)
+                                            @php
+                                                $contentItem = $items->first();
+                                                $professions = $items->map(fn($i) => $i->pivot?->profession?->name)->filter()->unique();
+                                            @endphp
+
+                                            <span
+                                                class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
+                                                    hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
+                                                    text-center cursor-pointer select-none shadow-sm"
+                                                wire:click="$set('contentItemFilter', {{ $contentItem->id }})"
+                                            >
+                                                {{ $contentItem->title }}
+                                            </span>
+
+                                            @if($professions->isNotEmpty())
+                                                <small class="ml-2 text-gray-600 dark:text-gray-300">
+                                                    ({{ $professions->join(', ') }})
+                                                </small>
+                                            @endif
+                                        @empty
+                                            <span class="font-semibold italic text-xs dark:text-white">
+                                                {{ __("people/main.no_works") }}
+                                            </span>
+                                        @endforelse
+                                    </div>
+
+{{--
+                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
+                                        <span class="font-medium">Status:</span>
+                                        <span wire:click="$set('statusFilter', '{{ $person->status->value }}')" @class([
+                                            'px-2 py-1 rounded text-xs font-bold hover:cursor-pointer',
+                                            'bg-green-500 text-white'  => $person->status === \App\Enums\ContentStatus::Watched,
+                                            'bg-blue-500 text-white'   => $person->status === \App\Enums\ContentStatus::Watching,
+                                            'bg-purple-500 text-white' => $person->status === \App\Enums\ContentStatus::WillWatch,
+                                            'bg-amber-500 text-black'  => $person->status === \App\Enums\ContentStatus::Waiting,
+                                        ])>
+                                            {{ \App\Enums\ContentStatus::labels()[$person->status->value] ?? ucfirst($person->status->value) }}
+                                        </span>
+                                    </div> --}}
+
+                                    @if($person->biography)
+                                        <p class="text-sm text-gray-600 dark:text-white mb-3">
+                                            {{ Str::limit($person->biography, 100) }}
+                                        </p>
+                                    @endif
+
+                                    <div class="flex justify-between items-center">
+                                        <flux:button href="{{ route('people.edit', $person) }}" wire:navigate>{{ __("people/main.edit") }}</flux:button>
+                                        <x-button wire:click="delete({{ $person->id }})"
+                                                wire:confirm="{{ __('people/main.delete_confirm_message') }}"
+                                                color="red" type="submit"
+                                                >{{ __("people/main.delete") }}</x-button>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-span-full text-center py-8">
+                                <p class="text-gray-500 text-lg">{{ __("people/main.no_people_found") }}.</p>
+                                <flux:link :href="route('people.create')" wire:navigate>{{ __("people/main.add_first_person") }}</flux:link>
+                            </div>
+                        @endforelse
+                    </div>
+
+                    <div class="mt-6">
+                        {{ $people->links('pagination.custom-tailwind') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

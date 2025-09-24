@@ -19,10 +19,10 @@ class Profession extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    // public function people(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Person::class, 'person_profession');
-    // }
+    public function people(): BelongsToMany
+    {
+        return $this->belongsToMany(Person::class, 'person_profession');
+    }
 
     protected function name(): Attribute
     {

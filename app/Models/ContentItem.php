@@ -56,6 +56,19 @@ class ContentItem extends Model
         return $this->belongsToMany(Actor::class, 'actor_content_item');
     }
 
+     /**
+     * The people that belong to the ContentItem
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function people(): BelongsToMany
+    {
+        return $this->belongsToMany(Person::class, 'content_item_person')
+            ->using(ContentItemPerson::class)
+            ->withPivot('profession_id')
+            ->withTimestamps();
+    }
+
 
     public function likes(): MorphMany
     {
