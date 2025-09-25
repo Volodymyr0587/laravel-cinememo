@@ -13,7 +13,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <flux:select wire:model="content_type_id" id="content_type_id"
-                                    :label="__('Category')">
+                                    :label="__('Category') . ' *'">
                                     <option value="">Select a category</option>
                                     @foreach($contentTypes as $contentType)
                                     <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
@@ -31,14 +31,14 @@
                         </div>
 
                         <div class="mt-4">
-                            <flux:input wire:model="title" :label="__('Title')" type="text" autocomplete="title"
+                            <flux:input wire:model="title" :label="__('Title') . ' *'" type="text" autocomplete="title"
                                 placeholder="The Lord of the Rings: The Fellowship of the Ring" />
                         </div>
 
                         <div class="mt-4">
                             <flux:input
                                 wire:model="release_date"
-                                :label="__('Release date')"
+                                :label="__('Release date') . ' **'"
                                 type="date"
                                 autocomplete="release_date"
                             />
@@ -276,6 +276,7 @@
                         <div class="my-12">
                             <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
                             <p class="mt-2 font-bold text-xs italic">* - {{ __("Required fields") }}</p>
+                            <p class="mt-2 font-bold text-xs italic">** - {{ __("Enter the full date (MM-DD-YYYY) or leave blank") }}</p>
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">

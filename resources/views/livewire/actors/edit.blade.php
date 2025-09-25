@@ -24,7 +24,7 @@
                         <div class="mt-4">
                             <flux:input
                                 wire:model="birth_date"
-                                :label="__('Birth date')"
+                                :label="__('Birth date') . ' **'"
                                 type="date"
                                 autocomplete="birth_date"
                             />
@@ -43,7 +43,7 @@
                          <div class="mt-4">
                             <flux:input
                                 wire:model="death_date"
-                                :label="__('Death date')"
+                                :label="__('Death date') . ' **'"
                                 type="date"
                                 autocomplete="death_date"
                             />

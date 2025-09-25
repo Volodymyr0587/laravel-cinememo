@@ -44,7 +44,7 @@
                         <div class="mt-4">
                             <flux:input
                                 wire:model="release_date"
-                                :label="__('Release date')"
+                                :label="__('Release date') . ' **'"
                                 type="date"
                                 autocomplete="release_date"
                             />
@@ -241,6 +241,7 @@
                         <div class="my-12">
                             <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
                             <p class="mt-2 font-bold text-xs italic">* - {{ __("Required fields") }}</p>
+                            <p class="mt-2 font-bold text-xs italic">** - {{ __("Enter the full date (MM-DD-YYYY) or leave blank") }}</p>
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
