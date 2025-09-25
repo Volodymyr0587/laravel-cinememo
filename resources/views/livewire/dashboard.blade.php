@@ -34,9 +34,9 @@
                 </div>
                 @endif
             </x-dashboard.card> --}}
-            <x-dashboard.card title="{{ __('dashboard.cast_and_crew') }}">
+            <x-dashboard.card title="{{ __('dashboard.total_cast_and_crew') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold">
-                    <flux:icon.list-bullet />{{ $stats->peopleCount }}
+                    <flux:icon.users />{{ $stats->peopleCount }}
                 </div>
                 @if ($stats->peopleCount)
                 <div class="text-gray-500 dark:text-gray-400">
