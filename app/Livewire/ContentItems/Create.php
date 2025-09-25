@@ -29,12 +29,15 @@ class Create extends Component
     public $is_public = false;
     public $additional_images = [];
     public $genres = [];
-    public $actors = [];
+    // public $actors = [];
+    public $selectedPeople = [];
+
 
     public function mount()
     {
         $this->genres = [];
-        $this->actors = [];
+        // $this->actors = [];
+        $this->selectedPeople = [];
     }
 
 
@@ -55,8 +58,9 @@ class Create extends Component
             'additional_images.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
-            'actors' => 'array',
-            'actors.*' => 'exists:actors,id',
+            // 'actors' => 'array',
+            // 'actors.*' => 'exists:actors,id',
+            'selectedPeople' => 'array',
         ];
     }
 
@@ -104,8 +108,26 @@ class Create extends Component
         }
 
         // Зберігаємо акторів
-        if (!empty($this->actors)) {
-            $contentItem->actors()->sync($this->actors);
+        // if (!empty($this->actors)) {
+        //     $contentItem->actors()->sync($this->actors);
+        // }
+
+        if (!empty($this->selectedPeople)) {
+            foreach ($this->selectedPeople as $key => $isSelected) {
+                if ($isSelected) {
+                    [$personId, $professionId] = explode('_', $key);
+
+                    // Check if this person-profession combination already exists
+                    $exists = $contentItem->people()
+                        ->wherePivot('profession_id', $professionId)
+                        ->where('person_id', $personId)
+                        ->exists();
+
+                    if (!$exists) {
+                        $contentItem->people()->attach($personId, ['profession_id' => $professionId]);
+                    }
+                }
+            }
         }
 
         session()->flash('message', 'Content item created successfully.');
@@ -117,8 +139,10 @@ class Create extends Component
     {
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
         $allGenres = Genre::orderBy('name')->get(['id', 'name']);;
-        $allUserActors = auth()->user()->actors()->with('mainImage')->orderBy('name')->get();
+        $professions = \App\Models\Profession::with(['people' => function ($q) {
+            $q->where('user_id', auth()->id());
+        }])->get();
 
-        return view('livewire.content-items.create', compact('contentTypes', 'allGenres', 'allUserActors'));
+        return view('livewire.content-items.create', compact('contentTypes', 'allGenres', 'professions'));
     }
 }

@@ -52,7 +52,7 @@ class Edit extends Component
 
     public function mount(Person $person)
     {
-        // $this->authorize('update', $person);
+        $this->authorize('update', $person);
 
         $this->person = $person;
         $this->name = $person->name;
@@ -93,8 +93,8 @@ class Edit extends Component
         $this->person->update([
             'name' => $this->name,
             'biography' => $this->biography,
-            'birth_date' => $this->birth_date,
-            'death_date' => $this->death_date,
+            'birth_date' => $this->birth_date ? \Carbon\Carbon::parse($this->birth_date) : null,
+            'death_date' => $this->death_date ? \Carbon\Carbon::parse($this->death_date) : null,
             'birth_place' => $this->birth_place,
             'death_place' => $this->death_place,
         ]);

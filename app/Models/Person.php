@@ -40,7 +40,8 @@ class Person extends Model
      */
     public function professions(): BelongsToMany
     {
-        return $this->belongsToMany(Profession::class)->withTimestamps();
+        return $this->belongsToMany(Profession::class, 'person_profession')
+            ->withTimestamps();
     }
 
     /**

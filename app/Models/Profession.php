@@ -21,7 +21,8 @@ class Profession extends Model
      */
     public function people(): BelongsToMany
     {
-        return $this->belongsToMany(Person::class, 'person_profession');
+        return $this->belongsToMany(Person::class, 'person_profession')
+            ->withTimestamps();
     }
 
     protected function name(): Attribute

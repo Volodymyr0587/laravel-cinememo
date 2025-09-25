@@ -22,21 +22,21 @@
                             />
                         </div>
 
-                        <!-- Show existing actors with similar names -->
-                        @if(!empty($existing_actors) && count($existing_actors) > 0)
+                        <!-- Show existing people with similar names -->
+                        @if(!empty($existing_people) && count($existing_people) > 0)
                             <div class="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
                                 <p class="text-sm text-yellow-800 font-medium mb-2">
-                                    ⚠️ You already have similar actors:
+                                    ⚠️ You already have similar people:
                                 </p>
                                 <ul class="space-y-1">
-                                    @foreach($existing_actors as $existing)
+                                    @foreach($existing_people as $existing)
                                         <li class="text-sm text-yellow-700">
                                             • {{ $existing['display_name'] }}
                                         </li>
                                     @endforeach
                                 </ul>
                                 <p class="text-xs text-yellow-600 mt-2">
-                                    You can still create this actor if it's a different person.
+                                    You can still create this person if it's a different person.
                                 </p>
                             </div>
                         @endif
@@ -152,7 +152,7 @@
 
                         <div class="mt-6 flex items-center justify-between">
                             <flux:button variant="primary" type="submit" >{{ __('Add Person') }}</flux:button>
-                            <flux:link :href="route('actors.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <flux:link :href="route('people.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
                         </div>
                     </form>
                 </div>

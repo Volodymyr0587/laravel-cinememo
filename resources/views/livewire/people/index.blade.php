@@ -161,8 +161,8 @@
                                     </div>
                                     @endif
 
-
-                                    <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
+                                    {{-- Know for --}}
+                                    {{-- <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
                                         <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("people/main.known_for") }}:</span>
                                         @php
                                             $grouped = $person->contentItems->groupBy('id');
@@ -193,21 +193,9 @@
                                                 {{ __("people/main.no_works") }}
                                             </span>
                                         @endforelse
-                                    </div>
-
-{{--
-                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
-                                        <span class="font-medium">Status:</span>
-                                        <span wire:click="$set('statusFilter', '{{ $person->status->value }}')" @class([
-                                            'px-2 py-1 rounded text-xs font-bold hover:cursor-pointer',
-                                            'bg-green-500 text-white'  => $person->status === \App\Enums\ContentStatus::Watched,
-                                            'bg-blue-500 text-white'   => $person->status === \App\Enums\ContentStatus::Watching,
-                                            'bg-purple-500 text-white' => $person->status === \App\Enums\ContentStatus::WillWatch,
-                                            'bg-amber-500 text-black'  => $person->status === \App\Enums\ContentStatus::Waiting,
-                                        ])>
-                                            {{ \App\Enums\ContentStatus::labels()[$person->status->value] ?? ucfirst($person->status->value) }}
-                                        </span>
                                     </div> --}}
+                                    {{-- End Know for --}}
+
 
                                     @if($person->biography)
                                         <p class="text-sm text-gray-600 dark:text-white mb-3">

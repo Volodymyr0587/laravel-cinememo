@@ -87,4 +87,23 @@ class ContentItemPolicy
         // Otherwise, deny
         return false;
     }
+
+    /**
+     * Determine whether the user can view people of the content item.
+     */
+    public function viewPeople(User $user, ContentItem $contentItem): bool
+    {
+        // Allow if item is not public
+        if (!$contentItem->is_public) {
+            return true;
+        }
+
+        // Allow if item is public but owned by the user
+        if ($contentItem->is_public && $contentItem->user_id === $user->id) {
+            return true;
+        }
+
+        // Otherwise, deny
+        return false;
+    }
 }

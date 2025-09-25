@@ -23,7 +23,7 @@
                 </div>
                 @endif
             </x-dashboard.card>
-            <x-dashboard.card title="{{ __('dashboard.total_actors') }}">
+            {{-- <x-dashboard.card title="{{ __('dashboard.total_actors') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold">
                     <flux:icon.list-bullet />{{ $stats->actorsCount }}
                 </div>
@@ -31,6 +31,17 @@
                 <div class="text-gray-500 dark:text-gray-400">
                     {{ __("dashboard.last_updated") }}: {{ $stats->lastUpdatedActor->updated_at->diffForHumans() }} ({{
                     $stats->lastUpdatedActor->name }})
+                </div>
+                @endif
+            </x-dashboard.card> --}}
+            <x-dashboard.card title="{{ __('dashboard.cast_and_crew') }}">
+                <div class="flex items-center gap-x-2 text-2xl font-bold">
+                    <flux:icon.list-bullet />{{ $stats->peopleCount }}
+                </div>
+                @if ($stats->peopleCount)
+                <div class="text-gray-500 dark:text-gray-400">
+                    {{ __("dashboard.last_updated") }}: {{ $stats->lastUpdatedPerson->updated_at->diffForHumans() }} ({{
+                    $stats->lastUpdatedPerson->name }})
                 </div>
                 @endif
             </x-dashboard.card>

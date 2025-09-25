@@ -69,7 +69,8 @@
                             </div>
                         </div>
 
-                        <div class="mt-4">
+                        {{-- Actors --}}
+                        {{-- <div class="mt-4">
                             <label for="actors" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
                                 {{ __("Actors") }}
                             </label>
@@ -108,6 +109,53 @@
                                     </span>
                                 @endforelse
                             </div>
+                            <hr class="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+                        </div> --}}
+                        {{-- End Actors --}}
+
+                        <!-- People Selection Section -->
+                        <div>
+                            <flux:label class="mt-4">{{ __("People & Professions") }}</flux:label>
+                            @foreach($professions as $profession)
+                                @if($profession->people->isNotEmpty())
+                                    <div class="mb-6">
+                                        <h3 class="text-md font-bold text-gray-900 dark:text-white mb-3">
+                                            {{ Str::plural($profession->name) }}
+                                        </h3>
+
+                                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                                            @foreach($profession->people as $person)
+                                            <label x-data="{ hover: false }" class="relative flex items-center space-x-2 cursor-pointer">
+                                                    <input type="checkbox"
+                                                        id="person_{{ $person->id }}_profession_{{ $profession->id }}"
+                                                        wire:model="selectedPeople.{{ $person->id }}_{{ $profession->id }}"
+                                                        class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white
+                                                            checked:bg-lime-600 checked:border-lime-600">
+
+                                                    <span @mouseenter="hover = true" @mouseleave="hover = false"
+                                                        class="text-gray-700 dark:text-white text-sm relative">
+                                                        {{ $person->name }}
+
+                                                        <div x-show="hover"
+                                                            x-transition
+                                                            class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border sm:block">
+                                                            @if($person->main_image_url)
+                                                                <img src="{{ $person->main_image_url }}"
+                                                                    alt="{{ $person->name }}"
+                                                                    class="w-full h-full object-cover">
+                                                            @else
+                                                                <img src="{{ asset('images/default-person.png') }}"
+                                                                    alt="{{ $person->name }}"
+                                                                    class="w-full h-full object-cover">
+                                                            @endif
+                                                        </div>
+                                                    </span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                             <hr class="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
                         </div>
 

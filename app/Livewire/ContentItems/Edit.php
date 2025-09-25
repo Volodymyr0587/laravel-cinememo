@@ -37,6 +37,7 @@ class Edit extends Component
     public $confirmingMainImageRemoval = false;
     public $genres = [];
     public $actors = [];
+    public $selectedPeople = [];
 
     protected function rules(): array
     {
@@ -57,6 +58,7 @@ class Edit extends Component
             'genres.*' => 'exists:genres,id',
             'actors' => 'array',
             'actors.*' => 'exists:actors,id',
+            'selectedPeople' => 'array',
         ];
     }
 
@@ -77,6 +79,21 @@ class Edit extends Component
         $this->is_public = $contentItem->is_public;
         $this->genres = $contentItem->genres()->pluck('genres.id')->toArray();
         $this->actors = $contentItem->actors()->pluck('actors.id')->toArray();
+        // Load existing people relationships and convert to selectedPeople format
+        $this->loadExistingPeople();
+    }
+
+    private function loadExistingPeople()
+    {
+        $this->selectedPeople = [];
+
+        // Get all people with their professions for this content item
+        $existingPeople = $this->contentItem->people()->get();
+
+        foreach ($existingPeople as $person) {
+            $key = $person->id . '_' . $person->pivot->profession_id;
+            $this->selectedPeople[$key] = true;
+        }
     }
 
     public function removeMainImage()
@@ -154,17 +171,46 @@ class Edit extends Component
         $this->contentItem->genres()->sync($this->genres);
         $this->contentItem->actors()->sync($this->actors);
 
+        $this->updatePeopleRelationships();
+
         session()->flash('message', 'Content item updated successfully.');
 
-        return redirect()->route('content-items.index');
+        return redirect()->route('content-items.show', $this->contentItem);
+    }
+
+    private function updatePeopleRelationships()
+    {
+        // First, detach all existing people relationships
+        $this->contentItem->people()->detach();
+
+        // Then attach the selected people with their professions
+        if (!empty($this->selectedPeople)) {
+            foreach ($this->selectedPeople as $key => $isSelected) {
+                if ($isSelected) {
+                    [$personId, $professionId] = explode('_', $key);
+
+                    // Check if this person-profession combination already exists to avoid duplicates
+                    $exists = $this->contentItem->people()
+                        ->wherePivot('profession_id', $professionId)
+                        ->where('person_id', $personId)
+                        ->exists();
+
+                    if (!$exists) {
+                        $this->contentItem->people()->attach($personId, ['profession_id' => $professionId]);
+                    }
+                }
+            }
+        }
     }
 
     public function render()
     {
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
         $allGenres = Genre::orderBy('name')->get(['id', 'name']);;
-        $allUserActors = auth()->user()->actors()->with('mainImage')->orderBy('name')->get();
+        $professions = \App\Models\Profession::with(['people' => function ($q) {
+            $q->where('user_id', auth()->id());
+        }])->get();
 
-        return view('livewire.content-items.edit', compact('contentTypes', 'allGenres', 'allUserActors'));
+        return view('livewire.content-items.edit', compact('contentTypes', 'allGenres', 'professions'));
     }
 }

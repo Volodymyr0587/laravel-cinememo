@@ -96,12 +96,13 @@
                             @endforelse
                         </div>
                     </div>
-                    <div>
+
+                    <!-- Actors Section-->
+                    {{-- <div>
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Actors') }}</p>
                         @forelse ($contentItem->actors as $actor)
 
                             @can('viewActors', $contentItem)
-                                {{-- Show link --}}
                                 <a x-data="{ hover: false }" href="{{ route('actors.show', $actor) }}" wire:navigate
                                     class="inline-block text-sm font-medium text-cyan-400 hover:underline"
                                     >
@@ -125,7 +126,6 @@
                                     </span>
                                 </a>
                             @else
-                                {{-- Plain text if public --}}
                                 <span class="inline-block text-sm font-medium text-gray-500 dark:text-gray-400">
                                     {{ $actor->name }}
                                 </span>
@@ -137,7 +137,71 @@
                                 {{ __("No actors") }}
                             </span>
                         @endforelse
-                    </div>
+                    </div> --}}
+                    <!-- End Actors Section-->
+
+                    <!-- People Section -->
+                    @if($contentItem->people->isNotEmpty())
+                        @php
+                            // Group people by profession for better display
+                            $peopleByProfession = $contentItem->people->groupBy('pivot.profession_id');
+                        @endphp
+
+                        @foreach($peopleByProfession as $professionId => $peopleInProfession)
+                            @php
+                                // Get the profession name
+                                $profession = \App\Models\Profession::find($professionId);
+                            @endphp
+
+                            <div class="mb-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    {{ $profession ? Str::plural($profession->name) : 'Unknown Profession' }}
+                                </p>
+
+                                @foreach($peopleInProfession as $person)
+                                    @can('viewPeople', $contentItem)
+                                        {{-- Show link if user has permission --}}
+                                        <a x-data="{ hover: false }" href="{{ route('people.show', $person) }}" wire:navigate
+                                            class="inline-block text-sm font-medium text-cyan-400 hover:underline">
+                                            <span @mouseenter="hover = true" @mouseleave="hover = false"
+                                                class="relative">
+                                                {{ $person->name }}
+                                                <div x-show="hover"
+                                                    x-transition
+                                                    class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border">
+                                                    @if($person->main_image_url)
+                                                        <img src="{{ $person->main_image_url }}"
+                                                            alt="{{ $person->name }}"
+                                                            class="w-full h-full object-cover">
+                                                    @else
+                                                        <img src="{{ asset('images/default-person.png') }}"
+                                                            alt="{{ $person->name }}"
+                                                            class="w-full h-full object-cover">
+                                                    @endif
+                                                </div>
+                                            </span>
+                                        </a>
+                                    @else
+                                        {{-- Plain text if no permission --}}
+                                        <span class="inline-block text-sm font-medium text-gray-500 dark:text-gray-400">
+                                            {{ $person->name }}
+                                        </span>
+                                    @endcan
+
+                                    @if(!$loop->last) | @endif
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @else
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('People') }}</p>
+                            <span class="font-semibold italic text-xs dark:text-white">
+                                {{ __("No people assigned") }}
+                            </span>
+                        </div>
+                    @endif
+
+
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Added by') }}</p>
                         <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">

@@ -23,6 +23,21 @@
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             @php
+                                $countPeople = auth()->user()->people()->count();
+                            @endphp
+                            <flux:navbar.item icon="users" :href="route('people.index')"
+                                class="{{ request()->routeIs('people.index') ? 'text-neon-gold' : '' }}" wire:navigate>
+                                <div class="flex items-center justify-between">
+                                    <span>{{ __('layouts-app-header.cast-and-crew') }}</span>
+                                    <flux:badge color="purple" size="sm" class="ml-1">{{ $countPeople }}</flux:badge>
+                                </div>
+                            </flux:navbar.item>
+                        </div>
+
+                        <flux:menu.separator />
+
+                        {{-- <div class="p-0 text-sm font-normal">
+                            @php
                                 $countActors = auth()->user()->actors()->count();
                             @endphp
                             <flux:navbar.item icon="users" :href="route('actors.index')"
@@ -34,7 +49,7 @@
                             </flux:navbar.item>
                         </div>
 
-                        <flux:menu.separator />
+                        <flux:menu.separator /> --}}
 
                         <div class="p-0 text-sm font-normal">
                             @php
@@ -207,10 +222,16 @@
                     <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                       {{ __('layouts-app-header.dashboard') }}
                     </flux:navlist.item>
-                    <flux:navlist.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
+                    {{-- <flux:navlist.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
                         <div class="flex items-center justify-between">
                             <span>{{ __('layouts-app-header.actors') }}</span>
                             <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
+                        </div>
+                    </flux:navlist.item> --}}
+                    <flux:navlist.item icon="users" :href="route('people.index')" :current="request()->routeIs('people.index')" wire:navigate>
+                        <div class="flex items-center justify-between">
+                            <span>{{ __('layouts-app-header.cast-and-crew') }}</span>
+                            <flux:badge color="purple" size="sm" class="ml-1">{{ $countPeople }}</flux:badge>
                         </div>
                     </flux:navlist.item>
                     <flux:navlist.item icon="list-bullet" :href="route('content-types.index')" :current="request()->routeIs('content-types.index')" wire:navigate>
