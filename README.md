@@ -65,9 +65,9 @@ This will log outgoing emails to `storage/logs/laravel.log` instead of sending t
 ## 📦 Tech Stack
 
 - Laravel 12
-- Livewire 3 (for reactive components)
+- Livewire 3 
 - Tailwind CSS
-- Alpine.js (optional)
+- Alpine.js
 - MySQL / SQLite
 
 ---
