@@ -102,4 +102,73 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
+    public function getCinemaLevelAttribute(): array
+    {
+        $count = $this->contentItems()->count();
+
+        $levels = [
+            ['min' => 101, 'label' => 'Master of Cinema', 'badge' => '🎥'],
+            ['min' => 51,  'label' => 'Archivist',        'badge' => '🏆'],
+            ['min' => 26,  'label' => 'Cinephile',        'badge' => '🌟'],
+            ['min' => 11,  'label' => 'Enthusiast',       'badge' => '🍿'],
+            ['min' => 1,   'label' => 'Beginner',         'badge' => '🎬'],
+        ];
+
+        // Find current level
+        foreach ($levels as $index => $level) {
+            if ($count >= $level['min']) {
+                $next = $levels[$index - 1] ?? null; // <-- immediate higher level
+                $toNext = $next ? $next['min'] - $count : null;
+
+                return [
+                    'level' => $level['label'],
+                    'badge' => $level['badge'],
+                    'count' => $count,
+                    'nextLevel' => $next['label'] ?? null,
+                    'toNext' => $toNext,
+                    'min' => $level['min'],
+                    'max' => $next['min'] ?? $count,
+                ];
+            }
+        }
+
+        // No items yet
+        return [
+            'level' => null,
+            'badge' => null,
+            'count' => 0,
+            'nextLevel' => 'Beginner',
+            'toNext' => 1,
+            'min' => 0,
+            'max' => 1,
+        ];
+    }
+
+    public function getCinemaLevelsAttribute(): array
+    {
+        $count = $this->contentItems()->count();
+
+        $levels = [
+            ['min' => 1,   'label' => 'Beginner',       'badge' => '🎬'],
+            ['min' => 11,  'label' => 'Enthusiast',     'badge' => '🍿'],
+            ['min' => 26,  'label' => 'Cinephile',      'badge' => '🌟'],
+            ['min' => 51,  'label' => 'Archivist',      'badge' => '🏆'],
+            ['min' => 101, 'label' => 'Master of Cinema','badge' => '🎥'],
+        ];
+
+        $currentLevel = $this->cinema_level['level'];
+
+        return collect($levels)->map(function ($level) use ($count, $currentLevel) {
+            return [
+                'label' => $level['label'],
+                'badge' => $level['badge'],
+                'min' => $level['min'],
+                'unlocked' => $count >= $level['min'],
+                'current' => $level['label'] === $currentLevel,
+            ];
+        })->toArray();
+    }
+
+
 }

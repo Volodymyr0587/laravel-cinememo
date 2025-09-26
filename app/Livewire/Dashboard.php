@@ -58,10 +58,39 @@ class Dashboard extends Component
         ];
     }
 
+    #[Computed]
+    public function cinemaLevel(): array
+    {
+        return Auth::user()->cinema_level;
+    }
+
+    #[Computed]
+    public function allCinemaLevels(): array
+    {
+        return Auth::user()->cinema_levels;
+    }
+
+    #[Computed]
+    public function cinemaMessage(): string
+    {
+        $phrases = [
+            "🎉 Congratulations! You’re now a",
+            "🍿 Bravo! You’ve reached the level of",
+            "🌟 Director’s Cut unlocked — welcome,",
+            "🏆 You’re climbing the cinema ladder as a",
+            "🎬 Another milestone achieved! Say hello to",
+        ];
+
+        return $phrases[array_rand($phrases)];
+    }
+
     public function render()
     {
         return view('livewire.dashboard', [
             'stats' => $this->stats,
+            'cinemaLevel' => $this->cinemaLevel,
+            'cinemaMessage' => $this->cinemaMessage,
+            'allCinemaLevels' => $this->allCinemaLevels,
         ]);
     }
 }

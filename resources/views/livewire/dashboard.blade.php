@@ -1,4 +1,9 @@
 <div>
+    <x-dashboard.cinema-level-banner
+    :cinema-level="$cinemaLevel"
+    :message="$cinemaMessage"
+    />
+    <x-dashboard.cinema-badge-grid :levels="$allCinemaLevels" />
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-5">
             <x-dashboard.card title="{{ __('dashboard.total_in_the_collection') }}">

@@ -12,6 +12,7 @@
 - 📁 Upload related images or posters
 - 📊 Filter and search through your library
 - 🌟 Recommendation system based on your most favorite genres
+- 🏆 Levels & Gamification
 - 💬 Comment system with likes
 - 🔒 Public and private content visibility
 - 📄 Articles 
@@ -29,6 +30,34 @@ The application includes a role-based management system:
 - **Writer**: Create and manage their own content and articles  
 - **User**: Create personal notes, manage their media library, comment, and interact with others  
 
+---
+## 🎬 Cinema Levels & Gamification
+
+To make collecting movies/series more engaging, the dashboard includes a cinema level system with milestones, badges, and progress tracking.
+
+- **Levels & Badges**:
+
+    - 🎬 **Beginner** — 1+ items
+
+    - 🍿 **Enthusiast** — 11+ items
+
+    - 🌟 **Cinephile** — 26+ items
+
+    - 🏆 **Archivist** — 51+ items
+
+    - 🎥 **Master of Cinema** — 101+ items
+
+- **Features**:
+
+    - Dynamic banner with rotating motivational messages (powered by Alpine.js).
+
+    - Current progress display: shows how many gems you’ve collected and how many remain to reach the next level.
+
+    - **Badge Showcase Grid**: visual grid of all levels, with unlocked/locked states, so users can see achievements already earned and milestones ahead.
+
+    This system adds **gamification** and encourages users to grow their collection of cinematic gems.
+
+![Dashboard page](public/images/app-screenshots/screnshot-for-readme-17.png)
 ---
 
 ## 📬 Contact Form
