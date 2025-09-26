@@ -1,6 +1,6 @@
 <div>
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-4">
+        <div class="grid auto-rows-min gap-4 md:grid-cols-5">
             <x-dashboard.card title="{{ __('dashboard.total_in_the_collection') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold">
                     <flux:icon.film /> {{ $stats->contentItemsCount }}
@@ -23,17 +23,6 @@
                 </div>
                 @endif
             </x-dashboard.card>
-            {{-- <x-dashboard.card title="{{ __('dashboard.total_actors') }}">
-                <div class="flex items-center gap-x-2 text-2xl font-bold">
-                    <flux:icon.list-bullet />{{ $stats->actorsCount }}
-                </div>
-                @if ($stats->actorsCount)
-                <div class="text-gray-500 dark:text-gray-400">
-                    {{ __("dashboard.last_updated") }}: {{ $stats->lastUpdatedActor->updated_at->diffForHumans() }} ({{
-                    $stats->lastUpdatedActor->name }})
-                </div>
-                @endif
-            </x-dashboard.card> --}}
             <x-dashboard.card title="{{ __('dashboard.total_cast_and_crew') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold">
                     <flux:icon.users />{{ $stats->peopleCount }}
@@ -44,6 +33,11 @@
                     $stats->lastUpdatedPerson->name }})
                 </div>
                 @endif
+            </x-dashboard.card>
+            <x-dashboard.card title="{{ __('dashboard.time_of_content_viewed') }}">
+                <div class="flex items-center gap-x-2 text-2xl font-bold">
+                    <flux:icon.clock />{{ $stats->timeOfContentViewed }}
+                </div>
             </x-dashboard.card>
             <x-dashboard.card title="{{ __('dashboard.total_in_trash') }}">
                 <div class="flex items-center gap-x-2 text-2xl font-bold">
@@ -56,11 +50,6 @@
                 </div>
                 @endif
             </x-dashboard.card>
-            {{-- <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern
-                    class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div> --}}
         </div>
 
         <div

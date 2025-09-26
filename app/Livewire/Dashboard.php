@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Services\RecommendationService;
 use Livewire\Component;
+use Carbon\CarbonInterval;
+use App\Enums\ContentStatus;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Auth;
+use App\Services\RecommendationService;
 
 class Dashboard extends Component
 {
@@ -50,6 +52,9 @@ class Dashboard extends Component
                 ->latest('updated_at')
                 ->select('name', 'updated_at')
                 ->first(),
+            'timeOfContentViewed' => CarbonInterval::seconds($user->contentItems()
+                ->where('status', ContentStatus::Watched->value)
+                ->sum('duration_in_seconds'))->cascade()->forHumans(),
         ];
     }
 
