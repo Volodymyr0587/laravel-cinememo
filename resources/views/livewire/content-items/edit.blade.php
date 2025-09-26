@@ -118,10 +118,16 @@
                             <flux:label class="mt-4">{{ __("People & Professions") }}</flux:label>
                             @foreach($professions as $profession)
                                 @if($profession->people->isNotEmpty())
-                                    <div class="mb-6">
-                                        <h3 class="text-md font-bold text-gray-900 dark:text-white mb-3">
-                                            {{ Str::plural($profession->name) }}
-                                        </h3>
+                                    <div>
+                                        <div class="flex items-center my-6">
+                                            <div class="flex-grow h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent dark:via-gray-600"></div>
+
+                                            <span class="px-4 text-sm font-semibold text-gray-800 dark:text-gray-100">
+                                                {{ Str::plural($profession->name) }}
+                                            </span>
+
+                                            <div class="flex-grow h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent dark:via-gray-600"></div>
+                                        </div>
 
                                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                                             @foreach($profession->people as $person)
