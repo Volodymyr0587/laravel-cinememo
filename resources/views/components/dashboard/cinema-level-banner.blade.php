@@ -5,11 +5,11 @@
         x-data="{ show: true }"
         x-show="show"
         x-transition
-        class="mb-6 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
+        class="cinema-level-banner"
     >
-        <div class="flex justify-between items-center">
+        <div class="relative flex items-center justify-center text-center">
             <div>
-                <p class="text-lg font-semibold">
+                <p class="text-lg font-semibold cinema-level-text">
                     {{ $cinemaLevel['badge'] }}
                     {{ $message }}
                     <span class="font-bold">{{ $cinemaLevel['level'] }}</span>
@@ -26,7 +26,7 @@
                 @endif
             </div>
 
-            <button @click="show = false" class="ml-4 text-white hover:opacity-80 hover:cursor-pointer transition duration-300 ease-in-out hover:scale-150">
+            <button @click="show = false" class="absolute right-3 top-6 text-white hover:opacity-80 hover:cursor-pointer transition duration-300 ease-in-out hover:scale-150">
                 ✖
             </button>
         </div>

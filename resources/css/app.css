@@ -120,6 +120,35 @@ select:focus[data-flux-control] {
     }
   }
 
+  @keyframes neon-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 7px rgba(255, 0, 102, 0.8),
+                    0 0 14px rgba(255, 0, 102, 0.7),
+                    0 0 28px rgba(255, 0, 102, 0.6),
+                    0 0 56px rgba(255, 0, 102, 0.5);
+    }
+    20%, 24%, 55% {
+        opacity: 0.6;
+        text-shadow: 0 0 4px rgba(255, 0, 102, 0.5),
+                    0 0 8px rgba(255, 0, 102, 0.4),
+                    0 0 16px rgba(255, 0, 102, 0.3);
+    }
+  }
+
+    .cinema-level-banner {
+        @apply mb-6 p-4 rounded-xl text-center font-extrabold uppercase tracking-widest
+                bg-gradient-to-r from-black via-zinc-900 to-black text-pink-500 relative;
+        box-shadow: 0 0 25px rgba(255, 0, 102, 0.7),
+                    0 0 50px rgba(255, 0, 102, 0.5),
+                    0 0 100px rgba(255, 0, 102, 0.3);
+    }
+
+    .cinema-level-text {
+        animation: neon-flicker 2.5s infinite;
+    }
+
+
   .text-neon-red {
     color: #ef4444; /* Tailwind red-600 */
     animation: neon-pulse-red 2s infinite;
