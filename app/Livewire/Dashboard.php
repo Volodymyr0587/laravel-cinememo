@@ -73,13 +73,7 @@ class Dashboard extends Component
     #[Computed]
     public function cinemaMessage(): string
     {
-        $phrases = [
-            "🎉 Congratulations! You’re now a",
-            "🍿 Bravo! You’ve reached the level of",
-            "🌟 Director’s Cut unlocked — welcome,",
-            "🏆 You’re climbing the cinema ladder as a",
-            "🎬 Another milestone achieved! Say hello to",
-        ];
+        $phrases = __('dashboard.cinema_messages');
 
         return $phrases[array_rand($phrases)];
     }

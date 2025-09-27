@@ -13,4 +13,24 @@ return [
     "recommendations" => "Because you liked these genres, you might enjoy",
     "recommendation_subtitle" => "Based on your top genres",
     "nothing_in_recommendations" => "There is currently nothing in your recommendations",
+    'cinema_messages' => [
+        "Congratulations! You’re now a",
+        "Bravo! You’ve reached the level of",
+        "Director’s Cut unlocked — welcome,",
+        "You’re climbing the cinema ladder as a",
+        "Another milestone achieved! Say hello to",
+    ],
+    'levels' => [
+        'beginner'   => 'Beginner',
+        'enthusiast' => 'Enthusiast',
+        'cinephile'  => 'Cinephile',
+        'archivist'  => 'Archivist',
+        'master'     => 'Master of Cinema',
+    ],
+
+    'messages' => [
+        'collected' => "You’ve collected :count gems of cinema.",
+        'progress'  => "Only :count more to reach :level!",
+        'from'      => "from :count items in collection",
+    ],
 ];

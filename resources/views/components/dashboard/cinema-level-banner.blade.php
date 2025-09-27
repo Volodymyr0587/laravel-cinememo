@@ -15,13 +15,15 @@
                     <span class="font-bold">{{ $cinemaLevel['level'] }}</span>
                 </p>
                 <p class="text-sm opacity-90">
-                    You’ve collected <span class="font-bold">{{ $cinemaLevel['count'] }}</span> gems of cinema.
+                     {{ __('dashboard.messages.collected', ['count' => $cinemaLevel['count']]) }}
                 </p>
 
                 @if($cinemaLevel['toNext'])
                     <p class="text-sm mt-1">
-                        Only <span class="font-bold">{{ $cinemaLevel['toNext'] }}</span> more to reach
-                        <span class="font-bold">{{ $cinemaLevel['nextLevel'] }}</span>!
+                        {{ __('dashboard.messages.progress', [
+                            'count' => $cinemaLevel['toNext'],
+                            'level' => $cinemaLevel['nextLevel']
+                        ]) }}
                     </p>
                 @endif
             </div>

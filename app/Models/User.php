@@ -108,11 +108,11 @@ class User extends Authenticatable
         $count = $this->contentItems()->count();
 
         $levels = [
-            ['min' => 101, 'label' => 'Master of Cinema', 'badge' => '🎥'],
-            ['min' => 51,  'label' => 'Archivist',        'badge' => '🏆'],
-            ['min' => 26,  'label' => 'Cinephile',        'badge' => '🌟'],
-            ['min' => 11,  'label' => 'Enthusiast',       'badge' => '🍿'],
-            ['min' => 1,   'label' => 'Beginner',         'badge' => '🎬'],
+            ['min' => 101, 'label' => __('dashboard.levels.master'),     'badge' => '🎥'],
+            ['min' => 51,  'label' => __('dashboard.levels.archivist'),  'badge' => '🏆'],
+            ['min' => 26,  'label' => __('dashboard.levels.cinephile'),  'badge' => '🌟'],
+            ['min' => 11,  'label' => __('dashboard.levels.enthusiast'), 'badge' => '🍿'],
+            ['min' => 1,   'label' => __('dashboard.levels.beginner'),   'badge' => '🎬'],
         ];
 
         // Find current level
@@ -138,7 +138,7 @@ class User extends Authenticatable
             'level' => null,
             'badge' => null,
             'count' => 0,
-            'nextLevel' => 'Beginner',
+            'nextLevel' => __('dashboard.levels.beginner'),
             'toNext' => 1,
             'min' => 0,
             'max' => 1,
@@ -150,11 +150,11 @@ class User extends Authenticatable
         $count = $this->contentItems()->count();
 
         $levels = [
-            ['min' => 1,   'label' => 'Beginner',       'badge' => '🎬'],
-            ['min' => 11,  'label' => 'Enthusiast',     'badge' => '🍿'],
-            ['min' => 26,  'label' => 'Cinephile',      'badge' => '🌟'],
-            ['min' => 51,  'label' => 'Archivist',      'badge' => '🏆'],
-            ['min' => 101, 'label' => 'Master of Cinema','badge' => '🎥'],
+            ['min' => 1,   'label' => __('dashboard.levels.beginner'),   'badge' => '🎬'],
+            ['min' => 11,  'label' => __('dashboard.levels.enthusiast'), 'badge' => '🍿'],
+            ['min' => 26,  'label' => __('dashboard.levels.cinephile'),  'badge' => '🌟'],
+            ['min' => 51,  'label' => __('dashboard.levels.archivist'),  'badge' => '🏆'],
+            ['min' => 101, 'label' => __('dashboard.levels.master'),     'badge' => '🎥'],
         ];
 
         $currentLevel = $this->cinema_level['level'];

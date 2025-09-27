@@ -14,7 +14,7 @@
                 {{ $level['unlocked'] ? $level['badge'] : '🔒' }}
             </div>
             <p class="font-semibold">{{ $level['label'] }}</p>
-            <p class="text-xs opacity-75">from {{ $level['min'] }} items in collection</p>
+            <p class="text-xs opacity-75">{{ __('dashboard.messages.from', ['count' => $level['min']]) }}</p>
         </div>
     @endforeach
 </div>
