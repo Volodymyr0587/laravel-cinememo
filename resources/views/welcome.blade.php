@@ -58,7 +58,7 @@
         <p class="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-8">
             <span class="font-bold">{{ config('app.name', 'MyApp') }}</span> — {{ __("welcome.subheader") }}
         </p>
-        <a href="{{ route('register') }}"
+        <a href="{{ route('register') }}" wire:navigate
             class="relative inline-block px-10 py-10 rounded-2xl
                     text-2xl font-bold text-neon-gold
                     bg-gradient-to-r from-black via-gray-800 to-gray-900
@@ -104,33 +104,33 @@
         <div class="grid md:grid-cols-2 gap-6">
             <x-screenshot-card
                 src="{{ asset('images/app-screenshots/screenshot-1.png') }}"
-                alt="Screenshot 1"
+                alt="Main Dashboard"
                 label="Main Dashboard"
             />
             <x-screenshot-card
                 src="{{ asset('images/app-screenshots/screenshot-2.png') }}"
-                alt="Screenshot 2"
-                label="Main Dashboard"
+                alt="Content Types"
+                label="Content Types"
             />
             <x-screenshot-card
                 src="{{ asset('images/app-screenshots/screenshot-3.png') }}"
-                alt="Screenshot 2"
-                label="Main Dashboard"
+                alt="Create"
+                label="Create"
             />
-            <x-screenshot-card
-                src="{{ asset('images/app-screenshots/screenshot-4.png') }}"
-                alt="Screenshot 3"
-                label="Main Dashboard"
+             <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-6.png') }}"
+                alt="Your Content"
+                label="Your Content"
             />
             <x-screenshot-card
                 src="{{ asset('images/app-screenshots/screenshot-5.png') }}"
-                alt="Screenshot 3"
-                label="Main Dashboard"
+                alt="People"
+                label="People"
             />
             <x-screenshot-card
-                src="{{ asset('images/app-screenshots/screenshot-6.png') }}"
-                alt="Screenshot 1"
-                label="Main Dashboard"
+                src="{{ asset('images/app-screenshots/screenshot-4.png') }}"
+                alt="Recommendations"
+                label="Recommendations"
             />
         </div>
     </section>
@@ -192,7 +192,7 @@
     </section>
 
     <div class="text-center mt-12">
-        <a href="{{ route('register') }}"
+        <a href="{{ route('register') }}" wire:navigate
             class="relative inline-block px-10 py-10 rounded-2xl
                     text-2xl font-bold text-neon-gold
                     bg-gradient-to-r from-black via-gray-800 to-gray-900
