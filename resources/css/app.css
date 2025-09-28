@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import '../../vendor/livewire/flux/dist/flux.css';
+@import "tailwindcss";
+@import "../../vendor/livewire/flux/dist/flux.css";
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -9,7 +9,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
 
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
@@ -34,7 +36,7 @@
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
 
-         /* Change neon color for dark theme */
+        /* Change neon color for dark theme */
         --neon-primary-color: #ffffff;
         --neon-primary-r: 255;
         --neon-primary-g: 255;
@@ -43,7 +45,6 @@
 }
 
 @layer base {
-
     *,
     ::after,
     ::before,
@@ -58,7 +59,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -68,80 +69,85 @@ select:focus[data-flux-control] {
 }
 
 @layer utilities {
-  @keyframes neon-pulse-red {
-    0%, 100% {
-      text-shadow: 0 0 10px rgba(239, 68, 68, 0.8),
-                   0 0 20px rgba(239, 68, 68, 0.6),
-                   0 0 30px rgba(239, 68, 68, 0.4);
+    @keyframes neon-pulse-red {
+        0%,
+        100% {
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.8),
+                0 0 20px rgba(239, 68, 68, 0.6), 0 0 30px rgba(239, 68, 68, 0.4);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(239, 68, 68, 1),
+                0 0 40px rgba(239, 68, 68, 0.8), 0 0 60px rgba(239, 68, 68, 0.6);
+        }
     }
-    50% {
-      text-shadow: 0 0 20px rgba(239, 68, 68, 1),
-                   0 0 40px rgba(239, 68, 68, 0.8),
-                   0 0 60px rgba(239, 68, 68, 0.6);
-    }
-  }
 
-  @keyframes neon-pulse-blue {
-    0%, 100% {
-      text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
-                   0 0 20px rgba(59, 130, 246, 0.6),
-                   0 0 30px rgba(59, 130, 246, 0.4);
+    @keyframes neon-pulse-blue {
+        0%,
+        100% {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
+                0 0 20px rgba(59, 130, 246, 0.6),
+                0 0 30px rgba(59, 130, 246, 0.4);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 1),
+                0 0 40px rgba(59, 130, 246, 0.8),
+                0 0 60px rgba(59, 130, 246, 0.6);
+        }
     }
-    50% {
-      text-shadow: 0 0 20px rgba(59, 130, 246, 1),
-                   0 0 40px rgba(59, 130, 246, 0.8),
-                   0 0 60px rgba(59, 130, 246, 0.6);
-    }
-  }
 
-  @keyframes neon-pulse-gold {
-    0%, 100% {
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
-                   0 0 20px rgba(255, 215, 0, 0.6),
-                   0 0 30px rgba(255, 215, 0, 0.4);
+    @keyframes neon-pulse-gold {
+        0%,
+        100% {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(255, 215, 0, 1),
+                0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.6);
+        }
     }
-    50% {
-      text-shadow: 0 0 20px rgba(255, 215, 0, 1),
-                   0 0 40px rgba(255, 215, 0, 0.8),
-                   0 0 60px rgba(255, 215, 0, 0.6);
-    }
-  }
 
-  @keyframes neon-pulse-white {
-    0%, 100% {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                   0 0 20px rgba(255, 255, 255, 0.6),
-                   0 0 30px rgba(255, 255, 255, 0.4);
+    @keyframes neon-pulse-white {
+        0%,
+        100% {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 30px rgba(255, 255, 255, 0.4);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                0 0 40px rgba(255, 255, 255, 0.8),
+                0 0 60px rgba(255, 255, 255, 0.6);
+        }
     }
-    50% {
-      text-shadow: 0 0 20px rgba(255, 255, 255, 1),
-                   0 0 40px rgba(255, 255, 255, 0.8),
-                   0 0 60px rgba(255, 255, 255, 0.6);
-    }
-  }
 
-  @keyframes neon-flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        opacity: 1;
-        text-shadow: 0 0 7px rgba(255, 0, 102, 0.8),
-                    0 0 14px rgba(255, 0, 102, 0.7),
-                    0 0 28px rgba(255, 0, 102, 0.6),
-                    0 0 56px rgba(255, 0, 102, 0.5);
+    @keyframes neon-flicker {
+        0%,
+        18%,
+        22%,
+        25%,
+        53%,
+        57%,
+        100% {
+            opacity: 1;
+            text-shadow: 0 0 7px rgba(255, 0, 102, 0.8),
+                0 0 14px rgba(255, 0, 102, 0.7), 0 0 28px rgba(255, 0, 102, 0.6),
+                0 0 56px rgba(255, 0, 102, 0.5);
+        }
+        20%,
+        24%,
+        55% {
+            opacity: 0.6;
+            text-shadow: 0 0 4px rgba(255, 0, 102, 0.5),
+                0 0 8px rgba(255, 0, 102, 0.4), 0 0 16px rgba(255, 0, 102, 0.3);
+        }
     }
-    20%, 24%, 55% {
-        opacity: 0.6;
-        text-shadow: 0 0 4px rgba(255, 0, 102, 0.5),
-                    0 0 8px rgba(255, 0, 102, 0.4),
-                    0 0 16px rgba(255, 0, 102, 0.3);
-    }
-  }
 
     .cinema-level-banner {
         @apply mb-6 p-4 rounded-xl text-center font-extrabold uppercase tracking-widest
                 bg-gradient-to-r from-black via-zinc-900 to-black text-pink-500 relative;
         box-shadow: 0 0 25px rgba(255, 0, 102, 0.7),
-                    0 0 50px rgba(255, 0, 102, 0.5),
-                    0 0 100px rgba(255, 0, 102, 0.3);
+            0 0 50px rgba(255, 0, 102, 0.5), 0 0 100px rgba(255, 0, 102, 0.3);
     }
 
     .cinema-level-text {
@@ -149,27 +155,59 @@ select:focus[data-flux-control] {
     }
 
 
-  .text-neon-red {
-    color: #ef4444; /* Tailwind red-600 */
-    animation: neon-pulse-red 2s infinite;
-  }
+    .floating-animation {
+        animation: float 6s ease-in-out infinite;
+    }
 
-  .text-neon-blue {
-    color: #3b82f6; /* Tailwind blue-500 */
-    animation: neon-pulse-blue 2s infinite;
-  }
+    .floating-animation:nth-child(2) {
+        animation-delay: -2s;
+    }
 
-  .text-neon-gold {
-    color: #fcd34d; /* Tailwind amber-300 */
-    animation: neon-pulse-gold 2s infinite;
-  }
+    .floating-animation:nth-child(3) {
+        animation-delay: -4s;
+    }
 
-  .text-neon-white {
-    color: #ffffff;
-    animation: neon-pulse-white 2s infinite;
-  }
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        33% {
+            transform: translateY(-10px) rotate(1deg);
+        }
+        66% {
+            transform: translateY(5px) rotate(-0.5deg);
+        }
+    }
+
+    .glow-effect {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .glow-effect:hover {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+    }
+
+    .text-neon-red {
+        color: #ef4444; /* Tailwind red-600 */
+        animation: neon-pulse-red 2s infinite;
+    }
+
+    .text-neon-blue {
+        color: #3b82f6; /* Tailwind blue-500 */
+        animation: neon-pulse-blue 2s infinite;
+    }
+
+    .text-neon-gold {
+        color: #fcd34d; /* Tailwind amber-300 */
+        animation: neon-pulse-gold 2s infinite;
+    }
+
+    .text-neon-white {
+        color: #ffffff;
+        animation: neon-pulse-white 2s infinite;
+    }
 }
-
 
 /* \[:where(&)\]:size-4 {
     @apply size-4;

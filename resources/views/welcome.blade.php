@@ -59,8 +59,20 @@
             <span class="font-bold">{{ config('app.name', 'MyApp') }}</span> — {{ __("welcome.subheader") }}
         </p>
         <a href="{{ route('register') }}"
-           class="px-6 py-3 rounded-xl bg-blue-600 text-white text-lg font-semibold shadow-lg hover:bg-blue-700 transition">
+            class="relative inline-block px-8 py-8 rounded-xl
+                    text-2xl font-bold text-neon-gold
+                    bg-gradient-to-r from-black to-gray-600
+                    shadow-lg hover:shadow-2xl
+                    transform hover:scale-105 hover:-rotate-1 transition duration-300 ease-out
+                    glow-effect overflow-hidden">
             {{ __("welcome.buttons.get_started") }}
+            <!-- Film strip frames -->
+            <div class="absolute inset-0 flex items-center justify-around -z-10">
+                @for ($i = 0; $i < 7; $i++)
+                    <div class="w-10 h-12 bg-white/20 dark:bg-black/30 rounded-sm"></div>
+                @endfor
+            </div>
+            <x-film-strip-effect />
         </a>
     </section>
 
@@ -89,25 +101,37 @@
     <!-- Screenshots -->
     <section class="max-w-6xl mx-auto py-16 px-6">
         <h2 class="text-3xl font-bold text-center mb-10">{{ __("welcome.examples") }}</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
-                <img src="{{ asset('images/app-screenshots/screenshot-1.png') }}" alt="Screenshot 1" class="w-full h-auto">
-            </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
-                <img src="{{ asset('images/app-screenshots/screenshot-2.png') }}" alt="Screenshot 2" class="w-full h-auto">
-            </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
-                <img src="{{ asset('images/app-screenshots/screenshot-3.png') }}" alt="Screenshot 3" class="w-full h-auto">
-            </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
-                <img src="{{ asset('images/app-screenshots/screenshot-4.png') }}" alt="Screenshot 4" class="w-full h-auto">
-            </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
-                <img src="{{ asset('images/app-screenshots/screenshot-5.png') }}" alt="Screenshot 5" class="w-full h-auto">
-            </div>
-            <div class="rounded-xl overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700  hover:scale-150 transition-transform duration-200">
-                <img src="{{ asset('images/app-screenshots/screenshot-6.png') }}" alt="Screenshot 6" class="w-full h-auto">
-            </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-1.png') }}"
+                alt="Screenshot 1"
+                label="Main Dashboard"
+            />
+            <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-2.png') }}"
+                alt="Screenshot 2"
+                label="Main Dashboard"
+            />
+            <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-3.png') }}"
+                alt="Screenshot 2"
+                label="Main Dashboard"
+            />
+            <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-4.png') }}"
+                alt="Screenshot 3"
+                label="Main Dashboard"
+            />
+            <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-5.png') }}"
+                alt="Screenshot 3"
+                label="Main Dashboard"
+            />
+            <x-screenshot-card
+                src="{{ asset('images/app-screenshots/screenshot-6.png') }}"
+                alt="Screenshot 1"
+                label="Main Dashboard"
+            />
         </div>
     </section>
 
