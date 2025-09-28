@@ -5,7 +5,7 @@
             rounded-t-2xl flex items-center justify-around px-2 overflow-hidden">
 
         @for ($i = 0; $i < 12; $i++)
-            <div class="w-3 h-2 bg-neutral-100/80 dark:bg-neutral-900/70 rounded-sm"></div>
+            <div class="w-3 h-4 bg-neutral-100/80 dark:bg-neutral-900/70 rounded-xs"></div>
         @endfor
     </div>
     <!-- End Top -->
@@ -15,7 +15,7 @@
             rounded-b-2xl flex items-center justify-around px-2 overflow-hidden">
 
         @for ($i = 0; $i < 12; $i++)
-            <div class="w-3 h-2 bg-neutral-100/80 dark:bg-neutral-900/70 rounded-sm"></div>
+            <div class="w-3 h-4 bg-neutral-100/80 dark:bg-neutral-900/70 rounded-xs"></div>
         @endfor
     </div>
     <!-- End Bottom -->

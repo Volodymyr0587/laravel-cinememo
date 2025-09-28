@@ -59,19 +59,19 @@
             <span class="font-bold">{{ config('app.name', 'MyApp') }}</span> — {{ __("welcome.subheader") }}
         </p>
         <a href="{{ route('register') }}"
-            class="relative inline-block px-8 py-8 rounded-xl
+            class="relative inline-block px-10 py-10 rounded-2xl
                     text-2xl font-bold text-neon-gold
-                    bg-gradient-to-r from-black to-gray-600
+                    bg-gradient-to-r from-black via-gray-800 to-gray-900
                     shadow-lg hover:shadow-2xl
                     transform hover:scale-105 hover:-rotate-1 transition duration-300 ease-out
-                    glow-effect overflow-hidden">
-            {{ __("welcome.buttons.get_started") }}
-            <!-- Film strip frames -->
-            <div class="absolute inset-0 flex items-center justify-around -z-10">
-                @for ($i = 0; $i < 7; $i++)
-                    <div class="w-10 h-12 bg-white/20 dark:bg-black/30 rounded-sm"></div>
-                @endfor
-            </div>
+                    glow-effect overflow-hidden group">
+
+            🎬 {{ __("welcome.buttons.get_started") }}
+            <!-- Spotlight sweep hover -->
+            <span class="absolute inset-0 -translate-x-full
+                        bg-gradient-to-r from-transparent via-white/20 to-transparent
+                        skew-x-12 transition-transform duration-700
+                        group-hover:translate-x-full"></span>
             <x-film-strip-effect />
         </a>
     </section>
@@ -190,6 +190,25 @@
             </div>
         </div>
     </section>
+
+    <div class="text-center mt-12">
+        <a href="{{ route('register') }}"
+            class="relative inline-block px-10 py-10 rounded-2xl
+                    text-2xl font-bold text-neon-gold
+                    bg-gradient-to-r from-black via-gray-800 to-gray-900
+                    shadow-lg hover:shadow-2xl
+                    transform hover:scale-105 hover:-rotate-1 transition duration-300 ease-out
+                    glow-effect overflow-hidden group">
+
+            🎬 {{ __("welcome.buttons.get_started_bottom") }}
+            <!-- Spotlight sweep hover -->
+            <span class="absolute inset-0 -translate-x-full
+                        bg-gradient-to-r from-transparent via-white/20 to-transparent
+                        skew-x-12 transition-transform duration-700
+                        group-hover:translate-x-full"></span>
+            <x-film-strip-effect />
+        </a>
+    </div>
 
     <!-- Feedback -->
     <section class="max-w-6xl mx-auto py-16 px-6">

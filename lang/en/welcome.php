@@ -10,7 +10,8 @@ return [
         "dashboard" => "Dashboard",
         "login" => "Log in",
         "signup" => "Sign up",
-        "get_started" => "Get started for free",
+        "get_started" => "Let's start a cinema adventure",
+        "get_started_bottom" => "Start your own cinema story",
         "send" => "Send",
     ],
     "features" => [
