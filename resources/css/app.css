@@ -130,9 +130,9 @@ select:focus[data-flux-control] {
         57%,
         100% {
             opacity: 1;
-            text-shadow: 0 0 7px rgba(255, 0, 102, 0.8),
-                0 0 14px rgba(255, 0, 102, 0.7), 0 0 28px rgba(255, 0, 102, 0.6),
-                0 0 56px rgba(255, 0, 102, 0.5);
+            text-shadow: 0 0 7px rgba(239, 68, 68, 0.7),
+                0 0 14px rgba(239, 68, 68, 0.5), 0 0 28px rgba(255, 0, 102, 0.6),
+                0 0 56px rgba(239, 68, 68, 0.5);
         }
         20%,
         24%,
@@ -145,9 +145,11 @@ select:focus[data-flux-control] {
 
     .cinema-level-banner {
         @apply mb-6 p-4 rounded-xl text-center font-extrabold uppercase tracking-widest
-                bg-gradient-to-r from-black via-zinc-900 to-black text-pink-500 relative;
-        box-shadow: 0 0 25px rgba(255, 0, 102, 0.7),
-            0 0 50px rgba(255, 0, 102, 0.5), 0 0 100px rgba(255, 0, 102, 0.3);
+                bg-gradient-to-r from-black via-zinc-900 to-black text-red-500 relative;
+        box-shadow:
+                0 0 25px rgba(239, 68, 68, 0.7),
+                0 0 50px rgba(239, 68, 68, 0.5),
+                0 0 100px rgba(239, 68, 68, 0.5);
     }
 
     .cinema-level-text {
