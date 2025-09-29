@@ -19,7 +19,6 @@
     <header class="flex items-center justify-between px-6 py-4">
         <a href="{{ url('/') }}" class="text-xl font-bold tracking-tight">
              <x-app-logo />
-            {{-- {{ config('app.name', 'MyApp') }} --}}
         </a>
         <nav class="flex items-center gap-4">
             <!-- Lang Switcher-->
@@ -58,22 +57,6 @@
         <p class="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-8">
             <span class="font-bold">{{ config('app.name', 'MyApp') }}</span> — {{ __("welcome.subheader") }}
         </p>
-        {{-- <a href="{{ route('register') }}" wire:navigate
-            class="relative inline-block px-10 py-10 rounded-2xl
-                    text-2xl font-bold text-neon-gold
-                    bg-gradient-to-r from-black via-gray-800 to-gray-900
-                    shadow-lg hover:shadow-2xl
-                    transform hover:scale-105 hover:-rotate-1 transition duration-300 ease-out
-                    glow-effect overflow-hidden group">
-
-            🎬 {{ __("welcome.buttons.get_started") }}
-            <!-- Spotlight sweep hover -->
-            <span class="absolute inset-0 -translate-x-full
-                        bg-gradient-to-r from-transparent via-white/20 to-transparent
-                        skew-x-12 transition-transform duration-700
-                        group-hover:translate-x-full"></span>
-            <x-film-strip-effect />
-        </a> --}}
         <x-cinema-welcome-button href="{{ route('register') }}">
             🎬 {{ __("welcome.buttons.get_started") }}
         </x-cinema-welcome-button>
