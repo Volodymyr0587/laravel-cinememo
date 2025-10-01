@@ -13,20 +13,14 @@
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            {{-- <flux:button
-                :href="route('content-items.export')" class="order-2 sm:order-none"
-                icon:trailing="arrow-down-tray"
+            <x-cinema-button href="{{ route('people.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="green"
             >
-                {{ __('Export to XLSX') }}
-            </flux:button>
-            <flux:button
-                :href="route('content-items.export-pdf')" class="order-3 sm:order-none"
-                icon:trailing="arrow-down-tray"
-                target="_blank"
-            >
-               {{ __('Export to PDF') }}
-            </flux:button> --}}
-            <x-button href="{{ route('people.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('people/main.add_new_person') }}</x-button>
+                {{ __('people/main.add_new_person') }}
+            </x-cinema-button>
         </div>
     </div>
 
@@ -48,22 +42,6 @@
                                 :placeholder="__('people/main.search_person')"
                             />
                         </div>
-                        {{-- <div>
-                            <flux:select wire:model.live="genreFilter" :label="__('Genre')">
-                                <option value="">All Genres</option>
-                                @foreach($genres as $genre)
-                                    <option value="{{ $genre->id }}">{{ __($genre->name) }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div>
-                        <div>
-                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
-                                <option value="">All Statuses</option>
-                                @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
-                                    <option value="{{ $value }}">{{ __($label) }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div> --}}
                         <div>
                             <flux:select wire:model.live="contentItemFilter" :label="__('people/main.content')">
                                 <option value="">{{ __("people/main.all_content") }}</option>
@@ -161,42 +139,6 @@
                                     </div>
                                     @endif
 
-                                    {{-- Know for --}}
-                                    {{-- <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
-                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("people/main.known_for") }}:</span>
-                                        @php
-                                            $grouped = $person->contentItems->groupBy('id');
-                                        @endphp
-
-                                        @forelse ($grouped as $contentItemId => $items)
-                                            @php
-                                                $contentItem = $items->first();
-                                                $professions = $items->map(fn($i) => $i->pivot?->profession?->name)->filter()->unique();
-                                            @endphp
-
-                                            <span
-                                                class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
-                                                    hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
-                                                    text-center cursor-pointer select-none shadow-sm"
-                                                wire:click="$set('contentItemFilter', {{ $contentItem->id }})"
-                                            >
-                                                {{ $contentItem->title }}
-                                            </span>
-
-                                            @if($professions->isNotEmpty())
-                                                <small class="ml-2 text-gray-600 dark:text-gray-300">
-                                                    ({{ $professions->join(', ') }})
-                                                </small>
-                                            @endif
-                                        @empty
-                                            <span class="font-semibold italic text-xs dark:text-white">
-                                                {{ __("people/main.no_works") }}
-                                            </span>
-                                        @endforelse
-                                    </div> --}}
-                                    {{-- End Know for --}}
-
-
                                     @if($person->biography)
                                         <p class="text-sm text-gray-600 dark:text-white mb-3">
                                             {{ Str::limit($person->biography, 100) }}
@@ -204,11 +146,17 @@
                                     @endif
 
                                     <div class="flex justify-between items-center">
-                                        <flux:button href="{{ route('people.edit', $person) }}" wire:navigate>{{ __("people/main.edit") }}</flux:button>
-                                        <x-button wire:click="delete({{ $person->id }})"
-                                                wire:confirm="{{ __('people/main.delete_confirm_message') }}"
-                                                color="red" type="submit"
-                                                >{{ __("people/main.delete") }}</x-button>
+                                        <x-cinema-button href="{{ route('people.edit', $person) }}"
+                                            wire:navigate
+                                            size="md"
+                                            palette="silver"
+                                        >{{ __("people/main.edit") }}</x-cinema-button>
+                                        <x-cinema-button wire:click="delete({{ $person->id }})"
+                                            wire:confirm="{{ __('people/main.delete_confirm_message') }}"
+                                            class="hover:cursor-pointer"
+                                            size="md"
+                                            palette="red"
+                                        >{{ __("people/main.delete") }}</x-cinema-button>
                                     </div>
                                 </div>
                             </div>
