@@ -148,13 +148,11 @@
                                     <div class="flex justify-between items-center">
                                         <x-cinema-button href="{{ route('people.edit', $person) }}"
                                             wire:navigate
-                                            size="md"
                                             palette="silver"
                                         >{{ __("people/main.edit") }}</x-cinema-button>
                                         <x-cinema-button wire:click="delete({{ $person->id }})"
                                             wire:confirm="{{ __('people/main.delete_confirm_message') }}"
                                             class="hover:cursor-pointer"
-                                            size="md"
                                             palette="red"
                                         >{{ __("people/main.delete") }}</x-cinema-button>
                                     </div>

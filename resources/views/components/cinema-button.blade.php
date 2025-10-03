@@ -13,11 +13,11 @@
     ";
 
     $sizeClasses = match($size) {
-        'sm' => 'px-4 py-2 text-sm',
-        'md' => 'px-6 py-3 text-base',
-        'lg' => 'px-10 py-6 text-2xl',
-        'xl' => 'px-12 py-8 text-3xl',
-        default => 'px-6 py-3 text-base',
+        'sm' => 'px-2 py-1.5 text-sm',
+        'md' => 'px-4 py-2 text-base',
+        'lg' => 'px-6 py-3 text-lg',
+        'xl' => 'px-8 py-4 text-xl',
+        default => 'px-4 py-2 text-base',
     };
 
     $paletteClasses = match($palette) {
