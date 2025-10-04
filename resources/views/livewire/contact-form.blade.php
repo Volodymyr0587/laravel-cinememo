@@ -19,10 +19,16 @@
             @error('message') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <button type="submit"
-            class="w-full bg-blue-600 text-white text-lg font-semibold py-3 rounded-lg shadow hover:bg-blue-700 transition">
+        <div class="flex justify-end">
+            <x-cinema-button
+            type="submit"
+            :glow="true"
+            palette="purple"
+        >
             {{ __("welcome.buttons.send") }}
-        </button>
+        </x-cinema-button>
+        </div>
+
 
         @if (session('success'))
             <div class="mt-4 p-3 rounded bg-green-100 text-green-700">
