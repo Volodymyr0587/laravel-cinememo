@@ -39,7 +39,14 @@
         <flux:checkbox wire:model="remember" :label="__('login.form.remember')" />
 
         <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full">{{ __('login.form.login') }}</flux:button>
+             <x-cinema-button
+                type="submit"
+                class="grow"
+                :glow="true"
+                palette="purple"
+            >
+                 {{ __('login.form.login') }}
+            </x-cinema-button>
         </div>
     </form>
 

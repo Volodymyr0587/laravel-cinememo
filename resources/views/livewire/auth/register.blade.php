@@ -48,10 +48,15 @@
             viewable
         />
 
-        <div class="flex items-center justify-end">
-            <flux:button type="submit" variant="primary" class="w-full">
-                {{ __('register.form.create') }}
-            </flux:button>
+        <div class="flex items-center">
+            <x-cinema-button
+                type="submit"
+                class="grow"
+                :glow="true"
+                palette="purple"
+            >
+                 {{ __('register.form.create') }}
+            </x-cinema-button>
         </div>
     </form>
 
