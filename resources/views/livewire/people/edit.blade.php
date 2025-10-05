@@ -95,10 +95,9 @@
                                 <div class="flex items-center space-x-4">
                                     <img src="{{ $person->main_image_url }}" alt="Current image"
                                         class="h-24 w-24 object-cover rounded">
-                                    <button type="button" wire:click="confirmMainImageRemoval"
-                                        class="bg-red-500 hover:bg-red-700 hover:cursor-pointer text-white font-bold py-1 px-3 rounded text-sm">
-                                        {{ __('Remove Image') }}
-                                    </button>
+                                    <x-cinema-button type="button" :glow="true" palette="red" wire:click="confirmMainImageRemoval">
+                                        {{ __("Remove Image") }}
+                                    </x-cinema-button>
                                 </div>
                             </div>
                             @endif
@@ -184,8 +183,12 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Update Person') }}</flux:button>
-                            <flux:link :href="route('people.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __("Update Person") }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('people.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>
@@ -206,16 +209,14 @@
         <p class="mb-6 text-gray-700 dark:text-gray-300">Are you sure you want to delete the main image? This action cannot be undone.</p>
 
         <div class="flex justify-end space-x-4">
-            <button @click="showModal = false"
-                    type="button"
-                    class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded hover:bg-gray-300">
-                Cancel
-            </button>
-            <button wire:click="removeMainImage"
-                    type="button"
-                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                Delete
-            </button>
+            <x-cinema-button @click="showModal = false"
+                type="button" :glow="true" palette="gray">
+                {{ __("Cancel") }}
+            </x-cinema-button>
+            <x-cinema-button wire:click="removeMainImage"
+                type="button" :glow="true" palette="red">
+                                {{ __("Delete") }}
+            </x-cinema-button>
         </div>
     </div>
 </div>
@@ -232,16 +233,14 @@
         <p class="mb-6 text-gray-700 dark:text-gray-300">Are you sure you want to delete this image? This action cannot be undone.</p>
 
         <div class="flex justify-end space-x-4">
-            <button @click="showModal = false"
-                    type="button"
-                    class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded hover:bg-gray-300">
-                Cancel
-            </button>
-            <button wire:click="deleteAdditionalImageConfirmed"
-                    type="button"
-                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                Delete
-            </button>
+            <x-cinema-button @click="showModal = false"
+                type="button" :glow="true" palette="gray">
+                {{ __("Cancel") }}
+            </x-cinema-button>
+            <x-cinema-button wire:click="deleteAdditionalImageConfirmed"
+                type="button" :glow="true" palette="red">
+                {{ __("Delete") }}
+            </x-cinema-button>
         </div>
     </div>
 </div>

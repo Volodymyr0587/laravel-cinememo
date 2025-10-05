@@ -235,15 +235,15 @@
                 {{-- Action Buttons --}}
                 @can('update', $person)
                 <div class="flex justify-between items-center mt-6">
-                    <flux:button href="{{ route('people.edit', $person) }}" wire:navigate>
-                        {{ __('Edit') }}
-                    </flux:button>
-
-                    <button type="submit" wire:click="delete"
-                            wire:confirm="Are you sure you want to delete this person? This action is irreversible."
-                            class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-800 text-sm font-medium hover:cursor-pointer">
-                        {{ __('Delete') }}
-                    </button>
+                    <x-cinema-button href="{{ route('people.edit', $person) }}"
+                        wire:navigate
+                        palette="purple"
+                    >{{ __("people/main.edit") }}</x-cinema-button>
+                    <x-cinema-button wire:click="delete"
+                        wire:confirm="{{ __('people/main.delete_confirm_message') }}"
+                        class="hover:cursor-pointer"
+                        palette="red"
+                    >{{ __("people/main.delete") }}</x-cinema-button>
                 </div>
                 @endcan
             </div>

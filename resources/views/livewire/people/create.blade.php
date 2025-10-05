@@ -156,8 +156,12 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Add Person') }}</flux:button>
-                            <flux:link :href="route('people.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __("Add Person") }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('people.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

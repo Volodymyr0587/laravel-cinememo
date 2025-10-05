@@ -17,7 +17,7 @@
                 class="order-1 sm:order-none"
                 wire:navigate
                 :glow="true"
-                palette="green"
+                palette="gold"
             >
                 {{ __('people/main.add_new_person') }}
             </x-cinema-button>
@@ -148,7 +148,7 @@
                                     <div class="flex justify-between items-center">
                                         <x-cinema-button href="{{ route('people.edit', $person) }}"
                                             wire:navigate
-                                            palette="silver"
+                                            palette="purple"
                                         >{{ __("people/main.edit") }}</x-cinema-button>
                                         <x-cinema-button wire:click="delete({{ $person->id }})"
                                             wire:confirm="{{ __('people/main.delete_confirm_message') }}"
