@@ -35,8 +35,12 @@
                         </div>
 
                         <div class="flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('content_types/create.create_category') }}</flux:button>
-                            <flux:link :href="route('content-types.index')" wire:navigate>{{ __('content_types/create.cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __('content_types/create.create_category') }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('content-types.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __('content_types/create.cancel') }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

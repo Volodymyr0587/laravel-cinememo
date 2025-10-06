@@ -13,7 +13,15 @@
                 </flux:button>
             @endif
         </h2>
-        <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('content_types/main.add_new_category') }}</x-button>
+        {{-- <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('content_types/main.add_new_category') }}</x-button> --}}
+        <x-cinema-button href="{{ route('content-types.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('content_types/main.add_new_category') }}
+            </x-cinema-button>
     </div>
 
 
@@ -58,11 +66,15 @@
                                             {{ $contentType->created_at->translatedFormat('d F Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('content-types.edit', $contentType) }}" wire:navigate
-                                               class="text-indigo-600 hover:text-indigo-900 mr-4">{{ __('content_types/main.edit') }}</a>
-                                            <button wire:click="delete({{ $contentType->id }})"
-                                                    wire:confirm="{{ __("content_types/main.delete_confirm_message") }}"
-                                                    class="text-red-600 hover:text-red-900 hover:cursor-pointer">{{ __('content_types/main.delete') }}</button>
+                                            <x-cinema-button href="{{ route('content-types.edit', $contentType) }}"
+                                                wire:navigate
+                                                palette="purple"
+                                            >{{ __("people/main.edit") }}</x-cinema-button>
+                                            <x-cinema-button wire:click="delete({{  $contentType->id }})"
+                                                wire:confirm="{{ __('content_types/main.delete_confirm_message') }}"
+                                                class="hover:cursor-pointer ml-2"
+                                                palette="red"
+                                            >{{ __("content_types/main.delete") }}</x-cinema-button>
                                         </td>
                                     </tr>
                                 @empty
