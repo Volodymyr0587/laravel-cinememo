@@ -14,7 +14,14 @@
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            <x-button href="{{ route('content-items.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Content Item') }}</x-button>
+            <x-cinema-button href="{{ route('content-items.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('Add New Content Item') }}
+            </x-cinema-button>
         </div>
     </div>
 

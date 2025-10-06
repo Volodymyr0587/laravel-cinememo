@@ -294,7 +294,7 @@
                         <!-- Close Button -->
                         <button
                             @click="imageModal = false"
-                            class="fixed top-4 right-4 z-50 text-white bg-red-600 hover:bg-red-700 hover:cursor-pointer rounded-full w-12 h-12 text-3xl flex items-center justify-center shadow-lg focus:outline-none"
+                            class="fixed top-4 right-4 z-50 text-white bg-red-600 hover:bg-red-700 rounded-full w-12 h-12 text-3xl flex items-center justify-center shadow-lg focus:outline-none"
                             aria-label="Close"
                         >
                             &times;

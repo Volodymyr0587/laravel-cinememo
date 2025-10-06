@@ -27,7 +27,14 @@
             >
                {{ __('Export to PDF') }}
             </flux:button>
-            <x-button href="{{ route('content-items.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Content Item') }}</x-button>
+            <x-cinema-button href="{{ route('content-items.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('Add New Content Item') }}
+            </x-cinema-button>
         </div>
     </div>
 
@@ -169,11 +176,14 @@
                                     @endif
 
                                     <div class="flex justify-between items-center">
-                                        <flux:button href="{{ route('content-items.edit', $contentItem) }}" wire:navigate>Edit</flux:button>
-                                        <x-button wire:click="delete({{ $contentItem->id }})"
-                                                wire:confirm="Are you sure you want to delete this content item?"
-                                                color="red" type="submit"
-                                                >Delete</x-button>
+                                        <x-cinema-button href="{{ route('content-items.edit', $contentItem) }}"
+                                            wire:navigate
+                                            palette="purple"
+                                        >Edit</x-cinema-button>
+                                        <x-cinema-button wire:click="delete({{ $contentItem->id }})"
+                                            wire:confirm="Are you sure you want to delete this content item?"
+                                            palette="red"
+                                        >Delete</x-cinema-button>
                                     </div>
                                 </div>
                             </div>

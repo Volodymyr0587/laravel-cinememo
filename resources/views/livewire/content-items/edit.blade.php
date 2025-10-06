@@ -205,10 +205,9 @@
                                 <div class="flex items-center space-x-4">
                                     <img src="{{ $contentItem->main_image_url }}" alt="Current image"
                                         class="h-24 w-24 object-cover rounded">
-                                    <button type="button" wire:click="confirmMainImageRemoval"
-                                        class="bg-red-500 hover:bg-red-700 hover:cursor-pointer text-white font-bold py-1 px-3 rounded text-sm">
-                                        {{ __('Remove Image') }}
-                                    </button>
+                                    <x-cinema-button type="button" :glow="true" palette="red" wire:click="confirmMainImageRemoval">
+                                        {{ __("Remove Image") }}
+                                    </x-cinema-button>
                                 </div>
                             </div>
                             @endif
@@ -286,8 +285,12 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" class="hover:cursor-pointer">{{ __('Update Content Item') }}</flux:button>
-                            <flux:link :href="route('content-items.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold" >
+                                {{ __('Update Content Item') }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('content-items.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

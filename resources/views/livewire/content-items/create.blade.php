@@ -251,8 +251,12 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Create Content Item') }}</flux:button>
-                            <flux:link :href="route('content-items.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold" >
+                                {{ __('Create Content Item') }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('content-items.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

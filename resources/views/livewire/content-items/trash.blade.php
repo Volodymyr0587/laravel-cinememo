@@ -31,12 +31,15 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $contentItem->deleted_at->format('Y-m-d H:i') }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button wire:click="restore({{ $contentItem->id }})"
-                                                    class="text-blue-600 hover:text-blue-900 hover:cursor-pointer mr-2">Restore</button>
-                                            <button wire:click="forceDelete({{ $contentItem->id }})"
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-1">
+                                            <x-cinema-button wire:click="restore({{ $contentItem->id }})" :glow="true" palette="green" >
+                                                {{ __('Restore') }}
+                                            </x-cinema-button>
+                                            <x-cinema-button wire:click="forceDelete({{ $contentItem->id }})"
                                                     wire:confirm="Are you sure you want to permanently delete this content item?"
-                                                    class="text-red-600 hover:text-red-900 hover:cursor-pointer">Delete</button>
+                                                    :glow="true" palette="red">
+                                                {{ __("Delete") }}
+                                            </x-cinema-button>
                                         </td>
                                     </tr>
                                 @empty
