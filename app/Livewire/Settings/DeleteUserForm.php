@@ -28,7 +28,7 @@ class DeleteUserForm extends Component
         $logout();
 
         // use centralized service
-        $userDeletionService->deleteUser($userId, 'User requested account deletion.');
+        $userDeletionService->deleteUser(userId: $userId, reason: 'User requested account deletion.');
 
         $this->redirect('/', navigate: true);
     }
