@@ -4,7 +4,6 @@ return [
     "dashboard" => "Головна",
     "categories" => "Категорії",
     "my-collection" => "Моя колекція",
-    "actors" => "Актори",
     "cast-and-crew" => "Актори та команда",
     "content" => "Контент",
     "public-content" => "Публічний контент",

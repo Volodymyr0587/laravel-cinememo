@@ -48,8 +48,8 @@
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->contentItems->count() }}</p>
                     </div>
                     <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("dashboard.total_actors") }}</p>
-                        <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->actors->count() }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("dashboard.total_cast_and_crew") }}</p>
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->people->count() }}</p>
                     </div>
                     <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("dashboard.total_categories") }}</p>

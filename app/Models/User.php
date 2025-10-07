@@ -84,16 +84,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Get all of the actors for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function actors(): HasMany
-    {
-        return $this->hasMany(Actor::class);
-    }
-
-    /**
      * Get all of the Articles for the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

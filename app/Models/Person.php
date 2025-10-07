@@ -117,18 +117,18 @@ class Person extends Model
     {
         $displayName = $this->name;
 
-        // Add birth year if available to distinguish actors with same name
+        // Add birth year if available to distinguish people with same name
         if ($this->birth_date) {
             $displayName .= ' (' . $this->birth_date->format('M-d-Y') . ')';
         }
 
-        // If still not unique within user's actors, add birth place
-        $sameNameActors = static::where('user_id', $this->user_id)
+        // If still not unique within user's people, add birth place
+        $sameNamePeople = static::where('user_id', $this->user_id)
                                ->where('name', $this->name)
                                ->where('id', '!=', $this->id)
                                ->count();
 
-        if ($sameNameActors > 0 && $this->birth_place) {
+        if ($sameNamePeople > 0 && $this->birth_place) {
             $displayName .= ' - ' . $this->birth_place;
         }
 

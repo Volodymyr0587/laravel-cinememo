@@ -36,7 +36,6 @@ class Edit extends Component
     public $imageIdToRemove = null;
     public $confirmingMainImageRemoval = false;
     public $genres = [];
-    public $actors = [];
     public $selectedPeople = [];
 
     protected function rules(): array
@@ -56,8 +55,6 @@ class Edit extends Component
             'newAdditionalImages.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
-            'actors' => 'array',
-            'actors.*' => 'exists:actors,id',
             'selectedPeople' => 'array',
         ];
     }
@@ -78,7 +75,6 @@ class Edit extends Component
         $this->status = $contentItem->status->value;
         $this->is_public = $contentItem->is_public;
         $this->genres = $contentItem->genres()->pluck('genres.id')->toArray();
-        $this->actors = $contentItem->actors()->pluck('actors.id')->toArray();
         // Load existing people relationships and convert to selectedPeople format
         $this->loadExistingPeople();
     }
@@ -169,7 +165,6 @@ class Edit extends Component
 
         // Оновлюємо жанри
         $this->contentItem->genres()->sync($this->genres);
-        $this->contentItem->actors()->sync($this->actors);
 
         $this->updatePeopleRelationships();
 

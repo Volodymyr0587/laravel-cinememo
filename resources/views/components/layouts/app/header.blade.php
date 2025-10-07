@@ -36,21 +36,6 @@
 
                         <flux:menu.separator />
 
-                        {{-- <div class="p-0 text-sm font-normal">
-                            @php
-                                $countActors = auth()->user()->actors()->count();
-                            @endphp
-                            <flux:navbar.item icon="users" :href="route('actors.index')"
-                                class="{{ request()->routeIs('actors.index') ? 'text-neon-gold' : '' }}" wire:navigate>
-                                <div class="flex items-center justify-between">
-                                    <span>{{ __('layouts-app-header.actors') }}</span>
-                                    <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
-                                </div>
-                            </flux:navbar.item>
-                        </div>
-
-                        <flux:menu.separator /> --}}
-
                         <div class="p-0 text-sm font-normal">
                             @php
                                 $countContentTypes = auth()->user()->contentTypes()->count();
@@ -222,12 +207,6 @@
                     <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                       {{ __('layouts-app-header.dashboard') }}
                     </flux:navlist.item>
-                    {{-- <flux:navlist.item icon="users" :href="route('actors.index')" :current="request()->routeIs('actors.index')" wire:navigate>
-                        <div class="flex items-center justify-between">
-                            <span>{{ __('layouts-app-header.actors') }}</span>
-                            <flux:badge color="purple" size="sm" class="ml-1">{{ $countActors }}</flux:badge>
-                        </div>
-                    </flux:navlist.item> --}}
                     <flux:navlist.item icon="users" :href="route('people.index')" :current="request()->routeIs('people.index')" wire:navigate>
                         <div class="flex items-center justify-between">
                             <span>{{ __('layouts-app-header.cast-and-crew') }}</span>

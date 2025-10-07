@@ -74,50 +74,6 @@
                             </div>
                         </div>
 
-                        {{-- Actors --}}
-                        {{-- <div class="mt-4">
-                            <label for="actors" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
-                                {{ __("Actors") }}
-                            </label>
-
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                               @forelse($allUserActors as $actor)
-                                    <label x-data="{ hover: false }" class="relative flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox"
-                                            id="actor_{{ $actor->id }}"
-                                            wire:model="actors"
-                                            value="{{ $actor->id }}"
-                                            class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
-
-                                        <span @mouseenter="hover = true" @mouseleave="hover = false"
-                                            class="text-gray-700 dark:text-white text-sm relative">
-                                            {{ $actor->name }}
-                                            <div x-show="hover"
-                                                x-transition
-                                                class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border hidden sm:block">
-                                                @if($actor->main_image_url)
-                                                <img src="{{ $actor->main_image_url }}"
-                                                    alt="{{ $actor->name }}"
-                                                    class="w-full h-full object-cover">
-                                                @else
-                                                <img src="{{ asset('images/default-actor.png') }}"
-                                                    alt="{{ $actor->name }}"
-                                                    class="w-full h-full object-cover"
-                                                >
-                                                @endif
-                                            </div>
-                                        </span>
-                                    </label>
-                                @empty
-                                    <span class="font-semibold italic text-xs dark:text-white">
-                                        {{ __("There are no actors in your collection yet.") }}
-                                    </span>
-                                @endforelse
-                            </div>
-                            <hr class="my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-                        </div> --}}
-                        {{-- End Actors --}}
-
                         <div>
                             <flux:label class="mt-4">{{ __("People & Professions") }}</flux:label>
                             @foreach($professions as $profession)

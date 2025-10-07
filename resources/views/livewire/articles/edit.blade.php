@@ -141,16 +141,10 @@
                         </div>
 
                         <div class="mt-4">
-                            <label for="content_type_id" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
-                                {{ __("Select actor-related content") }}
-                            </label>
-
-
                             <div class="my-12">
                                 <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
                                 <p class="mt-2 font-bold text-xs italic">* - {{ __("Required fields") }}</p>
                             </div>
-
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">

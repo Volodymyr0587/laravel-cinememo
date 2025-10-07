@@ -51,11 +51,6 @@ class ContentItem extends Model
         return $this->belongsToMany(Genre::class, 'content_item_genre');
     }
 
-    public function actors(): BelongsToMany
-    {
-        return $this->belongsToMany(Actor::class, 'actor_content_item');
-    }
-
      /**
      * The people that belong to the ContentItem
      *

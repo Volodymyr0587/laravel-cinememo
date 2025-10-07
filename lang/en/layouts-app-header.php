@@ -4,7 +4,6 @@ return [
     "dashboard" => "Dashboard",
     "categories" => "Categories",
     "my-collection" => "My Collection",
-    "actors" => "Actors",
     "cast-and-crew" => "Cast & Crew",
     "content" => "Content",
     "public-content" => "Public Content",

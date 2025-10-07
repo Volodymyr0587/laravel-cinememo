@@ -97,49 +97,6 @@
                         </div>
                     </div>
 
-                    <!-- Actors Section-->
-                    {{-- <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Actors') }}</p>
-                        @forelse ($contentItem->actors as $actor)
-
-                            @can('viewActors', $contentItem)
-                                <a x-data="{ hover: false }" href="{{ route('actors.show', $actor) }}" wire:navigate
-                                    class="inline-block text-sm font-medium text-cyan-400 hover:underline"
-                                    >
-                                    <span @mouseenter="hover = true" @mouseleave="hover = false"
-                                        class="relative">
-                                        {{ $actor->name }}
-                                        <div x-show="hover"
-                                            x-transition
-                                            class="absolute z-50 top-full left-0 mt-2 w-32 h-32 bg-white dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden border">
-                                            @if($actor->main_image_url)
-                                            <img src="{{ $actor->main_image_url }}"
-                                                alt="{{ $actor->name }}"
-                                                class="w-full h-full object-cover">
-                                            @else
-                                            <img src="{{ asset('images/default-actor.png') }}"
-                                                alt="{{ $actor->name }}"
-                                                class="w-full h-full object-cover"
-                                            >
-                                            @endif
-                                        </div>
-                                    </span>
-                                </a>
-                            @else
-                                <span class="inline-block text-sm font-medium text-gray-500 dark:text-gray-400">
-                                    {{ $actor->name }}
-                                </span>
-                            @endcan
-
-                            @if(!$loop->last) | @endif
-                        @empty
-                            <span class="font-semibold italic text-xs dark:text-white">
-                                {{ __("No actors") }}
-                            </span>
-                        @endforelse
-                    </div> --}}
-                    <!-- End Actors Section-->
-
                     <!-- People Section -->
                     @if($contentItem->people->isNotEmpty())
                         @php

@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\Articles;
-use App\Livewire\Actors;
 use App\Livewire\People;
 use App\Livewire\Dashboard;
 use App\Livewire\ContentItems;
@@ -62,12 +61,6 @@ Route::middleware(['auth'])->group(function () {
             ->format('A4')
             ->name($fileName);
     })->name('content-items.export-pdf');
-
-    // Actors Routes
-    // Route::get('/actors', Actors\Index::class)->name('actors.index');
-    // Route::get('/actors/create', Actors\Create::class)->name('actors.create');
-    // Route::get('/actors/{actor}/edit', Actors\Edit::class)->name('actors.edit');
-    // Route::get('/actors/{actor}', Actors\Show::class)->name('actors.show');
 
     // People Routes
     Route::get('/people', People\Index::class)->name('people.index');

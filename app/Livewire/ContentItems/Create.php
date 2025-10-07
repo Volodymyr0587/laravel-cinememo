@@ -29,14 +29,12 @@ class Create extends Component
     public $is_public = false;
     public $additional_images = [];
     public $genres = [];
-    // public $actors = [];
     public $selectedPeople = [];
 
 
     public function mount()
     {
         $this->genres = [];
-        // $this->actors = [];
         $this->selectedPeople = [];
     }
 
@@ -58,8 +56,6 @@ class Create extends Component
             'additional_images.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
-            // 'actors' => 'array',
-            // 'actors.*' => 'exists:actors,id',
             'selectedPeople' => 'array',
         ];
     }
@@ -106,11 +102,6 @@ class Create extends Component
         if (!empty($this->genres)) {
             $contentItem->genres()->sync($this->genres);
         }
-
-        // Зберігаємо акторів
-        // if (!empty($this->actors)) {
-        //     $contentItem->actors()->sync($this->actors);
-        // }
 
         if (!empty($this->selectedPeople)) {
             foreach ($this->selectedPeople as $key => $isSelected) {
