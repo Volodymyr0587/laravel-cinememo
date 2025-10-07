@@ -129,9 +129,12 @@ class ContentSeeder extends Seeder
         ];
 
         foreach ($contentTypesAndContentItems as $typeName => $items) {
-            $type = ContentType::create([
+            // Normalize to lowercase to match the auto-created type
+            $normalizedTypeName = strtolower($typeName);
+
+            $type = ContentType::firstOrCreate([
                 'user_id' => $user->id,
-                'name' => $typeName,
+                'name' => $normalizedTypeName,
                 'color' => $colors[$typeName] ?? '#3b82f6',
             ]);
 
