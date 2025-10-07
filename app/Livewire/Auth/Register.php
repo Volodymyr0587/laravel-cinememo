@@ -38,11 +38,6 @@ class Register extends Component
 
         Auth::login($user);
 
-        auth()->user()->contentTypes()->create([
-            'name' => 'movie',
-            'color' => '#ff9900',
-        ]);
-
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
 }

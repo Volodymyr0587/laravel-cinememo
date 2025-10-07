@@ -160,5 +160,17 @@ class User extends Authenticatable
         })->toArray();
     }
 
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::created(function ($user) {
+            if (! $user->contentTypes()->where('name', 'movie')->exists()) {
+                $user->contentTypes()->create([
+                    'name' => 'movie',
+                    'color' => '#ff9900',
+                ]);
+            }
+        });
+    }
 }
