@@ -128,11 +128,7 @@
                                             <div class="relative">
                                                 <img src="{{ Storage::url($image->path) }}" alt="Additional Image"
                                                     class="h-24 w-24 object-cover rounded border border-gray-300">
-                                                <button type="button"
-                                                        wire:click="confirmAdditionalImageRemoval({{ $image->id }})"
-                                                        class="absolute top-1 right-1 bg-red-500 hover:bg-red-700 text-white rounded-full p-1 text-xs">
-                                                    ✕
-                                                </button>
+                                                <x-delete-image-button wire:click="confirmAdditionalImageRemoval({{ $image->id }})" />
                                             </div>
                                         @endforeach
                                     </div>
