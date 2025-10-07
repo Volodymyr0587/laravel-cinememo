@@ -30,8 +30,8 @@ class UserDeletionService
                 $item->removeAllImages();
             });
 
-            $user->actors()->each(function ($actor) {
-                $actor->removeAllImages();
+            $user->people()->each(function ($person) {
+                $person->removeAllImages();
             });
 
             // TODO: delete other relationships if exist
