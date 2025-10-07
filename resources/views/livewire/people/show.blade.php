@@ -6,7 +6,7 @@
                 {{-- Back Button --}}
                 <div class="mb-4">
                     <flux:link href="{{ route('people.index') }}" wire:navigate>
-                        ← {{ __('Back to all people') }}
+                        ← {{ __('people/show.back') }}
                     </flux:link>
                 </div>
 
@@ -17,7 +17,7 @@
 
                 @if ($person->birth_date)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Birth date:</span>
+                    <span class="font-medium">{{ __('people/show.birth_date') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                         {{ $person->birth_date->format('M-d-Y') }}
                     </span>
@@ -26,7 +26,7 @@
 
                 @if ($person->birth_place)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Birth place:</span>
+                    <span class="font-medium">{{ __('people/show.birth_place') }}:</span>
                     <a href="https://www.google.com/maps/search/?api=1&query={{ $person->birth_place }}" target="_blank"
                         class="px-2 py-1 rounded text-xs font-bold
                             bg-gray-900 text-white
@@ -41,7 +41,7 @@
 
                 @if ($person->death_date)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Death date:</span>
+                    <span class="font-medium">{{ __('people/show.death_date') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                         {{ $person->death_date->format('M-d-Y') }}
                     </span>
@@ -50,7 +50,7 @@
 
                 @if ($person->formatted_age)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Age:</span>
+                    <span class="font-medium">{{ __('people/show.age') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                          {{ $person->formatted_age }}
                     </span>
@@ -59,7 +59,7 @@
 
                 @if ($person->death_place)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Death place:</span>
+                    <span class="font-medium">{{ __('people/show.death_place') }}:</span>
                     <a href="https://www.google.com/maps/search/?api=1&query={{ $person->death_place }}" target="_blank"
                         class="px-2 py-1 rounded text-xs font-bold
                             bg-gray-900 text-white
@@ -90,7 +90,7 @@
                         </div>
                     @else
                         <div class="w-full h-64 bg-gray-200 dark:bg-zinc-600 flex items-center justify-center rounded mb-6">
-                            <span class="text-gray-500 dark:text-gray-300">No Image</span>
+                            <span class="text-gray-500 dark:text-gray-300">{{ __("people/show.no_image") }}</span>
                         </div>
                     @endif
                 @endif
@@ -99,7 +99,7 @@
                 {{-- Meta Info --}}
                 <div class="gap-4 mb-6">
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("Known for") }}:</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("people/show.known_for") }}:</p>
                         <div class="flex flex-wrap gap-2 mt-0.5">
                             @php
                                 $grouped = $person->contentItems->groupBy('id');
@@ -133,7 +133,7 @@
                                 </a>@if(!$loop->last) | @endif
                             @empty
                                 <span class="font-semibold italic text-xs dark:text-white">
-                                    {{ __("No works") }}
+                                    {{ __("people/show.no_works") }}
                                 </span>
                             @endforelse
                         </div>
@@ -143,7 +143,7 @@
                 {{-- Biography --}}
                 @if($person->biography)
                     <div class="mb-6">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Biography') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('people/show.biography') }}</p>
                         <p class="text-base text-gray-800 dark:text-white">{{ $person->biography }}</p>
                     </div>
                 @endif
@@ -171,7 +171,7 @@
                     @keydown.arrow-left.window="prev()"
                     class="my-4"
                 >
-                    <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">Additional Images</p>
+                    <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">{{ __('people/show.additional_images') }}</p>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         <template x-for="(img, index) in images" :key="index">
                             <div
