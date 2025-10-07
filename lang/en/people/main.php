@@ -2,7 +2,7 @@
 
 return [
     "clear_filters" => "Clear filters",
-    "people" => "People",
+    "people" => "Cast and crew",
     "add_new_person" => "Add new person",
     "search" => "Search",
     "search_person" => "Search person...",

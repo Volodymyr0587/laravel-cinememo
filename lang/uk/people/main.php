@@ -2,7 +2,7 @@
 
 return [
     "clear_filters" => "Очистити фільтри",
-    "people" => "Люди",
+    "people" => "Актори та команда",
     "add_new_person" => "Додати нову людину",
     "search" => "Пошук",
     "search_person" => "Шукати людину...",
