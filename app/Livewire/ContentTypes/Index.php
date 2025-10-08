@@ -33,7 +33,7 @@ class Index extends Component
             $contentType = ContentType::where('user_id', auth()->id())->findOrFail($id);
             $contentType->delete();
 
-            session()->flash('message', "Category $contentType->name deleted successfully.");
+            session()->flash('message', __('content_types/main.category_deleted_message', ['name' => $contentType->name]));
         } catch (\Exception $e) {
              session()->flash('message', $e->getMessage());
         }

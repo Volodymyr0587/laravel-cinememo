@@ -5,4 +5,5 @@ return [
     "name" => "Name",
     "color" => "Color",
     "cancel" => "Cancel",
+    "category_updated_message" => "Category :name updated successfully.",
 ];

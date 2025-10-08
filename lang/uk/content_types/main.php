@@ -15,4 +15,6 @@ return [
     "edit" => "Редагувати",
     "delete" => "Видалити",
     "delete_confirm_message" => "Ви впевнені, що хочете видалити цю категорію? Ця дія незворотна",
+    "category_deleted_message" => "Категорію :name успішно видалено.",
+    "cannot_delete_category_message" => "Неможливо видалити категорію :name з пов'язаним контентом.",
 ];

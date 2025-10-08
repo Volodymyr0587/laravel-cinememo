@@ -15,4 +15,6 @@ return [
     "edit" => "Edit",
     "delete" => "Delete",
     "delete_confirm_message" => "Are you sure you want to delete this category? This action is irreversible",
+    "category_deleted_message" => "Category :name deleted successfully.",
+    "cannot_delete_category_message" => "Cannot delete category :name with related content.",
 ];

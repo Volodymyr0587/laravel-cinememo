@@ -5,4 +5,5 @@ return [
     "name" => "Назва",
     "color" => "Колір",
     "cancel" => "Скасувати",
+    "category_updated_message" => "Категорію :name успішно оновлено.",
 ];

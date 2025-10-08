@@ -5,4 +5,5 @@ return [
     "name" => "Name",
     "color" => "Color",
     "cancel" => "Cancel",
+    "category_created_message" => "Category :name was successfully created.",
 ];

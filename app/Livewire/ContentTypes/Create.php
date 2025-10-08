@@ -41,7 +41,7 @@ class Create extends Component
             'color' => $this->color,
         ]);
 
-        session()->flash('message', "Category $contentType->name created successfully.");
+        session()->flash('message', __('content_types/create.category_created_message', ['name' => $contentType->name]));
 
         return redirect()->route('content-types.index');
     }
