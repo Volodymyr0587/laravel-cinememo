@@ -119,7 +119,7 @@ class Person extends Model
 
         // Add birth year if available to distinguish people with same name
         if ($this->birth_date) {
-            $displayName .= ' (' . $this->birth_date->format('M-d-Y') . ')';
+            $displayName .= ' (' . $this->birth_date->translatedFormat('d M Y') . ')';
         }
 
         // If still not unique within user's people, add birth place

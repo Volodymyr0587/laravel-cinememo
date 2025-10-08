@@ -19,7 +19,7 @@
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">{{ __('people/show.birth_date') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                        {{ $person->birth_date->format('M-d-Y') }}
+                        {{ $person->birth_date->translatedFormat('d M Y') }}
                     </span>
                 </div>
                 @endif
@@ -43,7 +43,7 @@
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
                     <span class="font-medium">{{ __('people/show.death_date') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                        {{ $person->death_date->format('M-d-Y') }}
+                        {{ $person->death_date->translatedFormat('d M Y') }}
                     </span>
                 </div>
                 @endif
