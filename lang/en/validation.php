@@ -185,6 +185,7 @@ return [
             'invalid_date' => 'The :attribute is not a valid date.',
             'after_birth' => 'The death date must be after the birth date.',
         ],
+        'video_url' => 'The :attribute must be a valid YouTube video URL. Examples: https://youtu.be/xxxx or https://www.youtube.com/watch?v=xxxx',
     ],
 
     /*

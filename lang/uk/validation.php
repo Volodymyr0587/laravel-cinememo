@@ -185,6 +185,7 @@ return [
             'invalid_date' => 'Поле :attribute не є дійсною датою.',
             'after_birth' => 'Дата смерті має бути після дати народження.',
         ],
+        'video_url' => ':attribute має бути дійсною URL-адресою відео YouTube. Приклади: https://youtu.be/xxxx або https://www.youtube.com/watch?v=xxxx',
     ],
 
     /*

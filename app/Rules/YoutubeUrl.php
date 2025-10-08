@@ -15,7 +15,7 @@ class YoutubeUrl implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/', $value, $matches)) {
-            $fail('The :attribute must be a valid YouTube URL.');
+            $fail(__('validation.custom.video_url'));
         }
     }
 

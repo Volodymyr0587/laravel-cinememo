@@ -15,7 +15,7 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    #[Validate('required', message: 'Please select a category. If there are no categories, first create one in the Categories section.')]
+    #[Validate('required')]
     public $content_type_id = '';
     public $title = '';
     public $description = '';
@@ -57,6 +57,13 @@ class Create extends Component
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
             'selectedPeople' => 'array',
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'content_type_id.required' => __('content_items/create.select_category'),
         ];
     }
 
