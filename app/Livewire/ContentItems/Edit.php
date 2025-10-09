@@ -18,7 +18,7 @@ class Edit extends Component
 
     public ContentItem $contentItem;
 
-    #[Validate('required', message: 'Please select a category. If there are no categories, first create one in the Categories section.')]
+    #[Validate('required')]
     public $content_type_id = '';
     public $title = '';
     public $description = '';
@@ -56,6 +56,13 @@ class Edit extends Component
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
             'selectedPeople' => 'array',
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'content_type_id.required' => __('content_items/edit.select_category'),
         ];
     }
 
@@ -168,7 +175,8 @@ class Edit extends Component
 
         $this->updatePeopleRelationships();
 
-        session()->flash('message', 'Content item updated successfully.');
+        // session()->flash('message', 'Content item updated successfully.');
+        session()->flash('message', __('content_items/edit.content_updated_message', ['title' => $this->contentItem->title]));
 
         return redirect()->route('content-items.show', $this->contentItem);
     }

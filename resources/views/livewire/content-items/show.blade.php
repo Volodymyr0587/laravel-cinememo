@@ -3,6 +3,8 @@
         <div class="overflow-hidden bg-white dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
             <div class="p-6">
 
+                <x-flash-message />
+
                 {{-- Back Button --}}
                 <div class="mb-4">
                     @php
