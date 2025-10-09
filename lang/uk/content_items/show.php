@@ -1,0 +1,27 @@
+<?php
+
+return [
+    "back_to_public" => "Назад до публічного контенту",
+    "back_to_collection" => "Назад до колекції",
+    "release_date" => "Дата виходу",
+    "no_image" => "Немає зображення",
+    "category" => "Категорія",
+    "status" => "Статус",
+    "genres" => "Жанри",
+    "no_genre" => "Немає жанру",
+    "unknown_profession" => "Невідома професія",
+    "people" => "Люди",
+    "no_people_assigned" => "Немає причетних людей",
+    "added_by" => "Додано",
+    "description" => "Опис",
+    "duration" => "Тривалість",
+    "if_video_does_not_load" => "Якщо відео не завантажується",
+    "watch_on_youtube" => "дивитися на YouTube",
+    "additional_images" => "Додаткові зображення",
+    "lets_discuss" => "Давайте обговоримо",
+    "add_comment" => "Додати коментар",
+    "edit_button" => "Редагувати",
+    "delete_button" => "Видалити",
+    "delete_confirm_message" => "Ви впевнені, що хочете видалити цей контент?",
+    "content_deleted_message" => "Контент :title успішно видалено.",
+];

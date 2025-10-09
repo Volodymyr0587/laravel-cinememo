@@ -13,11 +13,11 @@
 
                     @if ($from === 'public-content.index')
                         <flux:link href="{{ route('public-content.index') }}" wire:navigate>
-                            ← {{ __('Back to public content') }}
+                            ← {{ __('content_items/show.back_to_public') }}
                         </flux:link>
                     @else
                         <flux:link href="{{ route('content-items.index') }}" wire:navigate>
-                            ← {{ __('Back to collection') }}
+                            ← {{ __('content_items/show.back_to_collection') }}
                         </flux:link>
                     @endif
                 </div>
@@ -29,7 +29,7 @@
 
                 @if ($contentItem->release_date)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Release date:</span>
+                    <span class="font-medium">{{ __('content_items/show.release_date') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                         {{ $contentItem->release_date->translatedFormat('d F Y') }}
                     </span>
@@ -54,7 +54,7 @@
                         </div>
                     @else
                         <div class="w-full h-64 bg-gray-200 dark:bg-zinc-600 flex items-center justify-center rounded mb-6">
-                            <span class="text-gray-500 dark:text-gray-300">No Image</span>
+                            <span class="text-gray-500 dark:text-gray-300">{{ __('content_items/show.no_image') }}</span>
                         </div>
                     @endif
                 @endif
@@ -63,14 +63,14 @@
                 {{-- Meta Info --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Category') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.category') }}</p>
                         <span class="inline-block px-2 py-1 rounded text-xs font-medium"
                             style="background-color: {{ $contentItem->contentType->color }}">
                             {{ $contentItem->contentType->name }}
                         </span>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Status') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.status') }}</p>
                         <span @class([
                             'inline-block px-2 py-1 rounded text-xs font-medium',
                             'bg-green-500 text-white'  => $contentItem->status === \App\Enums\ContentStatus::Watched,
@@ -82,7 +82,7 @@
                         </span>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Genres') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.genres') }}</p>
                         <div class="flex flex-wrap gap-2 mt-0.5">
                             @forelse ($contentItem->genres as $genre)
                                 <span
@@ -93,7 +93,7 @@
                                 </span>
                             @empty
                                 <span class="font-semibold italic text-xs dark:text-white">
-                                    {{ __("No genre") }}
+                                    {{ __("content_items/show.no_genre") }}
                                 </span>
                             @endforelse
                         </div>
@@ -114,7 +114,7 @@
 
                             <div class="mb-4">
                                 <p class="text-sm text-gray-500 dark:text-gray-300">
-                                    {{ $profession ? Str::plural($profession->name) : 'Unknown Profession' }}
+                                    {{ $profession ? Str::plural($profession->name) : __('content_items/show.unknown_profession') }}
                                 </p>
 
                                 @foreach($peopleInProfession as $person)
@@ -153,16 +153,16 @@
                         @endforeach
                     @else
                         <div>
-                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('People') }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.people') }}</p>
                             <span class="font-semibold italic text-xs dark:text-white">
-                                {{ __("No people assigned") }}
+                                {{ __("content_items/show.no_people_assigned") }}
                             </span>
                         </div>
                     @endif
 
 
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Added by') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.added_by') }}</p>
                         <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-cyan-400 text-white">
                             {{ $contentItem->user->name }}
                         </span>
@@ -172,14 +172,14 @@
                 {{-- Description --}}
                 @if($contentItem->description)
                     <div class="mb-6">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Description') }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.description') }}</p>
                         <p class="text-base text-gray-800 dark:text-white">{{ $contentItem->description }}</p>
                     </div>
                 @endif
 
                 @if($contentItem->formatted_duration)
                 <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">Duration:</span>
+                    <span class="font-medium">{{ __('content_items/show.duration') }}:</span>
                     <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                         {{ $contentItem->formatted_duration['human'] }}
                     </span>
@@ -199,7 +199,10 @@
                         ></iframe>
                     </div>
                     <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                        If the video doesn’t load, <a href="{{ $contentItem->video_url }}" target="_blank" class="text-blue-600 underline">watch it on YouTube</a>.
+                        {{ __('content_items/show.if_video_does_not_load') }},
+                        <a href="{{ $contentItem->video_url }}" target="_blank" class="text-blue-600 underline">
+                            {{ __('content_items/show.watch_on_youtube') }}
+                        </a>.
                     </p>
                 @endif
 
@@ -227,7 +230,7 @@
                     @keydown.arrow-left.window="prev()"
                     class="my-4"
                 >
-                    <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">Additional Images</p>
+                    <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">{{ __('content_items/show.additional_images') }}</p>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         <template x-for="(img, index) in images" :key="index">
                             <div
@@ -309,22 +312,17 @@
                 {{-- Action Buttons --}}
                 @can('update', $contentItem)
                 <div class="flex justify-between items-center mt-6">
-                    <flux:button href="{{ route('content-items.edit', $contentItem) }}" wire:navigate>
-                        {{ __('Edit') }}
-                    </flux:button>
-
-                    <button type="submit" wire:click="delete({{ $contentItem->id }})"
-                            wire:confirm="Are you sure you want to delete this content item?"
-                            class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-800 text-sm font-medium hover:cursor-pointer">
-                        {{ __('Delete') }}
-                    </button>
+                    <x-cinema-button href="{{ route('content-items.edit', $contentItem) }}"
+                        wire:navigate
+                        palette="purple"
+                    >{{ __('content_items/show.edit_button') }}</x-cinema-button>
+                    <x-cinema-button wire:click="delete({{ $contentItem->id }})"
+                        wire:confirm="{{ __('content_items/show.delete_confirm_message') }}"
+                        palette="red"
+                    >{{ __('content_items/show.delete_button') }}</x-cinema-button>
                 </div>
                 @endcan
             </div>
         </div>
     </div>
 </div>
-
-<script>
-
-</script>

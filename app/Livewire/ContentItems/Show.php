@@ -25,7 +25,8 @@ class Show extends Component
 
         $contentItem->delete();
 
-        session()->flash('message', 'Content item deleted successfully.');
+        // session()->flash('message', 'Content item deleted successfully.');
+        session()->flash('message', __('content_items/show.content_deleted_message', ['title' => $contentItem->title]));
 
         $this->redirectRoute('content-items.index');
 

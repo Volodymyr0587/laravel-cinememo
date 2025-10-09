@@ -1,0 +1,27 @@
+<?php
+
+return [
+    "back_to_public" => "Back to public content",
+    "back_to_collection" => "Back to collection",
+    "release_date" => "Release date",
+    "no_image" => "No Image",
+    "category" => "Category",
+    "status" => "Status",
+    "genres" => "Genres",
+    "no_genre" => "No genre",
+    "unknown_profession" => "Unknown profession",
+    "people" => "People",
+    "no_people_assigned" => "No people assigned",
+    "added_by" => "Added by",
+    "description" => "Description",
+    "duration" => "Duration",
+    "if_video_does_not_load" => "If the video doesn’t load",
+    "watch_on_youtube" => "watch it on YouTube",
+    "additional_images" => "Additional Images",
+    "lets_discuss" => "Let's discuss",
+    "add_comment" => "Add comment",
+    "edit_button" => "Edit",
+    "delete_button" => "Delete",
+    "delete_confirm_message" => "Are you sure you want to delete this content item?",
+    "content_deleted_message" => "Content :title deleted successfully.",
+];

@@ -1,6 +1,6 @@
 <div>
     <div class="mb-4">
-        <flux:textarea wire:model.defer="body" :label="__('Let\'s discuss')" id="body" rows="4"></flux:textarea>
+        <flux:textarea wire:model.defer="body" :label="__('content_items/show.lets_discuss')" id="body" rows="4"></flux:textarea>
         <div class="flex items-center justify-between mt-2">
 
                 <span
@@ -14,7 +14,7 @@
                 </span>
 
         <flux:button class="mt-2 hover:cursor-pointer" wire:click="postComment" variant="primary" type="submit">
-            {{__('Add Comment') }}
+            {{__('content_items/show.add_comment') }}
         </flux:button>
         </div>
     </div>
