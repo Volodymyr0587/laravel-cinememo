@@ -12,8 +12,8 @@
                     <form wire:submit="save" enctype="multipart/form-data">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <flux:select wire:model="content_type_id" id="content_type_id" :label="__('Category') . ' *'">
-                                    <option value="">Select a category</option>
+                                <flux:select wire:model="content_type_id" id="content_type_id" :label="__('content_items/create.category') . ' *'">
+                                    <option value="">{{ __('content_items/create.select_category_dropdown') }}</option>
                                     @foreach($contentTypes as $contentType)
                                         <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
                                     @endforeach
@@ -23,7 +23,7 @@
 
                             <div>
 
-                                <flux:select wire:model="status" id="status" :label="__('Status')">
+                                <flux:select wire:model="status" id="status" :label="__('content_items/create.status')">
                                     @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
                                         <option value="{{ $value }}">{{ __($label) }}</option>
                                     @endforeach
@@ -34,7 +34,7 @@
                         <div class="mt-4">
                             <flux:input
                                 wire:model="title"
-                                :label="__('Title') . ' *'"
+                                :label="__('content_items/create.title') . ' *'"
                                 type="text"
                                 autocomplete="title"
                                 placeholder="The Lord of the Rings: The Fellowship of the Ring"
@@ -44,38 +44,38 @@
                         <div class="mt-4">
                             <flux:input
                                 wire:model="release_date"
-                                :label="__('Release date') . ' **'"
+                                :label="__('content_items/create.release_date') . ' **'"
                                 type="date"
                                 autocomplete="release_date"
                             />
                         </div>
 
                         <div class="mt-4">
-                            <flux:textarea wire:model="description" :label="__('Description')" id="description" rows="4"></flux:textarea>
+                            <flux:textarea wire:model="description" :label="__('content_items/create.description')" id="description" rows="4"></flux:textarea>
                         </div>
 
                         <div class="mt-4">
-                            <flux:input wire:model="video_url" :label="__('YouTube video url')" id="video_url"
+                            <flux:input wire:model="video_url" :label="__('content_items/create.youtube_video_url')" id="video_url"
                                 placeholder="https://youtu.be/xxxx or https://www.youtube.com/watch?v=xxxx"/>
                         </div>
 
-                        <flux:label class="mt-4">Duration</flux:label>
+                        <flux:label class="mt-4">{{ __('content_items/create.duration') }}</flux:label>
                         <div class="flex flex-col lg:flex-row gap-4">
                             <div class="flex-1 max-w-3xs">
-                                <flux:input wire:model="hours" :label="__('Hours')" type="number" min="0" />
+                                <flux:input wire:model="hours" :label="__('content_items/create.hours')" type="number" min="0" />
                             </div>
 
                             <div class="flex-1 max-w-3xs">
-                                <flux:input wire:model="minutes" :label="__('Minutes')" type="number" min="0" max="59" />
+                                <flux:input wire:model="minutes" :label="__('content_items/create.minutes')" type="number" min="0" max="59" />
                             </div>
 
                             <div class="flex-1 max-w-3xs">
-                                <flux:input wire:model="seconds" :label="__('Seconds')" type="number" min="0" max="59" />
+                                <flux:input wire:model="seconds" :label="__('content_items/create.seconds')" type="number" min="0" max="59" />
                             </div>
                         </div>
 
                         <div>
-                            <flux:label class="mt-4">{{ __("People & Professions") }}</flux:label>
+                            <flux:label class="mt-4">{{ __("content_items/create.people_and_professions") }}</flux:label>
                             @foreach($professions as $profession)
                                 @if($profession->people->isNotEmpty())
                                     <div>
@@ -127,7 +127,7 @@
 
                         <div class="mt-4">
                             <label for="genres" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">
-                                {{ __("Genres") }}
+                                {{ __("content_items/create.genres") }}
                             </label>
 
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -146,21 +146,21 @@
                         </div>
 
                         <div class="mt-4">
-                            <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">{{ __("Visibility") }}</p>
+                            <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">{{ __("content_items/create.visibility") }}</p>
                             <label class="flex items-center space-x-2 cursor-pointer">
                                 <input type="checkbox"
                                     wire:model="is_public"
                                     class="appearance-none w-5 h-5 rounded border border-gray-400 bg-white checked:bg-blue-600 checked:border-blue-600">
                                 <div class="grid grid-cols-1">
-                                    <span class="text-gray-700 dark:text-white text-sm">{{ __("Make Public") }}</span>
-                                    <span class="text-xs italic">(Other users will be able to view this content and leave comments)</span>
+                                    <span class="text-gray-700 dark:text-white text-sm">{{ __("content_items/create.make_public") }}</span>
+                                    <span class="text-xs italic">({{ __("content_items/create.other_users_view_leave_comments") }})</span>
                                 </div>
                             </label>
                         </div>
 
                         <div class="mt-4">
                             <flux:input
-                                :label="__('Image')"
+                                :label="__('content_items/create.image')"
                                 wire:model="main_image"
                                 type="file"
                                 id="main_image"
@@ -168,19 +168,19 @@
 
                             @if ($main_image)
                                 <div class="mt-2">
-                                    <p class="text-sm text-gray-800 dark:text-white">Preview:</p>
-                                    <img src="{{ $main_image->temporaryUrl() }}" alt="Preview" class="mt-1 h-32 w-32 object-cover rounded">
+                                    <p class="text-sm text-gray-800 dark:text-white">{{ __('content_items/create.preview') }}:</p>
+                                    <img src="{{ $main_image->temporaryUrl() }}" alt="{{ __('content_items/create.preview') }}" class="mt-1 h-32 w-32 object-cover rounded">
                                 </div>
                             @endif
 
                             <div wire:loading wire:target="image" class="text-sm text-gray-600 mt-2">
-                                Uploading...
+                                {{ __('content_items/create.uploading') }}...
                             </div>
                         </div>
 
                         <div class="mt-4">
                             <flux:input
-                                :label="__('Additional images')"
+                                :label="__('content_items/create.additional_images')"
                                 wire:model="additional_images"
                                 type="file"
                                 multiple />
@@ -188,11 +188,11 @@
 
                          @if ($additional_images)
                             <div class="mt-4">
-                                <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">Additional Image Previews:</p>
+                                <p class="text-sm text-gray-800 dark:text-white font-semibold mb-2">{{ __('content_items/create.additional_image_previews') }}:</p>
                                 <div class="flex flex-wrap gap-4">
                                     @foreach ($additional_images as $file)
                                         <div class="w-24 h-24">
-                                            <img src="{{ $file->temporaryUrl() }}" alt="Preview"
+                                            <img src="{{ $file->temporaryUrl() }}" alt="{{ __('content_items/create.preview') }}"
                                                 class="w-full h-full object-cover rounded border border-gray-300">
                                         </div>
                                     @endforeach
@@ -202,16 +202,16 @@
 
                         <div class="my-12">
                             <hr class="h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-                            <p class="mt-2 font-bold text-xs italic">* - {{ __("Required fields") }}</p>
-                            <p class="mt-2 font-bold text-xs italic">** - {{ __("Enter the full date (MM-DD-YYYY) or leave blank") }}</p>
+                            <p class="mt-2 font-bold text-xs italic">* - {{ __("content_items/create.required_fields") }}</p>
+                            <p class="mt-2 font-bold text-xs italic">** - {{ __("content_items/create.enter_full_date") }}</p>
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
                             <x-cinema-button type="submit" :glow="true" palette="gold" >
-                                {{ __('Create Content Item') }}
+                                {{ __('content_items/create.create_content_button') }}
                             </x-cinema-button>
                             <x-cinema-button :href="route('content-items.index')" :glow="true" palette="gray" wire:navigate>
-                                {{ __("Cancel") }}
+                                {{ __("content_items/create.cancel_button") }}
                             </x-cinema-button>
                         </div>
                     </form>

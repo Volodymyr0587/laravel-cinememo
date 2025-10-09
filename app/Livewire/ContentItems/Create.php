@@ -128,7 +128,7 @@ class Create extends Component
             }
         }
 
-        session()->flash('message', 'Content item created successfully.');
+        session()->flash('message', __('content_items/create.content_created_message', ['title' => $contentItem->title]));
 
         return redirect()->route('content-items.index');
     }
