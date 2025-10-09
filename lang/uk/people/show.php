@@ -12,4 +12,5 @@ return [
     "no_works" => "Немає творів",
     "biography" => "Біографія",
     "additional_images" => "Додаткові зображення",
+    "person_deleted_message" => "Людину :name успішно видалено",
 ];

@@ -12,4 +12,5 @@ return [
     "no_works" => "No works",
     "biography" => "Biography",
     "additional_images" => "Additional Images",
+    "person_deleted_message" => "Person :name deleted successfully",
 ];

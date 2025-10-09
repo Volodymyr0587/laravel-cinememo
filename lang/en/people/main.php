@@ -22,5 +22,6 @@ return [
 
     "edit" => "Edit",
     "delete_confirm_message" => "Are you sure you want to delete this person? This action is irreversible",
-    "delete" => "Delete"
+    "delete" => "Delete",
+    "person_deleted_message" => "Person :name deleted successfully",
 ];

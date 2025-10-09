@@ -21,4 +21,5 @@ return [
     "enter_full_date" => "Enter the full date (MM-DD-YYYY) or leave blank",
     "add_person_button" => "Add Person",
     "cancel_button" => "Cancel",
+    "person_created_message" => "Person :name has been added to your list of people.",
 ];

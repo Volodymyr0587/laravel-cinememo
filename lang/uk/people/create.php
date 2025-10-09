@@ -21,4 +21,5 @@ return [
     "enter_full_date" => "Введіть повну дату (ММ-ДД-РРРР) або залиште поле порожнім",
     "add_person_button" => "Додати людину",
     "cancel_button" => "Скасувати",
+    "person_created_message" => "Людину :name додано до вашого списку.",
 ];

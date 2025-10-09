@@ -104,8 +104,7 @@ class Edit extends Component
 
         $this->person->professions()->sync($this->professions);
 
-
-        session()->flash('message', 'Person updated successfully.');
+        session()->flash('message', __('people/edit.person_updated_message', ['name' => $this->person->name]));
 
         return redirect()->route('people.index');
     }

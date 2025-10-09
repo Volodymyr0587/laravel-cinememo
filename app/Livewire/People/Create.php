@@ -103,7 +103,7 @@ class Create extends Component
             $person->professions()->sync($this->professions);
         }
 
-        session()->flash('message', "Person $person->name has been added to your list of people.");
+        session()->flash('message', __('people/create.person_created_message', ['name' => $person->name]));
 
         return redirect()->route('people.index');
     }

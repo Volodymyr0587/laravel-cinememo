@@ -27,7 +27,7 @@ class Index extends Component
             $person->removeAllImages();
             $person->delete();
 
-            session()->flash('message', "Person $person->name deleted successfully.");
+            session()->flash('message', __('people/main.person_deleted_message', ['name' => $person->name]));
         } catch (\Exception $e) {
              session()->flash('message', $e->getMessage());
         }

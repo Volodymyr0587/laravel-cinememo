@@ -23,7 +23,7 @@ class Show extends Component
         $this->person->removeAllImages();
         $this->person->delete();
 
-        session()->flash('message', "Person {$this->person->name} deleted successfully.");
+        session()->flash('message', __('people/show.person_deleted_message', ['name' => $this->person->name]));
 
         $this->redirectRoute('people.index');
     }
