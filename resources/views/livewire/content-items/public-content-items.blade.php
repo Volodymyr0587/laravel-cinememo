@@ -2,14 +2,14 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Public Content Items') }}
+            {{ __('content_items/public-content.public_content') }}
             @if($publicContentTypeFilter || $search)
                 <flux:button
                     wire:click.prevent="clearFilters"
                     wire:key="public-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('content_items/public-content.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -20,7 +20,7 @@
                 :glow="true"
                 palette="gold"
             >
-                {{ __('Add New Content Item') }}
+                {{ __('content_items/public-content.add_new_content') }}
             </x-cinema-button>
         </div>
     </div>
@@ -36,17 +36,17 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('content_items/public-content.search')"
                                 type="text"
-                                :placeholder="__('Search content items...')"
+                                :placeholder="__('content_items/public-content.search_placeholder')"
                             />
                         </div>
                         <div>
                             <flux:select
                                 wire:model.live="publicContentTypeFilter"
-                                :label="__('Category')"
+                                :label="__('content_items/public-content.category')"
                             >
-                                <option value="">{{ __('All Categories') }}</option>
+                                <option value="">{{ __('content_items/public-content.all_categories') }}</option>
                                 @foreach($contentTypes as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
@@ -72,7 +72,7 @@
                                                 class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                         @else
                                             <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                                                <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                                                <span class="text-gray-500 dark:text-gray-700">{{ __('content_items/public-content.no_image') }}</span>
                                             </div>
                                         @endif
                                     @endif
@@ -86,7 +86,7 @@
                                     </a>
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
-                                        <span class="font-medium">Category:</span>
+                                        <span class="font-medium">{{ __('content_items/public-content.category') }}:</span>
                                         <span wire:click="$set('publicContentTypeFilter', '{{ $contentItem->contentType->id }}')"
                                             class="px-2 py-1 rounded text-white font-bold hover:cursor-pointer"
                                             style="background-color: {{ $contentItem->contentType->color }}">
@@ -95,11 +95,11 @@
                                     </div>
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
-                                        <span class="font-medium">User:</span>
+                                        <span class="font-medium">{{ __('content_items/public-content.added_by') }}:</span>
                                         <span
                                             class="px-2 py-1 rounded font-bold"
                                             >
-                                            {{ $contentItem->contentType->user->name }}
+                                            {{ $contentItem->user->name }}
                                         </span>
                                     </div>
 
@@ -118,8 +118,8 @@
                             </div>
                         @empty
                             <div class="col-span-full text-center py-8">
-                                <p class="text-gray-500 text-lg">No content items found.</p>
-                                <flux:link :href="route('content-items.create')" wire:navigate>{{ __('Create Your First Content Item') }}</flux:link>
+                                <p class="text-gray-500 text-lg">{{ __('content_items/public-content.no_content_found') }}</p>
+                                <flux:link :href="route('content-items.create')" wire:navigate>{{ __('content_items/public-content.create_your_first_content') }}</flux:link>
                             </div>
                         @endforelse
                     </div>
