@@ -2,14 +2,14 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Content Items') }}
+            {{ __('content_items/main.content_items') }}
             @if($statusFilter || $contentTypeFilter || $genreFilter || $search)
                 <flux:button
                     wire:click.prevent="clearFilters"
                     wire:key="index-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('content_items/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -18,14 +18,14 @@
                 :href="route('content-items.export')" class="order-2 sm:order-none"
                 icon:trailing="arrow-down-tray"
             >
-                {{ __('Export to XLSX') }}
+                {{ __('content_items/main.export_to_xlsx') }}
             </flux:button>
             <flux:button
                 :href="route('content-items.export-pdf')" class="order-3 sm:order-none"
                 icon:trailing="arrow-down-tray"
                 target="_blank"
             >
-               {{ __('Export to PDF') }}
+               {{ __('content_items/main.export_to_pdf') }}
             </flux:button>
             <x-cinema-button href="{{ route('content-items.create') }}"
                 class="order-1 sm:order-none"
@@ -33,7 +33,7 @@
                 :glow="true"
                 palette="gold"
             >
-                {{ __('Add New Content Item') }}
+                {{ __('content_items/main.add_new_content') }}
             </x-cinema-button>
         </div>
     </div>
@@ -51,30 +51,30 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('content_items/main.search')"
                                 type="text"
-                                :placeholder="__('Search content items...')"
+                                :placeholder="__('content_items/main.search_placeholder')"
                             />
                         </div>
                         <div>
-                            <flux:select wire:model.live="genreFilter" :label="__('Genre')">
-                                <option value="">All Genres</option>
+                            <flux:select wire:model.live="genreFilter" :label="__('content_items/main.genre')">
+                                <option value="">{{ __('content_items/main.all_genres') }}</option>
                                 @foreach($genres as $genre)
                                     <option value="{{ $genre->id }}">{{ __($genre->name) }}</option>
                                 @endforeach
                             </flux:select>
                         </div>
                         <div>
-                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
-                                <option value="">All Statuses</option>
+                            <flux:select wire:model.live="statusFilter" :label="__('content_items/main.status')">
+                                <option value="">{{ __('content_items/main.all_statuses') }}</option>
                                 @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
                                     <option value="{{ $value }}">{{ __($label) }}</option>
                                 @endforeach
                             </flux:select>
                         </div>
                         <div>
-                            <flux:select wire:model.live="contentTypeFilter" :label="__('Category')">
-                                <option value="">All Categories</option>
+                            <flux:select wire:model.live="contentTypeFilter" :label="__('content_items/main.category')">
+                                <option value="">{{ __('content_items/main.all_categories') }}</option>
                                 @foreach($contentTypes as $contentType)
                                     <option value="{{ $contentType->id }}">{{ $contentType->name }}</option>
                                 @endforeach
@@ -100,7 +100,7 @@
                                                 class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                         @else
                                             <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                                                <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                                                <span class="text-gray-500 dark:text-gray-700">{{ __('content_items/main.no_image') }}</span>
                                             </div>
                                         @endif
                                     @endif
@@ -109,7 +109,7 @@
                                 <div class="p-4">
                                     @if ($contentItem->is_public)
                                         <span class="px-2 py-0.5 mr-1 rounded text-xs font-bold bg-indigo-400 text-red-600">
-                                            public
+                                            {{ __('content_items/main.public') }}
                                         </span>
                                     @endif
                                     <a href="{{ route('content-items.show', [$contentItem, 'from' => request()->route()->getName()]) }}"  wire:navigate
@@ -119,7 +119,7 @@
 
                                     @if ($contentItem->release_date)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">Release date:</span>
+                                        <span class="font-medium">{{ __('content_items/main.release_date') }}:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                                             {{ $contentItem->release_date->translatedFormat('d F Y') }}
                                         </span>
@@ -128,7 +128,7 @@
 
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-2">
-                                        <span class="font-medium">Category:</span>
+                                        <span class="font-medium">{{ __('content_items/main.category') }}:</span>
                                         <span
                                             wire:click="$set('contentTypeFilter', '{{ $contentItem->contentType->id }}')"
                                             class="px-2 py-1 rounded text-white font-bold hover:cursor-pointer"
@@ -138,7 +138,7 @@
                                     </div>
 
                                     <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
-                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">Genres:</span>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __('content_items/main.genres') }}:</span>
                                         @forelse ($contentItem->genres as $genre)
                                             <span
                                                 class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
@@ -150,14 +150,14 @@
                                             </span>
                                         @empty
                                             <span class="font-semibold italic text-xs dark:text-white">
-                                                {{ __("No genre") }}
+                                                {{ __("content_items/main.no_genre") }}
                                             </span>
                                         @endforelse
                                     </div>
 
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
-                                        <span class="font-medium">Status:</span>
+                                        <span class="font-medium">{{ __("content_items/main.status") }}:</span>
                                         <span wire:click="$set('statusFilter', '{{ $contentItem->status->value }}')" @class([
                                             'px-2 py-1 rounded text-xs font-bold hover:cursor-pointer',
                                             'bg-green-500 text-white'  => $contentItem->status === \App\Enums\ContentStatus::Watched,
@@ -179,18 +179,18 @@
                                         <x-cinema-button href="{{ route('content-items.edit', $contentItem) }}"
                                             wire:navigate
                                             palette="purple"
-                                        >Edit</x-cinema-button>
+                                        >{{ __("content_items/main.edit_button") }}</x-cinema-button>
                                         <x-cinema-button wire:click="delete({{ $contentItem->id }})"
-                                            wire:confirm="Are you sure you want to delete this content item?"
+                                            wire:confirm="{{ __('content_items/main.delete_confirm_message') }}"
                                             palette="red"
-                                        >Delete</x-cinema-button>
+                                        >{{ __("content_items/main.delete_button") }}</x-cinema-button>
                                     </div>
                                 </div>
                             </div>
                         @empty
                             <div class="col-span-full text-center py-8">
-                                <p class="text-gray-500 text-lg">No content items found.</p>
-                                <flux:link :href="route('content-items.create')" wire:navigate>{{ __('Create Your First Content Item') }}</flux:link>
+                                <p class="text-gray-500 text-lg">{{ __("content_items/main.no_content_found") }}</p>
+                                <flux:link :href="route('content-items.create')" wire:navigate>{{ __('content_items/main.create_your_first_content') }}</flux:link>
                             </div>
                         @endforelse
                     </div>

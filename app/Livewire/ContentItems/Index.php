@@ -7,7 +7,7 @@ use Livewire\Component;
 use App\Models\ContentItem;
 use App\Models\ContentType;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Storage;
+
 
 class Index extends Component
 {
@@ -58,7 +58,7 @@ class Index extends Component
 
         $contentItem->delete();
 
-        session()->flash('message', 'Content item deleted successfully.');
+        session()->flash('message', __('content_items/main.content_deleted_message', ['title' => $contentItem->title]));
     }
 
     public function render()
@@ -88,10 +88,7 @@ class Index extends Component
 
         $contentTypes = ContentType::where('user_id', auth()->id())->get();
 
-        // 👇 Fetch all genres for current user
-        // $genres = Genre::where('user_id', auth()->id())->get();
         $genres = Genre::all();
-
 
         return view('livewire.content-items.index', compact('contentItems', 'contentTypes', 'genres'));
     }

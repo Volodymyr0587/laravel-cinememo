@@ -1,0 +1,28 @@
+<?php
+
+return [
+    "content_items" => "Контент",
+    "clear_filters" => "Очистити фільтри",
+    "export_to_xlsx" => "Експортувати до XLSX",
+    "export_to_pdf" => "Експортувати до PDF",
+    "add_new_content" => "Додати новий контент",
+    "content_deleted_message" => "Контент :title успішно видалено.",
+    "search" => "Пошук",
+    "search_placeholder" => "Шукати контент...",
+    "genre" => "Жанр",
+    "all_genres" => "Всі жанри",
+    "status" => "Статус",
+    "all_statuses" => "Всі статуси",
+    "category" => "Категорія",
+    "all_categories" => "Всі категорії",
+    "no_image" => "Немає зображення",
+    "public" => "public",
+    "release_date" => "Дата виходу",
+    "genres" => "Жанри",
+    "no_genre" => "Немає жанрів",
+    "edit_button" => "Редагувати",
+    "delete_button" => "Видалити",
+    "delete_confirm_message" => "Ви впевнені, що хочете видалити цей контент?",
+    "no_content_found" => "Контент не знайдено.",
+    "create_your_first_content" => "Створіть свій перший контент",
+];

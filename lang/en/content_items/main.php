@@ -1,0 +1,28 @@
+<?php
+
+return [
+    "content_items" => "Content",
+    "clear_filters" => "Clear filters",
+    "export_to_xlsx" => "Export to XLSX",
+    "export_to_pdf" => "Export to PDF",
+    "add_new_content" => "Add New Content",
+    "content_deleted_message" => "Content :title deleted successfully.",
+    "search" => "Search",
+    "search_placeholder" => "Search content...",
+    "genre" => "Genre",
+    "all_genres" => "All Genres",
+    "status" => "Status",
+    "all_statuses" => "All Statuses",
+    "category" => "Category",
+    "all_categories" => "All Categories",
+    "no_image" => "No Image",
+    "public" => "public",
+    "release_date" => "Release date",
+    "genres" => "Genres",
+    "no_genre" => "No genre",
+    "edit_button" => "Edit",
+    "delete_button" => "Delete",
+    "delete_confirm_message" => "Are you sure you want to delete this content?",
+    "no_content_found" => "No content found.",
+    "create_your_first_content" => "Create Your First Content",
+];
