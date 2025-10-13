@@ -7,7 +7,7 @@
 
 @php
     $baseClasses = "
-        relative inline-flex items-center justify-center
+        relative inline-flex items-center justify-center cursor-pointer
         font-bold rounded-lg transition-all duration-300 ease-out
         transform hover:scale-105 hover:-rotate-1 shadow-lg overflow-hidden group
     ";
