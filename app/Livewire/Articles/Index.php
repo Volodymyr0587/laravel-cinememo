@@ -47,7 +47,7 @@ class Index extends Component
 
             $article->delete();
 
-            session()->flash('message', "Article '{$article->title}' deleted successfully.");
+            session()->flash('message', __('articles/main.article_deleted_message', ['title' => $article->title]));
         } catch (\Exception $e) {
             session()->flash('message', $e->getMessage());
         }

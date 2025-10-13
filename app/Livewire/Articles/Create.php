@@ -64,7 +64,7 @@ class Create extends Component
         // Зберігаємо tags
         $article->syncTags($this->tags);
 
-        session()->flash('message', "Article $article->name has been created.");
+        session()->flash('message', __('articles/create.article_created_message', ['title' => $article->title]));
 
         return redirect()->route('writer.articles.index');
     }

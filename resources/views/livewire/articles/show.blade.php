@@ -6,7 +6,7 @@
                 {{-- Back Button --}}
                 <div class="mb-4">
                     <flux:link href="{{ route('articles.index') }}" wire:navigate>
-                        ← {{ __('Back to all articles') }}
+                        ← {{ __('articles/show.back_to_all') }}
                     </flux:link>
                 </div>
 
@@ -34,11 +34,11 @@
                             <ul class="text-xs text-gray-500 dark:text-neutral-500">
                                 <li
                                     class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                                    {{ $article->published_at ? $article->published_at->format('Y-M-d H:m:i') : 'under review' }}
+                                    {{ $article->published_at ? $article->published_at->format('Y-M-d H:m:i') : __("articles/show.under_review") }}
                                 </li>
                                 <li
                                     class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                                    {{ $article->reading_time }} {{ __("min read") }}
+                                    {{ trans_choice("articles/show.minute", $article->reading_time, ['count' => $article->reading_time]) }} {{ __("articles/show.to_read") }}
                                 </li>
                             </ul>
                         </div>
@@ -78,7 +78,7 @@
                             {{ ucfirst($tag->name) }}
                         </span>
                     @empty
-                        <span class="text-sm">{{ __("No tags") }}</span>
+                        <span class="text-sm">{{ __("articles/show.no_tags") }}</span>
                     @endforelse
                 </div>
 
@@ -92,14 +92,14 @@
 
                 @if($article->main_image_url)
                     <img src="{{ $article->main_image_url }}" alt="{{ $article->title }}"
-                        class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
+                        class="h-auto max-w-full">
                 @else
                     @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
                         <img src="{{ asset('images/default-article.png') }}" alt="{{ $article->title }}"
-                            class="w-full object-cover rounded-xl transition duration-300 ease-in-out hover:scale-110">
+                            class="w-full object-cover rounded-xl">
                     @else
                         <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                            <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                            <span class="text-gray-500 dark:text-gray-700">{{ __("articles/show.no_image") }}</span>
                         </div>
                     @endif
                 @endif
@@ -133,7 +133,7 @@
                     @keydown.arrow-left.window="prev()"
                     class="my-4"
                 >
-                    <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">Additional Images</p>
+                    <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">{{ __("articles/show.additional_images") }}</p>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         <template x-for="(img, index) in images" :key="index">
                             <div
@@ -142,7 +142,7 @@
                             >
                                 <img
                                     :src="img"
-                                    alt="Additional Image"
+                                    alt="{{ __("articles/show.additional_images") }}"
                                     class="w-full h-40 object-cover hover:scale-105 transition-transform duration-200 rounded"
                                 >
                             </div>
@@ -197,7 +197,7 @@
 
             @if ($article->conclusion)
                 <div class="space-y-3">
-                <h3 class="text-2xl font-semibold dark:text-white">{{ __("Conclusion") }}</h3>
+                <h3 class="text-2xl font-semibold dark:text-white">{{ __("articles/show.conclusion") }}</h3>
 
                 <p class="text-lg text-gray-800 dark:text-neutral-200">{{ $article->conclusion }}</p>
             </div>

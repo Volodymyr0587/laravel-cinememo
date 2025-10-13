@@ -20,6 +20,7 @@ return [
     "additional_images" => "Additional Images",
     "lets_discuss" => "Let's discuss",
     "add_comment" => "Add comment",
+    "comment_delete_confirm_message" => "Are you sure you want to delete this comment?",
     "edit_button" => "Edit",
     "delete_button" => "Delete",
     "delete_confirm_message" => "Are you sure you want to delete this content item?",

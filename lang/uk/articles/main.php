@@ -1,0 +1,28 @@
+<?php
+
+return [
+    "articles" => "Статті",
+    "article_deleted_message" => "Стаття :title успішно видалена.",
+    "manage_articles" => "керуйте своїми статтями як автор",
+    "clear_filters" => "Очистити фільтри",
+    "view_deleted_articles" => "Переглянути видалені статті",
+    "add_new_article" => "Додати нову статтю",
+    "search" => "Пошук",
+    "search_placeholder" => "Шукати статтю...",
+    "authors" => "Автори",
+    "all_authors" => "Всі автори",
+    "no_image" => "Немає зображення",
+    "written_by" => "Автор",
+    "visibility" => "Видимість",
+    "published" => "опубліковано",
+    "under_review" => "на рецензії",
+    "created_at" => "Створено",
+    "updated_at" => "Оновлено",
+    "published_at" => "Опубліковано",
+    "not_yet" => "Ще ні",
+    "no_articles_found" => "Статті не знайдено",
+    "edit_button" => "Редагувати",
+    "delete_button" => "Видалити",
+    "delete_confirm_message" => "Ви впевнені, що хочете видалити цю статтю?",
+    "add_first_article" => "Додати першу статтю",
+];

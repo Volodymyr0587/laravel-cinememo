@@ -20,6 +20,7 @@ return [
     "additional_images" => "Додаткові зображення",
     "lets_discuss" => "Давайте обговоримо",
     "add_comment" => "Додати коментар",
+    "comment_delete_confirm_message" => "Ви впевнені, що хочете видалити цей коментар?",
     "edit_button" => "Редагувати",
     "delete_button" => "Видалити",
     "delete_confirm_message" => "Ви впевнені, що хочете видалити цей контент?",

@@ -89,7 +89,7 @@ class Edit extends Component
         // Синхронізуємо теги
         $this->article->syncTags($this->tags);
 
-        session()->flash('message', "Article {$this->article->title} updated successfully.");
+        session()->flash('message', __('articles/edit.article_updated_message', ['title' => $this->article->title]));
 
         return redirect()->route('writer.articles.index');
     }

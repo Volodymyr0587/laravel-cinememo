@@ -40,7 +40,7 @@
 
             @can('delete', $comment)
             <flux:button wire:click="deleteComment({{ $comment->id }})"
-                wire:confirm="Are you sure you want to delete this comment?"
+                wire:confirm="{{ __('content_items/show.comment_delete_confirm_message') }}"
                 square icon="trash" class="hover:cursor-pointer" />
             @endcan
         </div>

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    "articles" => "Articles",
+    "article_deleted_message" => "Article :title deleted successfully.",
+    "manage_articles" => "manage your articles as an author",
+    "clear_filters" => "Clear filters",
+    "view_deleted_articles" => "View deleted articles",
+    "add_new_article" => "Add new article",
+    "search" => "Search",
+    "search_placeholder" => "Search article...",
+    "authors" => "Authors",
+    "all_authors" => "All authors",
+    "no_image" => "No image",
+    "written_by" => "Written by",
+    "visibility" => "Visibility",
+    "published" => "published",
+    "under_review" => "under review",
+    "created_at" => "Created at",
+    "updated_at" => "Updated at",
+    "published_at" => "Published at",
+    "not_yet" => "Not yet",
+    "no_articles_found" => "No articles found",
+    "edit_button" => "Edit",
+    "delete_button" => "Delete",
+    "delete_confirm_message" => "Are you sure you want to delete this article?",
+    "add_first_article" => "Add first article",
+];

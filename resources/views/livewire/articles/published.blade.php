@@ -2,14 +2,14 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Articles') }}
+            {{ __('articles/published.articles') }}
             @if($publishedAuthorFilter || $search || $publishedTagFilter)
                 <flux:button
                     wire:click.prevent="clearFilters"
                     wire:key="published-articles-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('articles/published.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -46,9 +46,9 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('articles/published.search')"
                                 type="text"
-                                :placeholder="__('Search article...')"
+                                :placeholder="__('articles/published.search_placeholder')"
                             />
                         </div>
                         {{-- <div>
@@ -76,16 +76,16 @@
                             </flux:select>
                         </div> --}}
                         <div>
-                            <flux:select wire:model.live="publishedAuthorFilter" :label="__('Authors')">
-                                <option value="">All authors</option>
+                            <flux:select wire:model.live="publishedAuthorFilter" :label="__('articles/published.authors')">
+                                <option value="">{{ __('articles/published.all_authors') }}</option>
                                 @foreach($authors as $author)
                                     <option value="{{ $author->id }}">{{ $author->name }}</option>
                                 @endforeach
                             </flux:select>
                         </div>
                         <div>
-                            <flux:select wire:model.live="publishedTagFilter" :label="__('Tags')">
-                                <option value="">All tags</option>
+                            <flux:select wire:model.live="publishedTagFilter" :label="__('articles/published.tags')">
+                                <option value="">{{ __('articles/published.all_tags') }}</option>
                                @foreach($tags as $tag)
                                     <option value="{{ $tag->id }}">{{ ucfirst($tag->name) }}</option>
                                 @endforeach
@@ -111,7 +111,7 @@
                                                 class="h-auto max-w-full transition duration-300 ease-in-out hover:scale-110">
                                         @else
                                             <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                                                <span class="text-gray-500 dark:text-gray-700">No Image</span>
+                                                <span class="text-gray-500 dark:text-gray-700">{{ __('articles/published.no_image') }}</span>
                                             </div>
                                         @endif
                                     @endif
@@ -125,31 +125,14 @@
 
 
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">{{ __("Written by") }}:</span>
+                                        <span class="font-medium">{{ __("articles/published.written_by") }}:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                                             {{ $article->user->name }}
                                         </span>
                                     </div>
 
-
-                                    @if ($article->birth_place)
                                     <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">Birth place:</span>
-                                        <a href="https://www.google.com/maps/search/?api=1&query={{ $article->birth_place }}" target="_blank"
-                                            class="px-2 py-1 rounded text-xs font-bold
-                                                bg-gray-900 text-white
-                                                dark:bg-white dark:text-gray-900
-                                                hover:bg-gray-700 dark:hover:bg-gray-200
-                                                hover:shadow-lg hover:scale-105
-                                                transition duration-300 ease-out transform">
-                                            {{ $article->birth_place }}
-                                        </a>
-                                    </div>
-                                    @endif
-
-
-                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                                        <span class="font-medium">{{ __("Publication date") }}:</span>
+                                        <span class="font-medium">{{ __("articles/published.publication_date") }}:</span>
                                         <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                                             {{ $article->updated_at->format('Y-M-d') }}
                                         </span>
@@ -160,64 +143,13 @@
                                         :key="'like-button-content-' . $article->id"
                                     />
 
-                                    {{-- <div class="grid grid-cols-1 gap-y-2 mb-4 text-sm">
-                                        <span class="font-semibold text-gray-700 dark:text-gray-300 col-span-full">{{ __("Known for") }}:</span>
-                                        @forelse ($article->contentItems as $contentItem)
-                                            <span
-                                                class="px-2 py-1 rounded font-bold text-xs text-white bg-blue-500 dark:bg-blue-600
-                                                    hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200
-                                                    text-center cursor-pointer select-none shadow-sm"
-                                                    wire:click="$set('contentItemFilter', {{ $contentItem->id }})"
-                                                >
-                                                {{ $contentItem->title }}
-                                            </span>
-                                        @empty
-                                            <span class="font-semibold italic text-xs dark:text-white">
-                                                {{ __("No works") }}
-                                            </span>
-                                        @endforelse
-                                    </div> --}}
-
-{{--
-                                    <div class="flex items-center justify-between text-sm text-gray-600 dark:text-white mb-3">
-                                        <span class="font-medium">Status:</span>
-                                        <span wire:click="$set('statusFilter', '{{ $article->status->value }}')" @class([
-                                            'px-2 py-1 rounded text-xs font-bold hover:cursor-pointer',
-                                            'bg-green-500 text-white'  => $article->status === \App\Enums\ContentStatus::Watched,
-                                            'bg-blue-500 text-white'   => $article->status === \App\Enums\ContentStatus::Watching,
-                                            'bg-purple-500 text-white' => $article->status === \App\Enums\ContentStatus::WillWatch,
-                                            'bg-amber-500 text-black'  => $article->status === \App\Enums\ContentStatus::Waiting,
-                                        ])>
-                                            {{ \App\Enums\ContentStatus::labels()[$article->status->value] ?? ucfirst($article->status->value) }}
-                                        </span>
-                                    </div> --}}
-
-                                    {{-- @if($article->biography)
-                                        <p class="text-sm text-gray-600 dark:text-white mb-3">
-                                            {{ Str::limit($article->biography, 100) }}
-                                        </p>
-                                    @endif --}}
-
-                                    {{-- <div class="flex justify-between items-center">
-                                        @can('update', $article)
-                                            <flux:button href="{{ route('writer.articles.edit', $article) }}" wire:navigate>Edit</flux:button>
-                                        @endcan
-
-                                        @can('delete', $article)
-                                             <x-button wire:click="delete({{ $article->id }})"
-                                                wire:confirm="Are you sure you want to delete this article? This action is irreversible."
-                                                color="red" type="submit"
-                                                >Delete</x-button>
-                                        @endcan
-
-                                    </div> --}}
                                 </div>
                             </div>
                         @empty
                             <div class="col-span-full text-center py-8">
-                                <p class="text-gray-500 text-lg">No articles found.</p>
+                                <p class="text-gray-500 text-lg">{{ __("articles/published.no_articles_found") }}.</p>
                                 @hasanyrole(['super_admin', 'writer'])
-                                    <flux:link :href="route('writer.articles.create')" wire:navigate>{{ __('Add First Article') }}</flux:link>
+                                    <flux:link :href="route('writer.articles.create')" wire:navigate>{{ __('articles/published.add_first_article') }}</flux:link>
                                 @endhasanyrole
                             </div>
                         @endforelse

@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Deleted Articles') }}
+            {{ __('articles/deleted.deleted_articles') }}
         </h2>
     </div>
 
@@ -17,9 +17,15 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deleted</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ __('articles/deleted.name') }}
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ __('articles/deleted.deleted') }}
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{ __('articles/deleted.actions') }}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -31,18 +37,22 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $article->deleted_at->format('Y-m-d H:i:s') }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button wire:click="restore({{ $article->id }})"
-                                                    class="text-blue-600 hover:text-blue-900 hover:cursor-pointer mr-2">Restore</button>
-                                            <button wire:click="forceDelete({{ $article->id }})"
-                                                    wire:confirm="Are you sure you want to permanently delete this article? This action is irreversible."
-                                                    class="text-red-600 hover:text-red-900 hover:cursor-pointer">Delete</button>
+                                        <td class="flex gap-x-2 px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <x-cinema-button wire:click="restore({{ $article->id }})"
+                                                type="button" :glow="true" palette="green">
+                                                {{ __("articles/deleted.restore") }}
+                                            </x-cinema-button>
+                                            <x-cinema-button wire:click="forceDelete({{ $article->id }})"
+                                                wire:confirm="{{ __('articles/deleted.are_you_sure_delete') }}"
+                                                type="button" :glow="true" palette="red">
+                                                {{ __("articles/deleted.delete_permanently") }}
+                                            </x-cinema-button>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                                            Trash is empty.
+                                            {{ __('articles/deleted.trash_empty') }}
                                         </td>
                                     </tr>
                                 @endforelse
