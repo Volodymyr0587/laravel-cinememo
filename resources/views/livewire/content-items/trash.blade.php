@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Deleted Content Items') }}
+            {{ __('content_items/trash.deleted_content') }}
         </h2>
     </div>
 
@@ -17,9 +17,9 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deleted</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_items/trash.name') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_items/trash.deleted') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('content_items/trash.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -33,19 +33,19 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-1">
                                             <x-cinema-button wire:click="restore({{ $contentItem->id }})" :glow="true" palette="green" >
-                                                {{ __('Restore') }}
+                                                {{ __('content_items/trash.restore') }}
                                             </x-cinema-button>
                                             <x-cinema-button wire:click="forceDelete({{ $contentItem->id }})"
-                                                    wire:confirm="Are you sure you want to permanently delete this content item?"
+                                                    wire:confirm="{{ __('content_items/trash.are_you_sure_delete') }}"
                                                     :glow="true" palette="red">
-                                                {{ __("Delete") }}
+                                                {{ __("content_items/trash.delete_permanently") }}
                                             </x-cinema-button>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                                            Trash is empty.
+                                            {{ __('content_items/trash.trash_empty') }}
                                         </td>
                                     </tr>
                                 @endforelse

@@ -21,7 +21,7 @@ class Trash extends Component
 
         $contentItem->restore();
 
-        session()->flash('message', 'Content item restored successfully.');
+        session()->flash('message', __('content_items/trash.content_restored_message', ['title' => $contentItem->title]));
 
         $this->dispatch('$refresh');
     }
@@ -36,7 +36,7 @@ class Trash extends Component
 
         $contentItem->forceDelete();
 
-        session()->flash('message', 'Content item permanently deleted.');
+        session()->flash('message', __('content_items/trash.content_permanently_deleted_message', ['title' => $contentItem->title]));
 
         $this->dispatch('$refresh');
     }

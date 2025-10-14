@@ -175,7 +175,6 @@ class Edit extends Component
 
         $this->updatePeopleRelationships();
 
-        // session()->flash('message', 'Content item updated successfully.');
         session()->flash('message', __('content_items/edit.content_updated_message', ['title' => $this->contentItem->title]));
 
         return redirect()->route('content-items.show', $this->contentItem);
