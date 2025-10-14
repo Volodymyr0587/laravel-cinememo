@@ -32,8 +32,12 @@
                         </div>
 
                         <div class="flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Create Role') }}</flux:button>
-                            <flux:link :href="route('admin.roles.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold" >
+                                {{ __('Create Role') }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('admin.roles.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

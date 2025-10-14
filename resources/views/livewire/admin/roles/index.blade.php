@@ -1,46 +1,3 @@
-{{-- <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
-    <div class="flex justify-between items-center">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-white">{{ __('Roles') }}</h2>
-
-        <input type="text" wire:model.debounce.300ms="search" placeholder="Search roles..."
-               class="px-3 py-2 rounded border dark:bg-zinc-700 dark:text-white">
-
-        <a href="{{ route('admin.roles.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            {{ __('Create Role') }}
-        </a>
-    </div>
-
-    <div class="bg-white dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700">
-            <thead class="bg-gray-50 dark:bg-zinc-700">
-            <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">Name</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">Permissions</th>
-                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">Actions</th>
-            </tr>
-            </thead>
-            <tbody class="bg-white dark:bg-zinc-800 divide-y divide-gray-200 dark:divide-zinc-700">
-            @foreach($roles as $role)
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $role->name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                        {{ $role->permissions->pluck('name')->join(', ') }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('admin.roles.edit', $role) }}" class="text-blue-600 hover:text-blue-900 mr-2">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-
-        <div class="p-4">
-            {{ $roles->links() }}
-        </div>
-    </div>
-</div> --}}
-
 <div>
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -57,7 +14,14 @@
                 </flux:button>
             @endif
         </h2>
-        <x-button href="{{ route('admin.roles.create') }}" wire:navigate>{{ __('Add New Role') }}</x-button>
+        <x-cinema-button href="{{ route('admin.roles.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('Add New Role') }}
+            </x-cinema-button>
     </div>
 
 
@@ -106,10 +70,14 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('admin.roles.edit', $role) }}"
-                                               class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
-                                            <button wire:click="confirmDelete({{ $role->id }})"
-                                                    class="text-red-600 hover:text-red-900 hover:cursor-pointer">Delete</button>
+                                            <x-cinema-button href="{{ route('admin.roles.edit', $role) }}"
+                                                wire:navigate
+                                                palette="purple"
+                                            >{{ __("Edit") }}</x-cinema-button>
+                                            <x-cinema-button wire:click="confirmDelete({{ $role->id }})"
+                                                palette="red"
+                                            >{{ __("Delete") }}</x-cinema-button>
+                                    </div>
                                         </td>
                                     </tr>
                                 @empty
@@ -132,14 +100,12 @@
                             </p>
 
                             <div class="flex justify-end space-x-4">
-                                <button @click="open = false" type="button"
-                                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded hover:bg-gray-300">
-                                    Cancel
-                                </button>
-                                <button wire:click="deleteRole" type="button"
-                                        class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                                    Delete
-                                </button>
+                                <x-cinema-button @click="open = false" palette="gray" :glow="true">
+                                {{ __("Cancel") }}
+                                </x-cinema-button>
+                                <x-cinema-button wire:click="deleteRole" palette="red" :glow="true">
+                                    {{ __("Delete") }}
+                                </x-cinema-button>
                             </div>
                         </div>
                     </div>
