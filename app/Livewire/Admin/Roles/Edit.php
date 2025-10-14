@@ -23,6 +23,8 @@ class Edit extends Component
 
     public function mount(Role $role)
     {
+        $this->authorize('update', $role);
+
         $this->role = $role;
         $this->name = $role->name;
         $this->permissions = $role->permissions()->pluck('name')->toArray();
@@ -30,35 +32,43 @@ class Edit extends Component
 
     public function update()
     {
-        if (!auth()->user()->hasRole(['super_admin', 'admin'])) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorize('update', $this->role);
 
         $this->validate();
 
         $this->role->update(['name' => $this->name]);
+
         $this->role->syncPermissions($this->permissions);
 
         session()->flash('message', 'Role updated successfully.');
+
         return redirect()->route('admin.roles.index');
     }
 
     public function confirmDelete()
     {
+        $this->authorize('delete', $this->role);
+
         $this->confirmingDelete = true;
     }
 
     public function deleteRole()
     {
+        $this->authorize('delete', $this->role);
+
         $this->role->delete();
 
         session()->flash('message', 'Role deleted successfully.');
+
         return redirect()->route('admin.roles.index');
     }
 
     public function render()
     {
+        $this->authorize('view', $this->role);
+
         $allPermissions = Permission::all();
+
         return view('livewire.admin.roles.edit', compact('allPermissions'));
     }
 }

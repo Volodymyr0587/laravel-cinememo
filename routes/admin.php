@@ -1,7 +1,8 @@
 <?php
 
-use App\Livewire\Articles;
 use App\Livewire\Admin;
+use App\Livewire\Articles;
+use Spatie\Permission\Models\Role;
 
 Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
      Route::prefix('admin') // Adds '/admin' to the URL of all routes in this group
@@ -13,9 +14,15 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
                 Route::get('users/{user}/edit', Admin\Users\Edit::class)->name('users.edit');
                 Route::get('users/{user}', Admin\Users\Show::class)->name('users.show');
 
-                Route::get('roles', Admin\Roles\Index::class)->name('roles.index');
-                Route::get('roles/create', Admin\Roles\Create::class)->name('roles.create');
-                Route::get('roles/{role}/edit', Admin\Roles\Edit::class)->name('roles.edit');
+                Route::get('roles', Admin\Roles\Index::class)
+                    ->middleware('can:viewAny,' . Role::class)
+                    ->name('roles.index');
+                Route::get('roles/create', Admin\Roles\Create::class)
+                    ->middleware('can:create,' . Role::class)
+                    ->name('roles.create');
+                Route::get('roles/{role}/edit', Admin\Roles\Edit::class)
+                    ->middleware('can:update,role')
+                    ->name('roles.edit');
 
                 Route::get('articles/deleted', Articles\Deleted::class)->name('articles.deleted');
 

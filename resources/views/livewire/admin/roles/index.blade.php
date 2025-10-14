@@ -70,13 +70,18 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            @can('update', $role)
                                             <x-cinema-button href="{{ route('admin.roles.edit', $role) }}"
                                                 wire:navigate
                                                 palette="purple"
                                             >{{ __("Edit") }}</x-cinema-button>
+                                            @endcan
+
+                                            @can('delete', $role)
                                             <x-cinema-button wire:click="confirmDelete({{ $role->id }})"
                                                 palette="red"
                                             >{{ __("Delete") }}</x-cinema-button>
+                                            @endcan
                                     </div>
                                         </td>
                                     </tr>

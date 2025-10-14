@@ -5,10 +5,11 @@ namespace App\Livewire\Admin\Roles;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
 
     public $search = '';
     public $confirmingDelete = false;
@@ -17,6 +18,12 @@ class Index extends Component
     protected $queryString = [
         'search' => ['except' => ''],
     ];
+
+    public function mount()
+    {
+        // Authorize viewing all roles (RolePolicy@viewAny)
+        $this->authorize('viewAny', Role::class);
+    }
 
     // reset pagination when changing filters
     public function updatingSearch()
@@ -33,18 +40,27 @@ class Index extends Component
 
     public function confirmDelete($roleId)
     {
-        $this->roleToDelete = Role::find($roleId); // find role by ID
-        if (!$this->roleToDelete) {
+        $role = Role::find($roleId);
+
+        if (!$role) {
             session()->flash('message', 'Role not found.');
             return;
         }
+        // Authorize deletion (RolePolicy@delete)
+        $this->authorize('delete', $role);
+
+        $this->roleToDelete = $role;
         $this->confirmingDelete = true;
     }
 
     public function deleteRole()
     {
         if ($this->roleToDelete) {
+            // Authorize again before actual deletion
+            $this->authorize('delete', $this->roleToDelete);
+
             $this->roleToDelete->delete();
+
             $this->confirmingDelete = false;
             $this->roleToDelete = null;
 
