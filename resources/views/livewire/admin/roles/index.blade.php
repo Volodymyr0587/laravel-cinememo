@@ -54,7 +54,7 @@
                                 @forelse($roles as $role)
                                     <tr wire:key="role-{{ $role->id }}">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                                            <span class="px-2 py-1 rounded text-xs font-bold" style="background-color: {{ $role->color }}">
+                                            <span class="px-2 py-1 rounded text-xs font-bold">
                                                 {{ $role->name }}
                                             </span>
                                         </td>

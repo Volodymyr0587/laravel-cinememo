@@ -11,25 +11,46 @@
                 </div>
 
                 {{-- Header --}}
-                <div class="flex items-center gap-4">
+                <div class="flex flex-wrap items-center gap-6">
                     {{-- Profile Image / Initials --}}
                     <div class="w-16 h-16 rounded-full bg-gray-200 dark:bg-zinc-700 flex items-center justify-center overflow-hidden">
                         @if($user->profile_image)
                             <img src="{{ Storage::url($user->profile_image) }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
                         @else
-                            <span class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->initials() }}</span>
+                            <span class="text-lg font-bold text-gray-800 dark:text-white">
+                                {{ $user->initials() }}
+                            </span>
                         @endif
                     </div>
 
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">
-                            {{ $user->name }}
-                        </h2>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">
-                            {{ __('Member since') }} {{ $user->created_at->format('M d, Y') }}
-                        </p>
+                    {{-- User Info + Roles --}}
+                    <div class="flex flex-1 flex-wrap items-center justify-between gap-4">
+                        <!-- Left: User info -->
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">
+                                {{ $user->name }}
+                            </h2>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                {{ __('Member since') }} {{ $user->created_at->format('M d, Y') }}
+                            </p>
+                        </div>
+
+                        <!-- Right: Roles -->
+                        <div class="text-right">
+                            <span class="block text-sm text-gray-600 dark:text-gray-300 mb-1">Roles:</span>
+                            <div class="flex flex-wrap justify-end items-center gap-2">
+                                @forelse ($user->getRoleNames() as $roleName)
+                                    <span class="px-2 py-1 rounded text-xs font-semibold bg-blue-500 text-white">
+                                        {{ $roleName }}
+                                    </span>
+                                @empty
+                                    <span class="text-sm text-gray-500 dark:text-gray-400">User has no roles</span>
+                                @endforelse
+                            </div>
+                        </div>
                     </div>
                 </div>
+
 
                 {{-- Info Badges --}}
                 <div class="flex flex-col sm:flex-row sm:items-center sm:gap-6 gap-3">
