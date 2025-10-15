@@ -16,7 +16,7 @@ class Edit extends Component
 
     public function mount(User $user)
     {
-        $this->authorize('view', $user);
+        $this->authorize('update', $user);
 
         $this->user = $user;
         $this->roles = $user->roles->pluck('name')->toArray();

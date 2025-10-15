@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin;
 use App\Livewire\Articles;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
@@ -9,10 +10,18 @@ Route::middleware(['auth', 'role:admin|super_admin'])->group(function () {
         ->name('admin.') // Prefixes route names with 'admin.'
         ->group(
             function () {
-                Route::get('users', Admin\Users\Index::class)->name('users.index'); // Route name: 'admin.users.index'
-                Route::get('users/create', Admin\Users\Create::class)->name('users.create');
-                Route::get('users/{user}/edit', Admin\Users\Edit::class)->name('users.edit');
-                Route::get('users/{user}', Admin\Users\Show::class)->name('users.show');
+                Route::get('users', Admin\Users\Index::class)
+                    ->middleware('can:viewAny,' . User::class)
+                    ->name('users.index'); // Route name: 'admin.users.index'
+                Route::get('users/create', Admin\Users\Create::class)
+                    ->middleware('can:create,' . User::class)
+                    ->name('users.create');
+                Route::get('users/{user}/edit', Admin\Users\Edit::class)
+                    ->middleware('can:update,user')
+                    ->name('users.edit');
+                Route::get('users/{user}', Admin\Users\Show::class)
+                    ->middleware('can:view,user')
+                    ->name('users.show');
 
                 Route::get('roles', Admin\Roles\Index::class)
                     ->middleware('can:viewAny,' . Role::class)
