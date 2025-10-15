@@ -21,7 +21,7 @@
                 palette="gold"
             >
                 {{ __('Add New Role') }}
-            </x-cinema-button>
+        </x-cinema-button>
     </div>
 
 

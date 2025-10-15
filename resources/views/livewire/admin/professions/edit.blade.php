@@ -26,8 +26,12 @@
                         </div>
 
                          <div class="flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Update Profession') }}</flux:button>
-                            <flux:link :href="route('admin.professions.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __("Update Profession") }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('admin.professions.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

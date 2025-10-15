@@ -13,7 +13,14 @@
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            <x-button href="{{ route('admin.professions.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Profession') }}</x-button>
+            <x-cinema-button href="{{ route('admin.professions.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('Add new profession') }}
+            </x-cinema-button>
         </div>
     </div>
 
@@ -58,37 +65,31 @@
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $profession->created_at }}</td>
                                         <td class="px-4 py-2 text-right space-x-2">
 
-                                        <flux:button
-                                            size="sm"
-                                            variant="primary"
-                                            color="lime"
-                                            href="{{ route('admin.professions.show', $profession) }}"
-                                            wire:navigate
-                                            class="hover:cursor-pointer"
-                                        >
+                                        <x-cinema-button href="{{ route('admin.professions.show', $profession) }}"
+                                                class=""
+                                                wire:navigate
+                                                :glow="true"
+                                                palette="green"
+                                            >
                                             {{ __("Details") }}
-                                        </flux:button>
+                                        </x-cinema-button>
 
-                                        <flux:button
-                                            size="sm"
-                                            variant="primary"
-                                            color="indigo"
-                                            href="{{ route('admin.professions.edit', $profession) }}"
+                                        <x-cinema-button href="{{ route('admin.professions.edit', $profession) }}"
+                                            class=""
                                             wire:navigate
-                                            class="hover:cursor-pointer"
+                                            :glow="true"
+                                            palette="purple"
                                         >
-                                            Edit
-                                        </flux:button>
+                                            {{ __("Edit") }}
+                                        </x-cinema-button>
 
-                                        <flux:button
-                                            size="sm"
-                                            variant="danger"
-                                            wire:click="delete({{ $profession->id }})"
+                                        <x-cinema-button wire:click="delete({{ $profession->id }})"
                                             wire:confirm="Are you sure you want to delete this profession? This action cannot be undone."
-                                            class="hover:cursor-pointer"
+                                            :glow="true"
+                                            palette="red"
                                         >
-                                            Delete
-                                        </flux:button>
+                                            {{ __("Delete") }}
+                                        </x-cinema-button>
 
                                         </td>
                                     </tr>
