@@ -3,6 +3,7 @@
     'size' => 'md',          // sm | md | lg | xl
     'palette' => 'gold',     // gold | red | silver | neon
     'glow' => false,         // add glowing shadow
+    'disabled' => false,
 ])
 
 @php
@@ -50,6 +51,11 @@
         }
     : '';
 
+    $disabledClasses = $disabled
+        ? 'opacity-60 cursor-not-allowed transform-none hover:cursor-not-allowed hover:scale-100 hover:-rotate-0'
+        : '';
+
+
 
     $sweepColor = match($palette) {
         'gold' => 'after:via-yellow-200/50 dark:after:via-yellow-300/40',
@@ -75,15 +81,15 @@
 @endphp
 
 @if($href)
-    <a href="{{ $href }}" {{ $attributes->merge([
-        'class' => "$baseClasses $sizeClasses $paletteClasses $glowClasses $sweep"
+    <a href="{{ $disabled ? '#' : $href }}" {{ $attributes->merge([
+        'class' => "$baseClasses $sizeClasses $paletteClasses $glowClasses $sweep $disabledClasses"
     ]) }}>
         {{ $slot }}
     </a>
 @else
     <button {{ $attributes->merge([
-        'class' => "$baseClasses $sizeClasses $paletteClasses $glowClasses $sweep"
-    ]) }}>
+        'class' => "$baseClasses $sizeClasses $paletteClasses $glowClasses $sweep $disabledClasses"
+    ]) }} @if($disabled) disabled @endif>
         {{ $slot }}
     </button>
 @endif

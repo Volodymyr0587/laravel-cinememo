@@ -13,7 +13,14 @@
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            <x-button href="{{ route('admin.users.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New User') }}</x-button>
+            <x-cinema-button href="{{ route('admin.users.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('Add New User') }}
+            </x-cinema-button>
         </div>
     </div>
 
@@ -35,30 +42,6 @@
                                 :placeholder="__('Search user...')"
                             />
                         </div>
-                        {{-- <div>
-                            <flux:select wire:model.live="genreFilter" :label="__('Genre')">
-                                <option value="">All Genres</option>
-                                @foreach($genres as $genre)
-                                    <option value="{{ $genre->id }}">{{ __($genre->name) }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div>
-                        <div>
-                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
-                                <option value="">All Statuses</option>
-                                @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
-                                    <option value="{{ $value }}">{{ __($label) }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div> --}}
-                        {{-- <div>
-                            <flux:select wire:model.live="contentItemFilter" :label="__('Content')">
-                                <option value="">All Content</option>
-                                @foreach($contentItems as $contentItem)
-                                    <option value="{{ $contentItem->id }}">{{ $contentItem->title }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div> --}}
                     </div>
 
                     <!-- Users Table -->
@@ -94,48 +77,47 @@
                                         <td class="px-4 py-2 text-right space-x-2">
 
                                             @can('view_users')
-                                            <flux:button
-                                                size="sm"
-                                                variant="primary"
-                                                color="lime"
-                                                href="{{ route('admin.users.show', $user) }}"
+                                            <x-cinema-button href="{{ route('admin.users.show', $user) }}"
+                                                class=""
                                                 wire:navigate
-                                                class="hover:cursor-pointer"
+                                                :glow="true"
+                                                palette="green"
                                             >
                                                 {{ __("Details") }}
-                                            </flux:button>
+                                            </x-cinema-button>
                                             @endcan
 
                                             @can('update', $user)
-                                                <flux:button
-                                                    size="sm"
-                                                    variant="primary"
-                                                    color="indigo"
-                                                    href="{{ route('admin.users.edit', $user) }}"
-                                                    class="hover:cursor-pointer"
+                                                <x-cinema-button href="{{ route('admin.users.edit', $user) }}"
+                                                    class=""
+                                                    wire:navigate
+                                                    :glow="true"
+                                                    palette="purple"
                                                 >
-                                                    Edit
-                                                </flux:button>
+                                                    {{ __("Edit") }}
+                                                </x-cinema-button>
                                             @else
-                                                <flux:button size="sm" variant="subtle" disabled>
-                                                    Edit
-                                                </flux:button>
+                                                <x-cinema-button
+                                                    palette="gray" disabled
+                                                >
+                                                    {{ __("Edit") }}
+                                                </x-cinema-button>
                                             @endcan
 
                                             @can('delete', $user)
-                                                <flux:button
-                                                    size="sm"
-                                                    variant="danger"
-                                                    wire:click="delete({{ $user->id }})"
+                                                <x-cinema-button wire:click="delete({{ $user->id }})"
                                                     wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
-                                                    class="hover:cursor-pointer"
+                                                    :glow="true"
+                                                    palette="red"
                                                 >
-                                                    Delete
-                                                </flux:button>
+                                                    {{ __("Delete") }}
+                                                </x-cinema-button>
                                             @else
-                                                <flux:button size="sm" variant="subtle" disabled>
-                                                    Delete
-                                                </flux:button>
+                                                <x-cinema-button
+                                                    palette="gray" disabled
+                                                >
+                                                    {{ __("Delete") }}
+                                                </x-cinema-button>
                                             @endcan
                                         </td>
                                     </tr>
