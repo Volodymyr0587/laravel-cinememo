@@ -13,7 +13,6 @@
                 </flux:button>
             @endif
         </h2>
-        {{-- <x-button href="{{ route('content-types.create') }}" wire:navigate>{{ __('content_types/main.add_new_category') }}</x-button> --}}
         <x-cinema-button href="{{ route('content-types.create') }}"
                 class="order-1 sm:order-none"
                 wire:navigate
@@ -21,7 +20,7 @@
                 palette="gold"
             >
                 {{ __('content_types/main.add_new_category') }}
-            </x-cinema-button>
+        </x-cinema-button>
     </div>
 
 

@@ -13,24 +13,6 @@
                 </flux:button>
             @endif
         </h2>
-        <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            {{-- <flux:button
-                :href="route('content-items.export')" class="order-2 sm:order-none"
-                icon:trailing="arrow-down-tray"
-            >
-                {{ __('Export to XLSX') }}
-            </flux:button>
-            <flux:button
-                :href="route('content-items.export-pdf')" class="order-3 sm:order-none"
-                icon:trailing="arrow-down-tray"
-                target="_blank"
-            >
-               {{ __('Export to PDF') }}
-            </flux:button> --}}
-            {{-- @hasanyrole(['super_admin', 'writer'])
-            <x-button href="{{ route('writer.articles.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Article') }}</x-button>
-            @endhasanyrole --}}
-        </div>
     </div>
 
 
@@ -51,30 +33,6 @@
                                 :placeholder="__('articles/published.search_placeholder')"
                             />
                         </div>
-                        {{-- <div>
-                            <flux:select wire:model.live="genreFilter" :label="__('Genre')">
-                                <option value="">All Genres</option>
-                                @foreach($genres as $genre)
-                                    <option value="{{ $genre->id }}">{{ __($genre->name) }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div>
-                        <div>
-                            <flux:select wire:model.live="statusFilter" :label="__('Status')">
-                                <option value="">All Statuses</option>
-                                @foreach(\App\Enums\ContentStatus::labels() as $value => $label)
-                                    <option value="{{ $value }}">{{ __($label) }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div> --}}
-                        {{-- <div>
-                            <flux:select wire:model.live="contentItemFilter" :label="__('Content')">
-                                <option value="">All Content</option>
-                                @foreach($contentItems as $contentItem)
-                                    <option value="{{ $contentItem->id }}">{{ $contentItem->title }}</option>
-                                @endforeach
-                            </flux:select>
-                        </div> --}}
                         <div>
                             <flux:select wire:model.live="publishedAuthorFilter" :label="__('articles/published.authors')">
                                 <option value="">{{ __('articles/published.all_authors') }}</option>
