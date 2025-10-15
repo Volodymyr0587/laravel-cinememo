@@ -26,7 +26,18 @@
                     </div>
                 @endif
             </div>
-
+            <div>
+                <flux:label>Roles</flux:label>
+                <div class="flex flex-wrap justify-start items-center gap-2">
+                    @forelse (auth()->user()->getRoleNames() as $roleName)
+                        <span class="px-2 py-1 rounded text-xs font-semibold bg-blue-500 text-white">
+                            {{ $roleName }}
+                        </span>
+                    @empty
+                        <span class="text-sm text-gray-500 dark:text-gray-400">{{ __("You have no roles") }}</span>
+                    @endforelse
+                </div>
+            </div>
              <!-- Profile Image -->
             <div class="mt-4">
                 <flux:input
