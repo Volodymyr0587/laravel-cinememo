@@ -27,7 +27,9 @@
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
-                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
+                    <x-cinema-button type="submit" :glow="true" palette="gold">
+                        {{ __('Save') }}
+                    </x-cinema-button>
                 </div>
 
                 <x-action-message class="me-3" on="password-updated">
