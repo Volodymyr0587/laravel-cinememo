@@ -25,15 +25,22 @@
                 {{-- Action Buttons --}}
                 @can('update', $genre)
                 <div class="flex justify-between items-center mt-6">
-                    <flux:button href="{{ route('admin.genres.edit', $genre) }}" wire:navigate>
-                        {{ __('Edit') }}
-                    </flux:button>
+                     <x-cinema-button href="{{ route('admin.genres.edit', $genre) }}"
+                        class=""
+                        wire:navigate
+                        :glow="true"
+                        palette="purple"
+                    >
+                        {{ __("Edit") }}
+                    </x-cinema-button>
 
-                    <button type="submit" wire:click="delete({{ $genre->id }})"
-                            wire:confirm="Are you sure you want to delete this genre?"
-                            class="px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-800 text-sm font-medium hover:cursor-pointer">
-                        {{ __('Delete') }}
-                    </button>
+                    <x-cinema-button wire:click="delete({{ $genre->id }})"
+                        wire:confirm="Are you sure you want to delete this genre? This action cannot be undone."
+                        :glow="true"
+                        palette="red"
+                    >
+                        {{ __("Delete") }}
+                    </x-cinema-button>
                 </div>
                 @endcan
             </div>

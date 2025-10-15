@@ -26,8 +26,12 @@
                         </div>
 
                          <div class="flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" >{{ __('Update Genre') }}</flux:button>
-                            <flux:link :href="route('admin.genres.index')" wire:navigate>{{ __('Cancel') }}</flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __("Update Genre") }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('admin.genres.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>

@@ -2,7 +2,7 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Genres') }}
+            {{ __('genres/main.genres') }}
             @if($search)
                 <flux:button
                     wire:click="clearFilters"
@@ -13,7 +13,14 @@
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            <x-button href="{{ route('admin.genres.create') }}" class="order-1 sm:order-none" wire:navigate>{{ __('Add New Genre') }}</x-button>
+            <x-cinema-button href="{{ route('admin.genres.create') }}"
+                class="order-1 sm:order-none"
+                wire:navigate
+                :glow="true"
+                palette="gold"
+            >
+                {{ __('Add new genre') }}
+            </x-cinema-button>
         </div>
     </div>
 
@@ -58,37 +65,31 @@
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $genre->created_at }}</td>
                                         <td class="px-4 py-2 text-right space-x-2">
 
-                                        <flux:button
-                                            size="sm"
-                                            variant="primary"
-                                            color="lime"
-                                            href="{{ route('admin.genres.show', $genre) }}"
-                                            wire:navigate
-                                            class="hover:cursor-pointer"
-                                        >
+                                        <x-cinema-button href="{{ route('admin.genres.show', $genre) }}"
+                                                class=""
+                                                wire:navigate
+                                                :glow="true"
+                                                palette="green"
+                                            >
                                             {{ __("Details") }}
-                                        </flux:button>
+                                        </x-cinema-button>
 
-                                        <flux:button
-                                            size="sm"
-                                            variant="primary"
-                                            color="indigo"
-                                            href="{{ route('admin.genres.edit', $genre) }}"
+                                        <x-cinema-button href="{{ route('admin.genres.edit', $genre) }}"
+                                            class=""
                                             wire:navigate
-                                            class="hover:cursor-pointer"
+                                            :glow="true"
+                                            palette="purple"
                                         >
-                                            Edit
-                                        </flux:button>
+                                            {{ __("Edit") }}
+                                        </x-cinema-button>
 
-                                        <flux:button
-                                            size="sm"
-                                            variant="danger"
-                                            wire:click="delete({{ $genre->id }})"
-                                            wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
-                                            class="hover:cursor-pointer"
+                                        <x-cinema-button wire:click="delete({{ $genre->id }})"
+                                            wire:confirm="Are you sure you want to delete this genre? This action cannot be undone."
+                                            :glow="true"
+                                            palette="red"
                                         >
-                                            Delete
-                                        </flux:button>
+                                            {{ __("Delete") }}
+                                        </x-cinema-button>
 
                                         </td>
                                     </tr>
