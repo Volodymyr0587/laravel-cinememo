@@ -81,9 +81,14 @@
                 {{-- Actions --}}
                 @can('update', $user)
                 <div class="flex justify-end">
-                    <flux:button href="{{ route('admin.users.edit', $user) }}" wire:navigate>
-                        {{ __('Edit User') }}
-                    </flux:button>
+                    <x-cinema-button href="{{ route('admin.users.edit', $user) }}"
+                        class=""
+                        wire:navigate
+                        :glow="true"
+                        palette="purple"
+                    >
+                        {{ __("Edit User") }}
+                    </x-cinema-button>
                 </div>
                 @endcan
 

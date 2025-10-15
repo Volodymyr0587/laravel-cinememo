@@ -55,12 +55,12 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                            <flux:button variant="primary" type="submit" class="hover:cursor-pointer">
-                                {{ __('Update User') }}
-                            </flux:button>
-                            <flux:link :href="route('admin.users.index')" wire:navigate>
-                                {{ __('Cancel') }}
-                            </flux:link>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __("Update User") }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('admin.users.index')" :glow="true" palette="gray" wire:navigate>
+                                {{ __("Cancel") }}
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>
@@ -80,15 +80,13 @@
                     </p>
                     <div class="mt-4">
                         @can('delete_users')
-                        <flux:button
-                            size="sm"
-                            variant="danger"
-                            wire:click="delete({{ $user->id }})"
+                        <x-cinema-button wire:click="delete({{ $user->id }})"
                             wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
-                            class="hover:cursor-pointer"
+                            :glow="true"
+                            palette="red"
                         >
-                            Delete
-                        </flux:button>
+                            {{ __("Delete") }}
+                        </x-cinema-button>
                         @endcan
                     </div>
                 </div>

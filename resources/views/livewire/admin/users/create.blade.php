@@ -80,14 +80,12 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between">
-                            <div class="flex items-center justify-end">
-                                <flux:button type="submit" variant="primary" class="w-full hover:cursor-pointer">
-                                    {{ __('Create user') }}
-                                </flux:button>
-                            </div>
-                            <flux:link :href="route('admin.users.index')" wire:navigate>
+                            <x-cinema-button type="submit" :glow="true" palette="gold">
+                                {{ __('Create user') }}
+                            </x-cinema-button>
+                            <x-cinema-button :href="route('admin.users.index')" :glow="true" palette="gray" wire:navigate>
                                 {{ __('Cancel') }}
-                            </flux:link>
+                            </x-cinema-button>
                         </div>
                     </form>
                 </div>
