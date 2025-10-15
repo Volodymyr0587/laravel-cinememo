@@ -38,11 +38,6 @@ class Create extends Component
 
         $user = User::create($validated);
 
-        $user->contentTypes()->create([
-            'name' => 'movie',
-            'color' => '#ff9900',
-        ]);
-
         $user->assignRole($this->roles);
 
         return redirect()->route('admin.users.index')
