@@ -40,9 +40,11 @@ class Create extends Component
 
         $user->assignRole($this->roles);
 
-        return redirect()->route('admin.users.index')
-                        ->with('success','User created successfully');
+        session()->flash('message', __("users/main.create_user_message", ['name' => $user->name]));
+
+        return redirect()->route('admin.users.index');
     }
+
     public function render()
     {
         return view('livewire.admin.users.create');

@@ -28,7 +28,7 @@ class Index extends Component
 
         $userDeletionService->deleteUser($userId);
 
-        session()->flash('message', "User {$user->name} and all related data deleted successfully.");
+        session()->flash('message', __("users/main.delete_user_message", ['name' => $user->name]));
 
         return redirect()->route('admin.users.index');
     }

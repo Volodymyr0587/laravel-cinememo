@@ -6,7 +6,7 @@
                 {{-- Back Button --}}
                 <div>
                     <flux:link href="{{ route('admin.users.index') }}" wire:navigate class="text-sm">
-                        ← {{ __('Back to all users') }}
+                        ← {{ __('users/show.back_button') }}
                     </flux:link>
                 </div>
 
@@ -31,20 +31,20 @@
                                 {{ $user->name }}
                             </h2>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ __('Member since') }} {{ $user->created_at->format('M d, Y') }}
+                                {{ __('users/show.member_since') }} {{ $user->created_at->format('M d, Y') }}
                             </p>
                         </div>
 
                         <!-- Right: Roles -->
                         <div class="text-right">
-                            <span class="block text-sm text-gray-600 dark:text-gray-300 mb-1">Roles:</span>
+                            <span class="block text-sm text-gray-600 dark:text-gray-300 mb-1">{{ __('users/show.roles') }}:</span>
                             <div class="flex flex-wrap justify-end items-center gap-2">
                                 @forelse ($user->getRoleNames() as $roleName)
                                     <span class="px-2 py-1 rounded text-xs font-semibold bg-blue-500 text-white">
                                         {{ $roleName }}
                                     </span>
                                 @empty
-                                    <span class="text-sm text-gray-500 dark:text-gray-400">User has no roles</span>
+                                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ __('users/show.no_roles') }}</span>
                                 @endforelse
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                 {{-- Info Badges --}}
                 <div class="flex flex-col sm:flex-row sm:items-center sm:gap-6 gap-3">
                     <div class="flex items-center gap-x-2 text-sm">
-                        <span class="font-medium text-gray-600 dark:text-gray-300">{{ __('login.form.email') }}:</span>
+                        <span class="font-medium text-gray-600 dark:text-gray-300">{{ __('users/show.email') }}:</span>
                         <span class="px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900">
                             {{ $user->email }}
                         </span>
@@ -65,15 +65,15 @@
                 {{-- Meta Stats --}}
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("dashboard.total_in_the_collection") }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("users/show.total_in_the_collection") }}</p>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->contentItems->count() }}</p>
                     </div>
                     <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("dashboard.total_cast_and_crew") }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("users/show.total_cast_and_crew") }}</p>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->people->count() }}</p>
                     </div>
                     <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("dashboard.total_categories") }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("users/show.total_categories") }}</p>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->contentTypes->count() }}</p>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         :glow="true"
                         palette="purple"
                     >
-                        {{ __("Edit User") }}
+                        {{ __("users/show.edit_button") }}
                     </x-cinema-button>
                 </div>
                 @endcan

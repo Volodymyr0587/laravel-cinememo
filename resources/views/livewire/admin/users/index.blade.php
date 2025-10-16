@@ -2,13 +2,13 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Users') }}
+            {{ __('users/main.users') }}
             @if($roleFilter || $search)
                 <flux:button
                     wire:click="clearFilters"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('users/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -19,7 +19,7 @@
                 :glow="true"
                 palette="gold"
             >
-                {{ __('Add New User') }}
+                {{ __('users/main.add_new_user') }}
             </x-cinema-button>
         </div>
     </div>
@@ -37,9 +37,9 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('users/main.search')"
                                 type="text"
-                                :placeholder="__('Search user...')"
+                                :placeholder="__('users/main.search_user')"
                             />
                         </div>
                     </div>
@@ -50,11 +50,11 @@
                             <thead class="bg-gray-50 dark:bg-zinc-800">
                                 <tr>
                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Roles</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date of registration</th>
-                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('users/main.name') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('users/main.email') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('users/main.roles') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('users/main.date_of_registration') }}</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('users/main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-zinc-900 divide-y divide-gray-200 dark:divide-zinc-700">
@@ -69,7 +69,7 @@
                                                     {{ $roleName }}
                                                 </span>
                                             @empty
-                                                No roles
+                                                {{ __('users/main.no_roles') }}
                                             @endforelse
 
                                         </td>
@@ -83,7 +83,7 @@
                                                 :glow="true"
                                                 palette="green"
                                             >
-                                                {{ __("Details") }}
+                                                {{ __("users/main.details_button") }}
                                             </x-cinema-button>
                                             @endcan
 
@@ -94,13 +94,13 @@
                                                     :glow="true"
                                                     palette="purple"
                                                 >
-                                                    {{ __("Edit") }}
+                                                    {{ __("users/main.edit_button") }}
                                                 </x-cinema-button>
                                             @else
                                                 <x-cinema-button
                                                     palette="gray" disabled
                                                 >
-                                                    {{ __("Edit") }}
+                                                    {{ __("users/main.edit_button") }}
                                                 </x-cinema-button>
                                             @endcan
 
@@ -110,13 +110,13 @@
                                                     :glow="true"
                                                     palette="red"
                                                 >
-                                                    {{ __("Delete") }}
+                                                    {{ __("users/main.delete_button") }}
                                                 </x-cinema-button>
                                             @else
                                                 <x-cinema-button
                                                     palette="gray" disabled
                                                 >
-                                                    {{ __("Delete") }}
+                                                    {{ __("users/main.delete_button") }}
                                                 </x-cinema-button>
                                             @endcan
                                         </td>
@@ -124,8 +124,8 @@
                                 @empty
                                     <tr>
                                         <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-300">
-                                            No users found.
-                                            <flux:link :href="route('admin.users.create')" wire:navigate class="ml-2">{{ __('Add First User') }}</flux:link>
+                                            {{ __("users/main.no_users_found") }}
+                                            <flux:link :href="route('admin.users.create')" wire:navigate class="ml-2">{{ __('users/main.add_first_user') }}</flux:link>
                                         </td>
                                     </tr>
                                 @endforelse
