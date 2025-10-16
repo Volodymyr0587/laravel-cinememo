@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 use App\Notifications\UserDeletedNotification;
 
 class UserDeletionService
@@ -12,11 +13,10 @@ class UserDeletionService
     public function deleteUser(int $userId, string $reason = 'Violation of rules or user request.'): void
     {
         $user = User::findOrFail($userId);
+        $email = $user->email;
+        $name  = $user->name;
 
         DB::transaction(function () use ($user, $reason) {
-            // notify user before deleting
-            $user->notify(new UserDeletedNotification($reason));
-
             // remove roles and permissions first (Spatie)
             $user->syncRoles([]);
             $user->syncPermissions([]);
@@ -40,5 +40,9 @@ class UserDeletionService
             // finally delete user
             $user->delete();
         });
+
+        // send notification to email address (not to deleted model)
+        Notification::route('mail', $email)
+            ->notify((new UserDeletedNotification($reason, $email, $name))->afterCommit());
     }
 }
