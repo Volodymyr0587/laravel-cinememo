@@ -15,12 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body
-    class="relative min-h-screen bg-white dark:bg-neutral-950 antialiased text-gray-900 dark:text-gray-100
-        [background-image:linear-gradient(135deg,rgba(234,179,8,0.08),rgba(168,85,247,0.08)),radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.35),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(234,179,8,0.35),transparent_60%)]
-        dark:[background-image:linear-gradient(135deg,rgba(234,179,8,0.05),rgba(168,85,247,0.05)),radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.25),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(234,179,8,0.2),transparent_60%)]
-        bg-fixed bg-no-repeat bg-cover"
->
+<body class="cinema-background-sunset">
     <!-- Header -->
     <header class="flex items-center justify-between px-6 py-4">
         <a href="{{ url('/') }}" class="text-xl font-bold tracking-tight">
