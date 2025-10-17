@@ -112,51 +112,65 @@ This will log outgoing emails to `storage/logs/laravel.log` instead of sending t
 
 ### Steps
 
-1. Clone the repository
+1. 🧬 Clone the repository
 
-```git clone https://github.com/Volodymyr0587/laravel-cinememo```
+    ```git clone https://github.com/Volodymyr0587/laravel-cinememo```
 
-```cd laravel-cinememo```
+    ```cd laravel-cinememo```
 
-2. Install dependencies
+2. 📦 Install dependencies
 
-```composer install```
+    ```composer install```
 
-```npm install```
+    ```npm install```
 
-```npm run dev```
+3. 📝 Set up the environment
 
-3. Set up the environment
+    ```cp .env.example .env```
 
-```cp .env.example .env```
+    ```php artisan key:generate```
 
-```php artisan key:generate```
+4. 🗄️ Database setup
 
-4. Database setup
+    Using SQLite for simplicity. Update your .env file accordingly:
 
-Using SQLite for simplicity. Update your .env file accordingly:
+    ```DB_CONNECTION=sqlite```
 
-```DB_CONNECTION=sqlite```
+5. 🔧 Run migrations with seeders
 
-5. Run migrations with seeders
+    ```php artisan migrate:fresh --seed```
 
-```php artisan migrate:fresh --seed```
+    This will create:
 
-This will create 
-- `Super admin` user (email: superadmin@gmail.com, password: `password123`)
-- `Admin` user (email: admin@gmail.com, password: `password123`)
-- `Writer` user (email: writer@gmail.com, password: `password123`)
-- `Regular user` (email: volodymyr@gmail.com, password: `password123`) 
+    - `Super admin` user (email: superadmin@gmail.com, password: `password123`)
+    - `Admin` user (email: admin@gmail.com, password: `password123`)
+    - `Writer` user (email: writer@gmail.com, password: `password123`)
+    - `Regular user` (email: volodymyr@gmail.com, password: `password123`) 
 
-and some data to explore for Regular user.
+    and some data to explore for Regular user.
 
-6. Create a symbolic link for storage
+6. 🔗 Create a symbolic link for storage
 
-```php artisan storage:link```
+    ```php artisan storage:link```
 
-7. Serve the application
+7. 🚀 Serve the Application
 
-    ```php artisan serve```
+    You can start the application in two ways:
+
+    * Option 1 — Run each service manually:
+
+        ```npm run dev```
+
+        ```php artisan queue:work```
+
+        ```php artisan serve```
+
+
+    * Option 2 — Use a single Composer command:
+
+        ```composer run dev```
+    
+        This command will automatically start the Vite dev server and prepare the app for local development.
 
 ## Usage
 
