@@ -5,7 +5,7 @@
                 {{-- Back Button --}}
                 <div class="mb-4">
                     <flux:link href="{{ route('admin.genres.index') }}" wire:navigate>
-                        ← {{ __('Back to all genres') }}
+                        ← {{ __('genres/show.back_to_all_genres') }}
                     </flux:link>
                 </div>
 
@@ -17,7 +17,6 @@
                 {{-- Description --}}
                 @if($genre->description)
                     <div class="mb-6">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('Description') }}</p>
                         <p class="text-base text-gray-800 dark:text-white">{{ $genre->description }}</p>
                     </div>
                 @endif
@@ -31,15 +30,15 @@
                         :glow="true"
                         palette="purple"
                     >
-                        {{ __("Edit") }}
+                        {{ __("genres/show.edit_button") }}
                     </x-cinema-button>
 
                     <x-cinema-button wire:click="delete({{ $genre->id }})"
-                        wire:confirm="Are you sure you want to delete this genre? This action cannot be undone."
+                        wire:confirm="{{ __('genres/show.are_you_sure', ['name' => $genre->name]) }}"
                         :glow="true"
                         palette="red"
                     >
-                        {{ __("Delete") }}
+                        {{ __("genres/show.delete_button") }}
                     </x-cinema-button>
                 </div>
                 @endcan

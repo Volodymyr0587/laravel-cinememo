@@ -41,7 +41,7 @@ class Edit extends Component
 
         $this->genre->update($validated);
 
-        session()->flash('message', "Genre {$this->genre->name} updated successfully");
+        session()->flash('message', __("genres/main.update_genre_message", ['name' => $this->genre->name]));
 
         return redirect()->route('admin.genres.index');
     }
@@ -54,7 +54,7 @@ class Edit extends Component
 
         $genre->delete();
 
-        session()->flash('message', "Genre '{$genre->name}' deleted successfully.");
+        session()->flash('message', __("genres/main.delete_genre_message", ['name' => $genre->name]));
 
         return redirect()->route('admin.genres.index');
     }

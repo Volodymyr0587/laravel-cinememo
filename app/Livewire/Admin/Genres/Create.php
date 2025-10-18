@@ -30,8 +30,9 @@ class Create extends Component
 
         $genre = Genre::create($validated);
 
-        return redirect()->route('admin.genres.index')
-                        ->with('success',"Genre {$genre->name} created successfully");
+        session()->flash('message', __("genres/main.create_genre_message", ['name' => $genre->name]));
+
+        return redirect()->route('admin.genres.index');
     }
     public function render()
     {

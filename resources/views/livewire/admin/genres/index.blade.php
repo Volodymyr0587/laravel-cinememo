@@ -8,7 +8,7 @@
                     wire:click="clearFilters"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('genres/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -19,7 +19,7 @@
                 :glow="true"
                 palette="gold"
             >
-                {{ __('Add new genre') }}
+                {{ __('genres/main.add_new_genre') }}
             </x-cinema-button>
         </div>
     </div>
@@ -37,9 +37,9 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('genres/main.search')"
                                 type="text"
-                                :placeholder="__('Search genre...')"
+                                :placeholder="__('genres/main.search_placeholder')"
                             />
                         </div>
                     </div>
@@ -50,10 +50,10 @@
                             <thead class="bg-gray-50 dark:bg-zinc-800">
                                 <tr>
                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Updated at</th>
-                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('genres/main.name') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('genres/main.description') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('genres/main.updated_at') }}</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('genres/main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-zinc-900 divide-y divide-gray-200 dark:divide-zinc-700">
@@ -71,7 +71,7 @@
                                                 :glow="true"
                                                 palette="green"
                                             >
-                                            {{ __("Details") }}
+                                            {{ __("genres/main.details_button") }}
                                         </x-cinema-button>
 
                                         <x-cinema-button href="{{ route('admin.genres.edit', $genre) }}"
@@ -80,15 +80,15 @@
                                             :glow="true"
                                             palette="purple"
                                         >
-                                            {{ __("Edit") }}
+                                            {{ __("genres/main.edit_button") }}
                                         </x-cinema-button>
 
                                         <x-cinema-button wire:click="delete({{ $genre->id }})"
-                                            wire:confirm="Are you sure you want to delete this genre? This action cannot be undone."
+                                            wire:confirm="{{ __('genres/main.are_you_sure', ['name' => $genre->name]) }}"
                                             :glow="true"
                                             palette="red"
                                         >
-                                            {{ __("Delete") }}
+                                            {{ __("genres/main.delete_button") }}
                                         </x-cinema-button>
 
                                         </td>
@@ -96,8 +96,8 @@
                                 @empty
                                     <tr>
                                         <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-300">
-                                            No genres found.
-                                            <flux:link :href="route('admin.genres.create')" wire:navigate class="ml-2">{{ __('Add First Genre') }}</flux:link>
+                                             {{ __("genres/main.no_genres_found") }}
+                                            <flux:link :href="route('admin.genres.create')" wire:navigate class="ml-2">{{ __('genres/main.add_first_genre') }}</flux:link>
                                         </td>
                                     </tr>
                                 @endforelse

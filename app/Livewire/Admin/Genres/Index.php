@@ -31,7 +31,7 @@ class Index extends Component
 
         $genre->delete();
 
-        session()->flash('message', "Genre '{$genre->name}' deleted successfully.");
+        session()->flash('message', __("genres/main.delete_genre_message", ['name' => $genre->name]));
 
         return redirect()->route('admin.genres.index');
     }
