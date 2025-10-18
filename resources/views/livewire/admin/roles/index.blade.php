@@ -2,15 +2,14 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Roles') }}
-
+            {{ __('roles/main.roles') }}
             @if($search)
                 <flux:button
                     wire:click.prevent="clearFilters"
                     wire:key="index-roles-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('roles/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -20,7 +19,7 @@
                 :glow="true"
                 palette="gold"
             >
-                {{ __('Add New Role') }}
+                {{ __('roles/main.add_new_role') }}
         </x-cinema-button>
     </div>
 
@@ -35,9 +34,9 @@
                     <div class="mb-4">
                         <flux:input
                             wire:model.live="search"
-                            :label="__('Search')"
+                            :label="__('roles/main.search')"
                             type="text"
-                            :placeholder="__('Search role...')"
+                            :placeholder="__('roles/main.search_role')"
                         />
                     </div>
 
@@ -45,9 +44,9 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('roles/main.name') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('roles/main.permissions') }}</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('roles/main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -65,7 +64,7 @@
                                                         {{ $permissionName }}
                                                     </span>
                                                 @empty
-                                                    {{ __("No permissions") }}
+                                                    {{ __("roles/main.no_permissions") }}
                                                 @endforelse
                                             </div>
                                         </td>
@@ -75,21 +74,21 @@
                                                 wire:navigate
                                                 :glow="true"
                                                 palette="purple"
-                                            >{{ __("Edit") }}</x-cinema-button>
+                                            >{{ __("roles/main.edit_button") }}</x-cinema-button>
                                             @endcan
 
                                             @can('delete', $role)
                                             <x-cinema-button wire:click="confirmDelete({{ $role->id }})"
                                                 :glow="true"
                                                 palette="red"
-                                            >{{ __("Delete") }}</x-cinema-button>
+                                            >{{ __("roles/main.delete_button") }}</x-cinema-button>
                                             @endcan
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                                            {{ __("No roles found") }}.
+                                            {{ __("roles/main.no_roles_found") }}.
                                         </td>
                                     </tr>
                                 @endforelse
@@ -100,17 +99,17 @@
                     <div x-data="{ open: @entangle('confirmingDelete') }" x-show="open" x-cloak
                         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 w-full max-w-md mx-auto">
-                            <h2 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">Confirm Deletion</h2>
+                            <h2 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">{{ __("roles/main.confirm_deletion") }}</h2>
                             <p class="mb-6 text-gray-700 dark:text-gray-300">
-                                Are you sure you want to delete role '{{ $roleToDelete?->name }}'? This action cannot be undone.
+                               {{ __("roles/main.are_you_sure_main", ['name' => $roleToDelete?->name])}}
                             </p>
 
                             <div class="flex justify-end space-x-4">
                                 <x-cinema-button @click="open = false" palette="gray" :glow="true">
-                                {{ __("Cancel") }}
+                                {{ __("roles/main.cancel_button") }}
                                 </x-cinema-button>
                                 <x-cinema-button wire:click="deleteRole" palette="red" :glow="true">
-                                    {{ __("Delete") }}
+                                    {{ __("roles/main.delete_button") }}
                                 </x-cinema-button>
                             </div>
                         </div>

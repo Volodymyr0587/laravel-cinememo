@@ -40,7 +40,7 @@ class Edit extends Component
 
         $this->role->syncPermissions($this->permissions);
 
-        session()->flash('message', 'Role updated successfully.');
+        session()->flash('message', __("roles/main.update_role_message", ['name' => $this->role->name]));
 
         return redirect()->route('admin.roles.index');
     }
@@ -58,7 +58,7 @@ class Edit extends Component
 
         $this->role->delete();
 
-        session()->flash('message', 'Role deleted successfully.');
+        session()->flash('message', __("roles/main.delete_role_message", ['name' => $this->role->name]));
 
         return redirect()->route('admin.roles.index');
     }

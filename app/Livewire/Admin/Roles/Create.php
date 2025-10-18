@@ -27,7 +27,8 @@ class Create extends Component
         $role = Role::create(['name' => $this->name]);
         $role->syncPermissions($this->permissions);
 
-        session()->flash('message', "Role {$role->name} created successfully.");
+        session()->flash('message', __("roles/main.create_role_message", ['name' => $role->name]));
+
         return redirect()->route('admin.roles.index');
     }
 

@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-            {{ __('Edit Role') }}: {{ $role->name }}
+            {{ __('roles/edit.edit_role') }}: {{ $role->name }}
         </h2>
     </div>
 
@@ -13,7 +13,7 @@
                         <div class="mb-4">
                             <flux:input
                                 wire:model="name"
-                                :label="__('Name')"
+                                :label="__('roles/edit.name')"
                                 type="text"
                                 autofocus
                                 autocomplete="name"
@@ -33,10 +33,10 @@
 
                         <div class="flex items-center justify-between">
                             <x-cinema-button type="submit" :glow="true" palette="gold" >
-                                {{ __('Update Role') }}
+                                {{ __("roles/edit.update_button") }}
                             </x-cinema-button>
                             <x-cinema-button :href="route('admin.roles.index')" :glow="true" palette="gray" wire:navigate>
-                                {{ __("Cancel") }}
+                                {{ __("roles/edit.cancel_button") }}
                             </x-cinema-button>
                         </div>
                     </form>

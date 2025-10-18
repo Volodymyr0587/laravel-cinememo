@@ -61,10 +61,11 @@ class Index extends Component
 
             $this->roleToDelete->delete();
 
+            $roleName = $this->roleToDelete->name;
             $this->confirmingDelete = false;
             $this->roleToDelete = null;
 
-            session()->flash('message', 'Role deleted successfully.');
+            session()->flash('message', __("roles/main.delete_role_message", ['name' => $roleName]));
         }
     }
 
