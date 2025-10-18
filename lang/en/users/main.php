@@ -18,6 +18,7 @@ return [
     "details_button" => "Details",
     "edit_button" => "Edit",
     "delete_button" => "Delete",
+    "are_you_sure" => "Are you sure you want to delete user :name? This action cannot be undone.",
     "no_users_found" => "No users found",
     "add_first_user" => "Add first user",
 ];

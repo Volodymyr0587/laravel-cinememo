@@ -106,7 +106,7 @@
 
                                             @can('delete', $user)
                                                 <x-cinema-button wire:click="delete({{ $user->id }})"
-                                                    wire:confirm="Are you sure you want to delete this user? This action cannot be undone."
+                                                    wire:confirm="{{ __('users/main.are_you_sure', ['name' => $user->name]) }}"
                                                     :glow="true"
                                                     palette="red"
                                                 >

@@ -81,7 +81,7 @@
                     <div class="mt-4">
                         @can('delete_users')
                         <x-cinema-button wire:click="delete({{ $user->id }})"
-                            wire:confirm="{{ __('users/edit.are_you_sure') }}"
+                            wire:confirm="{{ __('users/edit.are_you_sure', ['name' => $user->name]) }}"
                             :glow="true"
                             palette="red"
                         >
