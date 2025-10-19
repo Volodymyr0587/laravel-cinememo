@@ -31,7 +31,7 @@ class Index extends Component
 
         $profession->delete();
 
-        session()->flash('message', "Profession '{$profession->name}' deleted successfully.");
+        session()->flash('message', __("professions/main.delete_profession_message", ['name' => $profession->name]));
 
         return redirect()->route('admin.professions.index');
     }

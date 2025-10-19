@@ -41,7 +41,7 @@ class Edit extends Component
 
         $this->profession->update($validated);
 
-        session()->flash('message', "Profession {$this->profession->name} updated successfully");
+        session()->flash('message', __("professions/main.update_profession_message", ['name' => $this->profession->name]));
 
         return redirect()->route('admin.professions.index');
     }
@@ -54,7 +54,7 @@ class Edit extends Component
 
         $profession->delete();
 
-        session()->flash('message', "Profession '{$profession->name}' deleted successfully.");
+        session()->flash('message', __("professions/main.delete_profession_message", ['name' => $profession->name]));
 
         return redirect()->route('admin.professions.index');
     }

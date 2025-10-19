@@ -2,13 +2,13 @@
 
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-            {{ __('Professions') }}
+            {{ __('professions/main.professions') }}
             @if($search)
                 <flux:button
                     wire:click="clearFilters"
                     class="ml-2 hover:cursor-pointer"
                 >
-                    {{ __('Clear filters') }}
+                    {{ __('professions/main.clear_filters') }}
                 </flux:button>
             @endif
         </h2>
@@ -19,7 +19,7 @@
                 :glow="true"
                 palette="gold"
             >
-                {{ __('Add new profession') }}
+                {{ __('professions/main.add_new_profession') }}
             </x-cinema-button>
         </div>
     </div>
@@ -37,9 +37,9 @@
                         <div>
                             <flux:input
                                 wire:model.live="search"
-                                :label="__('Search')"
+                                :label="__('professions/main.search')"
                                 type="text"
-                                :placeholder="__('Search profession...')"
+                                :placeholder="__('professions/main.search_placeholder')"
                             />
                         </div>
                     </div>
@@ -50,10 +50,10 @@
                             <thead class="bg-gray-50 dark:bg-zinc-800">
                                 <tr>
                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Updated at</th>
-                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('professions/main.name') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('professions/main.description') }}</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('professions/main.updated_at') }}</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('professions/main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-zinc-900 divide-y divide-gray-200 dark:divide-zinc-700">
@@ -71,7 +71,7 @@
                                                 :glow="true"
                                                 palette="green"
                                             >
-                                            {{ __("Details") }}
+                                            {{ __("professions/main.details_button") }}
                                         </x-cinema-button>
 
                                         <x-cinema-button href="{{ route('admin.professions.edit', $profession) }}"
@@ -80,15 +80,15 @@
                                             :glow="true"
                                             palette="purple"
                                         >
-                                            {{ __("Edit") }}
+                                            {{ __("professions/main.edit_button") }}
                                         </x-cinema-button>
 
                                         <x-cinema-button wire:click="delete({{ $profession->id }})"
-                                            wire:confirm="Are you sure you want to delete this profession? This action cannot be undone."
+                                            wire:confirm="{{ __('professions/main.are_you_sure', ['name' => $profession->name]) }}"
                                             :glow="true"
                                             palette="red"
                                         >
-                                            {{ __("Delete") }}
+                                            {{ __("professions/main.delete_button") }}
                                         </x-cinema-button>
 
                                         </td>
@@ -96,8 +96,8 @@
                                 @empty
                                     <tr>
                                         <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-300">
-                                            No professions found.
-                                            <flux:link :href="route('admin.professions.create')" wire:navigate class="ml-2">{{ __('Add First Profession') }}</flux:link>
+                                            {{ __("professions/main.no_professions_found") }}
+                                            <flux:link :href="route('admin.professions.create')" wire:navigate class="ml-2">{{ __('professions/main.add_first_profession') }}</flux:link>
                                         </td>
                                     </tr>
                                 @endforelse

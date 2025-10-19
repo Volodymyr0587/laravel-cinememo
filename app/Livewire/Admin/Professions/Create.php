@@ -30,8 +30,9 @@ class Create extends Component
 
         $profession = Profession::create($validated);
 
-        return redirect()->route('admin.professions.index')
-                        ->with('success',"Genre {$profession->name} created successfully");
+        session()->flash('message', __("professions/main.create_profession_message", ['name' => $profession->name]));
+
+        return redirect()->route('admin.professions.index');
     }
 
     public function render()

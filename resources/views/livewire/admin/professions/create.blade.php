@@ -1,7 +1,7 @@
 <div>
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-            {{ __('Add new profession') }}
+            {{ __("professions/create.add_new_profession") }}
         </h2>
     </div>
 
@@ -13,7 +13,7 @@
                         <div class="mb-4">
                             <flux:input
                                 wire:model="name"
-                                :label="__('Name')"
+                                :label="__('professions/create.name')"
                                 type="text"
                                 autofocus
                                 autocomplete="name"
@@ -21,17 +21,17 @@
                             />
 
                             <div class="mt-4">
-                                <flux:textarea wire:model="description" :label="__('Description')" id="description" rows="4"></flux:textarea>
+                                <flux:textarea wire:model="description" :label="__('professions/create.description')" id="description" rows="4"></flux:textarea>
                             </div>
 
                         </div>
 
                         <div class="flex items-center justify-between">
                             <x-cinema-button type="submit" :glow="true" palette="gold">
-                                {{ __('Create Profession') }}
+                                {{ __('professions/create.create_button') }}
                             </x-cinema-button>
                             <x-cinema-button :href="route('admin.professions.index')" :glow="true" palette="gray" wire:navigate>
-                                {{ __('Cancel') }}
+                                {{ __('professions/create.cancel_button') }}
                             </x-cinema-button>
                         </div>
                     </form>
