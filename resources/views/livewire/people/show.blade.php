@@ -1,6 +1,6 @@
 <div class="py-12">
-    <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-        <div class="overflow-hidden bg-white dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
             <div class="p-6">
 
                 {{-- Back Button --}}
@@ -78,18 +78,18 @@
                 @endphp
 
                 @if($person->main_image_url)
-                    <div class="w-full max-h-96 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded mb-6 p-2">
+                    <div class="w-full max-h-96 flex items-center justify-center shadow-lg rounded mb-6 p-2">
                         <img src="{{ $person->main_image_url }}" alt="{{ $person->name }}"
                             class="object-contain max-h-96 max-w-full">
                     </div>
                 @else
                     @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
-                        <div class="w-full max-h-96 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded mb-6 p-2">
+                        <div class="w-full max-h-96 flex items-center justify-center shadow-lg rounded mb-6 p-2">
                             <img src="{{ asset('images/default-person.png') }}" alt="{{ $person->name }}"
                                 class="object-contain max-h-96 max-w-full">
                         </div>
                     @else
-                        <div class="w-full h-64 bg-gray-200 dark:bg-zinc-600 flex items-center justify-center rounded mb-6">
+                        <div class="w-full h-64 glass-card flex items-center justify-center rounded mb-6">
                             <span class="text-gray-500 dark:text-gray-300">{{ __("people/show.no_image") }}</span>
                         </div>
                     @endif

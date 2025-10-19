@@ -13,7 +13,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
 
 @if ($paginator->hasPages())
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="mt-6">
-        <ul class="flex flex-wrap justify-center gap-1 text-sm font-medium bg-white dark:bg-zinc-800 p-3 rounded-xl shadow text-black dark:text-white">
+        <ul class="flex flex-wrap justify-center gap-1 text-sm font-medium p-3 rounded-xl shadow text-black dark:text-white">
 
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
@@ -46,7 +46,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                         <span wire:key="paginator-{{ $paginator->getPageName() }}-page{{ $page }}">
                             @if ($page == $paginator->currentPage())
                                 <li>
-                                    <span class="px-3 py-1 rounded border border-blue-500 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300">
+                                    <span class="px-3 py-1 rounded border glow-effect border-blue-500 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300">
                                         {{ $page }}
                                     </span>
                                 </li>

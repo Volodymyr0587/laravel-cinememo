@@ -245,7 +245,17 @@ select:focus[data-flux-control] {
         bg-fixed bg-no-repeat bg-cover;
     }
 
+    /* .glass-card {
+        @apply dark:text-white rounded-lg shadow-md overflow-hidden backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10;
+    } */
 
+    .glass-card {
+        @apply relative overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 rounded-lg shadow-lg transition duration-300 hover:bg-white/20;
+    }
+    .glass-card::before {
+        @apply absolute inset-0 bg-gradient-to-br from-white/15 to-transparent pointer-events-none;
+        content: "";
+    }
 
 }
 

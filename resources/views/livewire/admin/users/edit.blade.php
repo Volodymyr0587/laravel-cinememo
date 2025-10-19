@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg">
                 <div class="p-6">
                     <form wire:submit="save">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -70,7 +70,7 @@
         <!-- Danger Zone -->
         @can('delete', $user)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
-            <div class="overflow-hidden border border-red-500 dark:border-red-400 bg-white dark:bg-zinc-800 shadow-lg sm:rounded-lg">
+            <div class="overflow-hidden border border-red-500 dark:border-red-400 shadow-lg sm:rounded-lg">
                 <div class="p-6">
                     <h3 class="text-lg font-semibold text-red-600 dark:text-red-400">
                         {{ __('users/edit.danger_zone') }}

@@ -27,7 +27,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+            <div class="overflow-hidden shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
                 <div class="p-6">
 
                     <x-flash-message />
@@ -47,7 +47,7 @@
                     <!-- Genres Table -->
                     <div class="overflow-x-auto rounded-lg shadow-md">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700">
-                            <thead class="bg-gray-50 dark:bg-zinc-800">
+                            <thead class="">
                                 <tr>
                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
                                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('genres/main.name') }}</th>
@@ -56,7 +56,7 @@
                                     <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('genres/main.actions') }}</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white dark:bg-zinc-900 divide-y divide-gray-200 dark:divide-zinc-700">
+                            <tbody class="divide-y divide-gray-200 dark:divide-zinc-700">
                                 @forelse($allGenres as $genre)
                                     <tr>
                                         <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $genre->id }}</td>

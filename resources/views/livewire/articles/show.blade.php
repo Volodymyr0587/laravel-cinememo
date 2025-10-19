@@ -1,6 +1,6 @@
 <div class="py-12">
-    <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-        <div class="overflow-hidden bg-white dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="overflow-hidden sm:rounded-lg">
             <div class="p-6">
 
                 {{-- Back Button --}}
@@ -98,8 +98,8 @@
                         <img src="{{ asset('images/default-article.png') }}" alt="{{ $article->title }}"
                             class="w-full object-cover rounded-xl">
                     @else
-                        <div class="w-full h-48 bg-gray-200 dark:bg-zinc-400 flex items-center justify-center">
-                            <span class="text-gray-500 dark:text-gray-700">{{ __("articles/show.no_image") }}</span>
+                        <div class="w-full h-48 glass-card flex items-center justify-center">
+                            <span class="text-gray-500 dark:text-gray-300">{{ __("articles/show.no_image") }}</span>
                         </div>
                     @endif
                 @endif

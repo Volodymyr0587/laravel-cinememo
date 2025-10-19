@@ -1,6 +1,6 @@
 <div class="py-12">
     <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-        <div class="overflow-hidden bg-white dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-2xl">
+        <div class="overflow-hidden shadow-lg dark:shadow-zinc-500/50 sm:rounded-2xl">
             <div class="p-6 sm:p-8 space-y-6">
 
                 {{-- Back Button --}}
@@ -64,16 +64,16 @@
 
                 {{-- Meta Stats --}}
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("users/show.total_in_the_collection") }}</p>
+                    <div class="p-4 rounded-lg glass-card text-center">
+                        <p class="font-semibold text-gray-500 dark:text-gray-300">{{ __("users/show.total_in_the_collection") }}</p>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->contentItems->count() }}</p>
                     </div>
-                    <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("users/show.total_cast_and_crew") }}</p>
+                    <div class="p-4 rounded-lg glass-card text-center">
+                        <p class="font-semibold text-gray-500 dark:text-gray-300">{{ __("users/show.total_cast_and_crew") }}</p>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->people->count() }}</p>
                     </div>
-                    <div class="p-4 rounded-lg bg-gray-50 dark:bg-zinc-700 text-center">
-                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ __("users/show.total_categories") }}</p>
+                    <div class="p-4 rounded-lg glass-card text-center">
+                        <p class="font-semibold text-gray-500 dark:text-gray-300">{{ __("users/show.total_categories") }}</p>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">{{ $user->contentTypes->count() }}</p>
                     </div>
                 </div>

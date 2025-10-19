@@ -27,7 +27,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg">
                 <div class="p-6">
 
                     <x-flash-message />
@@ -55,7 +55,7 @@
                     <!-- People Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @forelse($people as $person)
-                            <div class="bg-white dark:bg-zinc-800 dark:text-white rounded-lg shadow-md overflow-hidden">
+                            <div class="glass-card">
                                 <a href="{{ route('people.show', $person) }}"  wire:navigate>
                                     @php
                                         $defaultImagePath = public_path('images/default-person.png');
@@ -145,7 +145,7 @@
                                         </p>
                                     @endif
 
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center mt-4">
                                         <x-cinema-button href="{{ route('people.edit', $person) }}"
                                             wire:navigate
                                             palette="purple"

@@ -22,7 +22,7 @@
     };
 
     $paletteClasses = match($palette) {
-        'gold' => 'bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black dark:text-white',
+        'gold' => 'bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-white',
         'red' => 'bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white',
         'silver' => 'bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 text-black dark:text-white',
         'neon' => 'bg-gradient-to-r from-pink-500 via-fuchsia-600 to-purple-700 text-white',

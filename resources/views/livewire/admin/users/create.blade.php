@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden dark:bg-zinc-800 shadow-lg dark:shadow-zinc-500/50 sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg">
                 <div class="p-6">
                     <form wire:submit="save">
                         <div class="grid grid-cols-1 gap-6">
