@@ -14,19 +14,22 @@
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
-            <flux:button
-                :href="route('content-items.export')" class="order-2 sm:order-none"
-                icon:trailing="arrow-down-tray"
-            >
-                {{ __('content_items/main.export_to_xlsx') }}
-            </flux:button>
-            <flux:button
-                :href="route('content-items.export-pdf')" class="order-3 sm:order-none"
-                icon:trailing="arrow-down-tray"
+            <x-cinema-button href="{{ route('content-items.export') }}"
+                class="order-1 sm:order-none"
+                palette="white"
                 target="_blank"
             >
-               {{ __('content_items/main.export_to_pdf') }}
-            </flux:button>
+                {{ __('content_items/main.export_to_xlsx') }}
+                <x-svg.document-arrow-down class="ml-2" size="6" />
+            </x-cinema-button>
+            <x-cinema-button href="{{ route('content-items.export-pdf') }}"
+                class="order-1 sm:order-none"
+                palette="white"
+                target="_blank"
+            >
+                {{ __('content_items/main.export_to_pdf') }}
+                <x-svg.document-arrow-down class="ml-2" size="6" />
+            </x-cinema-button>
             <x-cinema-button href="{{ route('content-items.create') }}"
                 class="order-1 sm:order-none"
                 wire:navigate
