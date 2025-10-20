@@ -26,8 +26,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden sm:rounded-lg shadow-lg">
-                <div class="p-6">
+            <div class="overflow-hidden sm:rounded-lg">
 
                     <x-flash-message />
 
@@ -93,7 +92,7 @@
                     <div class="mt-4">
                         {{ $contentTypes->links('pagination.custom-tailwind') }}
                     </div>
-                </div>
+
             </div>
         </div>
     </div>

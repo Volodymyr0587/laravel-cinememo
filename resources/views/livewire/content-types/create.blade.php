@@ -1,5 +1,5 @@
 <div>
-    <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="mt-2 flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
             {{ __('content_types/create.create_category') }}
         </h2>
@@ -7,43 +7,41 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden sm:rounded-lg shadow-lg">
-                <div class="p-6">
-                    <form wire:submit="save">
-                        <div class="mb-4">
-                            <flux:input
-                                wire:model="name"
-                                :label="__('content_types/create.name')"
-                                type="text"
-                                autofocus
-                                autocomplete="name"
-                                placeholder="movie"
-                            />
+            <div class="sm:rounded-lg">
+                <form wire:submit="save">
+                    <div class="mb-4">
+                        <flux:input
+                            wire:model="name"
+                            :label="__('content_types/create.name')"
+                            type="text"
+                            autofocus
+                            autocomplete="name"
+                            placeholder="movie"
+                        />
 
-                            <div class="mt-4">
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    {{ __('content_types/create.color') }}
-                                </label>
-                                <input
-                                    type="color"
-                                    wire:model="color"
-                                    class="w-16 h-10 rounded border border-gray-300 dark:border-zinc-600 shadow-sm cursor-pointer
-                                        bg-white dark:bg-zinc-700"
-                                >
-                            </div>
-
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                {{ __('content_types/create.color') }}
+                            </label>
+                            <input
+                                type="color"
+                                wire:model="color"
+                                class="w-16 h-10 rounded border border-gray-300 dark:border-zinc-600 shadow-sm cursor-pointer
+                                    bg-white dark:bg-zinc-700"
+                            >
                         </div>
 
-                        <div class="flex items-center justify-between">
-                            <x-cinema-button type="submit" :glow="true" palette="gold">
-                                {{ __('content_types/create.create_category') }}
-                            </x-cinema-button>
-                            <x-cinema-button :href="route('content-types.index')" :glow="true" palette="gray" wire:navigate>
-                                {{ __('content_types/create.cancel') }}
-                            </x-cinema-button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <x-cinema-button type="submit" :glow="true" palette="gold">
+                            {{ __('content_types/create.create_category') }}
+                        </x-cinema-button>
+                        <x-cinema-button :href="route('content-types.index')" :glow="true" palette="gray" wire:navigate>
+                            {{ __('content_types/create.cancel') }}
+                        </x-cinema-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
