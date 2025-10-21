@@ -28,7 +28,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden sm:rounded-lg">
+            <div>
                 <!-- Filters -->
                 <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
