@@ -45,7 +45,7 @@
             <!-- Users Table -->
             <div>
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700">
-                    <thead class="">
+                    <thead>
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __('users/main.name') }}</th>

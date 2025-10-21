@@ -1,9 +1,8 @@
-<div class="py-12">
+<div>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="overflow-hidden sm:rounded-lg shadow-lg">
-            <div class="p-6">
+        <div class="space-y-6">
                 {{-- Back Button --}}
-                <div class="mb-4">
+                <div class="mb-12">
                     <flux:link href="{{ route('admin.genres.index') }}" wire:navigate>
                         ← {{ __('genres/show.back_to_all_genres') }}
                     </flux:link>
@@ -42,7 +41,7 @@
                     </x-cinema-button>
                 </div>
                 @endcan
-            </div>
+
         </div>
     </div>
 </div>
