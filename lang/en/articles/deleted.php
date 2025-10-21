@@ -11,4 +11,6 @@ return [
     "delete_permanently" => "Delete permanently",
     "are_you_sure_delete" => "Are you sure you want to permanently delete this article? This action is irreversible.",
     "trash_empty" => "Trash is empty.",
+    "article_restored_message" => "Article :title restored successfully.",
+    "article_deleted_permanently_message" => "Article :title has been permanently deleted",
 ];

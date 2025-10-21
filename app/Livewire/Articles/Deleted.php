@@ -20,7 +20,8 @@ class Deleted extends Component
 
         $article->restore();
 
-        session()->flash('message', 'Article restored successfully.');
+        session()->flash('message', __('articles/deleted.article_restored_message', ['title' => $article->title]));
+
 
         $this->dispatch('$refresh');
     }
@@ -35,7 +36,7 @@ class Deleted extends Component
 
         $article->forceDelete();
 
-        session()->flash('message', 'Article permanently deleted.');
+        session()->flash('message', __('articles/deleted.article_deleted_permanently_message', ['title' => $article->title]));
 
         $this->dispatch('$refresh');
     }
