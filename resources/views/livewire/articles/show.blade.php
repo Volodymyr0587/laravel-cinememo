@@ -1,18 +1,16 @@
-<div>
+<div class="pb-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="overflow-hidden sm:rounded-lg">
-            <div class="">
 
-                {{-- Back Button --}}
-                <div class="mt-1 mb-4">
-                    <flux:link href="{{ route('articles.index') }}" wire:navigate>
-                        ← {{ __('articles/show.back_to_all') }}
-                    </flux:link>
-                </div>
+            {{-- Back Button --}}
+            <div class="mb-4">
+                <flux:link href="{{ route('articles.index') }}" wire:navigate>
+                    ← {{ __('articles/show.back_to_all') }}
+                </flux:link>
+            </div>
 
                 <!-- Blog Article -->
-            <div class="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
-                <div class="max-w-2xl">
+            <div class="">
+                <div class="">
                     <!-- Avatar Media -->
                     <div class="flex justify-between items-center mb-6">
                         <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
@@ -85,7 +83,7 @@
                             <p class="text-lg text-gray-800 dark:text-neutral-200">{{ $article->introduction }}</p>
                         </div>
 
-                        <figure>
+                        <div class="w-full max-h-96 flex items-center justify-center rounded mb-6 p-2">
                             @php
                                 $defaultImagePath = public_path('images/default-article.png');
                             @endphp
@@ -103,10 +101,11 @@
                                     </div>
                                 @endif
                             @endif
-                            <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-                                {{ $article->title }}
-                            </figcaption>
-                        </figure>
+
+                        </div>
+                        <div class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
+                            {{ $article->title }}
+                        </div>
 
                         <p class="text-lg text-gray-800 dark:text-neutral-200">{{ $article->main }}</p>
 
@@ -208,9 +207,9 @@
             </div>
             <!-- End Blog Article -->
 
-            <!-- Sticky Share Group -->
-            <div class="sticky bottom-6 inset-x-0 text-center">
-                <div class="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
+            <!-- Like button -->
+            <div class="mt-4 bottom-6 inset-x-0 text-center">
+                <div class="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-400 dark:text-black">
                     <div class="flex items-center gap-x-1.5">
                         <!-- Like Button -->
                         <div class="hs-tooltip inline-block">
@@ -223,14 +222,10 @@
                     </div>
                 </div>
             </div>
-            <!-- End Sticky Share Group -->
-
+            <!-- End Like button -->
             @if ($article->is_published)
                 <livewire:comments.comments-section :commentable="$article" />
             @endif
-
-            </div>
-        </div>
     </div>
 </div>
 
