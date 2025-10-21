@@ -8,7 +8,7 @@
         <div class="flex items-center gap-x-2">
             <flux:icon.heart
                 variant="{{ $isLiked ? 'solid' : 'outline' }}"
-                class="w-5 h-5 {{ $isLiked ? 'text-red-500 font-bold' : 'text-gray-500' }}"
+                class="w-5 h-5 {{ $isLiked ? 'text-red-500 font-bold' : 'text-gray-500 dark:text-gray-700' }}"
             />
 
             <span>{{ $likesCount }}</span>
