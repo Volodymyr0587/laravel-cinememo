@@ -13,9 +13,9 @@
                     {{ $count }}
                 </span>
 
-        <flux:button class="mt-2 hover:cursor-pointer" wire:click="postComment" variant="primary" type="submit">
+        <x-cinema-button class="mt-2" wire:click="postComment" palette="black">
             {{__('content_items/show.add_comment') }}
-        </flux:button>
+        </x-cinema-button>
         </div>
     </div>
     @foreach($comments as $comment)
