@@ -78,7 +78,7 @@ class Index extends Component
             $query->where('name', 'like', "%{$this->search}%");
         }
 
-        $roles = $query->latest()->paginate(10)->withQueryString();
+        $roles = $query->latest()->paginate(3)->withQueryString();
 
         return view('livewire.admin.roles.index', compact('roles'));
     }
