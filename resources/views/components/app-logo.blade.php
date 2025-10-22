@@ -7,6 +7,6 @@
     </div>
 </div> --}}
 
-<div class="flex items-center mr-1 sm:text-xl font-extrabold tracking-tight text-neon-red">
+<div class="flex items-center mr-1 sm:text-xl font-logo tracking-tight text-neon-red">
     <span>🎥</span> {{ config('app.name', 'CineMemo') }}
 </div>

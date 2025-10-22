@@ -58,7 +58,7 @@
 
     <!-- Hero -->
     <section class="text-center py-20 px-6">
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-neon-red">
+        <h1 class="text-5xl md:text-7xl font-logo tracking-tight mb-4 text-neon-red">
             🎥 {{ config('app.name', 'CineMemo') }}
         </h1>
         <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">

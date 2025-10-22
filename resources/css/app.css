@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik+Marker+Hatch&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import "tailwindcss";
 @import "../../vendor/livewire/flux/dist/flux.css";
 
@@ -9,6 +11,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+    --font-logo: "Rubik Marker Hatch", sans-serif;
     --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
@@ -146,16 +149,13 @@ select:focus[data-flux-control] {
     .cinema-level-banner {
         @apply mb-6 p-4 rounded-xl text-center font-extrabold uppercase tracking-widest
                 bg-gradient-to-r from-black via-zinc-900 to-black text-red-500 relative;
-        box-shadow:
-                0 0 25px rgba(239, 68, 68, 0.7),
-                0 0 50px rgba(239, 68, 68, 0.5),
-                0 0 100px rgba(239, 68, 68, 0.5);
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.7),
+            0 0 50px rgba(239, 68, 68, 0.5), 0 0 100px rgba(239, 68, 68, 0.5);
     }
 
     .cinema-level-text {
         animation: neon-flicker 2.5s infinite;
     }
-
 
     .floating-animation {
         animation: float 6s ease-in-out infinite;
@@ -257,6 +257,9 @@ select:focus[data-flux-control] {
         content: "";
     }
 
+    .font-logo {
+        font-family: var(--font-logo);
+    }
 }
 
 /* \[:where(&)\]:size-4 {
