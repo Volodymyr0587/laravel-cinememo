@@ -57,6 +57,16 @@
             'black'  => 'shadow-[0_0_20px_rgba(0,0,0,0.7)] dark:shadow-[0_0_25px_rgba(0,0,0,1)]',
             'green'  => 'shadow-[0_0_20px_rgba(34,197,94,0.7)] dark:shadow-[0_0_25px_rgba(34,197,94,1)]',
             'orange' => 'shadow-[0_0_20px_rgba(249,115,22,0.7)] dark:shadow-[0_0_25px_rgba(249,115,22,1)]',
+            'cyan' => 'shadow-[0_0_20px_rgba(34,211,238,0.7)] dark:shadow-[0_0_25px_rgba(34,211,238,1)]',
+            'teal' => 'shadow-[0_0_20px_rgba(20,184,166,0.7)] dark:shadow-[0_0_25px_rgba(20,184,166,1)]',
+            'indigo' => 'shadow-[0_0_20px_rgba(79,70,229,0.7)] dark:shadow-[0_0_25px_rgba(79,70,229,1)]',
+            'rose' => 'shadow-[0_0_20px_rgba(244,63,94,0.7)] dark:shadow-[0_0_25px_rgba(244,63,94,1)]',
+            'crimson' => 'shadow-[0_0_20px_rgba(190,24,93,0.7)] dark:shadow-[0_0_25px_rgba(190,24,93,1)]',
+            'aqua' => 'shadow-[0_0_20px_rgba(56,189,248,0.7)] dark:shadow-[0_0_25px_rgba(56,189,248,1)]',
+            'lime' => 'shadow-[0_0_20px_rgba(132,204,22,0.7)] dark:shadow-[0_0_25px_rgba(132,204,22,1)]',
+            'bronze' => 'shadow-[0_0_20px_rgba(234,179,8,0.7)] dark:shadow-[0_0_25px_rgba(234,179,8,1)]',
+            'magenta' => 'shadow-[0_0_20px_rgba(217,70,239,0.7)] dark:shadow-[0_0_25px_rgba(217,70,239,1)]',
+            'midnight' => 'shadow-[0_0_20px_rgba(30,41,59,0.7)] dark:shadow-[0_0_25px_rgba(30,41,59,1)]',
             default => 'shadow-[0_0_20px_rgba(255,255,255,0.5)] dark:shadow-[0_0_25px_rgba(255,255,255,0.8)]',
         }
     : '';
@@ -78,6 +88,16 @@
         'black'  => 'after:via-gray-700/60 dark:after:via-gray-800/50',
         'green'  => 'after:via-green-200/50 dark:after:via-green-300/40',
         'orange' => 'after:via-orange-200/50 dark:after:via-orange-300/40',
+        'cyan' => 'after:via-cyan-200/50 dark:after:via-cyan-300/40',
+        'teal' => 'after:via-teal-200/50 dark:after:via-teal-300/40',
+        'indigo' => 'after:via-indigo-200/50 dark:after:via-indigo-300/40',
+        'rose' => 'after:via-rose-200/50 dark:after:via-rose-300/40',
+        'crimson' => 'after:via-rose-200/50 dark:after:via-pink-300/40',
+        'aqua' => 'after:via-sky-200/50 dark:after:via-cyan-300/40',
+        'lime' => 'after:via-lime-200/50 dark:after:via-lime-300/40',
+        'bronze' => 'after:via-amber-200/50 dark:after:via-amber-300/40',
+        'magenta' => 'after:via-fuchsia-200/50 dark:after:via-pink-300/40',
+        'midnight' => 'after:via-slate-600/50 dark:after:via-gray-700/40',
         default => 'after:via-white/40 dark:after:via-white/30',
     };
 
