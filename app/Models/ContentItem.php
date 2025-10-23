@@ -184,6 +184,7 @@ class ContentItem extends Model
 
         static::forceDeleted(function ($contentItem) {
             $contentItem->comments()->delete();
+            $contentItem->likes()->delete();
         });
     }
 

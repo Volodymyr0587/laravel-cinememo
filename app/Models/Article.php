@@ -97,6 +97,7 @@ class Article extends Model
 
         static::forceDeleted(function ($article) {
             $article->comments()->delete();
+            $article->likes()->delete();
         });
     }
 
