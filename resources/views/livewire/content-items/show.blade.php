@@ -291,8 +291,8 @@
             {{-- End of Additional images Slider Modal --}}
 
             @if ($contentItem->is_public)
-                <div class="sticky bottom-6 inset-x-0 text-center">
-                    <div class="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
+                <div class="mt-4 bottom-6 inset-x-0 text-center">
+                    <div class="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-600 dark:text-black">
                         <div class="flex items-center gap-x-1.5">
                             <!-- Like Button -->
                             <div class="hs-tooltip inline-block">
