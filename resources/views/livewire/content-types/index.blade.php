@@ -4,13 +4,14 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('content_types/main.categories') }}
             @if($search)
-                <flux:button
+                <x-cinema-button
                     wire:click.prevent="clearFilters"
                     wire:key="index-content-types-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
+                    palette="rose"
                 >
                     {{ __('content_types/main.clear_filters') }}
-                </flux:button>
+                </x-cinema-button>
             @endif
         </h2>
         <x-cinema-button href="{{ route('content-types.create') }}"

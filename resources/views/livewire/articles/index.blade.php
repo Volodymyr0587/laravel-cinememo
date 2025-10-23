@@ -4,13 +4,14 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('articles/main.articles') }}: {{ __('articles/main.manage_articles') }}
             @if($authorFilter || $search)
-                <flux:button
+                <x-cinema-button
                     wire:click.prevent="clearFilters"
-                    class="ml-2 hover:cursor-pointer"
                     wire:key="articles-clear-filters-btn"
+                    class="ml-2 hover:cursor-pointer"
+                    palette="rose"
                 >
                     {{ __('articles/main.clear_filters') }}
-                </flux:button>
+                </x-cinema-button>
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">

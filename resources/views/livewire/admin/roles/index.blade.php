@@ -4,13 +4,14 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('roles/main.roles') }}
             @if($search)
-                <flux:button
+                <x-cinema-button
                     wire:click.prevent="clearFilters"
                     wire:key="index-roles-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
+                    palette="rose"
                 >
                     {{ __('roles/main.clear_filters') }}
-                </flux:button>
+                </x-cinema-button>
             @endif
         </h2>
         <x-cinema-button href="{{ route('admin.roles.create') }}"

@@ -4,13 +4,14 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
             {{ __('content_items/main.content_items') }}
             @if($statusFilter || $contentTypeFilter || $genreFilter || $search)
-                <flux:button
+                <x-cinema-button
                     wire:click.prevent="clearFilters"
                     wire:key="index-clear-filters-btn"
                     class="ml-2 hover:cursor-pointer"
+                    palette="rose"
                 >
                     {{ __('content_items/main.clear_filters') }}
-                </flux:button>
+                </x-cinema-button>
             @endif
         </h2>
         <div class="flex flex-col gap-y-4 sm:flex-row sm:items-center sm:gap-x-8">
