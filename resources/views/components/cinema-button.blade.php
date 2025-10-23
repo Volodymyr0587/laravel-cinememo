@@ -32,6 +32,16 @@
         'black' => 'bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white',
         'green'  => 'bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white',
         'orange' => 'bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white',
+        'cyan' => 'bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 text-white',
+        'teal' => 'bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 text-white',
+        'indigo' => 'bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 text-white',
+        'rose' => 'bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600 text-white',
+        'crimson' => 'bg-gradient-to-r from-red-500 via-rose-600 to-pink-700 text-white',
+        'aqua' => 'bg-gradient-to-r from-sky-400 via-cyan-500 to-blue-600 text-white',
+        'lime' => 'bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 text-black',
+        'bronze' => 'bg-gradient-to-r from-amber-600 via-orange-700 to-yellow-700 text-white',
+        'magenta' => 'bg-gradient-to-r from-fuchsia-500 via-pink-600 to-rose-700 text-white',
+        'midnight' => 'bg-gradient-to-r from-slate-800 via-gray-900 to-black text-white',
         default => 'bg-gradient-to-r from-gray-600 to-gray-800 text-white',
     };
 
