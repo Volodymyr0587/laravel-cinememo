@@ -3,7 +3,13 @@
 return [
     "back_to_public" => "Back to public content",
     "back_to_collection" => "Back to collection",
+    "original_title" => "Original title",
     "release_date" => "Release date",
+    "number_of_seasons" => "Number of seasons",
+    "season_number" => "Season number",
+    "number_of_series_of_season" => "Number of series of the season",
+    "country_of_origin" => "Country of origin",
+    "language" => "Language",
     "no_image" => "No Image",
     "category" => "Category",
     "status" => "Status",

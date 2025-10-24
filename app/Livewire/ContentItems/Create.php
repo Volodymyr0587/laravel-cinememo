@@ -18,12 +18,18 @@ class Create extends Component
     #[Validate('required')]
     public $content_type_id = '';
     public $title = '';
-    public $description = '';
+    public $original_title = null;
+    public $description = null;
     public ?string $video_url = null;
     public ?int $hours = null;
     public ?int $minutes = null;
     public ?int $seconds = null;
-    public $release_date = '';
+    public $release_date = null;
+    public $number_of_seasons = null;
+    public $season_number = null;
+    public $number_of_series_of_season = null;
+    public $country_of_origin = null;
+    public $language = null;
     public $main_image; // Змінюємо назву для ясності
     public $status = 'willwatch';
     public $is_public = false;
@@ -44,15 +50,21 @@ class Create extends Component
         return [
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
+            'original_title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'video_url' => ['nullable', 'string', new YoutubeUrl],
             'hours' => 'nullable|integer|min:0',
             'minutes' => 'nullable|integer|min:0|max:59',
             'seconds' => 'nullable|integer|min:0|max:59',
-            'release_date' => ['nullable', 'date'],
+            'release_date' => 'nullable|date',
+            'number_of_seasons' => 'nullable|integer|min:1|max:100',
+            'season_number' => 'nullable|integer|min:1|max:100',
+            'number_of_series_of_season' => 'nullable|integer|min:1|max:15000',
+            'country_of_origin' => 'nullable|string|max:100',
+            'language' => 'nullable|string|max:60',
             'main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
-            'is_public' => ['boolean'],
+            'is_public' => 'boolean',
             'additional_images.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
@@ -83,11 +95,17 @@ class Create extends Component
         $contentItem = auth()->user()->contentItems()->create([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
+            'original_title' => $this->original_title,
             'description' => $this->description,
             'video_url' => $this->video_url,
             'video_id'  => $videoId,
             'duration_in_seconds' => $durationInSeconds ?: null,
             'release_date' => $this->release_date ? \Carbon\Carbon::parse($this->release_date) : null,
+            'number_of_seasons' => $this->number_of_seasons,
+            'season_number' => $this->season_number,
+            'number_of_series_of_season' => $this->number_of_series_of_season,
+            'country_of_origin' => $this->country_of_origin,
+            'language' => $this->language,
             'status' => $this->status,
             'is_public' => $this->is_public,
             // Тимчасово залишаємо image поле порожнім для нової системи

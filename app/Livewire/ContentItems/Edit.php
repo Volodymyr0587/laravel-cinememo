@@ -21,12 +21,18 @@ class Edit extends Component
     #[Validate('required')]
     public $content_type_id = '';
     public $title = '';
-    public $description = '';
+    public $original_title = null;
+    public $description = null;
     public ?string $video_url = null;
     public ?int $hours = null;
     public ?int $minutes = null;
     public ?int $seconds = null;
-    public $release_date = '';
+    public $release_date = null;
+    public $number_of_seasons = null;
+    public $season_number = null;
+    public $number_of_series_of_season = null;
+    public $country_of_origin = null;
+    public $language = null;
     public $new_main_image; // Нове головне зображення
     public $status = '';
     public $is_public = '';
@@ -43,15 +49,21 @@ class Edit extends Component
         return [
             'content_type_id' => 'required|exists:content_types,id',
             'title' => 'required|string|max:255',
+            'original_title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'video_url' => ['nullable', 'string', new YoutubeUrl],
             'hours' => 'nullable|integer|min:0',
             'minutes' => 'nullable|integer|min:0|max:59',
             'seconds' => 'nullable|integer|min:0|max:59',
-            'release_date' => ['nullable', 'date'],
+            'release_date' => 'nullable|date',
+            'number_of_seasons' => 'nullable|integer|min:1|max:100',
+            'season_number' => 'nullable|integer|min:1|max:100',
+            'number_of_series_of_season' => 'nullable|integer|min:1|max:15000',
+            'country_of_origin' => 'nullable|string|max:100',
+            'language' => 'nullable|string|max:60',
             'new_main_image' => 'nullable|image|max:2048',
             'status' => ['required', Rule::in(ContentStatus::values())],
-            'is_public' => ['boolean'],
+            'is_public' => 'boolean',
             'newAdditionalImages.*' => 'nullable|image|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
@@ -73,12 +85,18 @@ class Edit extends Component
         $this->contentItem = $contentItem;
         $this->content_type_id = $contentItem->content_type_id;
         $this->title = $contentItem->title;
+        $this->original_title = $contentItem->original_title;
         $this->description = $contentItem->description;
         $this->video_url = $contentItem->video_url;
         $this->hours = $contentItem->hours;
         $this->minutes = $contentItem->minutes;
         $this->seconds = $contentItem->seconds;
         $this->release_date = $contentItem->release_date?->format('Y-m-d');
+        $this->number_of_seasons = $contentItem->number_of_seasons;
+        $this->season_number = $contentItem->season_number;
+        $this->number_of_series_of_season = $contentItem->number_of_series_of_season;
+        $this->country_of_origin = $contentItem->country_of_origin;
+        $this->language = $contentItem->language;
         $this->status = $contentItem->status->value;
         $this->is_public = $contentItem->is_public;
         $this->genres = $contentItem->genres()->pluck('genres.id')->toArray();
@@ -161,11 +179,17 @@ class Edit extends Component
         $this->contentItem->update([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
+            'original_title' => $this->original_title,
             'description' => $this->description,
             'video_url' => $this->video_url,
             'video_id'  => $videoId,
             'duration_in_seconds' => $durationInSeconds ?: null,
             'release_date' => $this->release_date ? \Carbon\Carbon::parse($this->release_date) : null,
+            'number_of_seasons' => $this->number_of_seasons,
+            'season_number' => $this->season_number,
+            'number_of_series_of_season' => $this->number_of_series_of_season,
+            'country_of_origin' => $this->country_of_origin,
+            'language' => $this->language,
             'status' => $this->status,
             'is_public' => $this->is_public,
         ]);

@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="sm:rounded-lg">
-                <form wire:submit="save" enctype="multipart/form-data">
+                <form wire:submit="save" enctype="multipart/form-data" novalidate>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <flux:select wire:model="content_type_id" id="content_type_id" :label="__('content_items/create.category') . ' *'">
@@ -36,7 +36,17 @@
                             :label="__('content_items/create.title') . ' *'"
                             type="text"
                             autocomplete="title"
-                            placeholder="The Lord of the Rings: The Fellowship of the Ring"
+                            placeholder="Spirited Away"
+                        />
+                    </div>
+
+                    <div class="mt-4">
+                        <flux:input
+                            wire:model="original_title"
+                            :label="__('content_items/create.original_title')"
+                            type="text"
+                            autocomplete="original_title"
+                            placeholder="千と千尋の神隠し"
                         />
                     </div>
 
@@ -46,6 +56,41 @@
                             :label="__('content_items/create.release_date') . ' **'"
                             type="date"
                             autocomplete="release_date"
+                        />
+                    </div>
+
+                    <flux:label class="mt-4">{{ __('content_items/create.if_series') }}</flux:label>
+                    <div class="flex flex-col lg:flex-row gap-4">
+                        <div class="flex-1 max-w-3xs">
+                            <flux:input wire:model="number_of_seasons" :label="__('content_items/create.number_of_seasons')" type="number" min="1" max="100" />
+                        </div>
+
+                        <div class="flex-1 max-w-3xs">
+                            <flux:input wire:model="season_number" :label="__('content_items/create.season_number')" type="number" min="1" max="100" />
+                        </div>
+
+                        <div class="flex-1 max-w-3xs">
+                            <flux:input wire:model="number_of_series_of_season" :label="__('content_items/create.number_of_series_of_season')" type="number" min="1" max="15000" />
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <flux:input
+                            wire:model="country_of_origin"
+                            :label="__('content_items/create.country_of_origin')"
+                            type="text"
+                            autocomplete="country_of_origin"
+                            placeholder="Japan"
+                        />
+                    </div>
+
+                    <div class="mt-4">
+                        <flux:input
+                            wire:model="language"
+                            :label="__('content_items/create.language')"
+                            type="text"
+                            autocomplete="language"
+                            placeholder="Japanese"
                         />
                     </div>
 

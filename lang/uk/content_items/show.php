@@ -3,7 +3,13 @@
 return [
     "back_to_public" => "Назад до публічного контенту",
     "back_to_collection" => "Назад до колекції",
+    "original_title" => "Оригінальна назва",
     "release_date" => "Дата виходу",
+    "number_of_seasons" => "Кількість сезонів",
+    "season_number" => "Номер сезону",
+    "number_of_series_of_season" => "Кількість серій сезону",
+    "country_of_origin" => "Країна походження",
+    "language" => "Мова",
     "no_image" => "Немає зображення",
     "category" => "Категорія",
     "status" => "Статус",

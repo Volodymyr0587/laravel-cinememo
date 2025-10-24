@@ -25,11 +25,17 @@ class ContentItem extends Model
         'user_id',
         'content_type_id',
         'title',
+        'original_title',
         'description',
         'video_url',
         'video_id',
         'duration_in_seconds',
         'release_date',
+        'number_of_seasons',
+        'season_number',
+        'number_of_series_of_season',
+        'country_of_origin',
+        'language',
         'image',
         'status',
         'slug',
@@ -141,6 +147,11 @@ class ContentItem extends Model
                 ];
             }
         );
+    }
+
+    public function isSerial(): bool
+    {
+        return $this->number_of_seasons || $this->season_number || $this->number_of_series_of_season;
     }
 
 

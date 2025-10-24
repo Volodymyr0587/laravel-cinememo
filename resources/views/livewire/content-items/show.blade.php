@@ -22,9 +22,15 @@
             </div>
 
             {{-- Title --}}
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+            <h2 class="text-4xl font-bold text-gray-800 dark:text-white">
                 {{ $contentItem->title }}
             </h2>
+
+            @if ($contentItem->original_title)
+                <h3 class="text-gray-800 dark:text-white mb-4">
+                    {{ __('content_items/show.original_title') }}: {{ $contentItem->original_title }}
+                </h3>
+            @endif
 
             @if ($contentItem->release_date)
             <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
@@ -32,6 +38,50 @@
                 <span class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
                     {{ $contentItem->release_date->translatedFormat('d F Y') }}
                 </span>
+            </div>
+            @endif
+
+
+            <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                @if ($contentItem->country_of_origin)
+                <div>
+                    <span class="font-medium">{{ __('content_items/show.country_of_origin') }}:</span>
+                    <span class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                        {{ $contentItem->country_of_origin }}
+                    </span>
+                </div>
+                @endif
+                @if ($contentItem->language)
+                 <div>
+                    <span class="font-medium">{{ __('content_items/show.language') }}:</span>
+                    <span class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                        {{ $contentItem->language }}
+                    </span>
+                </div>
+                @endif
+            </div>
+
+
+            @if ($contentItem->isSerial())
+            <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                <div>
+                    <span class="font-medium">{{ __('content_items/show.number_of_seasons') }}:</span>
+                    <span class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                        {{ $contentItem->number_of_seasons ? $contentItem->number_of_seasons : '---' }}
+                    </span>
+                </div>
+                 <div>
+                    <span class="font-medium">{{ __('content_items/show.season_number') }}:</span>
+                    <span class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                        {{ $contentItem->season_number ? $contentItem->season_number : '---' }}
+                    </span>
+                </div>
+                 <div>
+                    <span class="font-medium">{{ __('content_items/show.number_of_series_of_season') }}:</span>
+                    <span class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                        {{ $contentItem->number_of_series_of_season ? $contentItem->number_of_series_of_season : '---' }}
+                    </span>
+                </div>
             </div>
             @endif
 
