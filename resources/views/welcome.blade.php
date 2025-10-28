@@ -196,7 +196,7 @@
     <!-- Feedback -->
     <section class="max-w-6xl mx-auto py-16 px-6">
         <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">{{ __("welcome.feedback.head") }}</h2>
-        <div class="max-w-2xl mx-auto bg-white dark:bg-neutral-900 p-8 rounded-lg shadow">
+        <div class="max-w-2xl mx-auto p-8">
             <livewire:contact-form />
         </div>
     </section>
