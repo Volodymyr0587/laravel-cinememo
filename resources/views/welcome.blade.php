@@ -201,10 +201,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-6 text-center text-gray-500 dark:text-gray-400">
-        © {{ date('Y') }} {{ config('app.name', 'MyApp') }}. {{ __("welcome.rights") }}.
-    </footer>
+    <x-footer />
 
 </body>
 </html>
