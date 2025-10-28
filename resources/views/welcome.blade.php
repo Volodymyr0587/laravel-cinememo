@@ -131,8 +131,8 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="py-20 bg-gray-50 dark:bg-neutral-950">
+    <!-- User reviews section -->
+    <section class="py-20">
         <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                 {{ __("welcome.reviews.head") }}
@@ -142,7 +142,7 @@
             </p>
 
             <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- Testimonial 1 -->
+                <!-- Review 1 -->
                 <div class="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-md">
                     <p class="text-gray-700 dark:text-gray-300">
                         “{{ __("welcome.reviews.first_review.message") }}.”
@@ -156,7 +156,7 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 2 -->
+                <!-- Review 2 -->
                 <div class="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-md">
                     <p class="text-gray-700 dark:text-gray-300">
                         “{{ __("welcome.reviews.second_review.message") }} ❤️”
@@ -170,7 +170,7 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 3 -->
+                <!-- Review 3 -->
                 <div class="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-md">
                     <p class="text-gray-700 dark:text-gray-300">
                         “{{ __("welcome.reviews.third_review.message") }}.”
