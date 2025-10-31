@@ -1,7 +1,7 @@
 <div x-data="{ open: false }" {{ $attributes->merge(['class' => 'relative inline-block text-left']) }}>
     {{-- Кнопка dropdown --}}
     <button @click="open = !open"
-            class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-gray-100 dark:bg-zinc-900
+            class="inline-flex items-center gap-2 px-3 py-2.5 rounded-md bg-gray-100 dark:bg-zinc-900
                    hover:bg-gray-200 hover:cursor-pointer dark:hover:bg-zinc-800 transition focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
         <x-icon name="flag-language-{{ app()->getLocale() }}" class="w-5 h-5" />
