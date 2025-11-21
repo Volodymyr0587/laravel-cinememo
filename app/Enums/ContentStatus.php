@@ -17,10 +17,10 @@ enum ContentStatus: string
     public static function labels(): array
     {
         return [
-            self::Watching->value => 'Watching',
-            self::Watched->value => 'Watched',
-            self::WillWatch->value => 'Will Watch',
-            self::Waiting->value => 'Waiting',
+            self::Watching->value => __('content_items/status-labels.watching'),
+            self::Watched->value =>  __('content_items/status-labels.watched'),
+            self::WillWatch->value =>  __('content_items/status-labels.will_watch'),
+            self::Waiting->value => __('content_items/status-labels.waiting'),
         ];
     }
 }
