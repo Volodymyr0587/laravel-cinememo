@@ -74,7 +74,7 @@ class Article extends Model
             if ($article->isDirty('title')) {
                 $slug = Str::slug($article->title);
 
-                // Робимо slug унікальним
+                // Making the slug unique
                 $originalSlug = $slug;
                 $counter = 1;
                 while (static::where('slug', $slug)

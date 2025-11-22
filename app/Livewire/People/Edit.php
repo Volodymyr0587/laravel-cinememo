@@ -22,7 +22,7 @@ class Edit extends Component
     public $birth_place = '';
     public $death_place = '';
 
-    public $new_main_image; // нове головне фото
+    public $new_main_image;
     public $newAdditionalImages = [];
 
     public $content_items = [];
@@ -69,27 +69,19 @@ class Edit extends Component
     {
         $this->validate();
 
-        // Extra check: death_date must be after birth_date
-        // if ($this->birth_date && $this->death_date) {
-        //     if (strcmp($this->death_date, $this->birth_date) <= 0) {
-        //         $this->addError('death_date', __('validation.custom.partial_date.after_birth'));
-        //         return;
-        //     }
-        // }
-
-        // додаємо нове головне фото
+        // adding a new main image
         if ($this->new_main_image) {
             $path = $this->new_main_image->store('people', 'public');
             $this->person->addMainImage($path);
         }
 
-        // додаємо нові додаткові фото
+        // adding new additional images
         foreach ($this->newAdditionalImages as $file) {
             $path = $file->store('people', 'public');
             $this->person->addAdditionalImage($path);
         }
 
-        // оновлюємо основні поля
+        // updating the main fields
         $this->person->update([
             'name' => $this->name,
             'biography' => $this->biography,
@@ -99,9 +91,9 @@ class Edit extends Component
             'death_place' => $this->death_place,
         ]);
 
-        // оновлюємо пов’язані контент-айтеми
+        // sync related content items
         $this->person->contentItems()->sync($this->content_items);
-
+        // sync related professions
         $this->person->professions()->sync($this->professions);
 
         session()->flash('message', __('people/edit.person_updated_message', ['name' => $this->person->name]));

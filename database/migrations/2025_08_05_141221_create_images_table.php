@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('path');
              // Add polymorphic columns
-            $table->morphs('imageable'); // Це створить imageable_id та imageable_type
+            $table->morphs('imageable'); // This will create an imageable_id and imageable_type
             // Add enum for image type (main or additional)
             $table->enum('type', ['main', 'additional'])->default('additional');
             // Add index for best productivity

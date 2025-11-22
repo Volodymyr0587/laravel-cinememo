@@ -139,7 +139,7 @@ class ContentSeeder extends Seeder
             ]);
 
             foreach ($items as $itemData) {
-                // Створюємо ContentItem без зображень
+                // Creating a ContentItem without images
                 $contentItem = ContentItem::create([
                     'user_id' => $user->id,
                     'content_type_id' => $type->id,
@@ -149,19 +149,19 @@ class ContentSeeder extends Seeder
                     'release_date' => $itemData['release_date'] ?? null
                 ]);
 
-                // Додаємо головне зображення через поліморфну систему
+                // Adding the main image via a polymorphic system
                 if (isset($itemData['main_image'])) {
                     $mainImagePath = $this->copyImageToStorage($itemData['main_image']);
                     $contentItem->addMainImage($mainImagePath);
                 }
 
-                // Додаємо додаткові зображення через поліморфну систему
+                // Adding additional images through a polymorphic system
                 foreach ($itemData['additional_images'] as $imgPath) {
                     $storedPath = $this->copyImageToStorage($imgPath);
                     $contentItem->addAdditionalImage($storedPath);
                 }
 
-                // Прив'язуємо випадкові жанри
+                // Tie random genres
                 $genreIds = \App\Models\Genre::inRandomOrder()->take(rand(1, 3))->pluck('id');
                 $contentItem->genres()->attach($genreIds);
             }

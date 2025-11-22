@@ -57,7 +57,7 @@ trait HasImages
      */
     public function addMainImage(string $path): Image
     {
-        // Видаляємо попереднє головне зображення, якщо є
+        // Delete the previous main image, if any
         $this->removeMainImage();
 
         return $this->images()->create([

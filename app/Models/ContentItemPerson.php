@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContentItemPerson extends Pivot
 {
-     // Явно вказуємо таблицю, якщо її назва не відповідає конвенції
+     // explicitly specify the table if its name does not follow the convention
     protected $table = 'content_item_person';
-
-    // Визначаємо зв'язок з моделлю Profession
     /**
      * Get the profession that owns the ContentItemPerson
      *

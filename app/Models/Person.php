@@ -65,7 +65,7 @@ class Person extends Model
             if ($person->isDirty('name')) {
                 $slug = Str::slug($person->name);
 
-                // Робимо slug унікальним
+                // Making the slug unique
                 $originalSlug = $slug;
                 $counter = 1;
                 while (static::where('slug', $slug)

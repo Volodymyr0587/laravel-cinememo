@@ -71,7 +71,7 @@ class Create extends Component
     {
         $this->validate();
 
-        // Створюємо Person
+        // Create Person
         $person = auth()->user()->people()->create([
             'name' => $this->name,
             'biography' => $this->biography,
@@ -81,24 +81,24 @@ class Create extends Component
             'death_place' => $this->death_place,
         ]);
 
-        // Додаємо головне зображення через нову поліморфну систему
+        // Adding the main image via a polymorphic system
         if ($this->main_image) {
             $mainImagePath = $this->main_image->store('people', 'public');
             $person->addMainImage($mainImagePath);
         }
 
-        // Додаємо додаткові зображення через нову поліморфну систему
+        // Adding additional images through a polymorphic system
         foreach ($this->additional_images as $file) {
             $path = $file->store('people', 'public');
             $person->addAdditionalImage($path);
         }
 
-        // Зберігаємо content items
+        // Save content items
         if (!empty($this->content_items)) {
             $person->contentItems()->sync($this->content_items);
         }
 
-        // Зберігаємо content items
+        // Save professions
         if (!empty($this->professions)) {
             $person->professions()->sync($this->professions);
         }

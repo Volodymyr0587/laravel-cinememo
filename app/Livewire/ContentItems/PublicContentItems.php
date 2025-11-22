@@ -50,7 +50,7 @@ class PublicContentItems extends Component
             $query->where('content_type_id', $this->publicContentTypeFilter);
         }
 
-        // Додаємо likes_count з уникненням конфліктів кешування
+        // Add likes_count to avoid caching conflicts
         $query->withCount(['likes' => function ($query) {
             $query->selectRaw('count(*)');
         }]);

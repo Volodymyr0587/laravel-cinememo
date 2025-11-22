@@ -30,7 +30,7 @@ class Create extends Component
     public $number_of_series_of_season = null;
     public $country_of_origin = null;
     public $language = null;
-    public $main_image; // Змінюємо назву для ясності
+    public $main_image;
     public $status = 'willwatch';
     public $is_public = false;
     public $additional_images = [];
@@ -91,7 +91,7 @@ class Create extends Component
                    + ($this->minutes ?? 0) * 60
                    + ($this->seconds ?? 0);
 
-        // Створюємо ContentItem
+        // Create ContentItem
         $contentItem = auth()->user()->contentItems()->create([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
@@ -108,22 +108,21 @@ class Create extends Component
             'language' => $this->language,
             'status' => $this->status,
             'is_public' => $this->is_public,
-            // Тимчасово залишаємо image поле порожнім для нової системи
         ]);
 
-        // Додаємо головне зображення через нову поліморфну систему
+        // Adding the main image via a polymorphic system
         if ($this->main_image) {
             $mainImagePath = $this->main_image->store('content-images', 'public');
             $contentItem->addMainImage($mainImagePath);
         }
 
-        // Додаємо додаткові зображення через нову поліморфну систему
+        // Adding additional images through a polymorphic system
         foreach ($this->additional_images as $file) {
             $path = $file->store('content-images', 'public');
             $contentItem->addAdditionalImage($path);
         }
 
-        // Зберігаємо жанри
+        // Sync genres
         if (!empty($this->genres)) {
             $contentItem->genres()->sync($this->genres);
         }

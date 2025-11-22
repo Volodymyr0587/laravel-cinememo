@@ -21,7 +21,7 @@ class Edit extends Component
     public $additional_images = [];
     public $tags;
 
-    public $new_main_image; // нове головне фото
+    public $new_main_image;
     public $newAdditionalImages = [];
     public $confirmingMainImageRemoval = false;
     public $confirmingImageRemoval = false;
@@ -41,8 +41,6 @@ class Edit extends Component
         $this->main = $article->main;
         $this->conclusion = $article->conclusion;
         $this->is_published = $article->is_published;
-        // If you have tags relation
-        // $this->tags = $article->tags()->pluck('id')->toArray();
     }
 
     protected function rules(): array
@@ -65,7 +63,7 @@ class Edit extends Component
 
         $this->validate();
 
-        // Оновлюємо дані статті
+        // Updating article data
         $this->article->update([
             'title' => $this->title,
             'introduction' => $this->introduction,
@@ -74,19 +72,19 @@ class Edit extends Component
             'is_published' => $this->is_published,
         ]);
 
-        // Якщо нове головне зображення
+        // If the new main image
         if ($this->new_main_image) {
             $mainImagePath = $this->new_main_image->store('articles', 'public');
-            $this->article->addMainImage($mainImagePath); // другий параметр можна зробити щоб заміняти
+            $this->article->addMainImage($mainImagePath);
         }
 
-        // Додаємо додаткові зображення
+        // Adding additional images
         foreach ($this->newAdditionalImages as $file) {
             $path = $file->store('articles', 'public');
             $this->article->addAdditionalImage($path);
         }
 
-        // Синхронізуємо теги
+        // Synchronizing tags
         $this->article->syncTags($this->tags);
 
         session()->flash('message', __('articles/edit.article_updated_message', ['title' => $this->article->title]));
@@ -126,12 +124,6 @@ class Edit extends Component
     }
     public function render()
     {
-        // $tags = Tag::where('user_id', auth()->id())
-        //     ->orderBy('name')
-        //     ->get();
-
-        return view('livewire.articles.edit', [
-            // 'tags' => $tags,
-        ]);
+        return view('livewire.articles.edit');
     }
 }

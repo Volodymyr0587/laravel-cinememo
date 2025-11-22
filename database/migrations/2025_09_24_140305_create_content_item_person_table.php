@@ -17,9 +17,8 @@ return new class extends Migration
             $table->foreignId('person_id')->constrained()->cascadeOnDelete();
             $table->foreignId('profession_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
-
-            // Додаємо унікальний індекс, щоб уникнути дублікатів
-            // Наприклад, одна й та сама людина не може бути двічі режисером в одному фільмі.
+            // Add a unique index to avoid duplicates
+            // For example, the same person cannot be the director of the same film twice.
             $table->unique(['content_item_id', 'person_id', 'profession_id']);
         });
     }

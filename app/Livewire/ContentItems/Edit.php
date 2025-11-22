@@ -33,7 +33,7 @@ class Edit extends Component
     public $number_of_series_of_season = null;
     public $country_of_origin = null;
     public $language = null;
-    public $new_main_image; // Нове головне зображення
+    public $new_main_image;
     public $status = '';
     public $is_public = '';
 
@@ -122,7 +122,7 @@ class Edit extends Component
         $this->contentItem->removeMainImage();
         $this->confirmingMainImageRemoval = false;
 
-        // Оновлюємо модель для відображення змін
+        // Updating the model to reflect changes
         $this->contentItem->refresh();
 
         session()->flash('message', 'Main image removed successfully.');
@@ -145,7 +145,7 @@ class Edit extends Component
 
         $this->reset(['confirmingImageRemoval', 'imageIdToRemove']);
 
-        // Оновлюємо модель для відображення змін
+        // Updating the model to reflect changes
         $this->contentItem->refresh();
 
         session()->flash('message', 'Additional image removed successfully.');
@@ -163,19 +163,19 @@ class Edit extends Component
                    + ($this->minutes ?? 0) * 60
                    + ($this->seconds ?? 0);
 
-        // Додаємо нове головне зображення, якщо завантажено
+        // Add a new main image if loaded
         if ($this->new_main_image) {
             $mainImagePath = $this->new_main_image->store('content-images', 'public');
             $this->contentItem->addMainImage($mainImagePath);
         }
 
-        // Додаємо нові додаткові зображення
+        // Add new additional images
         foreach ($this->newAdditionalImages as $file) {
             $path = $file->store('content-images', 'public');
             $this->contentItem->addAdditionalImage($path);
         }
 
-        // Оновлюємо основну інформацію
+        // Updating basic information
         $this->contentItem->update([
             'content_type_id' => $this->content_type_id,
             'title' => $this->title,
@@ -194,7 +194,7 @@ class Edit extends Component
             'is_public' => $this->is_public,
         ]);
 
-        // Оновлюємо жанри
+        // Sync genres
         $this->contentItem->genres()->sync($this->genres);
 
         $this->updatePeopleRelationships();

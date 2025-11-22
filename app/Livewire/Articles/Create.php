@@ -40,7 +40,7 @@ class Create extends Component
 
         $this->validate();
 
-        // Створюємо Article
+        // Create Article
         $article = auth()->user()->articles()->create([
             'title' => $this->title,
             'introduction' => $this->introduction,
@@ -49,19 +49,19 @@ class Create extends Component
             'is_published' => $this->is_published,
         ]);
 
-        // Додаємо головне зображення через нову поліморфну систему
+        // Adding a main image through a new polymorphic system
         if ($this->main_image) {
             $mainImagePath = $this->main_image->store('articles', 'public');
             $article->addMainImage($mainImagePath);
         }
 
-        // Додаємо додаткові зображення через нову поліморфну систему
+        // Adding additional images through a new polymorphic system
         foreach ($this->additional_images as $file) {
             $path = $file->store('articles', 'public');
             $article->addAdditionalImage($path);
         }
 
-        // Зберігаємо tags
+        // Save tags
         $article->syncTags($this->tags);
 
         session()->flash('message', __('articles/create.article_created_message', ['title' => $article->title]));

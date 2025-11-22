@@ -180,7 +180,7 @@ class ContentItem extends Model
             if ($contentItem->isDirty('title')) {
                 $slug = Str::slug($contentItem->title);
 
-                // Робимо slug унікальним
+                // Making the slug unique
                 $originalSlug = $slug;
                 $counter = 1;
                 while (static::where('slug', $slug)

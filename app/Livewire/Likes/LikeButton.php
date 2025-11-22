@@ -24,7 +24,7 @@ class LikeButton extends Component
 
     private function loadLikeData()
     {
-        // Завжди перезавантажуємо свіжі дані з бази
+        // Always reload fresh data from the database
         $this->likeable->loadCount('likes');
         $this->likesCount = $this->likeable->likes_count;
 
@@ -34,7 +34,6 @@ class LikeButton extends Component
 
     public function toggleLike()
     {
-        // Перевірка політики
         $this->authorize('like', $this->likeable);
 
         $user = Auth::user();
@@ -45,21 +44,21 @@ class LikeButton extends Component
             $this->likeable->likes()->create(['user_id' => $user->id]);
         }
 
-        // Оновлюємо дані після зміни
+        // Update data after changes
         $this->loadLikeData();
 
-        // Повідомляємо батьківський компонент про зміну
+        // Notifying the parent component of the change
         $this->dispatch('like-updated', $this->likeable->id);
     }
 
-    // Слухач для оновлення з батьківського компонента
+    // Listener for updates from the parent component
     #[On('refresh-likes')]
     public function refreshLikes()
     {
         $this->loadLikeData();
     }
 
-    // Слухач для оновлення конкретного елемента
+    // Listener for updating a specific element
     #[On('refresh-like-{likeable.id}')]
     public function refreshSpecificLike()
     {
