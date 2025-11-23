@@ -19,6 +19,7 @@ class GenreSeeder extends Seeder
             'Romance', 'Sci-Fi', 'Thriller', 'Crime', 'Historical', 'War',
             'Western', 'Musical', 'Documentary', 'Animation', 'Family',
             'Kids', 'Coming-of-Age', 'Experimental', 'Silent Film', 'Short Film',
+            'Reality-TV', 'Game Show', 'Talk Show', 'News', 'Biography',
 
             // Subgenres
             'Martial Arts', 'Superhero', 'Spy', 'Disaster', 'Survival',
@@ -44,6 +45,8 @@ class GenreSeeder extends Seeder
             'Gaslamp Fantasy', 'Arthouse', 'Road Movie', 'Travelogue', 'Experimental Animation',
             'Comedy Horror Romance', 'Fantasy Romance',
             'Sci-Fi Comedy', 'Mystery Comedy', 'Action Horror', 'Fantasy Mystery',
+            'Epic Adventure', 'Crime Thriller', 'Erotic Romance', 'Musical Comedy', 'Sports Documentary', 'War Documentary',
+            'Supernatural Thriller', 'Creature Feature', 'Historical Crime', 'Crime Comedy', 'Action Thriller', 'Dark Romance',
 
             // Music-Related
             'Concert Film', 'Music Video Compilation',
@@ -53,6 +56,7 @@ class GenreSeeder extends Seeder
             'Slice of Life', 'Mecha', 'Magical Girl', 'Harem', 'Reverse Harem',
             'Sports', 'Idol/Music', 'Shojo-ai', 'Shonen-ai',
             'Ecchi', 'Doujinshi', 'Anthropomorphic / Kemono', 'Game Adaptation',
+            'Kodomo', 'Gekiga', 'Space Mecha',
 
             // Hybrid
             'Steampunk', 'Dieselpunk', 'Supernatural Romance',
