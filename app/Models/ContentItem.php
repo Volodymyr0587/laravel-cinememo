@@ -2,24 +2,25 @@
 
 namespace App\Models;
 
-use App\Traits\HasImages;
-use App\Helpers\DateHelper;
-use Illuminate\Support\Str;
 use App\Enums\ContentStatus;
+use App\Helpers\DateHelper;
 use App\Observers\ContentItemObserver;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Traits\HasImages;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 #[ObservedBy([ContentItemObserver::class])]
 class ContentItem extends Model
 {
-    use SoftDeletes, HasImages;
+    use HasFactory, HasImages, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -57,10 +58,8 @@ class ContentItem extends Model
         return $this->belongsToMany(Genre::class, 'content_item_genre');
     }
 
-     /**
+    /**
      * The people that belong to the ContentItem
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function people(): BelongsToMany
     {
@@ -69,7 +68,6 @@ class ContentItem extends Model
             ->withPivot('profession_id')
             ->withTimestamps();
     }
-
 
     public function likes(): MorphMany
     {
@@ -100,7 +98,6 @@ class ContentItem extends Model
             : null;
     }
 
-
     public function getFormattedReleaseDateAttribute(): string
     {
         return DateHelper::formatReleaseDate((string) $this->release_date);
@@ -121,7 +118,7 @@ class ContentItem extends Model
                 }
 
                 // Standard HH:MM:SS
-                $hhmmss = gmdate($seconds >= 3600 ? "H:i:s" : "i:s", $seconds);
+                $hhmmss = gmdate($seconds >= 3600 ? 'H:i:s' : 'i:s', $seconds);
 
                 // Human-readable format
                 $hours = intdiv($seconds, 3600);
@@ -143,7 +140,7 @@ class ContentItem extends Model
 
                 return [
                     'hhmmss' => $hhmmss,
-                    'human'  => $human,
+                    'human' => $human,
                 ];
             }
         );
@@ -153,7 +150,6 @@ class ContentItem extends Model
     {
         return $this->number_of_seasons || $this->season_number || $this->number_of_series_of_season;
     }
-
 
     public function getHoursAttribute(): ?int
     {
@@ -170,8 +166,6 @@ class ContentItem extends Model
         return $this->duration_in_seconds ? $this->duration_in_seconds % 60 : null;
     }
 
-
-
     protected static function boot()
     {
         parent::boot();
@@ -186,7 +180,7 @@ class ContentItem extends Model
                 while (static::where('slug', $slug)
                     ->where('id', '!=', $contentItem->id)
                     ->exists()) {
-                    $slug = $originalSlug . '-' . $counter++;
+                    $slug = $originalSlug.'-'.$counter++;
                 }
 
                 $contentItem->slug = $slug;
