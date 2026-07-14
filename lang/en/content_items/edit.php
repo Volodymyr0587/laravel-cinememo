@@ -13,7 +13,7 @@ return [
     "if_series" => "If it's a series",
     "number_of_seasons" => "Number of seasons",
     "season_number" => "Season number",
-    "number_of_series_of_season" => "Number of series of the season",
+    "number_of_series_of_season" => "Number of episodes in the season",
     "country_of_origin" => "Country of origin",
     "language" => "Language",
     "description" => "Description",

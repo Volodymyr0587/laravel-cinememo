@@ -13,7 +13,7 @@ return [
     "if_series" => "Якщо це серіал",
     "number_of_seasons" => "Кількість сезонів",
     "season_number" => "Номер сезону",
-    "number_of_series_of_season" => "Кількість серій сезону",
+    "number_of_series_of_season" => "Кількість серій в сезоні",
     "country_of_origin" => "Країна походження",
     "language" => "Мова",
     "description" => "Опис",
