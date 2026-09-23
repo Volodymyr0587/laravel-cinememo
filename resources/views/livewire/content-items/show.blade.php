@@ -21,99 +21,114 @@
                 @endif
             </div>
 
-            {{-- Title --}}
-            <h2 class="text-4xl font-bold text-gray-800 dark:text-white">
-                {{ $contentItem->title }}
-            </h2>
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                {{-- Image --}}
+                <div>
+                    @php
+                        $defaultImagePath = public_path('images/default-content.png');
+                    @endphp
 
-            @if ($contentItem->original_title)
-                <h3 class="text-gray-800 dark:text-white mb-4">
-                    {{ __('content_items/show.original_title') }}: {{ $contentItem->original_title }}
-                </h3>
-            @endif
-
-            @if ($contentItem->release_date)
-                <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <span class="font-medium">{{ __('content_items/show.release_date') }}:</span>
-                    <span
-                        class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                        {{ $contentItem->release_date->translatedFormat('d F Y') }}
-                    </span>
+                    @if($contentItem->main_image_url)
+                        <div class="w-full max-h-96 flex items-center justify-center rounded mb-6">
+                            <img src="{{ $contentItem->main_image_url }}" alt="{{ $contentItem->title }}"
+                                class="object-contain max-h-96 max-w-full">
+                        </div>
+                    @else
+                        @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
+                            <div class="w-full max-h-96 flex items-center justify-center rounded mb-6">
+                                <img src="{{ asset('images/default-content.png') }}" alt="{{ $contentItem->title }}"
+                                    class="object-contain max-h-96 max-w-full">
+                            </div>
+                        @else
+                            <div class="w-full h-64 glass-card flex items-center justify-center rounded mb-6">
+                                <span class="text-gray-500 dark:text-gray-300">{{ __('content_items/show.no_image') }}</span>
+                            </div>
+                        @endif
+                    @endif
                 </div>
-            @endif
+                {{-- Main info --}}
+                <div>
+                    {{-- Title --}}
+                    <h2 class="text-4xl font-bold text-gray-800 dark:text-white">
+                        {{ $contentItem->title }}
+                    </h2>
+
+                    @if ($contentItem->original_title)
+                        <h3 class="text-2xl font-bold italic text-gray-800 dark:text-white my-4">
+                            {{ $contentItem->original_title }}
+                        </h3>
+                    @endif
+
+                    @if ($contentItem->release_date)
+                        <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                            <span class="font-medium">{{ __('content_items/show.release_date') }}:</span>
+                            <span
+                                class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                {{ $contentItem->release_date->translatedFormat('d F Y') }}
+                            </span>
+                        </div>
+                    @endif
+
+                    @if ($contentItem->country_of_origin)
+                        <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                            <div>
+                                <span class="font-medium">{{ __('content_items/show.country_of_origin') }}:</span>
+                                <span
+                                    class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                    {{ $contentItem->country_of_origin }}
+                                </span>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($contentItem->language)
+                        <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                            <span class="font-medium">{{ __('content_items/show.language') }}:</span>
+                            <span
+                                class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                {{ $contentItem->language }}
+                            </span>
+                        </div>
+                    @endif
+
+                    @if($contentItem->formatted_duration)
+                        <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
+                            <span class="font-medium">{{ __('content_items/show.duration') }}:</span>
+                            <span
+                                class='px-2 py-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                {{ $contentItem->formatted_duration['human'] }}
+                            </span>
+                        </div>
+                    @endif
 
 
-            <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                @if ($contentItem->country_of_origin)
-                    <div>
-                        <span class="font-medium">{{ __('content_items/show.country_of_origin') }}:</span>
-                        <span
-                            class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                            {{ $contentItem->country_of_origin }}
-                        </span>
-                    </div>
-                @endif
-                @if ($contentItem->language)
-                    <div>
-                        <span class="font-medium">{{ __('content_items/show.language') }}:</span>
-                        <span
-                            class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                            {{ $contentItem->language }}
-                        </span>
-                    </div>
-                @endif
+                    @if ($contentItem->isSerial())
+                        <div class="text-sm text-gray-600 dark:text-white">
+                            <div class="flex items-center gap-x-2 text-sm mt-2 mb-3">
+                                <span class="font-medium">{{ __('content_items/show.number_of_seasons') }}:</span>
+                                <span
+                                    class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                    {{ $contentItem->number_of_seasons ? $contentItem->number_of_seasons : '---' }}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-x-2 text-sm mt-2 mb-3">
+                                <span class="font-medium">{{ __('content_items/show.season_number') }}:</span>
+                                <span
+                                    class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                    {{ $contentItem->season_number ? $contentItem->season_number : '---' }}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-x-2 text-sm mt-2 mb-3">
+                                <span class="font-medium">{{ __('content_items/show.number_of_series_of_season') }}:</span>
+                                <span
+                                    class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
+                                    {{ $contentItem->number_of_series_of_season ? $contentItem->number_of_series_of_season : '---' }}
+                                </span>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
-
-
-            @if ($contentItem->isSerial())
-                <div class="flex items-center gap-x-2 text-sm text-gray-600 dark:text-white mt-2 mb-3">
-                    <div>
-                        <span class="font-medium">{{ __('content_items/show.number_of_seasons') }}:</span>
-                        <span
-                            class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                            {{ $contentItem->number_of_seasons ? $contentItem->number_of_seasons : '---' }}
-                        </span>
-                    </div>
-                    <div>
-                        <span class="font-medium">{{ __('content_items/show.season_number') }}:</span>
-                        <span
-                            class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                            {{ $contentItem->season_number ? $contentItem->season_number : '---' }}
-                        </span>
-                    </div>
-                    <div>
-                        <span class="font-medium">{{ __('content_items/show.number_of_series_of_season') }}:</span>
-                        <span
-                            class='px-2 py-1 ml-1 rounded text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900'>
-                            {{ $contentItem->number_of_series_of_season ? $contentItem->number_of_series_of_season : '---' }}
-                        </span>
-                    </div>
-                </div>
-            @endif
-
-            {{-- Image --}}
-            @php
-                $defaultImagePath = public_path('images/default-content.png');
-            @endphp
-
-            @if($contentItem->main_image_url)
-                <div class="w-full max-h-96 flex items-center justify-center rounded mb-6 p-2">
-                    <img src="{{ $contentItem->main_image_url }}" alt="{{ $contentItem->title }}"
-                        class="object-contain max-h-96 max-w-full">
-                </div>
-            @else
-                @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
-                    <div class="w-full max-h-96 flex items-center justify-center rounded mb-6 p-2">
-                        <img src="{{ asset('images/default-content.png') }}" alt="{{ $contentItem->title }}"
-                            class="object-contain max-h-96 max-w-full">
-                    </div>
-                @else
-                    <div class="w-full h-64 glass-card flex items-center justify-center rounded mb-6">
-                        <span class="text-gray-500 dark:text-gray-300">{{ __('content_items/show.no_image') }}</span>
-                    </div>
-                @endif
-            @endif
-
 
             {{-- Meta Info --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -140,8 +155,8 @@
                     <p class="text-sm text-gray-500 dark:text-gray-300">{{ __('content_items/show.genres') }}</p>
                     <div class="flex flex-wrap gap-2 mt-0.5">
                         @forelse ($contentItem->genres as $genre)
-                            <span class="px-2 py-1 rounded font-medium text-xs text-white bg-blue-500 dark:bg-blue-600
-                                        transition-colors duration-200 text-center shadow-sm">
+                            <span
+                                class="px-2 py-1 rounded font-medium text-xs text-white bg-blue-500 dark:bg-blue-600 transition-colors duration-200 text-center shadow-sm">
                                 {{ $genre->name }}
                             </span>
                         @empty
@@ -272,7 +287,8 @@
                     }" @keydown.escape.window="imageModal = false" @keydown.arrow-right.window="next()"
                     @keydown.arrow-left.window="prev()" class="my-4">
                     <p class="text-sm text-gray-700 dark:text-white font-semibold mb-2">
-                        {{ __('content_items/show.additional_images') }}</p>
+                        {{ __('content_items/show.additional_images') }}
+                    </p>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         <template x-for="(img, index) in images" :key="index">
                             <div class="relative overflow-hidden rounded shadow hover:shadow-lg transition duration-200 cursor-pointer"
