@@ -21,33 +21,35 @@
                 @endif
             </div>
 
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+            <div class="flex flex-col md:flex-row md:items-start gap-x-4">
                 {{-- Image --}}
-                <div>
+                <div class="w-full md:w-1/2">
                     @php
                         $defaultImagePath = public_path('images/default-content.png');
                     @endphp
 
                     @if($contentItem->main_image_url)
-                        <div class="w-full max-h-96 flex items-center justify-center rounded mb-6">
+                        <div
+                            class="w-full max-h-[32rem] md:max-h-96 flex items-center justify-center md:justify-start rounded mb-6">
                             <img src="{{ $contentItem->main_image_url }}" alt="{{ $contentItem->title }}"
-                                class="object-contain max-h-96 max-w-full">
+                                class="object-contain max-h-[32rem] md:max-h-96 max-w-full">
                         </div>
                     @else
                         @if(\Illuminate\Support\Facades\File::exists($defaultImagePath))
-                            <div class="w-full max-h-96 flex items-center justify-center rounded mb-6">
+                            <div
+                                class="w-full max-h-[32rem] md:max-h-96 flex items-center justify-center md:justify-start rounded mb-6">
                                 <img src="{{ asset('images/default-content.png') }}" alt="{{ $contentItem->title }}"
-                                    class="object-contain max-h-96 max-w-full">
+                                    class="object-contain max-h-[32rem] md:max-h-96 max-w-full">
                             </div>
                         @else
-                            <div class="w-full h-64 glass-card flex items-center justify-center rounded mb-6">
+                            <div class="w-full h-64 glass-card flex items-center justify-start rounded mb-6">
                                 <span class="text-gray-500 dark:text-gray-300">{{ __('content_items/show.no_image') }}</span>
                             </div>
                         @endif
                     @endif
                 </div>
                 {{-- Main info --}}
-                <div>
+                <div class="w-full md:w-1/2">
                     {{-- Title --}}
                     <h2 class="text-4xl font-bold text-gray-800 dark:text-white">
                         {{ $contentItem->title }}
